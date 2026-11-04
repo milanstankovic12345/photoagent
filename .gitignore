@@ -1,0 +1,47 @@
+# Virtual environments
+.venv/
+venv/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+
+# Build and packaging output
+/build/
+/dist/
+*.egg-info/
+
+# Local logs and environment configuration
+*.log
+.env
+.env.*
+!.env.example
+
+# Local databases and SQLite recovery files
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.sqlite3-journal
+
+# Local documentation and generated PhotoAgent data
+/docs/
+/demo_photo_collection/
+.photo_agent_quarantine/
+/PhotoAgentReports/
+.photo_agent_state.json
