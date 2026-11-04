@@ -1,0 +1,4 @@
+Pillow>=11,<14
+ImageHash>=4.3,<5
+rawpy>=0.25,<0.29
+pillow-heif>=1.0,<2
