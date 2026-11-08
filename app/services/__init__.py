@@ -1,0 +1,1 @@
+"""Desktop-independent application coordination."""

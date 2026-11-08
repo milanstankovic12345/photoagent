@@ -1,0 +1,1 @@
+"""Offline PhotoAgent application services."""

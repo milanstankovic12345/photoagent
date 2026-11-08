@@ -40,8 +40,17 @@ htmlcov/
 *.sqlite3-journal
 
 # Local documentation and generated PhotoAgent data
-/docs/
+/docs/*
+!/docs/ARCHITECTURE.md
+!/docs/REVERSE_ENGINEERING.md
+!/docs/ROADMAP.md
+!/docs/SECURITY.md
+!/docs/TESTING.md
+!/docs/CHANGELOG.md
 /demo_photo_collection/
 .photo_agent_quarantine/
 /PhotoAgentReports/
 .photo_agent_state.json
+.photo_agent_operations/
+.photo_agent_state.json.*.bak
+/.benchmarks/
