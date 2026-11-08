@@ -75,6 +75,13 @@ def generate(root: Path, count: int, seed: int) -> None:
                     image.save(path)
 
 
+def pair_identity_digest(pairs) -> str:
+    """Compare matching identities independent of each run's temporary root."""
+    identities = sorted((pair.kind.value, Path(pair.keep.path).name,
+                         Path(pair.dup.path).name) for pair in pairs)
+    return hashlib.sha256(json.dumps(identities, ensure_ascii=False).encode()).hexdigest()
+
+
 def run(args) -> None:
     source = args.source.resolve() if args.source else Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(source))
@@ -159,6 +166,8 @@ def run(args) -> None:
                                             'scan_seconds': value.scan_seconds, 'match_seconds': value.match_seconds,
                                             'database_bytes': service.index.path.stat().st_size}
                         elapsed = time.perf_counter() - start
+                        pair_source = value.pairs if service is None else service.index.iter_pairs(value.session_id)
+                        measurements['pair_identity_sha256'] = pair_identity_digest(pair_source)
                         row = dict(size=size, repetition=repetition, scenario=scenario, seconds=elapsed,
                                    peak_rss=peak[0], **counters, **measurements)
                         results.append(row)

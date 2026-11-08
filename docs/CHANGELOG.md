@@ -1,5 +1,17 @@
 ﻿# Changelog
 
+## Task002 - Windows measurement evidence - 2026-11-08
+
+- Added a separate synthetic Tkinter heartbeat benchmark without production changes.
+  Three cold/warm 20-photo repetitions with 50 ms worker-read delay met the 250 ms
+  target; worst measured gap was 84.746 ms. Raw intervals are under ignored
+  `.benchmarks/task002-ui-final-20261108/`.
+- Added pair-identity digests to the existing synthetic index benchmark tool.
+  The requested 1k/10k index and compatible-baseline attempts stopped before a
+  completed scenario; time/RAM budgets and pair equivalence remain open.
+- Reconciled M2/M3 evidence and current test counts. Linux remains untested; neither
+  cross-platform milestone is declared complete.
+
 ## v2.2 - Modular core and SQLite index - 2026-11-08
 
 - Added schema version 1 with transactional migrations, backup support for upgrades,

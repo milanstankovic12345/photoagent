@@ -1,4 +1,74 @@
-﻿# PhotoAgent Task001 test evidence
+﻿# PhotoAgent test evidence
+
+## Task002 measurements (2026-11-08)
+
+Only generated 80×60 PNG/JPEG/WebP files were used. Reference host: Windows 11
+24H2, build 26100.9711 (`platform.platform()` reports Windows 11; the legacy
+registry ProductName says Windows 10 Enterprise), 13th Gen Intel Core i5-1335U,
+Python 3.12.10. Dependencies: Pillow 13.0.0, ImageHash 4.3.2, rawpy 0.28.0,
+pillow-heif 1.8.1, NumPy 2.5.4, SciPy 1.18.1 and pytest 9.2.0. WSL/Linux was not run.
+
+The hidden Tk window used the actual `PhotoApp` worker path. A wrapper delayed each
+background full-content read by 50 ms. Tk scheduled a heartbeat every 25 ms; all
+observed gaps, including the initial and final intervals, are in
+`.benchmarks/task002-ui-final-20261108/results.json`. Each repetition generated 20
+synthetic files and ran a cold then unchanged warm scan. The OS filesystem cache was
+not flushed. These are elapsed times and UI scheduling gaps, not end-to-end GUI
+interaction times.
+
+| Repetition | Cold seconds | Cold max gap ms | Warm seconds | Warm max gap ms |
+|---:|---:|---:|---:|---:|
+| 1 | 25.274 | 43.307 | 1.353 | 39.420 |
+| 2 | 25.756 | 46.998 | 1.426 | 51.033 |
+| 3 | 25.656 | 84.746 | 1.362 | 30.976 |
+
+All six scans completed with 20 photos. Every measured maximum is below the M2
+target of 250 ms on this host. The first UI attempt stopped with a cross-thread
+SQLite access error in the measurement tool; the second produced overlapping tick
+chains. Their ignored directories are retained as invalid/partial evidence and
+are excluded from the table. The final tool binds each tick chain to its scenario.
+
+Run from the repository root with the project environment and a **new** output path:
+
+```powershell
+.\.venv\Scripts\python.exe -B -m tools.benchmark_ui --output .benchmarks/task002-ui-final-20261108 --repeats 3
+.\.venv\Scripts\python.exe -B tools\benchmark_index.py --output .benchmarks/task002-index-20261108 --mode index --sizes 1000 10000 --repeats 3
+.\.venv\Scripts\python.exe -B tools\benchmark_index.py --output .benchmarks/task002-baseline-20261108 --mode baseline --sizes 1000 10000 --repeats 3
+.\.venv\Scripts\python.exe -B tools\benchmark_index.py --output .benchmarks/task002-smoke-index-20261108 --mode index --sizes 10 --repeats 1
+.\.venv\Scripts\python.exe -B tools\benchmark_index.py --output .benchmarks/task002-smoke-baseline-20261108 --mode baseline --sizes 10 --repeats 1
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests\test_ui.py tests\test_indexing.py -q
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests -q
+git diff --check
+```
+
+The 1k/10k index run was interrupted during its first 1k cold scan after prolonged
+runtime, before any scenario completed. Its generated files and partial SQLite data
+are retained under `.benchmarks/task002-index-20261108/attempt.json`; there is no
+completed `results.json` for it. The compatible baseline attempt likewise stopped
+during its first 1k scan; its status is in
+`.benchmarks/task002-baseline-20261108/attempt.json`. Therefore no 1k/10k cold,
+warm, changed, or baseline timings, SHA reads, decode counts, peak sampled RSS,
+database sizes, or pair-identity
+comparisons are claimed here. The tool measures parent plus live decoder RSS every
+20 ms, not a hard memory cap, and retains full SHA reads on cache hits. A future
+completed run must verify zero warm decodes and compare both pair count and the
+`pair_identity_sha256` digest. `baseline` denotes the **current compatible scanner**,
+not historical v1. No 125% time/RAM regression budgets are assigned to unmeasured
+1k/10k scenarios. A separate performance task is needed to finish these measurements.
+
+A one-repetition, 10-file **tool smoke check** completed in both modes under
+`.benchmarks/task002-smoke-{index,baseline}-20261108/results.json`: cold index and
+compatible baseline each found 8 pairs with the same identity digest
+`a17bcf0047b6801e024867adfa42164142dfb7686407c2e0759c620131e080b0`.
+The unchanged warm index scan had 0 decodes and 10 full SHA reads. This checks the
+measurement path; it does not satisfy the requested 1k/10k performance gate.
+
+Task002 focused tests: **41 passed, 0 failed, 0 skipped**. Full suite:
+**110 passed, 0 failed, 2 skipped**; the skips are valid RAW decode (no licensed
+fixture) and native Linux execution on Windows. The earlier Task001 count below is
+historical. Neither M2 nor M3 is accepted on both platforms.
+
+## Task001 historical evidence
 
 Date: 2026-11-08. Windows, Python 3.12.10, pytest 9.2.0. No real photo library
 was scanned or modified. Linux/WSL and a licensed valid RAW fixture are unavailable.

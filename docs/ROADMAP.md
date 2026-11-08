@@ -1,23 +1,14 @@
-﻿> v2.2 implementation update: I1/I2 now have a version-1 SQLite index, incremental
-> scans with full-content cache validation, disk-backed matching/discovery, paged
-> Tkinter results and migration/cache/recovery regressions. The JSON operation
-> journal remains authoritative; SQLite stores a rebuildable projection. Warm scans
-> skip decoding, not SHA-256. Actual benchmark evidence is recorded in TESTING.md;
-> do not infer a completed cross-platform M3 gate.
->
-> Task001 implementation update, 2026-11-08: T1, S1-S4 and B1-B4 have concrete
-> implementations and Windows synthetic regression coverage. B5 adds development
-> dependencies, configuration and launcher preflight; .venv is already untracked
-> and was not removed. Native Linux/valid RAW/release packaging remain unverified,
-> so cross-platform milestone gates below are not declared complete. Structured
-> operation transitions are persistent; general runtime diagnostics use logging.
-> SQLite, quality calibration, PySide6, themes and full localization remain future
-> work. The original planning baseline below is retained for traceability; its
-> statement that all work is unstarted is historical. Current evidence is TESTING.md.
-# PhotoAgent v2 implementation roadmap
+﻿# PhotoAgent v2 implementation roadmap
 
-Planning baseline: `569e2a1`, 2026-11-04. **All tasks and milestones below are
-proposed and not started.** Only documentation has been added. Priorities follow
+Planning baseline: `569e2a1`, 2026-11-04. The task table and gate definitions below
+originated as a proposal; their present status is assessed here and in
+[TESTING.md](TESTING.md). T1, S1-S4, B1-B5 and I1-I2 have implementations with
+Windows synthetic regression coverage. I1/I2 use a schema-versioned SQLite cache,
+full-content validation, disk-backed matching and paged Tkinter results. The JSON
+operation journal remains authoritative. Warm cache hits still read full SHA-256.
+Neither M2 nor M3 has a completed cross-platform gate: Linux was not run, and the
+1k/10k M3 benchmark stopped before its first scenario completed. Quality calibration,
+PySide6, themes and full localization remain future work. Priorities follow
 [AGENTS.md](../AGENTS.md); finding IDs refer to [the audit](REVERSE_ENGINEERING.md).
 Each change must remain independently reviewable and preserve stronger existing checks.
 
@@ -56,6 +47,20 @@ weaker size/mtime-only shortcut.
 Safety, backend modernization, UI migration and localization are separate workstreams.
 Acceptance criteria below are targets, not results. Required safety cases must pass
 on Windows and Linux; a platform skip does not satisfy the corresponding gate.
+
+### Task002 evidence review for M2 and M3 (Windows, 2026-11-08)
+
+| Gate criterion | Status and evidence |
+|---|---|
+| M2 GUI-free backend imports and compatible results | Windows synthetic import and matcher-equivalence tests pass. Large 1k/10k pair-identity comparison remains unmeasured. |
+| M2 report failure, offline roots, keeper invalidation | Covered by passing UI, scanning and indexing regressions in TESTING.md. |
+| M2 cancellation, decoder limits and shutdown | Covered by passing synthetic regressions; OS calls still have no hard cancellation deadline. |
+| M2 slow-I/O heartbeat under 250 ms | Met on this Windows host: six complete 20-photo scans, worst gap 84.746 ms, 50 ms worker-read delay and 25 ms tick. Raw gaps in `.benchmarks/task002-ui-final-20261108/results.json`. |
+| M2 clean launch on Windows and Linux | Windows environment and UI tests pass. Native Linux launch remains untested. **M2 cross-platform gate open.** |
+| M3 unchanged warm scan: zero decodes with full SHA reads | Small synthetic tests cover cache reuse and full-content validation. A 10-file tool smoke check measured 0 warm decodes and 10 SHA reads. Required 1k/10k measured counts remain open. |
+| M3 changed/moved/replaced/offline outcomes and move-time verification | Passing synthetic index and operation tests cover these states. Physical drive unplug/replug remains untested. |
+| M3 migrations, crash recovery and writer concurrency | Passing synthetic migration, process-crash and competing-writer tests; physical power-loss behavior remains unverified. |
+| M3 1k/10k cold/warm/changed metrics, pair comparison and 125% budgets | Index attempt stopped during its first 1k cold scan; no completed scenario or valid budget. Baseline attempt is also incomplete. The tool now records a pair-identity digest for future completed runs. **M3 benchmark and cross-platform gate open.** |
 
 ### M0 — Executable baseline and synthetic test harness
 
@@ -161,7 +166,7 @@ on Windows and Linux; a platform skip does not satisfy the corresponding gate.
 | A4 | Definition/configuration of protected backup roots and uncertain edited derivatives. | Before S4: reviewable defaults; confirmation remains explicit. |
 | A5 | Redistributable RAW fixtures and decoder limits/process isolation. | Before B4: asset provenance and resource measurements; no borrowed personal library. |
 | A6 | SQLite journal mode, writer topology, schema versions and legacy import policy. | Before I1: recovery/concurrency tests; preserve legacy file and mark unverifiable records. |
-| A7 | Reference hardware, archive sizes and performance budgets. | M2/M3: publish measurements; 250 ms UI target is proposed, not measured. |
+| A7 | Windows i5-1335U UI reference measured in Task002; 250 ms UI target met on that host. 1k/10k index/baseline measurements and budgets remain open. | Complete interrupted benchmark work in a separate performance task; then derive per-scenario 125% time/RAM budgets. |
 | A8 | Qt distribution/license obligations, packaging tool and theme behavior. | Before U1 implementation; no licensing conclusion in this plan. |
 | A9 | Translation workflow and fallback language (proposed: English). | Before L1; stable internal identifiers begin in B1. |
 
