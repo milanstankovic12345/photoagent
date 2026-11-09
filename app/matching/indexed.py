@@ -2,13 +2,14 @@
 from __future__ import annotations
 
 from threading import Event
+from app.core.queries import MatchingOptions
 
 from app.matching.matcher import ASPECT_MAX, DHASH_MAX, PHASH_MAX, aspect
 from app.safety.paths import cancelled
 from app.storage.index import Index, decode_photo
 
 
-def match_index(index: Index, session: str, cancel: Event) -> None:
+def match_index(index: Index, session: str, cancel: Event, options: MatchingOptions = MatchingOptions()) -> None:
     db = index.db
     for table in ('bk_nodes', 'bk_members', 'bk_frontier'):
         db.execute(f'DROP TABLE IF EXISTS temp.{table}')
@@ -43,17 +44,17 @@ def match_index(index: Index, session: str, cancel: Event) -> None:
             cancelled(cancel)
             db.execute('DELETE FROM bk_frontier WHERE id=?', (node['id'],))
             distance = (h ^ int(node['hash'], 16)).bit_count()
-            if distance <= PHASH_MAX:
+            if distance <= options.phash_max:
                 for member in db.execute('SELECT e.id,e.photo FROM bk_members b JOIN scan_entries e ON e.id=b.entry WHERE b.node=?', (node['id'],)):
                     cancelled(cancel)
                     other = decode_photo(member['photo'])
                     dd = (int(photo.dhash, 16) ^ int(other.dhash, 16)).bit_count()
                     delta = abs(aspect(photo) - aspect(other)) / max(aspect(photo), aspect(other))
                     candidate = (distance, dd, other.path, member['id'])
-                    if dd <= DHASH_MAX and delta <= ASPECT_MAX and (best is None or candidate < best):
+                    if dd <= options.dhash_max and delta <= ASPECT_MAX and (best is None or candidate < best):
                         best = candidate
             db.execute('INSERT INTO bk_frontier SELECT id FROM bk_nodes WHERE parent=? AND edge BETWEEN ? AND ?',
-                       (node['id'], distance - PHASH_MAX, distance + PHASH_MAX))
+                       (node['id'], distance - options.phash_max, distance + options.phash_max))
         if best:
             with index.transaction():
                 db.execute("INSERT INTO match_results(session_id,keeper,duplicate,kind,pd,dd) VALUES(?,?,?,'VISUAL',?,?)",

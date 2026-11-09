@@ -11,8 +11,10 @@ import sqlite3
 from threading import Event
 import time
 import uuid
+from typing import Callable
 
 from app.core.models import Cancelled, ScanSummary, SafetyError
+from app.core.queries import MatchingOptions, ScanProgress
 from app.matching.indexed import match_index
 from app.safety.paths import QUARANTINE, absolute, cancelled, check_path, identity, snapshot
 from app.scanning.discovery import discover
@@ -25,7 +27,9 @@ def pipeline_version() -> str:
         importlib.metadata.version(n) for n in ('Pillow', 'ImageHash', 'rawpy', 'pillow-heif', 'numpy', 'scipy'))
 
 
-def indexed_scan(index: Index, folders: list[str], updates: Queue, cancel: Event) -> ScanSummary:
+def indexed_scan(index: Index, folders: list[str], updates: Queue | None, cancel: Event,
+                 options: MatchingOptions = MatchingOptions(),
+                 progress: Callable[[ScanProgress], None] | None = None) -> ScanSummary:
     session = uuid.uuid4().hex
     db = index.db
     pipeline = pipeline_version()
@@ -33,10 +37,21 @@ def indexed_scan(index: Index, folders: list[str], updates: Queue, cancel: Event
     scan_seconds = match_seconds = 0.0
     start = time.perf_counter()
     state = 'complete'
+    discovered = processed = skipped = failed = 0
+    availability = []
+    last_progress = 0.0
+
+    def emit(phase: str, force: bool = False) -> None:
+        nonlocal last_progress
+        now = time.monotonic()
+        if progress and (force or now - last_progress >= .15):
+            progress(ScanProgress(phase, discovered, processed, skipped, failed, tuple(availability)))
+            last_progress = now
     # Do not attach an already-set cancellation flag until intent is recorded.
     index.cancel = None
     with index.transaction():
-        db.execute("INSERT INTO scan_sessions(id,state,started) VALUES(?,'running',?)", (session, time.time()))
+        db.execute("INSERT INTO scan_sessions(id,state,started,metrics) VALUES(?,'running',?,?)",
+                   (session, time.time(), json.dumps({'matching_options': asdict(options)})))
     index.cancel = cancel
     db.set_progress_handler(lambda: int(cancel.is_set()), 1000)
     try:
@@ -58,16 +73,20 @@ def indexed_scan(index: Index, folders: list[str], updates: Queue, cancel: Event
                     db.execute('INSERT INTO scan_session_roots VALUES(?,?,?,?,?)', (session, rank, root_id, path, 'running'))
 
                 def error(name: str, exc: Exception) -> None:
-                    nonlocal traversal_ok
+                    nonlocal traversal_ok, failed
                     traversal_ok = False
+                    failed += 1
                     index.error(session, name, str(exc))
 
                 for file in discover(root, cancel, error, spool=db):
+                    discovered += 1
                     cancelled(cancel)
                     try:
                         fid = identity(file)
                         file_path = str(absolute(file))
                         if index.seen(session, file_path, fid):
+                            skipped += 1
+                            emit('scan')
                             # A physically deduplicated file was still observed in this root.
                             with index.transaction():
                                 db.execute('UPDATE photo_files SET last_seen=? WHERE root_id=? AND path_key=?',
@@ -87,13 +106,17 @@ def indexed_scan(index: Index, folders: list[str], updates: Queue, cancel: Event
                         if identity(root) != original_id or photo.root_identity != original_id:
                             raise SafetyError('root_replaced')
                         index.save_photo(session, root_id, rank, photo, pipeline)
+                        processed += 1
+                        if photo.decode_error:
+                            failed += 1
                     except (OSError, SafetyError, ValueError) as exc:
                         error(str(file), exc)
                     # Coalesce progress at the producer; UI is not an unbounded per-file queue.
-                    if time.perf_counter() - getattr(index, '_last_progress', 0) >= .15:
+                    if updates is not None and time.perf_counter() - getattr(index, '_last_progress', 0) >= .15:
                         count = db.execute('SELECT count(*) FROM scan_entries WHERE session_id=? AND photo IS NOT NULL', (session,)).fetchone()[0]
                         updates.put(('status', ('scan_progress', count)))
                         index._last_progress = time.perf_counter()
+                    emit('scan')
                 if identity(root) != original_id:
                     raise SafetyError('root_replaced')
                 with index.transaction():
@@ -102,7 +125,10 @@ def indexed_scan(index: Index, folders: list[str], updates: Queue, cancel: Event
                     if traversal_ok:
                         db.execute("UPDATE photo_files SET state='missing' WHERE root_id=? AND last_seen<>? AND state<>'moved'",
                                    (root_id, session))
+                availability.append((path, 'complete' if traversal_ok else 'incomplete'))
             except (OSError, SafetyError) as exc:
+                failed += 1
+                availability.append((path, 'unavailable'))
                 traversal_ok = False
                 index.error(session, path, str(exc))
                 with index.transaction():
@@ -115,8 +141,9 @@ def indexed_scan(index: Index, folders: list[str], updates: Queue, cancel: Event
             state = 'incomplete'
         cancelled(cancel)
         if state in ('complete', 'incomplete'):
+            emit('matching', True)
             match_start = time.perf_counter()
-            match_index(index, session, cancel)
+            match_index(index, session, cancel, options)
             match_seconds = time.perf_counter() - match_start
         cancelled(cancel)
     except Cancelled:
@@ -145,5 +172,7 @@ def indexed_scan(index: Index, folders: list[str], updates: Queue, cancel: Event
     summary = ScanSummary(session, state, counts[0], pairs[0], pairs[1], counts[1] or 0,
                           hits, decodes, hash_reads, hash_bytes, scan_seconds or time.perf_counter() - start, match_seconds)
     with index.transaction():
-        db.execute('UPDATE scan_sessions SET metrics=? WHERE id=?', (json.dumps(asdict(summary)), session))
+        db.execute('UPDATE scan_sessions SET metrics=? WHERE id=?',
+                   (json.dumps({**asdict(summary), 'matching_options': asdict(options)}), session))
+    emit(state, True)
     return summary

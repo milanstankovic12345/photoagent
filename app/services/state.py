@@ -17,7 +17,23 @@ def load_state(path: Path) -> dict:
             or not all(isinstance(r, str) for r in value.get("roots", []))
             or not isinstance(value.get("moves", []), list)):
         raise SafetyError("invalid_settings_or_history")
-    return {"roots": value.get("roots", []), "moves": value.get("moves", [])}
+    return {**value, "roots": value.get("roots", []), "moves": value.get("moves", [])}
+
+
+def validated_settings(value: dict) -> tuple[dict, list[str]]:
+    result = dict(value)
+    warnings = []
+    defaults = {'theme': 'dark', 'language': 'sr_Latn', 'phash_max': 4, 'dhash_max': 6}
+    for key, default in defaults.items():
+        item = result.get(key, default)
+        valid = (item in ('dark', 'light', 'system') if key == 'theme' else
+                 item == 'sr_Latn' if key == 'language' else
+                 type(item) is int and 0 <= item <= 64)
+        if not valid:
+            warnings.append('invalid_setting:' + key)
+            item = default
+        result[key] = item
+    return result, warnings
 
 
 def save_state(path: Path, value: dict) -> None:

@@ -33,7 +33,8 @@ def isolated(tmp_path, monkeypatch):
 
     def confined_popen(args, *a, **kw):
         if "--worker" in args or "--index-worker" in args:
-            assert Path(args[-1]).is_relative_to(tmp_path)
+            flag = '--worker' if '--worker' in args else '--index-worker'
+            assert Path(args[args.index(flag) + 1]).is_relative_to(tmp_path)
         return popen(args, *a, **kw)
 
     monkeypatch.setattr(decoder.subprocess, "Popen", confined_popen)

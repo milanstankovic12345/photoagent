@@ -9,9 +9,9 @@ if [ ! -x ".venv/bin/python" ]; then
     python3 -m venv .venv
 fi
 
-if ! .venv/bin/python -B -m app.services.preflight; then
+if ! .venv/bin/python -B -m app.services.preflight "$@"; then
     .venv/bin/python -m pip install -r requirements.txt
 fi
 
-.venv/bin/python -B -m app.services.preflight
-.venv/bin/python -B photo_agent.py
+.venv/bin/python -B -m app.services.preflight "$@"
+.venv/bin/python -B photo_agent.py "$@"

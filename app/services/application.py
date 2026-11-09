@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from functools import lru_cache
+from dataclasses import replace
 import logging
 import os
 from pathlib import Path
@@ -19,7 +20,9 @@ from app.scanning.decoder import decode
 from app.scanning.inspection import extract
 from app.services.indexing import indexed_scan
 from app.services.reports import make_report
-from app.services.state import load_state, save_state
+from app.services.state import load_state, save_state, validated_settings
+from app.core.queries import (DashboardSummary, GroupRow, HistoryEntry, MatchRow, MatchingOptions,
+                              MatchQuery, PageResult, ScanProgress)
 from app.storage.index import Index, PAGE_SIZE
 
 log = logging.getLogger(__name__)
@@ -59,6 +62,8 @@ class Application:
             self.temporary = TemporaryDirectory(prefix='.photoagent-index-', dir=self.home)
             self.index = Index(Path(self.temporary.name) / 'index.sqlite3')
         self._sync_history()
+        state, warnings = validated_settings(state)
+        issues.extend(warnings)
         return self.journal, state, issues
 
     def _sync_history(self) -> None:
@@ -72,21 +77,46 @@ class Application:
             log.exception('index_history_projection_failed')
 
     def save_settings(self, value: dict) -> None:
+        self.update_settings(value)
+
+    def update_settings(self, patch: dict) -> dict:
         with self.journal._guard:
             self.journal.require_writer()
-            save_state(self.home / '.photo_agent_state.json', value)
+            path = self.home / '.photo_agent_state.json'
+            current, _ = validated_settings(load_state(path))
+            value, warnings = validated_settings({**current, **patch})
+            if warnings:
+                raise ValueError(','.join(warnings))
+            if not isinstance(value['roots'], list) or not all(isinstance(r, str) for r in value['roots']):
+                raise ValueError('invalid_roots')
+            if not isinstance(value['moves'], list):
+                raise SafetyError('invalid_settings_or_history')
+            save_state(path, value)
+            return value
 
-    def scan(self, folders: list[str], updates: Queue, cancel: Event) -> ScanSummary:
-        return indexed_scan(self.index, folders, updates, cancel)
+    def scan(self, folders: list[str], updates: Queue | None, cancel: Event,
+             progress: Callable[[ScanProgress], None] | None = None) -> ScanSummary:
+        try:
+            settings, _ = validated_settings(load_state(self.home / '.photo_agent_state.json'))
+        except (OSError, ValueError, TypeError, SafetyError) as exc:
+            # Damaged history must block operations, but never block read-only scanning.
+            log.warning('scan_settings_unavailable', extra={'reason': str(exc)})
+            self.journal.error = str(exc)
+            self.journal.writable = False
+            settings, _ = validated_settings({})
+        options = MatchingOptions(settings['phash_max'], settings['dhash_max'])
+        return indexed_scan(self.index, folders, updates, cancel, options, progress)
 
-    def scan_with_report(self, folders: list[str], updates: Queue, cancel: Event,
-                         report_writer: Callable = make_report) -> tuple:
-        result = self.scan(folders, updates, cancel)
+    def scan_with_report(self, folders: list[str], updates: Queue | None, cancel: Event,
+                         report_writer: Callable = make_report, *,
+                         progress: Callable[[ScanProgress], None] | None = None) -> tuple:
+        result = self.scan(folders, updates, cancel, progress)
         report, error = None, ''
         try:
             report = report_writer(self.index.iter_pairs(result.session_id), self.index.iter_errors(result.session_id),
                                    self.home / 'PhotoAgentReports')
-        except OSError as exc:
+        except (OSError, SafetyError) as exc:
+            log.warning('report_failed', extra={'reason': str(exc)})
             error = str(exc)
         return result, report, error, self.page(result.session_id, 0), self.index.errors(result.session_id), self.index_warning
 
@@ -140,9 +170,41 @@ class Application:
             raise SafetyError('incomplete_scan')
         return self.prepare(self.index.iter_pairs(session, exact=True), cancel, bulk=True, session=session)
 
-    def restore_plan(self, cancel: Event) -> Plan:
+    def restore_plan(self, cancel: Event, *, operation_id: str | None = None) -> Plan:
         self.recover(cancel)
-        return self.operations.restore_plan(cancel)
+        return self.operations.restore_plan(cancel, operation_id=operation_id)
+
+    def dashboard(self, session_id: str | None = None) -> DashboardSummary:
+        from app.services.queries import dashboard
+        summary = dashboard(self.index, session_id, self.index_warning)
+        availability = dict(self.sources(p for p, _ in summary.roots))
+        roots = tuple((p, state if availability[p] == 'available' else 'unavailable') for p, state in summary.roots)
+        warnings = summary.warnings
+        if any(state == 'unavailable' for _, state in roots):
+            warnings = (*warnings, 'unavailable_source')
+        return replace(summary, roots=roots, warnings=warnings)
+
+    def sources(self, folders: Iterable[str]) -> tuple[tuple[str, str], ...]:
+        result = []
+        for folder in folders:
+            try:
+                path = check_path(folder, allow_missing=True)
+                result.append((folder, 'available' if path.is_dir() else 'unavailable'))
+            except (OSError, SafetyError):
+                result.append((folder, 'unavailable'))
+        return tuple(result)
+
+    def query_matches(self, session_id: str, query: MatchQuery) -> PageResult[MatchRow]:
+        from app.services.queries import matches
+        return matches(self.index, session_id, query)
+
+    def query_groups(self, session_id: str, query: MatchQuery) -> PageResult[GroupRow]:
+        from app.services.queries import groups
+        return groups(self.index, session_id, query)
+
+    def history(self, query: MatchQuery = MatchQuery(sort='time', descending=True)) -> PageResult[HistoryEntry]:
+        from app.services.queries import history
+        return history(self.journal, query)
 
     def execute(self, plan: Plan, approval: Approval, cancel: Event) -> tuple[str, ...]:
         try:

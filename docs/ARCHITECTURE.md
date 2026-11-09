@@ -1,8 +1,37 @@
-﻿# PhotoAgent v2.2 architecture
+﻿# PhotoAgent v2.4 architecture
 
-The Tkinter interface remains in use, with 200-row result pages. v2.2 adds a
-disposable SQLite index and application orchestration to the stabilized v2.1 core.
-PySide6, themes, full language switching and packaging remain future work.
+Task003 adds `app/ui/qt/`, selected with `--ui qt`: bootstrap, controller, workers,
+six screens, table model, components, themes and compiled local SVG resources.
+Qt is now the default; `--ui tk` selects the retained Tkinter adapter. Both share the existing core.
+Full language switching and packaging remain future work.
+
+`app/core/queries.py` supplies frozen query/page/dashboard/history/progress contracts
+and matching options. `app/services/queries.py` executes whole-session SQLite
+search/sort with parameters, allowlisted columns and stable IDs. Direct groups use
+(kind, keeper). Journal records supply history; SQLite projections do not authorize
+restore. A selected ineligible restore ID fails without choosing another entry.
+
+Qt constructs, uses and closes Application/SQLite on one long-lived QObject/QThread.
+A separate worker uses `app/services/preview.py` without SQLite; it creates QImage
+off-thread. Only the GUI thread changes widgets/models or creates QPixmap.
+Request tokens discard stale results; cancellation sets threading.Event directly.
+Closing rejects plans and queues shutdown after active work, without terminate or
+blocking waits on the GUI thread. Plans require fresh preparation and explicit Approval.
+
+Settings updates merge atomically and preserve unknown fields and legacy history.
+Invalid UI preferences fall back with warnings; damaged recovery data still blocks
+operations. Matching parameters live in existing session metrics JSON; schema v1
+and the journal format are unchanged. Progress is coalesced about every 150 ms.
+Discovered counts yielded paths; skipped counts previously observed paths/identities;
+processed counts indexed inspections (including decode failures); failed counts
+inspection/decode/traversal/source failures. These counts can overlap.
+
+Preview keys include path, full snapshot, size, preview version and library versions.
+Full SHA is verified before/after preparation, including cache hits. The decoded
+QImage cache is capped at 64 MiB (UI pixmaps/in-flight buffers are separate).
+The 880→320 fingerprint path is unchanged; previews can grow to 2048 px.
+ThemeManager applies global palette/styles with System/Unknown dark fallback.
+All new UI messages use stable Serbian keys and translation fallback.
 
 ## Actual components
 

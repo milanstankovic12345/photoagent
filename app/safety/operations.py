@@ -188,13 +188,15 @@ class Operations:
                     self.journal.transition(move.id, "blocked", str(exc))
         return issues
 
-    def restore_plan(self, cancel: Event | None = None) -> Plan:
+    def restore_plan(self, cancel: Event | None = None, *, operation_id: str | None = None) -> Plan:
         cancelled(cancel)
         records = self.journal.records()
         restored = {r["move"]["restores"] for r in records if "move" in r
                     and r["move"]["action"] == "restore" and r["state"] in {"intent", "blocked", "complete"}}
         candidates = [r for r in records if r["id"] not in restored and
                       (r["state"] == "legacy" or r["state"] == "complete" and r["move"]["action"] == "quarantine")]
+        if operation_id is not None:
+            candidates = [r for r in candidates if r['id'] == operation_id]
         if not candidates:
             raise SafetyError("no_restore_candidates")
         # Never silently skip an inaccessible latest entry.

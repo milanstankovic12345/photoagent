@@ -1,5 +1,76 @@
 ﻿# PhotoAgent test evidence
 
+## Task003 verification (2026-11-08)
+
+Launcher correction: Qt is now the default for the entry point and preflight,
+including double-click start_windows.bat. The selected-toolkit and six-screen
+restart smoke tests passed together (2 passed in 35.42s):
+
+```powershell
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests\test_qt.py::test_preflight_checks_only_selected_toolkit tests\test_qt.py::test_six_screens_scan_compare_query_and_theme_restart -q
+```
+
+The selected-toolkit test also exercises no-argument preflight with Tkinter blocked.
+This default change is owner-authorized; it does not claim manual scaling acceptance.
+
+Runtime: Windows, Python 3.12.10, PySide6/Qt/shiboken6 6.12.0; existing image
+libraries are unchanged. All images, state, journals and indexes are synthetic.
+
+Executed during implementation:
+
+```powershell
+.\.venv\Scripts\python.exe -B tools\check_environment.py
+.\.venv\Scripts\python.exe -m pip install "PySide6>=6.8,<7"
+.\.venv\Scripts\pyside6-rcc.exe app/ui/qt/resources/resources.qrc -o app/ui/qt/resources_rc.py
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests\test_task003_services.py tests\test_indexing.py -x -q
+# 39 passed (before the later added edge cases)
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests\test_qt.py -x -q
+# 7 passed (initial Qt suite)
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests -q
+# Initial full regression: 123 passed, 2 skipped
+# Expanded regression: 130 passed, 1 failed, 2 skipped (preparation cancellation)
+$env:QT_QPA_PLATFORM = 'offscreen'
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests\test_qt.py::test_themes_system_fallback_and_text_contrast tests\test_qt.py::test_raw_legacy_confirmation_requires_both -q
+# 2 passed in 3.13s (separate process environment)
+git -c core.safecrlf=false diff --check
+# passed
+```
+
+The expanded-run failure concerned cancellation being routed through generic error
+handling and a pending-preparation assertion. Cancellation now has a separate worker
+signal/result path, clears pending preparation and refreshes partial execution state.
+Post-fix checks:
+
+```powershell
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests\test_qt.py::test_preparation_cancel_and_keeper_change_invalidate_plan -q
+# 1 passed in 31.31s
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests -q
+# 131 passed, 2 skipped in 341.97s
+```
+
+The two skips are the existing unavailable licensed valid RAW fixture and native
+Linux execution unavailable on Windows. A final focused Qt run additionally
+checks the last cache-accounting/preview-size assertions and presentation tweaks.
+
+```powershell
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests\test_qt.py::test_six_screens_scan_compare_query_and_theme_restart tests\test_qt.py::test_preview_source_changes_orientation_cache_and_corrupt_raw tests\test_qt.py::test_themes_system_fallback_and_text_contrast -q
+# 3 passed in 44.65s (after the final cache/presentation changes)
+```
+
+Coverage includes settings/history preservation from both adapters, global numeric
+sort/search over multiple pages, direct groups, hardlink/overlap estimates, offline
+dashboard warnings, per-session thresholds, selected restore/no fallback, report
+failure, corrupt settings with read-only scanning, six screens, theme restart/System
+fallback/contrast, slow-scan heartbeat below 250 ms, scan/preview/preparation cancellation,
+close during work/confirmation, stale/changed previews, cache bounds, EXIF orientation,
+corrupt RAW, RAW/legacy consent and existing safety/recovery/Tk regressions.
+
+Not performed: manual Windows launcher and 100/150/200% scaling acceptance, full
+keyboard/resize review, native Linux, valid licensed RAW, physical removable media,
+offline wheelhouse rehearsal or installer validation. Qt subsequently became the
+default at the owner's request; those acceptance limitations remain unchanged.
+See [implementation record](TASK003_IMPLEMENTATION.md) and [distribution notes](QT_DISTRIBUTION.md).
+
 ## Task002 measurements (2026-11-08)
 
 Only generated 80×60 PNG/JPEG/WebP files were used. Reference host: Windows 11

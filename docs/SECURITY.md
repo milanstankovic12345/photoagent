@@ -1,6 +1,13 @@
 ﻿# PhotoAgent safety and recovery
 
-Implemented v2.1/v2.2 behavior, 2026-11-08. Evidence and unverified limits are separated
+Task003 Qt retains prepare → frozen plan → Approval → execute. Reject/close creates
+no Approval; selection/keeper changes invalidate pending preparation. Shutdown
+cancels without killing threads. Selected restore IDs pass the same journal,
+snapshot, root, containment and no-overwrite checks as latest-entry restore.
+Preview cache always revalidates full content and never authorizes moves. No UI
+switch disables RAW/XMP, backup, hash or confirmation protection.
+
+Core v2.1/v2.2 behavior, 2026-11-08. Evidence and unverified limits are separated
 in [TESTING.md](TESTING.md). This application never permanently deletes photographs.
 
 ## Approval and verification

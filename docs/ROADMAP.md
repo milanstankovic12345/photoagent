@@ -8,7 +8,8 @@ full-content validation, disk-backed matching and paged Tkinter results. The JSO
 operation journal remains authoritative. Warm cache hits still read full SHA-256.
 Neither M2 nor M3 has a completed cross-platform gate: Linux was not run, and the
 1k/10k M3 benchmark stopped before its first scenario completed. Quality calibration,
-PySide6, themes and full localization remain future work. Priorities follow
+Task003 adds PySide6 and themes (now the default at the owner's request); manual acceptance,
+full localization and packaging remain open. Priorities follow
 [AGENTS.md](../AGENTS.md); finding IDs refer to [the audit](REVERSE_ENGINEERING.md).
 Each change must remain independently reviewable and preserve stronger existing checks.
 
@@ -128,7 +129,8 @@ on Windows and Linux; a platform skip does not satisfy the corresponding gate.
 ### M5 — Desktop UI migration and themes
 
 - Deliver U1 only after a written Python/Qt/native-codec compatibility, packaging
-  and distribution-license assessment. This assessment has not yet been performed.
+  and distribution-license assessment. Task003 records the source-runtime assessment
+  in QT_DISTRIBUTION.md; frozen packaging and native manual/scaling acceptance remain open.
 - Acceptance: scan sources, progress/cancel, group filters, comparison, metadata,
   quarantine/restore history and settings work through the same services. Keyboard
   flows and 100/150/200% scaling pass manual checks; Dark/Light/System persist

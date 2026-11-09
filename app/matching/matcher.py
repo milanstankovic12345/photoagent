@@ -5,6 +5,7 @@ from threading import Event
 from typing import Iterator
 
 from app.core.models import Kind, Match, Photo
+from app.core.queries import MatchingOptions
 from app.matching.quality import quality
 from app.safety.paths import cancelled
 
@@ -45,7 +46,8 @@ class BKTree:
                          if distance - radius <= edge <= distance + radius)
 
 
-def match(photos: list[Photo], roots: list[str], cancel: Event | None = None) -> tuple[Match, ...]:
+def match(photos: list[Photo], roots: list[str], cancel: Event | None = None,
+          options: MatchingOptions = MatchingOptions()) -> tuple[Match, ...]:
     rank = {r: i for i, r in enumerate(roots)}
     groups = defaultdict(list)
     for photo in photos:
@@ -63,11 +65,11 @@ def match(photos: list[Photo], roots: list[str], cancel: Event | None = None) ->
                         key=lambda p: (*quality(p), -rank[p.root], p.path.casefold()), reverse=True):
         cancelled(cancel)
         candidates = []
-        for pdist, keeper in tree.near(int(photo.phash, 16), PHASH_MAX):
+        for pdist, keeper in tree.near(int(photo.phash, 16), options.phash_max):
             cancelled(cancel)
             ddist = (int(photo.dhash, 16) ^ int(keeper.dhash, 16)).bit_count()
             difference = abs(aspect(photo) - aspect(keeper)) / max(aspect(photo), aspect(keeper))
-            if ddist <= DHASH_MAX and difference <= ASPECT_MAX:
+            if ddist <= options.dhash_max and difference <= ASPECT_MAX:
                 candidates.append((pdist, ddist, keeper))
         if candidates:
             pdist, ddist, keeper = min(candidates, key=lambda c: (c[0], c[1], c[2].path))

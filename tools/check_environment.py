@@ -5,7 +5,7 @@ import sys
 
 print(sys.version)
 print(sys.executable)
-for name in ('Pillow', 'ImageHash', 'rawpy', 'pillow-heif', 'pytest'):
+for name in ('Pillow', 'ImageHash', 'rawpy', 'pillow-heif', 'pytest', 'PySide6', 'shiboken6'):
     try:
         print(name, importlib.metadata.version(name))
     except importlib.metadata.PackageNotFoundError:

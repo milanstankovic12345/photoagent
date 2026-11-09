@@ -25,7 +25,7 @@ MAX_PIXELS = 100_000_000
 TIMEOUT = 60.0
 
 
-def _decode(path: str, *, preview: bool = True) -> dict:
+def _decode(path: str, *, preview: bool = True, preview_size: int = 880) -> dict:
     from app.scanning.fingerprints import perceptual
     from PIL import Image, ImageOps
     from pillow_heif import register_heif_opener
@@ -65,9 +65,12 @@ def _decode(path: str, *, preview: bool = True) -> dict:
             w, h = im.size
 
     with im:
-        im.thumbnail((880, 880), Image.Resampling.LANCZOS)
+        with im.copy() as fingerprint:
+            fingerprint.thumbnail((880, 880), Image.Resampling.LANCZOS)
+            with fingerprint.convert('RGB') as rgb:
+                phash, dhash = perceptual(rgb)
+        im.thumbnail((preview_size, preview_size), Image.Resampling.LANCZOS)
         with im.convert("RGB") as rgb:
-            phash, dhash = perceptual(rgb)
             result = {"width": w, "height": h, "phash": phash, "dhash": dhash,
                       "image_format": image_format}
             if preview:
@@ -78,14 +81,16 @@ def _decode(path: str, *, preview: bool = True) -> dict:
 
 
 def decode(path: str | Path, cancel: Event | None = None, *, timeout: float = TIMEOUT,
-           preview: bool = True) -> dict:
+           preview: bool = True, preview_size: int = 880) -> dict:
+    if type(preview_size) is not int or not 1 <= preview_size <= 2048:
+        raise ValueError('invalid_preview_size')
     p = check_path(path)
     cancelled(cancel)
     env = os.environ.copy()
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     process = subprocess.Popen(
         [sys.executable, "-B", "-m", "app.scanning.decoder",
-         "--worker" if preview else "--index-worker", str(p)],
+         "--worker" if preview else "--index-worker", str(p)] + ([str(preview_size)] if preview_size != 880 else []),
         stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
         cwd=Path(__file__).resolve().parents[2], env=env,
         creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
@@ -130,7 +135,8 @@ def open_picture(path: str | Path, cancel: Event | None = None) -> tuple[Image.I
 
 if __name__ == "__main__":
     try:
-        response = _decode(sys.argv[2], preview=sys.argv[1] != "--index-worker")
+        response = _decode(sys.argv[2], preview=sys.argv[1] != "--index-worker",
+                           preview_size=int(sys.argv[3]) if len(sys.argv) > 3 else 880)
     except Exception as exc:
         response = {"error": f"{type(exc).__name__}: {exc}"}
     sys.stdout.buffer.write(json.dumps(response).encode("utf-8"))

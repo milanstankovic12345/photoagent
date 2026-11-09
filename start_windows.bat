@@ -8,17 +8,17 @@ if not exist ".venv\Scripts\python.exe" (
 )
 
 echo Proveravam Python biblioteke...
-".venv\Scripts\python.exe" -B -m app.services.preflight
+".venv\Scripts\python.exe" -B -m app.services.preflight %*
 if errorlevel 1 (
     ".venv\Scripts\python.exe" -m pip install -r requirements.txt
     if errorlevel 1 goto ERROR
 )
 
-".venv\Scripts\python.exe" -B -m app.services.preflight
+".venv\Scripts\python.exe" -B -m app.services.preflight %*
 if errorlevel 1 goto ERROR
 
 echo Pokrecem PhotoAgent...
-".venv\Scripts\python.exe" -B photo_agent.py
+".venv\Scripts\python.exe" -B photo_agent.py %*
 
 if errorlevel 1 goto ERROR
 exit /b 0

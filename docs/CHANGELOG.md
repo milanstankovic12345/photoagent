@@ -1,5 +1,23 @@
 ﻿# Changelog
 
+## Launcher default correction - 2026-11-08
+
+- Changed the application and preflight defaults to Qt at the owner's request:
+  double-clicking start_windows.bat now opens the six-screen interface, with Dark
+  as the default theme. Saved theme preferences remain respected; `--ui tk`
+  selects the retained legacy adapter. Manual scaling/platform acceptance remains open.
+
+## v2.4 - Task003 - 2026-11-08 (manual acceptance pending)
+
+- Added optional six-screen Qt desktop, Dark/Light/System themes, Serbian keyed
+  messages, worker-owned services, asynchronous previews/shutdown and cancellation.
+- Added whole-session queries/direct groups, dashboard estimates, progress,
+  preserved preferences, per-session matching thresholds and selected restore IDs.
+- Added 2048 px previews and a content-validated 64 MiB decoded cache; frozen-plan
+  dialogs retain RAW/legacy confirmations and all existing safety checks.
+- Added Qt/offline distribution notes and regression tests. Tkinter remains available
+  and default until manual acceptance. No installer, language switching or new classifiers.
+
 ## Task002 - Windows measurement evidence - 2026-11-08
 
 - Added a separate synthetic Tkinter heartbeat benchmark without production changes.

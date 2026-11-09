@@ -6,6 +6,7 @@ from queue import Queue
 from threading import Event
 
 from app.core.models import Cancelled, Photo, ScanResult, SafetyError
+from app.core.queries import MatchingOptions
 from app.matching.matcher import match
 from app.safety.paths import QUARANTINE, absolute, cancelled, check_path, identity, snapshot
 from app.scanning.discovery import discover
@@ -36,7 +37,8 @@ def inspect(path: Path, root: Path, cancel: Event | None = None) -> Photo:
     return extract(path, root, snapshot(path, cancel), cancel)
 
 
-def scan(folders: list[str], updates: Queue, cancel: Event) -> ScanResult:
+def scan(folders: list[str], updates: Queue, cancel: Event,
+         options: MatchingOptions = MatchingOptions()) -> ScanResult:
     found, errors, seen, physical = [], [], set(), set()
     roots = roots_for_scan(folders, errors)
     try:
@@ -62,7 +64,7 @@ def scan(folders: list[str], updates: Queue, cancel: Event) -> ScanResult:
                 updates.put(("status", ("scan_progress", len(found))))
             if identity(root) != root_id:
                 raise SafetyError("root_replaced")
-        pairs = match(found, [str(r) for r in roots], cancel)
+        pairs = match(found, [str(r) for r in roots], cancel, options)
         return ScanResult(tuple(found), pairs, tuple(errors), not errors)
     except Cancelled:
         return ScanResult(tuple(found), (), tuple(errors), False, True)
