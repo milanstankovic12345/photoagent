@@ -1,4 +1,26 @@
-﻿# Changelog
+# Changelog
+
+## Task005 — Qt design system — 2026-11-09
+
+- Extended Dark/Light themes with semantic colors, readable action text, stable
+  focus/hover, typography and shared dialog/menu/list/table styles.
+- Added reusable headers/cards/stats/empty states/status badges/sections and action
+  variants, plus worker-fed preview loading/unavailable/reset states.
+- Bundled three original CC0 SVGs and loaded QtSvg before Windows icon engines.
+- Added contrast/keyboard/preview tests and eight inspected component captures.
+  Settings format, matcher, decoder, schema and safety services are unchanged.
+  Native DPI/Linux and full accessibility acceptance remain open.
+
+## Task004 — UX audit and redesign plan — 2026-11-09
+
+- Audited all six existing Qt pages with 24 newly rendered synthetic screenshots,
+  including confirmation, incomplete/offline errors and selected restore after
+  service restart. Added a repeatable isolated capture tool and evidence manifest.
+- Documented per-screen improvements, actual metric sources and contract gaps,
+  3+ member review, retained copies, Back context and stale-plan invalidation.
+- Preserved production behavior and separated future redesign (Task005–011),
+  localization (Task012) and release/packaging (Task013). Focused regression:
+  38 passed; native DPI/Linux/full manual accessibility acceptance remains open.
 
 ## Launcher default correction - 2026-11-08
 

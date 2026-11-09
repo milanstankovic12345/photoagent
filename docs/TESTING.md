@@ -1,4 +1,102 @@
-﻿# PhotoAgent test evidence
+# PhotoAgent test evidence
+
+## Task005 design system (2026-11-09)
+
+Windows 11, Python 3.12.10, Qt 6.12.0, Fusion/offscreen. Only temporary synthetic
+fixtures were used. The gallery does not create a home/index/journal and contains
+no photographs or fabricated collection metrics.
+
+```powershell
+$env:QT_QPA_PLATFORM = 'offscreen'
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_qt_design_system.py tests/test_qt.py tests/test_task003_services.py tests/test_operations.py tests/test_recovery.py -q -ra
+# 43 passed, 0 failed, 0 skipped in 133.93s
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_qt_design_system.py tests/test_qt.py::test_themes_system_fallback_and_text_contrast -q -ra
+# Final palette/link/tooltip revision: 6 passed, 0 failed, 0 skipped in 1.64s
+.\.venv\Scripts\python.exe -B -m tools.capture_design_system --output docs/design/verification/task005
+```
+
+The first capture found a stale Dark tooltip background after switching to Light.
+After explicit QToolTip palette updates and allowing the hide delay to finish,
+the second capture used `--output docs/design/verification/task005-review`, then
+was moved to accepted `task005`. The rejected run is retained in ignored
+`task005-tooltip-rejected`. Eight accepted images were inspected: components,
+dialogs, menus and tooltips in both themes. The manifest records DPR, dimensions
+and SHA-256. Segoe UI is loaded only into the capture process.
+
+New tests cover text/semantic/disabled/action/link contrast, focus/control
+boundaries, actual focus painting, stable geometry, Tab/Space, collapsible
+content, SVG rendering and preview loading/failure/ready/reset. Existing tests
+cover theme persistence/System fallback, approval/RAW/legacy, stale previews,
+cancellation, worker ownership, quarantine and restart recovery. Early focused
+failures exposed low selection-border contrast and an unloaded Windows SVG
+runtime; both were corrected. The sandbox Python launch failed; actual tests
+ran with the approved external runner. A focused intermediate run passed 5 tests.
+
+Final `git diff --check` passed. All eight accepted PNG SHA-256 values matched
+the manifest; seven unchanged captures also matched the previously inspected
+images byte-for-byte. Diff review found no changes to matching, decoding, schema,
+settings persistence or safety services. Existing Task004 work was preserved.
+
+Tested text meets 4.5:1 and indicators 3:1; card dividers are decorative. These
+scoped checks do not establish complete accessibility. No full-suite, native
+Linux/physical DPI, screen reader, full keyboard/screen matrix, packaging,
+real-photo, physical-drive or power-loss checks were run. No pytest skips in the
+listed runs. Full redesign acceptance remains Task011, localization/release
+Task012/013. See [DESIGN_SYSTEM.md](design/DESIGN_SYSTEM.md).
+
+## Task004 UX audit (2026-11-09)
+
+Stage A produced an [evidence-based redesign plan](design/UX_REDESIGN_PLAN.md),
+not a redesigned application. Production code and existing tests were unchanged.
+The capture tool uses generated images and a private temporary home/index/journal;
+it closes all worker threads before cleanup. No real library was scanned.
+
+Executed from the repository root on Windows 11, Python 3.12.10, PySide6 6.12.0:
+
+```powershell
+.\.venv\Scripts\python.exe -B -m tools.capture_ux_audit --output docs/design/verification/task004
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_qt.py tests/test_task003_services.py -q -ra
+# 21 passed, 0 failed, 0 skipped in 189.95s
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_operations.py tests/test_recovery.py -q -ra
+# 17 passed, 0 failed, 0 skipped in 34.85s
+git diff --check
+# passed
+```
+
+Also verified all 24 PNG SHA-256 values against the manifest, all local links in
+the redesign plan and trailing whitespace in the new script/document. Diff review
+confirmed no changes under `app/` or `tests/`. Narrow `.gitignore` exceptions keep
+the plan/accepted evidence reviewable without exposing the older ignored references.
+
+Capture result: **24 saved and individually inspected screenshots**, with dimensions,
+DPR and SHA-256 in [manifest.json](design/verification/task004/manifest.json).
+The first attempt completed its scenarios but rendered missing-font boxes in Windows
+offscreen mode. It was rejected, moved to ignored
+`docs/design/verification/task004-font-rejected/`, and replaced by a complete fresh
+run after the tool loaded installed Segoe UI regular/bold fonts into its own process.
+The accepted run uses Fusion/offscreen, 1280×800 logical pixels, DPR 1.0.
+It preserves the rendered PNGs exactly. The output path must not exist when rerunning;
+choose a new path to keep this evidence.
+
+Scenario assertions cover a real complete scan (5 photos, 2 EXACT links, 1 VISUAL
+link, an EXACT group with 3 members), rejected confirmation with unchanged bytes,
+one synthetic quarantine, new window/service instances, selected-ID restore with
+all original bytes verified, incomplete scan with malformed RAW/missing source,
+disabled bulk, worker-level rejection, and saved Light theme after service restart.
+The logged `SafetyError: incomplete_scan` is the expected refusal captured in the
+error dialog, not a failed scenario. Actions use Qt window slots and real workers;
+native mouse input/folder-dialog navigation are not exercised. Existing pytest Qt
+tests used the host platform plugin (the command did not set `QT_QPA_PLATFORM`);
+the offscreen setting is local to the separate capture process.
+
+Focused regression total: **38 passed, 0 failed, 0 skipped**. No new tests were
+added for this documentation/capture change. No full-suite, native Linux, licensed
+valid RAW, physical-media/power-loss, screen-reader, full keyboard, full Dark/Light
+screen matrix, native DPI or packaging checks were run. Existing Qt tests do cover
+worker ownership/heartbeat/cancellation/close, stale previews, keeper-change plan
+invalidation, RAW/legacy consent and theme fallback/contrast; those passes do not
+close the manual acceptance gaps. Full redesign verification remains Task011;
+localization and release/packaging remain Task012/013.
 
 ## Task003 verification (2026-11-08)
 

@@ -1,9 +1,15 @@
-﻿# PhotoAgent v2.4 architecture
+# PhotoAgent v2.4 architecture
 
 Task003 adds `app/ui/qt/`, selected with `--ui qt`: bootstrap, controller, workers,
 six screens, table model, components, themes and compiled local SVG resources.
 Qt is now the default; `--ui tk` selects the retained Tkinter adapter. Both share the existing core.
 Full language switching and packaging remain future work.
+
+Task005 extends the same ThemeManager with semantic Dark/Light tokens, logical
+spacing/type metrics and one application stylesheet. Shared cards, headers,
+badges, collapsible sections and action variants live in `components.py`.
+PhotoView handles presentation states only; decoded images still arrive from the
+preview worker. See [DESIGN_SYSTEM.md](design/DESIGN_SYSTEM.md) for APIs/evidence.
 
 `app/core/queries.py` supplies frozen query/page/dashboard/history/progress contracts
 and matching options. `app/services/queries.py` executes whole-session SQLite

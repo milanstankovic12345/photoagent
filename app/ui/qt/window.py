@@ -169,8 +169,8 @@ class MainWindow(QMainWindow):
             else:
                 self.selected_id = None
                 self.controller.preview(None)
-                self.comparison.left.scene.clear()
-                self.comparison.right.scene.clear()
+                self.comparison.left.reset()
+                self.comparison.right.reset()
         elif action == 'groups':
             self.group_rows = value.items
             self.group_total = value.total
@@ -292,8 +292,8 @@ class MainWindow(QMainWindow):
         self.operation_epoch += 1
         self.controller.preview(None)
         self.selected_id = None
-        self.comparison.left.scene.clear()
-        self.comparison.right.scene.clear()
+        self.comparison.left.reset()
+        self.comparison.right.reset()
 
     def filter_changed(self) -> None:
         self.invalidate_selection()

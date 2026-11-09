@@ -1,0 +1,416 @@
+{
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "qt_platform": "offscreen",
+    "style": "Fusion",
+    "viewport_logical": [
+      1280,
+      800
+    ],
+    "versions": {
+      "PySide6": "6.12.0",
+      "Pillow": "13.0.0"
+    },
+    "loaded_font_families": [
+      "Segoe UI",
+      "Segoe UI"
+    ],
+    "font_family": "Segoe UI"
+  },
+  "method": "Real Qt widgets, event loop, workers and services; window slots drive actions. No OS window decoration, native folder chooser, or physical display tested.",
+  "screenshots": [
+    {
+      "file": "01-dashboard-initial.png",
+      "state": "No scan; empty application home",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "86216dc8d3058bb53e68997a5ee26f4b7a7e86d23af66e28f510dcf7b6f6165b"
+    },
+    {
+      "file": "02-scan-initial.png",
+      "state": "No scan; empty application home",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "a68cdcc976941a82b6bf8ac9c347944a7607fe05bc38a26fe6dca9ffa18a6df4"
+    },
+    {
+      "file": "03-duplicates-initial.png",
+      "state": "No scan; empty application home",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "e090e552b716afb5772a78f41e5bc69647acdd6bd92371ce27a471f12e7b8f1d"
+    },
+    {
+      "file": "04-compare-initial.png",
+      "state": "No scan; empty application home",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "717248fbb38aca1f0187c5de589ac3afaf9d6554a5d67a90265e58b1a176e39e"
+    },
+    {
+      "file": "05-quarantine-initial.png",
+      "state": "No scan; empty application home",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "9143a5254e671b42611e7d01f00da36d2e4179a3c67007c18fa49b472255ce50"
+    },
+    {
+      "file": "06-settings-initial.png",
+      "state": "No scan; empty application home",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "c89846cfb3ed281aacbc3cc072dd9809ab3bb416aae3eb24de48582f553527dc"
+    },
+    {
+      "file": "07-scan-sources.png",
+      "state": "One generated source, before scan",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "bd124cb5c366fbc8cea479409b90307dcf9ec317f29d769f9d666bd727885667"
+    },
+    {
+      "file": "08-scan-running.png",
+      "state": "Actual worker scan progress",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "361e59926ea9be0605430750a51328a98049dedad147d8eff237804638a22837"
+    },
+    {
+      "file": "09-scan-complete.png",
+      "state": "Completed real scan of five generated photos",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "339179b3efdc75e77126be507e3c95a94c0894d0e05a8c01d44023eba3f09409"
+    },
+    {
+      "file": "10-dashboard-populated.png",
+      "state": "Actual summary after completed scan",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "efb08b752df3c15a0499bd0098e2d3a4ae2cf1d0d4638cb429fa0662ae1e86fa"
+    },
+    {
+      "file": "11-duplicates-populated.png",
+      "state": "Actual direct groups and candidate pairs",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "1429ae44fedc2e0b03a408f76c1b9b8c28c048e4e98d404c2b8b189573994813"
+    },
+    {
+      "file": "12-duplicates-no-filter-results.png",
+      "state": "No result for literal search",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "10066ecbff5d3dcd95695c7b2140811d00916de455d4b45e11007fbe85e45dee"
+    },
+    {
+      "file": "13-exact-three-members.png",
+      "state": "Exact group: retained original plus two candidate copies",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "d9236128aca8715b9169fe72be9bef99c9cd26d54486fd52fc6ac0f385e14551"
+    },
+    {
+      "file": "14-compare-exact.png",
+      "state": "Both real generated previews loaded",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "c3f2bf909e9fb19b788ca1c1f842f90fe411cf560c094e17f66a781db0cc0f93"
+    },
+    {
+      "file": "15-quarantine-confirmation.png",
+      "state": "Real single-move plan; no Approval yet",
+      "width": 900,
+      "height": 620,
+      "device_pixel_ratio": 1.0,
+      "sha256": "d11c37a7d7f54fa1614810230b27c54aeed74f2fb3ef4d2000689a5acd3f7bf1"
+    },
+    {
+      "file": "16-quarantine-populated.png",
+      "state": "Completed synthetic quarantine; one restorable operation",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "0ce192ea74310c4c10591962bf113df76bf55e73426c6a3f6232abde86086cf3"
+    },
+    {
+      "file": "17-quarantine-after-restart.png",
+      "state": "New MainWindow and worker services; same private journal",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "8b13e749a845a5881ad7a7fa2dcc1d3ac679a11cf546550ffb38a113f967d685"
+    },
+    {
+      "file": "18-restore-confirmation.png",
+      "state": "Restore selected operation ID after restart",
+      "width": 900,
+      "height": 620,
+      "device_pixel_ratio": 1.0,
+      "sha256": "0c2c0dacaab3b201e803f241d9ff99af0f2fc7580ba59c45bd74e2901c9e90b5"
+    },
+    {
+      "file": "19-quarantine-restored.png",
+      "state": "Restore completed; original operation is no longer eligible",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "46d12b423adc0f76e4cc954f5fb927dda8691f25f4fb264899be7369c2d617d7"
+    },
+    {
+      "file": "20-scan-errors-offline.png",
+      "state": "Incomplete scan: malformed RAW and missing synthetic drive",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "9d361d899fafd97ad6515b767edf43c5dbb376640f4a66becdbe01881a4658fd"
+    },
+    {
+      "file": "21-dashboard-incomplete.png",
+      "state": "Actual incomplete/offline warnings; review only",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "fe2bc0fffbb7a312a297bc7e53d40d9131f3c9e44811681a63dda0461b1b0384"
+    },
+    {
+      "file": "22-operation-error.png",
+      "state": "Worker rejects incomplete_scan; real error dialog",
+      "width": 400,
+      "height": 161,
+      "device_pixel_ratio": 1.0,
+      "sha256": "55bd6ecb6b90527e6d70331df3f0187ff82f51f30bcae8d804e19f1da5d1c451"
+    },
+    {
+      "file": "23-settings-populated.png",
+      "state": "Current controls and actual private index location",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "4a86bd9cb05515ff7dec1105b5773ff5bd0df17ad6b13816408febe0d88ebd54"
+    },
+    {
+      "file": "24-settings-light.png",
+      "state": "Existing Light theme after actual settings persistence",
+      "width": 1280,
+      "height": 800,
+      "device_pixel_ratio": 1.0,
+      "sha256": "2e04614f69447b9552806ce639d0a0878e1e71c841a0cded637450fb667f03dd"
+    }
+  ],
+  "checks": [
+    "Reject confirmation: all five original byte sequences unchanged",
+    "Quarantine, service restart and selected-ID restore preserve all original bytes",
+    "Incomplete scan disables bulk quarantine",
+    "Light theme survives service/window restart",
+    "Every worker thread stopped before temporary sandbox cleanup"
+  ],
+  "dashboard": [
+    {
+      "indexed": 0,
+      "session_id": "",
+      "status": "",
+      "started": 0,
+      "exact": 0,
+      "visual": 0,
+      "potential_bytes": 0,
+      "errors": 0,
+      "roots": [],
+      "warnings": []
+    },
+    {
+      "indexed": 5,
+      "session_id": "e2fa1ad22cef411cad9325d589528e95",
+      "status": "complete",
+      "started": 1794215204.2861464,
+      "exact": 2,
+      "visual": 1,
+      "potential_bytes": 27172,
+      "errors": 0,
+      "roots": [
+        [
+          "<private-temp>\\photos",
+          "complete"
+        ]
+      ],
+      "warnings": []
+    },
+    {
+      "indexed": 5,
+      "session_id": "e2fa1ad22cef411cad9325d589528e95",
+      "status": "complete",
+      "started": 1794215204.2861464,
+      "exact": 1,
+      "visual": 1,
+      "potential_bytes": 13586,
+      "errors": 0,
+      "roots": [
+        [
+          "<private-temp>\\photos",
+          "complete"
+        ]
+      ],
+      "warnings": [
+        "stale_results"
+      ]
+    },
+    {
+      "indexed": 5,
+      "session_id": "e2fa1ad22cef411cad9325d589528e95",
+      "status": "complete",
+      "started": 1794215204.2861464,
+      "exact": 1,
+      "visual": 1,
+      "potential_bytes": 13586,
+      "errors": 0,
+      "roots": [
+        [
+          "<private-temp>\\photos",
+          "complete"
+        ]
+      ],
+      "warnings": [
+        "stale_results"
+      ]
+    },
+    {
+      "indexed": 5,
+      "session_id": "e2fa1ad22cef411cad9325d589528e95",
+      "status": "complete",
+      "started": 1794215204.2861464,
+      "exact": 1,
+      "visual": 1,
+      "potential_bytes": 13586,
+      "errors": 0,
+      "roots": [
+        [
+          "<private-temp>\\photos",
+          "complete"
+        ]
+      ],
+      "warnings": [
+        "stale_results"
+      ]
+    },
+    {
+      "indexed": 6,
+      "session_id": "511f5b61412b4e409b6115498d2010d9",
+      "status": "incomplete",
+      "started": 1794215293.045002,
+      "exact": 2,
+      "visual": 1,
+      "potential_bytes": 27172,
+      "errors": 2,
+      "roots": [
+        [
+          "<private-temp>\\photos",
+          "complete"
+        ],
+        [
+          "<private-temp>\\offline-drive",
+          "unavailable"
+        ]
+      ],
+      "warnings": [
+        "scan_review_only",
+        "stale_results",
+        "unavailable_source"
+      ]
+    },
+    {
+      "indexed": 6,
+      "session_id": "511f5b61412b4e409b6115498d2010d9",
+      "status": "incomplete",
+      "started": 1794215293.045002,
+      "exact": 2,
+      "visual": 1,
+      "potential_bytes": 27172,
+      "errors": 2,
+      "roots": [
+        [
+          "<private-temp>\\photos",
+          "complete"
+        ],
+        [
+          "<private-temp>\\offline-drive",
+          "unavailable"
+        ]
+      ],
+      "warnings": [
+        "scan_review_only",
+        "stale_results",
+        "unavailable_source"
+      ]
+    },
+    {
+      "indexed": 6,
+      "session_id": "511f5b61412b4e409b6115498d2010d9",
+      "status": "incomplete",
+      "started": 1794215293.045002,
+      "exact": 2,
+      "visual": 1,
+      "potential_bytes": 27172,
+      "errors": 2,
+      "roots": [
+        [
+          "<private-temp>\\photos",
+          "complete"
+        ],
+        [
+          "<private-temp>\\offline-drive",
+          "unavailable"
+        ]
+      ],
+      "warnings": [
+        "scan_review_only",
+        "stale_results",
+        "unavailable_source"
+      ]
+    }
+  ],
+  "scan_summaries": [
+    {
+      "session_id": "e2fa1ad22cef411cad9325d589528e95",
+      "status": "complete",
+      "photo_count": 5,
+      "pair_count": 3,
+      "exact_count": 2,
+      "error_count": 0,
+      "cache_hits": 0,
+      "decodes": 5,
+      "hash_reads": 10,
+      "hash_bytes": 252158,
+      "scan_seconds": 13.060750200063922,
+      "match_seconds": 0.6139975000405684
+    },
+    {
+      "session_id": "511f5b61412b4e409b6115498d2010d9",
+      "status": "incomplete",
+      "photo_count": 6,
+      "pair_count": 3,
+      "exact_count": 2,
+      "error_count": 2,
+      "cache_hits": 4,
+      "decodes": 2,
+      "hash_reads": 8,
+      "hash_bytes": 139707,
+      "scan_seconds": 8.43737110006623,
+      "match_seconds": 0.723168500000611
+    }
+  ]
+}

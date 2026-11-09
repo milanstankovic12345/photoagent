@@ -49,6 +49,14 @@ htmlcov/
 !/docs/CHANGELOG.md
 !/docs/QT_DISTRIBUTION.md
 !/docs/TASK003_IMPLEMENTATION.md
+!/docs/design/
+/docs/design/*
+!/docs/design/UX_REDESIGN_PLAN.md
+!/docs/design/DESIGN_SYSTEM.md
+!/docs/design/verification/
+/docs/design/verification/*
+!/docs/design/verification/task004/
+!/docs/design/verification/task005/
 /demo_photo_collection/
 .photo_agent_quarantine/
 /PhotoAgentReports/
@@ -56,3 +64,4 @@ htmlcov/
 .photo_agent_operations/
 .photo_agent_state.json.*.bak
 /.benchmarks/
+/task/*

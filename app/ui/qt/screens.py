@@ -4,7 +4,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (QAbstractItemView, QComboBox, QFormLayout, QHBoxLayout,
     QLabel, QLineEdit, QListWidget, QPlainTextEdit, QProgressBar, QPushButton,
     QSpinBox, QSplitter, QTableView, QTableWidget, QVBoxLayout, QWidget)
-from app.ui.qt.components import PhotoView, button
+from app.ui.qt.components import PageHeader, PhotoView, button
 from app.ui.qt.models import MatchModel
 from app.ui.qt.strings import tr
 
@@ -21,8 +21,7 @@ class DashboardScreen(QWidget):
     def __init__(self, refresh: Callable) -> None:
         super().__init__()
         layout = QVBoxLayout(self)
-        heading = label(tr('dashboard'), layout)
-        heading.setProperty('role', 'heading')
+        layout.addWidget(PageHeader('dashboard'))
         self.counts = label(tr('no_session'), layout)
         self.counts.setProperty('role', 'card')
         self.session = label('', layout)

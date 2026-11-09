@@ -1,0 +1,66 @@
+{
+  "qt": "6.12.0",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "plugin": "offscreen",
+  "font": "Segoe UI",
+  "scale_factor": "1",
+  "scope": "Shared Qt widgets only; no photographs or collection data.",
+  "screenshots": [
+    {
+      "file": "dark-components.png",
+      "width": 1280,
+      "height": 1000,
+      "dpr": 1.0,
+      "sha256": "dcc7392d4c03c41725a7f9a6c7e62911fd5a46a978d88d9ef15b8319e32807f1"
+    },
+    {
+      "file": "dark-dialog.png",
+      "width": 620,
+      "height": 230,
+      "dpr": 1.0,
+      "sha256": "e34422f2667b3e75acf6ae01d21ed12ce23f6ede26f42cf6186c7e4ef42d2674"
+    },
+    {
+      "file": "dark-menu.png",
+      "width": 133,
+      "height": 115,
+      "dpr": 1.0,
+      "sha256": "743e72fec9b1cd7dce4491e204f880e28eda01480d56b8127abbfba9e1694151"
+    },
+    {
+      "file": "dark-tooltip.png",
+      "width": 370,
+      "height": 54,
+      "dpr": 1.0,
+      "sha256": "1bbde13e2aca50081051982615ad1a7efec8fd5e0b2696460499c0e7be68cd35"
+    },
+    {
+      "file": "light-components.png",
+      "width": 1280,
+      "height": 1000,
+      "dpr": 1.0,
+      "sha256": "c973173cc14ce833aa20d3ce2ffda8b1e1cd2441b6481bf028ae934d3b46bb58"
+    },
+    {
+      "file": "light-dialog.png",
+      "width": 620,
+      "height": 230,
+      "dpr": 1.0,
+      "sha256": "89e53471094863d7f3c7535772de3bc78fb4d8e7338e804a9b18a01c09dd3623"
+    },
+    {
+      "file": "light-menu.png",
+      "width": 133,
+      "height": 115,
+      "dpr": 1.0,
+      "sha256": "c0015341f783b164661954a72b0606dce7abb3ce278c4917dc28f220f5afd9f2"
+    },
+    {
+      "file": "light-tooltip.png",
+      "width": 370,
+      "height": 54,
+      "dpr": 1.0,
+      "sha256": "eafeac5dfeb80450f2a3561e26713d95a70ba7d83e2a899a54a2d3d183deba77"
+    }
+  ]
+}

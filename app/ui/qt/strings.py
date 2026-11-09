@@ -2,6 +2,10 @@
 from app.i18n import tr as core_tr
 
 SR = {
+    'preview_loading': 'Učitavanje pregleda…',
+    'section_expanded': 'Proširena sekcija', 'section_collapsed': 'Skupljena sekcija',
+    'design_system': 'Zajedničke komponente',
+    'design_system_note': 'Pregled stilova · bez fotografija i podataka kolekcije',
     'title': 'PhotoAgent · lokalni pregled fotografija',
     'dashboard': 'Pregled', 'scan': 'Skeniranje', 'duplicates': 'Duplikati',
     'compare': 'Poređenje', 'history': 'Karantin i vraćanje', 'settings': 'Podešavanja',
