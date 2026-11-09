@@ -48,6 +48,7 @@ htmlcov/
 !/docs/TESTING.md
 !/docs/CHANGELOG.md
 !/docs/QT_DISTRIBUTION.md
+!/docs/RELEASE.md
 !/docs/TASK003_IMPLEMENTATION.md
 !/docs/design/
 /docs/design/*

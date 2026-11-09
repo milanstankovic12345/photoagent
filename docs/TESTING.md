@@ -1,5 +1,117 @@
 # PhotoAgent test evidence
 
+## Task013 — Packaging and release audit (2026-11-09)
+
+Target available here: Windows 11 build 26100, CPython 3.12.10 x64, PySide6/Qt
+6.12.0. The existing Store-Python launcher requires the approved external runner;
+the restricted runner cannot launch it. No system packages, commits, pushes or
+publication. Only generated photographs and disposable application state were used.
+See [RELEASE.md](RELEASE.md) for selected format, dependency/license inventory,
+backup/recovery procedures and required gates. No full release-ready claim is made.
+
+Commands executed:
+
+```powershell
+# Full pre-existing source suite; Qt environment restored in finally.
+$oldPlatform = $env:QT_QPA_PLATFORM
+try {
+    $env:QT_QPA_PLATFORM = 'offscreen'
+    .venv/Scripts/python.exe -B -m pytest -p no:cacheprovider tests -q -o faulthandler_timeout=90
+} finally { $env:QT_QPA_PLATFORM = $oldPlatform }
+# 213 passed, 2 skipped in 1351.44s (22:31).
+
+# New packaging tests, collected separately after the full run started.
+.venv/Scripts/python.exe -B -m pytest -p no:cacheprovider tests/test_task013.py -q
+# Final focused run: 15 passed in 0.93s, zero skips.
+
+.venv/Scripts/python.exe -B -m tools.benchmark_index --output .benchmarks/task013-index-smoke-20261109 --sizes 10 --repeats 1
+.venv/Scripts/python.exe -B -m tools.benchmark_index --output .benchmarks/task013-baseline-smoke-20261109 --mode baseline --sizes 10 --repeats 1
+.venv/Scripts/python.exe -B -m tools.benchmark_ui --output .benchmarks/task013-ui-smoke-20261109 --repeats 1
+git diff --check
+```
+
+New packaging regressions cover allowlisted contents/catalogs, SHA integrity,
+complete license-directory notice retention, missing/wrong/repeated dependency
+locks, preserving existing outputs/runtimes, tamper detection, manifest/ZIP path
+escapes and redirected source inputs. Initial 11-case run passed in 0.92s. The
+expanded set first had 14 passes/1 failure twice: Windows ZipInfo normalized a
+backslash fixture name; preserving raw ZIP headers then exposed that the verifier
+also needed to validate `orig_filename`. The final 15-case run passes. No test
+failure is presented as a pass.
+
+Together these runs cover **228 distinct passing tests and 2 skips**. Exact skips:
+`tests/test_decoder_and_services.py:145` (`test_valid_raw_asset`, no licensed valid
+RAW fixture) and `tests/test_native_races.py:116` (`test_linux_no_replace`, native
+Linux unavailable). Neither skip closes its platform/codec acceptance gate. There
+were no failures in the complete pre-existing source regression run.
+
+Fresh small benchmark results, all scenarios complete:
+
+| Scenario (10 generated images) | Seconds | SHA reads | Decodes | Pairs | Peak sampled RSS bytes |
+|---|---:|---:|---:|---:|---:|
+| Indexed cold | 5.237216 | 20 | 10 | 8 | 58,281,984 |
+| Indexed warm | 0.097300 | 10 | 0 | 8 | 45,969,408 |
+| Indexed changed | 1.700315 | 13 | 3 | 7 | 57,905,152 |
+| Reference baseline | 5.123322 | 20 | 10 | 8 | 55,431,168 |
+
+Cold/warm/baseline pair-identity SHA-256 all equal
+`a17bcf0047b6801e024867adfa42164142dfb7686407c2e0759c620131e080b0`.
+The separate hidden Tk slow-read heartbeat rehearsal completed cold/warm 20-image
+scans in 13.339326/1.224246s; maximum gaps 30.032300/29.015800 ms (<250 ms).
+These are single-repetition smoke measurements on a shared active development host,
+not archive-scale budgets or Qt latency certification. Raw JSON is retained under
+the three `.benchmarks/task013-*` output paths. The required 1k/10k comparisons,
+repeated measurements and 125% budgets were **not run** and remain open; incomplete
+older attempts are not reused as results.
+
+Packaging preparation used the exact 13-version runtime reference and
+`pip download --only-binary=:all: --no-cache-dir`, then the builder/verification
+commands in RELEASE.md. Complete upstream wheel notices are retained; the actual
+pillow-heif 1.8.1 wheel's `LICENSES_bundled.txt` confirms GPLv2 binary-wheel labeling,
+LGPL libheif/libde265 and the Windows runtime notices. No application license or
+public distribution permission is inferred from wrapper metadata.
+
+Preliminary artifacts/evidence are retained under `dist/*-validation*.zip` and
+`build/task013-*`. First install exited 0 but emitted pip UnicodeEncodeError logging
+errors on a non-ASCII path; it is not a clean acceptance result. Explicit Python
+UTF-8 flags fixed that. Validation2 installed offline and passed scan, injected
+crash/restart, conflict/restore and native Qt (`platform_plugin=windows`), but its
+final smoke assertion tried to hash the newly created quarantine directory.
+Validation3 installed offline on a genuine čćž path but failed its smoke phase due
+to a loop variable shadowing the phase selector. Both harness defects were fixed;
+neither failed verification is counted as a pass. Source application/safety code
+was unchanged throughout.
+
+Validation4 completed successfully, including offline installation with no broken
+requirements, all four smoke phases, native Qt 6.12.0 `windows` plugin and packaged
+`start_offline.bat --help`. Evidence: `build/task013-validation4/verification.json`,
+`install.log`, `launcher.log` and `smoke-čćž/{results.json,scan.log,interrupt.log,
+restore.log,qt.log,qt.png}`. Fixture originals retained their four recorded SHA-256
+values after restoration; the approved interrupt child exited exactly 73 and
+restart reconciled its durable intent. The Qt screenshot was visually inspected:
+local SVG branding, Serbian text and populated synthetic preview render. This
+single native capture is not the physical DPI/accessibility matrix.
+Validation4 artifact SHA-256:
+`aea43d16efc99b830834a8ffdfb57999b16da899af80e77fc6a49c1eebaf4616`.
+The earlier validation3 install also confirmed Unicode installation logging on the
+genuine čćž path before its separate smoke-script failure.
+
+The final candidate is rebuilt after documentation updates as
+`dist/PhotoAgent-2.4-win-amd64-py312-candidate.zip`. Reproduce its own fresh install
+and rehearsal with the RELEASE.md command using new output
+`build/task013-final`. Its exact ZIP hash and result are recorded in
+`build/task013-final/verification.json` and the adjacent per-phase logs. Candidate
+hash is also supplied in `dist/PhotoAgent-2.4-win-amd64-py312-candidate.zip.sha256`;
+it is kept outside the ZIP to avoid a circular checksum/documentation dependency.
+
+Not executed: native Linux (WSL is not installed), clean Windows 10/11 VM or user
+installation, OS-level network disconnection/trace, physical drive/filesystem and
+power-loss matrix, licensed valid RAW, all HEIF/AVIF variants, physical DPI/monitor
+or assistive-technology acceptance, large performance budgets, license/source-offer
+clearance, installer upgrade/uninstall and public publication. A host-local new
+venv and native Windows Qt launch do not close those gates. Python socket audit
+denial in rehearsal children is not an OS firewall for native libraries.
+
 ## Task012 — Qt EN/SR localization (2026-11-09)
 
 The [Task012 report](design/TASK012_VERIFICATION.md) lists implemented behavior,

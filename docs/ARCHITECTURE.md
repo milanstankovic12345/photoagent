@@ -3,7 +3,17 @@
 `app/ui/qt/`, selected with `--ui qt`, contains bootstrap, controller, workers,
 screen components, named navigation, table model, themes and local SVG resources.
 Qt is now the default; `--ui tk` selects the retained Tkinter adapter. Both share the existing core.
-Qt supports English/Serbian runtime switching; Tk remains Serbian. Packaging remains future work.
+Qt supports English/Serbian runtime switching; Tk remains Serbian. Task013 adds a
+source ZIP/wheelhouse candidate; full platform release acceptance remains open.
+
+`tools/build_release.py` packages allowlisted sources, catalogs, resource modules,
+hash-pinned runtime wheels and their notices. `packaging/install_offline.py` verifies
+the manifest before creating a new isolated `.runtime`; packaged launchers never
+bootstrap from the network. `tools/release_smoke.py` exercises the installed runtime
+in fresh processes using generated fixtures and temporary application/Qt state.
+The ordinary `python -m app.scanning.decoder` child dispatch is preserved; no frozen
+dispatch, backend/schema/journal change or uninstall behavior is introduced.
+See [RELEASE.md](RELEASE.md) for actual target, prerequisites and open gates.
 
 Task012 stores the single authoritative catalogs in `app/i18n/en.json` and
 `sr_Latn.json`. The framework-independent translator provides safe English fallback;

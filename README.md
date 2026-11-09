@@ -49,6 +49,13 @@ Use the isolated capture tool for testing; the CLI has no `--home` option.
 Qt mode needs PySide6 >=6.8,<7; preflight checks only the selected toolkit.
 See [Qt distribution notes](docs/QT_DISTRIBUTION.md).
 
+Task013 adds a local **source ZIP + offline wheelhouse** candidate for Python 3.12
+Windows x64. Its separate installer verifies SHA-256 and creates a new `.runtime`;
+packaged launchers never install dependencies online. See
+[build, offline install, recovery and release gates](docs/RELEASE.md).
+Python is an external prerequisite. Native Linux/clean OS/valid RAW/licensing and
+performance acceptance remain open; this is not a public release.
+
 Linux: provide Python 3.12+ and venv through your distribution, then run
 `bash start_linux.sh`. The launcher does not install system packages.
 Tkinter is optional and needed only for `--ui tk`.
@@ -145,8 +152,8 @@ instance may scan, but only one instance may write settings/history or move file
 
 Qt search/sorting cover the entire session; groups use direct keeper links.
 Dashboard space estimates are not approved plans. Quarantine on the same disk does
-not free space. Dark/Light/System themes persist across restarts. Language switching
-is inactive in this milestone. pHash/dHash thresholds (0–64, defaults 4/6) apply only
+not free space. Dark/Light/System themes and EN/SR language preferences persist across
+restarts. pHash/dHash thresholds (0–64, defaults 4/6) apply only
 to the next scan; aspect stays 0.025. Preview zoom/pan/Fit uses a bitmap up to 2048 px;
 100% means preview pixels. Focus, noise and edit provenance are not measured.
 Enlarged previews use the same bounded bitmap, never original full resolution.

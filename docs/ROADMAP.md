@@ -1,5 +1,14 @@
 ﻿# PhotoAgent v2 implementation roadmap
 
+Task013 (2026-11-09): local source ZIP/offline-wheelhouse tooling is implemented
+for the owner's selected format, with hash verification and synthetic installed
+runtime rehearsal. [RELEASE.md](RELEASE.md) documents actual contents, dependency
+and license inventory, installation/recovery and open gates; [TESTING.md](TESTING.md)
+records executed checks. R1/M7 remains open: a host-local fresh venv is not clean
+Windows 10/11 or Linux acceptance, valid RAW/platform/DPI gates remain required,
+and the 1k/10k benchmark/budgets and redistribution license decisions are unresolved.
+No release-ready/publication claim or safety-policy waiver is made.
+
 Planning baseline: `569e2a1`, 2026-11-04. The task table and gate definitions below
 originated as a proposal; their present status is assessed here and in
 [TESTING.md](TESTING.md). T1, S1-S4, B1-B5 and I1-I2 have implementations with

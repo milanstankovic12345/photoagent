@@ -1,0 +1,14 @@
+# Task013 reference runtime. Other targets require their own lock and validation.
+Pillow==13.0.0
+ImageHash==4.3.2
+rawpy==0.28.0
+pillow-heif==1.8.1
+PySide6==6.12.0
+PySide6_Addons==6.12.0
+PySide6_Essentials==6.12.0
+PySide6_Pdf==6.12.0.140
+PySide6_WebEngine==6.12.0.140
+shiboken6==6.12.0
+numpy==2.5.4
+scipy==1.18.1
+PyWavelets==1.10.0

@@ -1,5 +1,17 @@
 ﻿# PhotoAgent safety and recovery
 
+Task013 distribution boundary: the source ZIP installer verifies file/wheel SHA-256,
+creates a new runtime and uses only local wheels. It refuses existing runtimes and
+provides no uninstall/history cleanup. Upgrade by extracting a compatible build
+beside the old one. Preserve home journal/state/legacy backups and every root's
+quarantine with retained originals, while no application writer is active. Never
+roll an older incompatible writer back over newer recovery records. Internal hashes
+detect accidental damage; unsigned bundles are not authenticated by those hashes.
+Installed-runtime synthetic crash/restart/conflict rehearsal supplements the source
+tests; it does not certify power-loss, hostile namespace races or clean OS acceptance.
+See [RELEASE.md](RELEASE.md) for procedures and remaining gates. Native safety checks
+and stronger SHA/identity/no-overwrite guarantees remain unchanged.
+
 Task003 Qt retains prepare → frozen plan → Approval → execute. Reject/close creates
 no Approval; selection/keeper changes invalidate pending preparation. Shutdown
 cancels without killing threads. Selected restore IDs pass the same journal,

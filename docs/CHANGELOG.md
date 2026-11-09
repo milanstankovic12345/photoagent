@@ -1,5 +1,19 @@
 # Changelog
 
+## Task013 — Local source ZIP and offline wheelhouse — 2026-11-09
+
+- Added an exact Windows AMD64/CPython 3.12 runtime reference, allowlisted ZIP
+  builder, file/wheel SHA-256 manifest, hashed offline requirements and extracted
+  dependency/license notices. Existing outputs and redirected inputs are refused.
+- Added an offline installer creating a new isolated runtime, pip dependency check,
+  Qt preflight and UTF-8 launchers without network bootstrap or uninstall behavior.
+- Added generated-fixture installed-runtime scan/cache/approval/crash/restart/
+  conflict/restore and native Qt smoke tooling, with per-phase evidence and a
+  Python socket audit guard (not an OS firewall).
+- Added packaging regressions and documented actual release/license/open-platform
+  gates. No matcher, schema, journal, approval or photograph operation changes.
+- Full release acceptance remains open; see TESTING.md and RELEASE.md for evidence.
+
 ## Task012 — Qt English / Serbian Latin localization — 2026-11-09
 
 - Added complete shared EN/SR catalogs with matching parameters and safe fallback,
