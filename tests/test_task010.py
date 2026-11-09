@@ -45,19 +45,21 @@ def tab_to(target, *, backwards=False):
                 f'enabled={target.isEnabled()}, visible={target.isVisible()}, chain={seen[:25]}')
 
 
-def test_catalog_inventory_safe_fallback_and_existing_language(monkeypatch):
+def test_catalog_inventory_safe_fallback_and_existing_language(monkeypatch, qtapp):
+    from app.ui.qt.localization import language_manager
+    language_manager().set_language('en')
     inventory = json.loads((Path(__file__).parents[1] / 'docs/design/QT_TEXT_INVENTORY.json').read_text(encoding='utf-8'))
     assert set(inventory['english_intents']) == set(SR) | set(STRINGS['sr_Latn'])
     assert all(text.strip() for text in inventory['english_intents'].values())
     assert shared_tr('history_error', language='en') == STRINGS['en']['history_error']
-    assert tr('history_error') == STRINGS['sr_Latn']['history_error']
+    assert tr('history_error') == STRINGS['en']['history_error']
     assert tr('missing_internal_key') == tr('message_unavailable')
     assert 'missing_internal_key' not in tr('missing_internal_key')
     assert tr('metadata') == tr('message_unavailable')  # Missing format arguments.
     assert error_text('OSError: <private path>') == tr('error')
     assert error_text('destination_occupied: <private path>') == tr('destination_occupied')
     monkeypatch.delitem(SR, 'xmp_warning', raising=False)
-    assert tr('xmp_warning') == STRINGS['sr_Latn']['xmp_warning']
+    assert tr('xmp_warning') == STRINGS['en']['xmp_warning']
 
 
 def test_empty_plan_message_is_nonblocking_and_cannot_approve(desktop):
@@ -78,7 +80,7 @@ def test_keyboard_sources_filters_group_compare_confirmation_restore_settings(de
     window.theme.apply(theme)
     window.activateWindow()
     window.navigate(Route.SCAN)
-    monkeypatch.setattr(QFileDialog, 'getExistingDirectory', lambda *a, **kw: str(collection))
+    monkeypatch.setattr(QFileDialog, 'open', lambda dialog: dialog.fileSelected.emit(str(collection)))
     tab_to(window.scan.add)
     QTest.keyClick(window.scan.add, Qt.Key_Space)
     pump(lambda: window.scan.start.isEnabled() and not window.controller.busy)
@@ -155,7 +157,7 @@ def test_keyboard_sources_filters_group_compare_confirmation_restore_settings(de
     tab_to(window.preferences.save)
     QTest.keyClick(window.preferences.save, Qt.Key_Space)
     pump(lambda: not window.controller.busy)
-    assert window.settings['phash_max'] == 5 and window.settings['language'] == 'sr_Latn'
+    assert window.settings['phash_max'] == 5 and window.settings['language'] == 'en'
     assert not errors
 
 

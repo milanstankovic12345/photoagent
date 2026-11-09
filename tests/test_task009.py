@@ -271,8 +271,9 @@ def test_history_settings_errors_toolbar_and_unavailable_features(desktop, theme
     window.resize(853, 480)
     window.navigate(Route.SETTINGS)
     assert_toolbar_available(window, window.preferences.toolbar)
-    assert 'srpski' in window.preferences.language.text() and not hasattr(window.preferences.language, 'currentIndex')
-    assert '64 MiB' in tr('preview_cache_detail') and 'kalibrisani' in tr('matching_explanation')
+    assert window.preferences.language.currentData() == 'en'
+    assert window.preferences.language.count() == 2
+    assert '64 MiB' in tr('preview_cache_detail') and 'not calibrated' in tr('matching_explanation')
     window.navigate(Route.QUARANTINE)
     assert_toolbar_available(window, window.history.toolbar)
     _real_error(window, 'restore', 'destination_occupied')

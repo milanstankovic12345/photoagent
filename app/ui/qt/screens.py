@@ -9,12 +9,13 @@ from app.ui.qt.components import CollapsibleSection, ContextToolbar, PhotoView, 
 from app.ui.qt.dashboard_scan import DashboardScreen, ScanScreen
 from app.ui.qt.models import MatchModel
 from app.ui.qt.gallery import GroupView
+from app.ui.qt.localization import set_text, add_item, with_text
 from app.ui.qt.strings import tr
 from app.ui.qt.quarantine_settings import HistoryScreen, SettingsScreen
 
 
 def label(text: str, layout: QVBoxLayout) -> QLabel:
-    item = QLabel(text)
+    item = with_text(QLabel(), text)
     item.setTextFormat(Qt.PlainText)
     item.setWordWrap(True)
     item.setTextInteractionFlags(Qt.TextSelectableByMouse)
@@ -70,30 +71,31 @@ class DuplicatesScreen(QWidget):
         filters = QVBoxLayout()
         layout.addLayout(filters)
         self.search = QLineEdit()
-        self.search.setPlaceholderText(tr('search'))
-        self.search.setAccessibleName(tr('search'))
+        set_text(self.search, tr('search'), 'setPlaceholderText')
+        set_text(self.search, tr('search'), 'setAccessibleName')
         self.search.textChanged.connect(changed)
         filters.addWidget(self.search, 1)
         options = ContextToolbar()
         filters.addWidget(options)
         self.kind = QComboBox()
-        self.kind.setAccessibleName(tr('category_filter'))
-        self.kind.addItem(tr('all'), '')
+        set_text(self.kind, tr('category_filter'), 'setAccessibleName')
+        add_item(self.kind, tr('all'), '')
         for kind in ('EXACT', 'VISUAL'):
-            self.kind.addItem(tr('filter_' + kind), kind)
+            add_item(self.kind, tr('filter_' + kind), kind)
         self.kind.currentIndexChanged.connect(changed)
         options.actions.addWidget(self.kind)
         self.sort_order = QComboBox()
         for key in MatchModel.columns:
-            self.sort_order.addItem(tr(key), key)
-        self.sort_order.setAccessibleName(tr('sort'))
+            add_item(self.sort_order, tr(key), key)
+        set_text(self.sort_order, tr('sort'), 'setAccessibleName')
         self.sort_order.currentIndexChanged.connect(sort)
         options.actions.addWidget(self.sort_order)
         self.direction = button('sort_asc', lambda: sort(self.sort_order.currentIndex()), options.actions)
-        self.direction.setAccessibleDescription(tr('sort_direction'))
+        set_text(self.direction, tr('sort_direction'), 'setAccessibleDescription')
         self.mode = QComboBox()
-        self.mode.addItems([tr('grid'), tr('list')])
-        self.mode.setAccessibleName(tr('view_mode'))
+        add_item(self.mode, tr('grid'))
+        add_item(self.mode, tr('list'))
+        set_text(self.mode, tr('view_mode'), 'setAccessibleName')
         options.actions.addWidget(self.mode)
         self.warning = label('', layout)
         splitter = QSplitter(Qt.Vertical)
@@ -127,8 +129,8 @@ class DuplicatesScreen(QWidget):
         self.table.activated.connect(compare)
         self.table.setAlternatingRowColors(True)
         self.table.horizontalHeader().setStretchLastSection(True)
-        self.table.setAccessibleName(tr('duplicates'))
-        self.table.setAccessibleDescription(tr('keyboard_pairs'))
+        set_text(self.table, tr('duplicates'), 'setAccessibleName')
+        set_text(self.table, tr('keyboard_pairs'), 'setAccessibleDescription')
         self.table.setTextElideMode(Qt.ElideMiddle)
         self.table.setMinimumHeight(100)
         splitter.addWidget(self.table)
@@ -148,7 +150,7 @@ class DuplicatesScreen(QWidget):
 
     def set_state(self, message: str, show_results: bool) -> None:
         self.error_details.set_detail('')
-        self.empty.setText(message)
+        set_text(self.empty, message)
         self.empty.setVisible(bool(message))
         self.results_panel.setVisible(show_results)
         self.pager.setVisible(show_results)
@@ -163,8 +165,8 @@ class CompareScreen(QWidget):
         self.warning = label(tr('review_advice'), layout)
         self.split = split = QSplitter()
         self.left, self.right = PhotoView(), PhotoView()
-        self.left.view.setAccessibleName(tr('left_preview'))
-        self.right.view.setAccessibleName(tr('right_preview'))
+        set_text(self.left.view, tr('left_preview'), 'setAccessibleName')
+        set_text(self.right.view, tr('right_preview'), 'setAccessibleName')
         split.addWidget(self.left)
         split.addWidget(self.right)
         split.setChildrenCollapsible(False)
@@ -186,7 +188,7 @@ class CompareScreen(QWidget):
         self.next = button('next', lambda: page(1), navigation)
         self.members = QTableView()
         self.members.setTabKeyNavigation(False)
-        self.members.setAccessibleName(tr('direct_members'))
+        set_text(self.members, tr('direct_members'), 'setAccessibleName')
         self.members.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.members.setSelectionMode(QAbstractItemView.SingleSelection)
         self.members.setMinimumHeight(96)

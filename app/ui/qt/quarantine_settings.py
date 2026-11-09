@@ -14,7 +14,8 @@ from app import __version__
 from app.core.queries import HistoryEntry, MatchingOptions, PageResult, StorageSummary
 from app.ui.qt.components import (Card, CollapsibleSection, ContextToolbar, EmptyState,
                                   TechnicalDetails, ThemeSelector, button, path_label, text_label)
-from app.ui.qt.strings import tr
+from app.ui.qt.localization import set_text, text_of, add_item, language_manager
+from app.ui.qt.strings import tr, join_text
 
 # Search breadth choices, not calibrated image-quality or duplicate confidence.
 MATCHING_PRESETS = {'strict': MatchingOptions(2, 3), 'balanced': MatchingOptions(),
@@ -49,10 +50,10 @@ class HistoryScreen(QWidget):
         self.empty = EmptyState('quarantine_empty', 'quarantine_empty_detail')
         layout.addWidget(self.empty)
         self.table = QTableWidget(0, 6)
-        self.table.setHorizontalHeaderLabels([tr(k) for k in
-            ('name', 'original_location', 'moved_at', 'size', 'state', 'kind')])
-        self.table.setAccessibleName(tr('history'))
-        self.table.setAccessibleDescription(tr('keyboard_history'))
+        set_text(self.table, [tr(k) for k in
+            ('name', 'original_location', 'moved_at', 'size', 'state', 'kind')], 'setHorizontalHeaderLabels')
+        set_text(self.table, tr('history'), 'setAccessibleName')
+        set_text(self.table, tr('keyboard_history'), 'setAccessibleDescription')
         self.table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.table.setTabKeyNavigation(False)  # Arrows browse cells; Tab leaves the table.
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
@@ -91,6 +92,19 @@ class HistoryScreen(QWidget):
         self.empty_space = QWidget()
         layout.addWidget(self.empty_space, 1)
         self.show_page(PageResult((), 0))
+        language_manager().changed.connect(self.retranslate_rows)
+
+    def retranslate_rows(self) -> None:
+        # Update cells in place: no selection signal, preview job or plan change.
+        for row in range(self.table.rowCount()):
+            entry = self.entries[self.table.item(row, 0).data(Qt.UserRole)]
+            status = 'state_restored' if entry.restored and entry.state == 'complete' else 'state_' + entry.state
+            for column, value in ((2, move_date(entry.moved_at)),
+                                  (3, str(entry.size) if entry.size is not None else tr('not_available')),
+                                  (4, tr(status)), (5, tr('action_' + entry.action))):
+                item = self.table.item(row, column)
+                item.setText(value)
+                item.setToolTip(value)
 
     @property
     def selected_entry(self) -> HistoryEntry | None:
@@ -125,7 +139,7 @@ class HistoryScreen(QWidget):
             if entry.id == selected_id:
                 self.table.selectRow(i)
         self.table.blockSignals(False)
-        self.message.clear()
+        set_text(self.message, '')
         self.message.hide()
         self.error_details.set_detail('')
         self.empty.setVisible(value.total == 0)
@@ -134,37 +148,38 @@ class HistoryScreen(QWidget):
         self.pager.setVisible(value.total > 0)
         self.previous.setEnabled(value.offset > 0)
         self.next.setEnabled(value.offset + len(value.items) < value.total)
-        self.page.setText(tr('page', value.offset + bool(value.items), value.offset + len(value.items), value.total))
+        set_text(self.page, tr('page', value.offset + bool(value.items), value.offset + len(value.items), value.total))
         self.selection_changed.emit()
 
     def selection_details(self) -> None:
         entry = self.selected_entry
         self.detail_card.setVisible(entry is not None)
         self.thumbnail.clear()
-        self.thumbnail.setText(tr('preview_loading') if entry and entry.restorable else tr('thumbnail_unavailable'))
-        self.thumbnail.setAccessibleName(self.thumbnail.text())
+        set_text(self.thumbnail, tr('preview_loading') if entry and entry.restorable else tr('thumbnail_unavailable'))
+        set_text(self.thumbnail, text_of(self.thumbnail), 'setAccessibleName')
         self.error_details.set_detail(entry.error if entry else '')
         if entry:
-            self.details.setText(tr('history_selection', entry.id, entry.source, entry.destination,
+            set_text(self.details, tr('history_selection', entry.id, entry.source, entry.destination,
                                     tr('yes' if entry.restorable else 'no')))
 
     def show_preview(self, operation_id: str, image: QImage) -> None:
         entry = self.selected_entry
         if entry and entry.id == operation_id:
-            self.thumbnail.setText('')
+            set_text(self.thumbnail, '')
             self.thumbnail.setPixmap(QPixmap.fromImage(image).scaled(200, 120, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-            self.thumbnail.setAccessibleName(tr('thumbnail_for', Path(entry.source).name))
+            set_text(self.thumbnail, tr('thumbnail_for', Path(entry.source).name), 'setAccessibleName')
 
     def fail(self, detail: str) -> None:
         self.show_page(PageResult((), 0))
         self.empty.hide()
-        self.message.setText(tr('history_load_failed'))
+        set_text(self.message, tr('history_load_failed'))
         self.error_details.set_detail(detail)
         self.message.show()
 
 
 class SettingsScreen(QWidget):
-    def __init__(self, save: Callable, theme_changed: Callable, edit_sources: Callable) -> None:
+    def __init__(self, save: Callable, theme_changed: Callable, edit_sources: Callable,
+                 language_changed: Callable) -> None:
         super().__init__()
         layout = QVBoxLayout(self)
         self.toolbar = ContextToolbar()
@@ -182,7 +197,11 @@ class SettingsScreen(QWidget):
         self.theme.currentIndexChanged.connect(theme_changed)
         appearance.addWidget(self.theme)
         language = section('settings_language', 'language_later')
-        self.language = text_label(tr('language'))
+        self.language = QComboBox()
+        set_text(self.language, tr('settings_language'), 'setAccessibleName')
+        add_item(self.language, tr('language_english'), 'en')
+        add_item(self.language, tr('language_serbian'), 'sr_Latn')
+        self.language.currentIndexChanged.connect(language_changed)
         language.addWidget(self.language)
         scanning = section('settings_scanning', 'settings_roots')
         self.roots = path_label()
@@ -190,9 +209,9 @@ class SettingsScreen(QWidget):
         self.edit_sources = button('edit_sources', edit_sources, scanning)
         matching = section('settings_similarity', 'matching_explanation')
         self.preset = QComboBox()
-        self.preset.setAccessibleName(tr('settings_similarity'))
+        set_text(self.preset, tr('settings_similarity'), 'setAccessibleName')
         for key in (*MATCHING_PRESETS, 'custom'):
-            self.preset.addItem(tr('matching_' + key), key)
+            add_item(self.preset, tr('matching_' + key), key)
         matching.addWidget(self.preset)
         self.preset_detail = text_label('')
         matching.addWidget(self.preset_detail)
@@ -203,8 +222,8 @@ class SettingsScreen(QWidget):
         self.phash, self.dhash = QSpinBox(), QSpinBox()
         for key, item in (('phash', self.phash), ('dhash', self.dhash)):
             item.setRange(0, 64)
-            item.setAccessibleName(tr(key))
-            form.addRow(tr(key), item)
+            set_text(item, tr(key), 'setAccessibleName')
+            form.addRow(text_label(tr(key)), item)
             item.valueChanged.connect(self.matching_edited)
         self.preset.currentIndexChanged.connect(self.preset_changed)
         self.load_matching(4, 6)
@@ -232,7 +251,7 @@ class SettingsScreen(QWidget):
         self.preset.blockSignals(True)
         self.preset.setCurrentIndex(self.preset.findData(key))
         self.preset.blockSignals(False)
-        self.preset_detail.setText(tr('matching_' + key + '_detail'))
+        set_text(self.preset_detail, tr('matching_' + key + '_detail'))
         if key == 'custom':
             self.advanced.toggle.setChecked(True)
 
@@ -242,13 +261,13 @@ class SettingsScreen(QWidget):
             options = MATCHING_PRESETS[key]
             self.load_matching(options.phash_max, options.dhash_max)
         else:
-            self.preset_detail.setText(tr('matching_custom_detail'))
+            set_text(self.preset_detail, tr('matching_custom_detail'))
             self.advanced.toggle.setChecked(True)
 
     def show_roots(self, roots: list[str]) -> None:
-        self.roots.setText('\n'.join(tr('settings_source', i + 1, root) for i, root in enumerate(roots))
+        set_text(self.roots, join_text(tr('settings_source', i + 1, root) for i, root in enumerate(roots))
                            or tr('empty_sources'))
 
     def show_storage(self, value: StorageSummary) -> None:
         self.error_details.set_detail('')
-        self.index.setText(tr('storage_info', value.index_path, value.indexed))
+        set_text(self.index, tr('storage_info', value.index_path, value.indexed))

@@ -11,6 +11,7 @@ from PySide6.QtWidgets import QListView, QStyle, QStyledItemDelegate
 
 from app.core.queries import GroupRow
 from app.ui.qt.dashboard_scan import size_text
+from app.ui.qt.localization import set_text, language_manager
 from app.ui.qt.strings import tr
 
 
@@ -20,6 +21,10 @@ class GroupModel(QAbstractListModel):
         self.rows: tuple[GroupRow, ...] = ()
         self.images: OrderedDict = OrderedDict()
         self.review: dict[tuple[int, str], set[int]] = {}
+        language_manager().changed.connect(self.retranslate)
+
+    def retranslate(self) -> None:
+        self.dataChanged.emit(self.index(0), self.index(len(self.rows)))
 
     def replace(self, rows: tuple[GroupRow, ...]) -> None:
         self.beginResetModel()
@@ -109,8 +114,8 @@ class GroupView(QListView):
         self.setModel(self.groups_model)
         self.setItemDelegate(GroupDelegate(self))
         self.setRowHidden(0, True)  # All groups is a separate action, never a photo card.
-        self.setAccessibleName(tr('groups'))
-        self.setAccessibleDescription(tr('keyboard_groups'))
+        set_text(self, tr('groups'), 'setAccessibleName')
+        set_text(self, tr('keyboard_groups'), 'setAccessibleDescription')
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setTextElideMode(Qt.ElideMiddle)
         self.setMinimumHeight(250)

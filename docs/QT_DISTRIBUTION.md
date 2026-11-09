@@ -47,3 +47,11 @@ resources_rc.py is checked in; regenerating the local SVG resource uses:
 ```text
 .venv\Scripts\pyside6-rcc.exe app/ui/qt/resources/resources.qrc -o app/ui/qt/resources_rc.py
 ```
+
+## Localization resources (Task012)
+
+Source launches load `app/i18n/en.json` and `sr_Latn.json` alongside the Python
+package. A future frozen/distributed build must include both UTF-8 JSON files as
+package data. Used Qt framework strings map to those same catalogs through the
+Python QTranslator adapter; no external translation download or new dependency is
+required. Frozen packaging and native Linux validation remain Task013 gates.

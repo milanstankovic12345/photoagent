@@ -567,7 +567,7 @@ def test_dashboard_to_scan_to_review_with_actual_thumbnails(desktop, collection,
     window.dashboard.scan.click()
     assert window.route == Route.SCAN
     assert not window.scan.advanced.toggle.isChecked() and not window.scan.error_section.toggle.isChecked()
-    monkeypatch.setattr(QFileDialog, 'getExistingDirectory', lambda *args, **kwargs: str(collection))
+    monkeypatch.setattr(QFileDialog, 'open', lambda dialog: dialog.fileSelected.emit(str(collection)))
     window.scan.add.click()
     pump(lambda: not window.controller.busy)
     assert window.roots == [str(collection)] and window.scan.start.isEnabled()

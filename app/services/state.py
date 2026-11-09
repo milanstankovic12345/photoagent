@@ -11,7 +11,9 @@ from app.safety.paths import check_path
 
 def load_state(path: Path) -> dict:
     if not os.path.lexists(path):
-        return {"roots": [], "moves": []}
+        # Only true absence is a fresh installation. An existing legacy file
+        # without language keeps Serbian through validated_settings below.
+        return {"roots": [], "moves": [], "language": "en"}
     value = json.loads(check_path(path).read_text(encoding="utf-8"))
     if (not isinstance(value, dict) or not isinstance(value.get("roots", []), list)
             or not all(isinstance(r, str) for r in value.get("roots", []))
@@ -27,11 +29,11 @@ def validated_settings(value: dict) -> tuple[dict, list[str]]:
     for key, default in defaults.items():
         item = result.get(key, default)
         valid = (item in ('dark', 'light', 'system') if key == 'theme' else
-                 item == 'sr_Latn' if key == 'language' else
+                 item in ('en', 'sr_Latn') if key == 'language' else
                  type(item) is int and 0 <= item <= 64)
         if not valid:
             warnings.append('invalid_setting:' + key)
-            item = default
+            item = 'en' if key == 'language' else default
         result[key] = item
     return result, warnings
 

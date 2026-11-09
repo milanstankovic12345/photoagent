@@ -1,7 +1,8 @@
 # PhotoAgent v2.4 (Qt acceptance pending)
 
 Offline desktop application for reviewing exact and visually similar photographs.
-Both desktop interfaces use Serbian Latin. Python 3.12+; Windows 10/11 and Linux
+Qt supports English and Serbian Latin; the retained Tk interface uses Serbian Latin.
+Python 3.12+; Windows 10/11 and Linux
 source adapters. Native Linux execution and valid RAW decoding are not yet verified.
 
 ## Install and run
@@ -20,14 +21,31 @@ The theme defaults to Dark and respects any saved theme preference.
 Settings groups Appearance, Language, Scanning, Similarity Detection, Safety,
 Storage and About. Dashboard and Settings share the same Dark/Light/System control;
 theme changes save immediately. Source folders are listed in their saved priority
-order, with a link to edit them on Scan. Serbian Latin is the available UI language;
-full English/Serbian switching remains Task012.
+order, with a link to edit them on Scan. Settings → Language switches between
+English and Srpski (latinica) immediately, including open confirmations and previews,
+without losing review choices or approving an operation. The preference saves on the
+service worker (after a running scan); a failed save restores the last saved choice.
+A fresh installation without `.photo_agent_state.json` starts in English. Existing
+`en`/`sr_Latn` choices are preserved; an existing state file without `language` keeps
+Serbian Latin. Invalid language values fall back to English with a warning.
 Task010 adds explicit keyboard focus order, distinct accessible preview names,
 readable error summaries with technical details on request, and wrapping paths and
 preview actions. Confirmation opens on Cancel; Enter never approves. At narrow
-logical widths comparison stacks the photographs vertically. English text intents
-are documented for future translation, without adding a partial English UI.
+logical widths comparison stacks the photographs vertically. Task012 adds complete
+Qt EN/SR catalogs, including service-error summaries, tooltips, accessibility labels,
+and the framework controls used in folder selection and text context menus. Missing
+translations fall back to English; unknown keys and bad formatting show a readable
+message. Paths, hashes, stored identifiers, CSV fields and raw technical diagnostics
+remain unchanged. `RAW` remains the exact confirmation token in both languages.
 See [accessibility behavior and verification limits](docs/design/ACCESSIBILITY.md).
+Task011 adds an isolated Qt capture/geometry driver and regression evidence for
+1280×720, 1366×768, 1650×900 and 1920×1080 at actual offscreen DPR 1/1.25/1.5.
+See the [Stage H verification report](docs/design/TASK011_VERIFICATION.md) for
+screenshots, exact commands, findings and remaining native display checks.
+The full Prompt 6.1 acceptance gate remains open for native platform verification.
+For a normal launch with your saved application state:
+`.\.venv\Scripts\python.exe -B photo_agent.py --ui qt`.
+Use the isolated capture tool for testing; the CLI has no `--home` option.
 Qt mode needs PySide6 >=6.8,<7; preflight checks only the selected toolkit.
 See [Qt distribution notes](docs/QT_DISTRIBUTION.md).
 
@@ -164,7 +182,8 @@ Decoding runs in a disposable process with a 100 megapixel / 60 second request
 limit; this is not a strict memory sandbox. Hashes are revalidated before each
 operation. The SQLite index reuses validated image metadata and perceptual hashes; every scan still reads each file fully for SHA-256. DERIVATIVE and
 SIMILAR_CAPTURE identifiers exist but are not automatically inferred. PySide6 and
-themes are available through `--ui qt`; full language switching remains future work.
+themes and English/Serbian language switching are available through `--ui qt`.
+Tk language switching, native Linux/DPI acceptance and release packaging remain open.
 
 Process-exit tests are not proof against physical power loss. Linux namespace races,
 network filesystems, real removable-media behavior and packaged distribution still

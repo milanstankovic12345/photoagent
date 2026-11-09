@@ -1,36 +1,73 @@
-"""New safety/status strings; the existing Tkinter UI remains Serbian Latin."""
+"""Local text catalogs. No Qt dependency; legacy Tk callers default to Serbian."""
+from __future__ import annotations
 
-STRINGS = {
-    "sr_Latn": {
-        "previous_page": "Prethodna",
-        "scan_review_only": "Rezultati nepotpunog skeniranja služe za pregled. Ponovite uspešno skeniranje pre premeštanja.",
-        "next_page": "Sledeća",
-        "page_count": "Prikazano do {0} od {1} rezultata",
-        "index_warning": "Privremeni ili nepotpun indeks: {0}",
-        "scan_progress": "Analizirano {0} fotografija...",
-        "operation_error": "Operacija je zaustavljena. Dnevnik je sačuvan; ponovite oporavak pre nove operacije.",
-        "history_error": "Istorija je nedostupna. Skeniranje je dozvoljeno; premeštanje i vraćanje su blokirani.",
-        "xmp_warning": "Pronađeni su XMP fajlovi. Ostaju na mestu; proverite vezu sa fotografijom.",
-        "legacy_warning": "Stara istorija nema proverljiv raniji sadržaj. Potvrdite vraćanje sadašnjih bajtova pojedinačno.",
-        "incomplete": "NEPOTPUNO skeniranje",
-        "cancelled": "Skeniranje je zaustavljeno; nema kandidata za operacije.",
-    },
-    "en": {
-        "previous_page": "Previous",
-        "scan_review_only": "Incomplete scan results are for review. Complete a successful scan before moving files.",
-        "next_page": "Next",
-        "page_count": "Showing through {0} of {1} results",
-        "index_warning": "Temporary or incomplete index: {0}",
-        "scan_progress": "Inspected {0} photographs...",
-        "operation_error": "Operation stopped. The journal is retained; run recovery before another operation.",
-        "history_error": "History unavailable. Scanning is allowed; moves and restores are blocked.",
-        "xmp_warning": "XMP sidecars found. They stay in place; review their relationship to the photograph.",
-        "legacy_warning": "Legacy history cannot verify earlier content. Confirm restoring the current bytes individually.",
-        "incomplete": "INCOMPLETE scan",
-        "cancelled": "Scan cancelled; no operation candidates.",
-    },
+import json
+import logging
+from pathlib import Path
+from typing import Iterable
+
+log = logging.getLogger(__name__)
+LANGUAGES = ('en', 'sr_Latn')
+STRINGS: dict[str, dict[str, str]] = {
+    language: json.loads(Path(__file__).with_name(language + '.json').read_text(encoding='utf-8'))
+    for language in LANGUAGES
 }
 
 
-def tr(key: str, *args, language: str = "sr_Latn") -> str:
-    return STRINGS.get(language, STRINGS["sr_Latn"]).get(key, STRINGS["en"].get(key, key)).format(*args)
+def translate(key: str, args: tuple[object, ...] = (), language: str = 'en') -> str:
+    """Unknown languages use English; missing keys/format errors stay readable."""
+    catalog = STRINGS.get(language, STRINGS['en'])
+    # Count-first group labels stay readable on small cards. Serbian needs the
+    # 1 / 2–4 / other forms, including the 11–14 exception (21 / 22 / 25).
+    if key == 'group_summary' and args and type(args[0]) is int:
+        count = abs(args[0])
+        if language == 'sr_Latn':
+            form = ('one' if count % 10 == 1 and count % 100 != 11 else
+                    'few' if 2 <= count % 10 <= 4 and not 12 <= count % 100 <= 14 else 'other')
+        else:
+            form = 'one' if count == 1 else 'other'
+        key += '_' + form
+    value = catalog.get(key, STRINGS['en'].get(key))
+    if value is None:
+        log.warning('translation_missing', extra={'translation_key': key, 'language': language})
+        return catalog.get('message_unavailable', STRINGS['en']['message_unavailable'])
+    try:
+        return value.format(*(render(arg, language) for arg in args))
+    except (IndexError, KeyError, ValueError):
+        log.warning('translation_format_failed', extra={'translation_key': key, 'language': language})
+        return catalog.get('message_unavailable', STRINGS['en']['message_unavailable'])
+
+
+def tr(key: str, *args: object, language: str = 'sr_Latn') -> str:
+    return translate(key, args, language)
+
+
+class Message(str):
+    """Readable text plus a stable recipe for live Qt retranslation.
+
+    Arguments are captured when displayed, never recovered by parsing translated
+    text. Paths and hashes stay literal even when they resemble a catalog entry.
+    """
+    def __new__(cls, key: str | None, args: tuple[object, ...], language: str,
+                separator: str = '') -> Message:
+        value = (translate(key, args, language) if key is not None
+                 else separator.join(str(render(part, language)) for part in args))
+        instance = super().__new__(cls, value)
+        instance.key, instance.args, instance.separator = key, args, separator
+        return instance
+
+    def translated(self, language: str) -> str:
+        return (translate(self.key, self.args, language) if self.key is not None
+                else self.separator.join(str(render(part, language)) for part in self.args))
+
+
+def render(value: object, language: str) -> object:
+    if isinstance(value, Message):
+        return value.translated(language)
+    if isinstance(value, (list, tuple)):
+        return [render(item, language) for item in value]
+    return value
+
+
+def joined(parts: Iterable[str], language: str, separator: str = '\n') -> Message:
+    return Message(None, tuple(parts), language, separator)

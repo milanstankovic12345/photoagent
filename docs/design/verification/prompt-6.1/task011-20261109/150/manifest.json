@@ -1,0 +1,451 @@
+{
+  "python": "3.12.10",
+  "platform": "Windows",
+  "qt_version": "6.12.0",
+  "qt_platform": "offscreen",
+  "scale_factor": 1.5,
+  "synthetic": true,
+  "captures": [
+    {
+      "file": "matrix-1280-dark-dashboard.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-dashboard",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        853,
+        480
+      ],
+      "window_logical": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 789,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          246
+        ]
+      },
+      "sha256": "c7e996f4ce46f593dd589543029cfd9e6ed9f93f3761fc3b9a4d8d04b56671f9",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-dark-scan.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-scan",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        853,
+        480
+      ],
+      "window_logical": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 399,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          291
+        ]
+      },
+      "sha256": "8016b01185bcca4ebd48e6dbf3ff484c0af72f9925362cf2a1577f6f1c28d216",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-dark-duplicates.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-duplicates",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        853,
+        480
+      ],
+      "window_logical": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 427,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          291
+        ]
+      },
+      "sha256": "6a9658a88d32b618ca361a3d8d3e4a6062b5b8d35bbc473dab9c7ceec2e73fff",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-dark-history.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-history",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        853,
+        480
+      ],
+      "window_logical": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          597,
+          291
+        ]
+      },
+      "sha256": "3f53c9ea2516631958c79f76b040d64a2ce912aa4ef893036a111154ff132594",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-dark-settings.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-settings",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        853,
+        480
+      ],
+      "window_logical": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 1000,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          291
+        ]
+      },
+      "sha256": "7822a46f6cf5166ce975742fb7e1472ede689ef74bac92c9a684a17ddb9e44b2",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-dark-compare.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-compare",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        853,
+        480
+      ],
+      "window_logical": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 927,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          291
+        ]
+      },
+      "sha256": "b388aec608830cc89121e9fd54fd6a5826844c2db55e5132f097a89dac24e203",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-light-dashboard.png",
+      "theme": "light",
+      "state": "matrix-1280-light-dashboard",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        853,
+        480
+      ],
+      "window_logical": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 789,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          246
+        ]
+      },
+      "sha256": "f4fb6dd0b35af50b47f1ff5f049ee58db0ac056a08e18d6d3fe606374927f213",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-light-scan.png",
+      "theme": "light",
+      "state": "matrix-1280-light-scan",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        853,
+        480
+      ],
+      "window_logical": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 399,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          291
+        ]
+      },
+      "sha256": "1ab2926144042bd4a9f8634d926964cfe625aff541bd6c3625d70b0b3a14c015",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-light-duplicates.png",
+      "theme": "light",
+      "state": "matrix-1280-light-duplicates",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        853,
+        480
+      ],
+      "window_logical": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 427,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          291
+        ]
+      },
+      "sha256": "cee2f78e438ebd576d1d6943f440274666b464e48466659a554a851ba4d5d2cd",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-light-history.png",
+      "theme": "light",
+      "state": "matrix-1280-light-history",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        853,
+        480
+      ],
+      "window_logical": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          597,
+          291
+        ]
+      },
+      "sha256": "33e0a1e28d8c20784458586597876d0c1f587a6ccb6b3d1875b46e60f0f06929",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-light-settings.png",
+      "theme": "light",
+      "state": "matrix-1280-light-settings",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        853,
+        480
+      ],
+      "window_logical": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 1000,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          291
+        ]
+      },
+      "sha256": "3c366c1796ba5b5f668b10a269bf7e55d76497f84a04a5781528b79686b8ca12",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-light-compare.png",
+      "theme": "light",
+      "state": "matrix-1280-light-compare",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        853,
+        480
+      ],
+      "window_logical": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 687,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          291
+        ]
+      },
+      "sha256": "424af2ca1ff56b793f5543b998017a815ef7551a1b15af1e2d67bbc6ed23cf33",
+      "visually_reviewed": false
+    }
+  ],
+  "checks": [],
+  "finished": false,
+  "method": "QWidget.grab, actual Qt event loop/workers/services. Physical target sizes are divided by QT_SCALE_FACTOR to exercise constrained logical space. No bitmap resizing used for DPI assertions. Internal metadata tables may scroll. Loading/unavailable preview and RAW/legacy warnings are presentation fixtures. Cancellation delays extraction but uses the real cancellation path. All moves explicitly approved and restricted to generated temporary files.",
+  "skipped": [
+    "Native Windows/Linux display and monitor DPI transitions",
+    "NVDA/Narrator, physical media and cross-drive operations",
+    "Successful RAW decode: no redistributable RAW fixture",
+    "Full localization, release audit and packaging (Task012/013)"
+  ]
+}

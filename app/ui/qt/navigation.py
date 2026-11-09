@@ -7,6 +7,7 @@ from PySide6.QtWidgets import (QHBoxLayout, QLabel, QPushButton,
                               QStyle, QVBoxLayout, QWidget)
 
 from app.ui.qt.components import style_button, text_label
+from app.ui.qt.localization import set_text, with_text
 from app.ui.qt.strings import tr
 
 
@@ -24,7 +25,7 @@ class Sidebar(QWidget):
     def __init__(self) -> None:
         super().__init__()
         self.setFixedWidth(208)
-        self.setAccessibleName(tr('navigation'))
+        set_text(self, tr('navigation'), 'setAccessibleName')
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         brand = QHBoxLayout()
@@ -41,7 +42,7 @@ class Sidebar(QWidget):
         for route, icon in zip(Route, icons):
             if route == Route.SETTINGS:
                 layout.addStretch(1)
-            control = QPushButton(tr(route.value))
+            control = with_text(QPushButton(), tr(route.value))
             style_button(control)
             control.setProperty('navigation', True)
             control.setCheckable(True)

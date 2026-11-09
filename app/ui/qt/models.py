@@ -1,6 +1,7 @@
 from pathlib import Path
 from PySide6.QtCore import QAbstractTableModel, QModelIndex, Qt
 from app.ui.qt.strings import tr
+from app.ui.qt.localization import language_manager
 
 
 class MatchModel(QAbstractTableModel):
@@ -11,6 +12,12 @@ class MatchModel(QAbstractTableModel):
         self.rows = ()
         self.retained_paths: set[str] = set()
         self.moving_paths: set[str] = set()
+        language_manager().changed.connect(self.retranslate)
+
+    def retranslate(self) -> None:
+        self.headerDataChanged.emit(Qt.Horizontal, 0, len(self.columns) - 1)
+        if self.rows:
+            self.dataChanged.emit(self.index(0, 0), self.index(len(self.rows) - 1, len(self.columns) - 1))
 
     def set_choices(self, retained: set[str], moving: set[str]) -> None:
         self.retained_paths = retained

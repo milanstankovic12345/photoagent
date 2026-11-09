@@ -1,21 +1,20 @@
-# Task010 accessibility and translation preparation
+# Qt accessibility and localization
 
-This milestone retains the Serbian Latin Qt interface. It does not implement
-English defaults or language switching. `state.py` language validation and the
-shared SR/EN resources are unchanged. The complete key inventory and English
-editorial intentions are in [QT_TEXT_INVENTORY.json](QT_TEXT_INVENTORY.json);
-Serbian wording remains in `app/ui/qt/strings.py` and `app/i18n/__init__.py`.
-The inventory is documentation and is never loaded at runtime.
+Task010 established the accessibility behavior below; Task012 adds English and
+Serbian Latin runtime switching. Both authoritative catalogs live in `app/i18n/`
+as UTF-8 JSON. [QT_TEXT_INVENTORY.json](QT_TEXT_INVENTORY.json) documents their
+current keys and is never loaded at runtime. Native Qt framework messages used by
+the app map into the same catalogs through a small QTranslator adapter.
 
 The inventory includes navigation, page headings/purposes, actions, dialogs,
 empty/loading/error/success states, classifications/statuses, tooltips, accessible
 names/descriptions and Settings explanations. Technical identifiers (EXACT, VISUAL,
 RAW, hashes, paths, operation IDs, schema values and the literal RAW consent token)
 remain independent of translated labels. New UI copy belongs in the existing
-catalog. The inventory test checks every Qt/shared Serbian key has an English intent.
+catalog. Tests check key and placeholder parity and literal Qt translation keys.
 
-Unknown Qt translation keys and invalid format arguments use a readable Serbian
-fallback. Shared known keys retain their Serbian/English resource fallback.
+Missing translations and unknown languages fall back to English. Unknown keys or
+invalid format arguments show a readable message in the active/fallback language.
 Exception text and unrecognized error codes appear only in selectable plain-text
 technical details, initially collapsed. A short actionable message remains visible.
 Scan/report failures retain their diagnostics in the existing Errors section.
@@ -58,4 +57,4 @@ For executed commands, actual results and reviewed renders see
 [TESTING.md](../TESTING.md). Offscreen rendering and `QAccessible` queries do not
 prove assistive-technology usability. Manual NVDA/Narrator, native Windows/Linux
 high-DPI and physical-display keyboard testing remain unverified. Full redesign
-acceptance belongs to Task011; full localization belongs to Task012.
+acceptance belongs to Task011. Task012 covers the Qt interface; Tk remains Serbian.

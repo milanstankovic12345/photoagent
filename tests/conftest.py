@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import shutil
+import sys
 
 from PIL import Image, ImageDraw
 import pytest
@@ -38,6 +39,28 @@ def isolated(tmp_path, monkeypatch):
         return popen(args, *a, **kw)
 
     monkeypatch.setattr(decoder.subprocess, "Popen", confined_popen)
+    # QFileDialog otherwise keeps framework history in the Windows registry (or
+    # the user's QtProject settings). Redirect both scopes to this synthetic home.
+    qt_core = sys.modules.get('PySide6.QtCore')
+    previous_qt = None
+    if qt_core is not None:
+        settings = qt_core.QSettings
+        previous_qt = settings.defaultFormat()
+        scopes = (settings.UserScope, settings.SystemScope)
+        previous_paths = {scope: Path(settings(settings.IniFormat, scope, 'PhotoAgent', 'path-probe').fileName()).parent.parent
+                          for scope in scopes}
+        settings.setDefaultFormat(settings.IniFormat)
+        for scope in scopes:
+            settings.setPath(settings.IniFormat, scope, str(tmp_path / 'qt-settings'))
+    try:
+        yield
+    finally:
+        if previous_qt is not None:
+            if qt_core.QCoreApplication.instance():
+                qt_core.QCoreApplication.sendPostedEvents(None, qt_core.QEvent.DeferredDelete)
+            for scope, previous_path in previous_paths.items():
+                settings.setPath(settings.IniFormat, scope, str(previous_path))
+            settings.setDefaultFormat(previous_qt)
 
 
 @pytest.fixture

@@ -16,7 +16,8 @@ from app.ui.qt.controller import Controller
 from app.ui.qt.navigation import Route, Sidebar
 from app.ui.qt.screens import (CompareScreen, DashboardScreen, DuplicatesFlow, DuplicatesScreen,
                                HistoryScreen, ScanScreen, SettingsScreen, scroll_page)
-from app.ui.qt.strings import error_text, tr
+from app.ui.qt.localization import set_text, text_of, language_manager
+from app.ui.qt.strings import error_text, tr, join_text
 from app.ui.qt.themes import ThemeManager
 from app.ui.qt import resources_rc  # Registers bundled local resources.
 
@@ -24,7 +25,7 @@ from app.ui.qt import resources_rc  # Registers bundled local resources.
 class MainWindow(QMainWindow):
     def __init__(self, home: Path | None = None) -> None:
         super().__init__()
-        self.setWindowTitle(tr('title'))
+        set_text(self, tr('title'), 'setWindowTitle')
         self.setWindowIcon(QIcon(':/photoagent/photoagent.svg'))
         self.home = home or Path.home()
         self.controller = Controller(self.home, self)
@@ -109,7 +110,8 @@ class MainWindow(QMainWindow):
         self.duplicates.groups.activated.connect(self.activate_group)
         self.history = HistoryScreen(self.restore, self.history_page, self.open_quarantine_folder)
         self.history.selection_changed.connect(self.history_selected)
-        self.preferences = SettingsScreen(self.save_settings, self.theme_changed, lambda: self.navigate(Route.SCAN))
+        self.preferences = SettingsScreen(self.save_settings, self.theme_changed,
+            lambda: self.navigate(Route.SCAN), self.language_changed)
         self.duplicates_flow = DuplicatesFlow(self.duplicates, self.comparison)
         self.screens = {Route.DASHBOARD: self.dashboard, Route.SCAN: self.scan,
                         Route.DUPLICATES: self.duplicates, Route.QUARANTINE: self.history,
@@ -129,7 +131,7 @@ class MainWindow(QMainWindow):
         self.back_shortcut = QShortcut(QKeySequence('Alt+Left'), self)
         self.back_shortcut.activated.connect(self.back_to_duplicates)
         self.setCentralWidget(central)
-        self.statusBar().showMessage(tr('ready'))
+        set_text(self.statusBar(), tr('ready'), 'showMessage')
 
     def navigate(self, route: Route) -> None:
         if self.controller.closing:
@@ -190,7 +192,7 @@ class MainWindow(QMainWindow):
                     self.duplicates.next, self.duplicates.error_details.toggle, self.duplicates.error_details.text],
                 Route.QUARANTINE: [self.history.table, self.history.previous, self.history.next,
                     self.history.error_details.toggle, self.history.error_details.text],
-                Route.SETTINGS: [self.preferences.theme, self.preferences.edit_sources,
+                Route.SETTINGS: [self.preferences.theme, self.preferences.language, self.preferences.edit_sources,
                     self.preferences.preset, self.preferences.advanced.toggle,
                     self.preferences.phash, self.preferences.dhash,
                     self.preferences.error_details.toggle, self.preferences.error_details.text],
@@ -223,6 +225,7 @@ class MainWindow(QMainWindow):
     def result(self, action: str, value: Any) -> None:
         if action == 'initialize':
             self.settings, issues, self.writable, detail = value
+            self.apply_language(self.settings['language'])
             self.roots = list(self.settings['roots'])
             self.render_roots()
             for combo in (self.preferences.theme, self.dashboard.theme):
@@ -239,12 +242,12 @@ class MainWindow(QMainWindow):
             if self.scan_active:
                 self.dashboard.loading_enabled = False
                 self.dashboard.pause_previews()
-            self.duplicates.warning.setText(self.dashboard.warning.text())
+            set_text(self.duplicates.warning, text_of(self.dashboard.warning))
             self.duplicates.warning.setVisible(bool(self.dashboard.warning.text()))
             if not value.session_id:
                 self.duplicates.set_state(tr('no_session'), False)
             elif not value.exact and not value.visual:
-                self.duplicates.empty.setText(tr('no_matches'))
+                set_text(self.duplicates.empty, tr('no_matches'))
             if not self.scan_active:
                 # A failed attempt may precede creation of a new session. Keep
                 # that failure visible instead of rendering the older successful
@@ -291,8 +294,8 @@ class MainWindow(QMainWindow):
             if report_error:
                 report_text.append(tr('report_error'))
                 self.scan.report_failure_detail = report_error
-                self.scan.errors.setPlainText(report_error)
-            self.scan.report.setText('\n'.join(report_text))
+                set_text(self.scan.errors, report_error, 'setPlainText')
+            set_text(self.scan.report, join_text(report_text))
             self.refresh()
         elif action == 'matches':
             self.total = value.total
@@ -301,11 +304,11 @@ class MainWindow(QMainWindow):
             selection.blockSignals(True)
             self.duplicates.model.replace(value.items)
             selection.blockSignals(False)
-            self.duplicates.page.setText(tr('page', value.offset + bool(value.items), value.offset + len(value.items), value.total))
-            self.comparison.member_page.setText(self.duplicates.page.text())
-            self.comparison.member_section.toggle.setText(tr('member_count', value.total + 1)
+            set_text(self.duplicates.page, tr('page', value.offset + bool(value.items), value.offset + len(value.items), value.total))
+            set_text(self.comparison.member_page, text_of(self.duplicates.page))
+            set_text(self.comparison.member_section.toggle, tr('member_count', value.total + 1)
                 if self.query.keeper_id is not None else tr('direct_members'))
-            self.comparison.member_section.toggle.setAccessibleName(self.comparison.member_section.toggle.text())
+            set_text(self.comparison.member_section.toggle, text_of(self.comparison.member_section.toggle), 'setAccessibleName')
             self.duplicates.set_state('' if value.items else tr('empty') if self.query.text or self.query.kind
                 else tr('no_matches') if self.status == 'complete' else tr('scan_review_only'),
                 bool(value.items or self.group_total))
@@ -330,9 +333,9 @@ class MainWindow(QMainWindow):
             chosen = next((i + 1 for i, r in enumerate(value.items) if r.keeper_id == self.query.keeper_id and r.kind == self.query.kind), 0)
             widget.setCurrentRow(chosen)
             selection.blockSignals(False)
-            self.duplicates.group_page.setText(tr('page', value.offset + bool(value.items),
+            set_text(self.duplicates.group_page, tr('page', value.offset + bool(value.items),
                 value.offset + len(value.items), value.total))
-            self.duplicates.set_state(self.duplicates.empty.text(), bool(value.items or self.total))
+            self.duplicates.set_state(text_of(self.duplicates.empty), bool(value.items or self.total))
         elif action == 'history':
             self.history_rows = value.items
             self.history_total = value.total
@@ -347,8 +350,8 @@ class MainWindow(QMainWindow):
         elif action == 'storage':
             self.preferences.show_storage(value)
         elif action == 'errors':
-            self.scan.errors.setPlainText('\n'.join(filter(None,
-                (self.scan.failure_detail, self.scan.report_failure_detail, *value))))
+            set_text(self.scan.errors, join_text(filter(None,
+                (self.scan.failure_detail, self.scan.report_failure_detail, *value))), 'setPlainText')
         elif action in ('prepare', 'bulk', 'restore'):
             self.pending_prepare = False
             if self.prepare_epoch == self.operation_epoch:
@@ -359,12 +362,18 @@ class MainWindow(QMainWindow):
             self.operation_epoch += 1
             self.controller.preview(None)
             self.invalidate_selection()
-            self.statusBar().showMessage(tr('operation_count', len(value)))
+            set_text(self.statusBar(), tr('operation_count', len(value)), 'showMessage')
             plan = self.executing_plan
             self.restore_id = (plan.moves[0].id if plan and len(plan.moves) == 1
                 and plan.moves[0].action == 'quarantine' and value else None)
             self.executing_plan = None
             self.refresh()
+        elif action == 'language_saved':
+            self.settings = value
+        elif action == 'language':
+            self.settings = value
+            self.apply_language(value['language'])
+            set_text(self.statusBar(), tr('saved'), 'showMessage')
         elif action == 'settings':
             self.settings = value
             self.theme.apply(value['theme'])
@@ -374,24 +383,29 @@ class MainWindow(QMainWindow):
                 combo.blockSignals(False)
             self.controller.request('sources', tuple(self.roots))
             self.preferences.show_roots(self.roots)
-            self.statusBar().showMessage(tr('saved'))
+            set_text(self.statusBar(), tr('saved'), 'showMessage')
         elif action == 'cancelled':
             self.pending_prepare = False
-            self.statusBar().showMessage(tr('action_cancelled'))
+            set_text(self.statusBar(), tr('action_cancelled'), 'showMessage')
             if value == 'execute':
                 self.refresh()
         self.busy_changed(self.controller.busy)
 
     def error(self, action: str, detail: str) -> None:
+        if action == 'language':
+            self.apply_language(self.settings['language'])
+            set_text(self.statusBar(), tr('language_save_failed'), 'showMessage')
+            self.show_error('language_save_failed: ' + detail)
+            return
         if action == 'history_preview':
             self.history.thumbnail.clear()
-            self.history.thumbnail.setText(tr('thumbnail_unavailable'))
-            self.history.thumbnail.setAccessibleName(tr('thumbnail_unavailable'))
-            self.history.thumbnail.setToolTip(error_text(detail))
+            set_text(self.history.thumbnail, tr('thumbnail_unavailable'))
+            set_text(self.history.thumbnail, tr('thumbnail_unavailable'), 'setAccessibleName')
+            set_text(self.history.thumbnail, error_text(detail), 'setToolTip')
             self.history.error_details.set_detail(detail)
             return
         if action == 'storage':
-            self.preferences.index.setText(tr('storage_failed'))
+            set_text(self.preferences.index, tr('storage_failed'))
             self.preferences.error_details.set_detail(detail)
             return
         self.pending_prepare = False
@@ -421,26 +435,30 @@ class MainWindow(QMainWindow):
             self.history.fail(detail)
             return
         if action in ('restore', 'execute'):
-            self.history.message.setText(error_text(detail))
+            set_text(self.history.message, error_text(detail))
             self.history.error_details.set_detail(detail)
             self.history.message.show()
+        self.show_error(detail)
+
+    def show_error(self, detail: str) -> None:
         box = QMessageBox(self)
-        box.setWindowTitle(tr('title'))
+        box.setAttribute(Qt.WA_DeleteOnClose)
+        set_text(box, tr('title'), 'setWindowTitle')
         box.setIcon(QMessageBox.Warning)
         box.setTextFormat(Qt.PlainText)
-        box.setText(tr('error'))
-        box.setInformativeText(error_text(detail))
+        set_text(box, tr('error'))
+        set_text(box, error_text(detail), 'setInformativeText')
         box.setStandardButtons(QMessageBox.Close)
-        box.button(QMessageBox.Close).setText(tr('close'))
+        set_text(box.button(QMessageBox.Close), tr('close'))
         box.setDetailedText(detail)
         for control in box.buttons():
             if box.buttonRole(control) == QMessageBox.ActionRole:
                 def update_details_label(checked=False, button=control) -> None:
                     key = 'hide_details' if any(editor.isVisible() for editor in box.findChildren(QTextEdit)) else 'technical_details'
-                    button.setText(tr(key))
-                    button.setAccessibleName(tr(key))
-                control.setText(tr('technical_details'))
-                control.setAccessibleName(tr('technical_details'))
+                    set_text(button, tr(key))
+                    set_text(button, tr(key), 'setAccessibleName')
+                set_text(control, tr('technical_details'))
+                set_text(control, tr('technical_details'), 'setAccessibleName')
                 control.clicked.connect(update_details_label)
         box.open()
 
@@ -469,7 +487,7 @@ class MainWindow(QMainWindow):
         self.comparison.context_restore.setVisible(bool(eligible))
         self.comparison.context_restore.setEnabled(allowed and bool(eligible))
         if not self.controller.closing and self.statusBar().currentMessage() in (tr('ready'), tr('busy')):
-            self.statusBar().showMessage(tr('busy' if busy else 'ready'))
+            set_text(self.statusBar(), tr('busy' if busy else 'ready'), 'showMessage')
 
     def render_roots(self) -> None:
         self.scan.set_sources(self.roots, self.root_states)
@@ -478,7 +496,17 @@ class MainWindow(QMainWindow):
         self.busy_changed(self.controller.busy)
 
     def add_root(self) -> None:
-        path = QFileDialog.getExistingDirectory(self, tr('add'), options=QFileDialog.DontUseNativeDialog)
+        dialog = QFileDialog(self)
+        dialog.setAttribute(Qt.WA_DeleteOnClose)
+        dialog.setOptions(QFileDialog.DontUseNativeDialog | QFileDialog.ReadOnly)
+        dialog.setFileMode(QFileDialog.Directory)
+        dialog.setDirectory(self.roots[0] if self.roots else str(self.home))
+        dialog.setWindowModality(Qt.WindowModal)
+        set_text(dialog, tr('add'), 'setWindowTitle')
+        dialog.fileSelected.connect(self.add_selected_root)
+        dialog.open()
+
+    def add_selected_root(self, path: str) -> None:
         if path and path not in self.roots:
             self.invalidate_selection()
             self.roots.append(path)
@@ -533,7 +561,7 @@ class MainWindow(QMainWindow):
             self.waiting_sources = self.scan_active = False
             self.status = 'cancelled'
             self.scan.timer.stop()
-            self.scan.status.setText(tr('state_cancelled'))
+            set_text(self.scan.status, tr('state_cancelled'))
             self.scan.progress.setRange(0, 1)
             self.dashboard.loading_enabled = True
             self.dashboard.visible_timer.start()
@@ -555,7 +583,7 @@ class MainWindow(QMainWindow):
             self.reviewed_photos.clear()
             self.visual_choice = None
             self.duplicates.model.set_choices(set(), set())
-        self.comparison.decision.setText(tr('choose_keeper'))
+        set_text(self.comparison.decision, tr('choose_keeper'))
         for view in (self.comparison.left, self.comparison.right):
             view.keep_photo.setChecked(False)
         # Clear Qt's current row as well, so the same pair can be selected again
@@ -595,8 +623,8 @@ class MainWindow(QMainWindow):
         self.duplicates.sort_order.blockSignals(True)
         self.duplicates.sort_order.setCurrentIndex(column)
         self.duplicates.sort_order.blockSignals(False)
-        self.duplicates.direction.setText(tr('sort_desc' if self.query.descending else 'sort_asc'))
-        self.duplicates.direction.setAccessibleName(self.duplicates.direction.text())
+        set_text(self.duplicates.direction, tr('sort_desc' if self.query.descending else 'sort_asc'))
+        set_text(self.duplicates.direction, text_of(self.duplicates.direction), 'setAccessibleName')
         self.duplicates.table.horizontalHeader().setSortIndicator(column, Qt.DescendingOrder if self.query.descending else Qt.AscendingOrder)
         self.duplicates.table.horizontalHeader().setSortIndicatorShown(True)
         self.request_matches()
@@ -663,7 +691,7 @@ class MainWindow(QMainWindow):
             warnings.append(tr('raw_warning'))
         if pair.kind.value == 'VISUAL':
             warnings.append(tr('visual_warning'))
-        self.comparison.warning.setText('\n'.join(warnings))
+        set_text(self.comparison.warning, join_text(warnings))
         self.update_choice()
         self.busy_changed(self.controller.busy)
 
@@ -689,7 +717,7 @@ class MainWindow(QMainWindow):
             if not complete_page:
                 self.request_matches()
             else:
-                self.comparison.member_section.toggle.setText(tr('member_count', group.members))
+                set_text(self.comparison.member_section.toggle, tr('member_count', group.members))
 
     def back_to_duplicates(self) -> None:
         if self.route != Route.DUPLICATES or not self.duplicates_flow.comparing or self.controller.closing:
@@ -711,7 +739,7 @@ class MainWindow(QMainWindow):
                 if index is not None and (self.controller.selection is None or self.controller.selection.id != selected_id):
                     self.selected(self.duplicates.model.index(index, 0), QModelIndex())
                 self.selected_id = selected_id
-            self.duplicates.page.setText(tr('page', query.offset + bool(rows), query.offset + len(rows), total))
+            set_text(self.duplicates.page, tr('page', query.offset + bool(rows), query.offset + len(rows), total))
             self.listing_context = None
         self.update_shell()
         self.duplicates.table.setFocus(Qt.OtherFocusReason)
@@ -734,7 +762,7 @@ class MainWindow(QMainWindow):
         keep, other = (pair.dup, pair.keep) if right else (pair.keep, pair.dup)
         if pair.kind == Kind.EXACT:
             if len(set(self.reviewed_photos) | {pair.keep.path, pair.dup.path}) > 200:
-                self.comparison.decision.setText(tr('selection_limit'))
+                set_text(self.comparison.decision, tr('selection_limit'))
                 return
             self.reviewed_photos.update({p.path: p for p in (pair.keep, pair.dup)})
             if checked:
@@ -765,9 +793,9 @@ class MainWindow(QMainWindow):
                             (self.comparison.right, row.match.dup if row else None)):
             view.keep_photo.setChecked(bool(photo and (photo.path in self.retained if row.match.kind == Kind.EXACT
                 else self.visual_choice and photo == self.visual_choice.keep)))
-            view.keep_photo.setText(tr('keep_chosen' if view.keep_photo.isChecked() else 'keep_photo'))
-            view.keep_photo.setAccessibleName(tr('keep_named_photo', photo.path) if photo else view.keep_photo.text())
-        self.comparison.decision.setText(tr('selection_summary', len(self.pending_pairs()),
+            set_text(view.keep_photo, tr('keep_chosen' if view.keep_photo.isChecked() else 'keep_photo'))
+            set_text(view.keep_photo, tr('keep_named_photo', photo.path) if photo else text_of(view.keep_photo), 'setAccessibleName')
+        set_text(self.comparison.decision, tr('selection_summary', len(self.pending_pairs()),
             len(self.retained) if row and row.match.kind == Kind.EXACT else int(bool(self.visual_choice))))
         self.duplicates.model.set_choices(set(self.retained) if row and row.match.kind == Kind.EXACT else
             {self.visual_choice.keep.path} if self.visual_choice else set(),
@@ -785,7 +813,7 @@ class MainWindow(QMainWindow):
             self.retained.update({p.path: p for p in (row.match.keep, row.match.dup)})
         self.duplicates.groups.groups_model.review.setdefault((row.keeper_id, row.match.kind.value), set()).add(row.id)
         self.update_choice()
-        self.comparison.decision.setText(tr('both_kept'))
+        set_text(self.comparison.decision, tr('both_kept'))
         self.duplicates.groups.viewport().update()
         self.busy_changed(self.controller.busy)
 
@@ -801,10 +829,12 @@ class MainWindow(QMainWindow):
 
     def confirm(self, plan: Plan) -> None:
         if not plan.moves:
-            box = QMessageBox(QMessageBox.Information, tr('plan'), tr('no_plan'), QMessageBox.Close, self)
+            box = QMessageBox(QMessageBox.Information, '', '', QMessageBox.Close, self)
+            set_text(box, tr('plan'), 'setWindowTitle')
+            set_text(box, tr('no_plan'))
             box.setAttribute(Qt.WA_DeleteOnClose)
             box.setTextFormat(Qt.PlainText)
-            box.button(QMessageBox.Close).setText(tr('close'))
+            set_text(box.button(QMessageBox.Close), tr('close'))
             box.open()
             return
         self.plan_dialog = PlanDialog(plan, self)
@@ -877,6 +907,20 @@ class MainWindow(QMainWindow):
     def theme_changed(self, *_: Any) -> None:
         self.set_theme(self.preferences.theme.currentData())
 
+    def apply_language(self, language: str) -> None:
+        self.preferences.language.blockSignals(True)
+        self.preferences.language.setCurrentIndex(self.preferences.language.findData(language))
+        self.preferences.language.blockSignals(False)
+        language_manager().set_language(language)
+
+    def language_changed(self, *_: Any) -> None:
+        language = self.preferences.language.currentData()
+        if self.settings and language != language_manager().language and not self.controller.closing:
+            # Presentation changes immediately even while the service is scanning.
+            # Persistence runs on the existing service thread after queued work.
+            self.apply_language(language)
+            self.controller.request('language', {'language': language})
+
     def set_theme(self, theme: str) -> None:
         self.theme.apply(theme)
         if self.settings:
@@ -902,6 +946,7 @@ class MainWindow(QMainWindow):
 
     def save_settings(self) -> None:
         self.controller.request('settings', {'theme': self.preferences.theme.currentData(),
+            'language': self.preferences.language.currentData(),
             'phash_max': self.preferences.phash.value(), 'dhash_max': self.preferences.dhash.value()})
 
     def closeEvent(self, event: QCloseEvent) -> None:
@@ -916,7 +961,7 @@ class MainWindow(QMainWindow):
         if self.plan_dialog:
             self.plan_dialog.reject()
         self.setEnabled(False)
-        self.statusBar().showMessage(tr('closing'))
+        set_text(self.statusBar(), tr('closing'), 'showMessage')
         self.controller.close()
 
     def safe_closed(self) -> None:

@@ -10,13 +10,14 @@ from app.core.models import Approval, Kind
 from app.core.models import Photo, Plan
 from typing import Callable
 from PySide6.QtGui import QImage
-from app.ui.qt.strings import tr
+from app.ui.qt.localization import set_text, text_of, add_item, with_text
+from app.ui.qt.strings import tr, join_text
 from app.ui.qt.themes import SPACING
 from app.ui.qt import resources_rc  # Register icons even when used without MainWindow.
 
 
 def text_label(text: str, role: str = 'body') -> QLabel:
-    label = QLabel(text)
+    label = with_text(QLabel(), text)
     label.setTextFormat(Qt.PlainText)
     label.setWordWrap(True)
     label.setProperty('role', role)
@@ -41,19 +42,19 @@ class ElidedPathLabel(QLabel):
         self.value = value
         self.setTextFormat(Qt.PlainText)
         self.setSizePolicy(QSizePolicy.Ignored, QSizePolicy.Preferred)
-        self.setToolTip(value)
-        self.setAccessibleName(value)
+        set_text(self, value, 'setToolTip')
+        set_text(self, value, 'setAccessibleName')
 
     def resizeEvent(self, event) -> None:
         super().resizeEvent(event)
-        self.setText(self.fontMetrics().elidedText(self.value, Qt.ElideMiddle, self.width()))
+        set_text(self, self.fontMetrics().elidedText(self.value, Qt.ElideMiddle, self.width()))
 
 
 def style_button(widget: QPushButton, variant: str = 'secondary') -> None:
     if variant not in ('primary', 'secondary', 'danger'):
         raise ValueError(variant)
     widget.setProperty('variant', variant)
-    widget.setAccessibleName(widget.text())
+    set_text(widget, text_of(widget), 'setAccessibleName')
     widget.setFocusPolicy(Qt.StrongFocus)
 
 
@@ -61,9 +62,9 @@ class ThemeSelector(QComboBox):
     """One theme control shared by Dashboard and Settings."""
     def __init__(self) -> None:
         super().__init__()
-        self.setAccessibleName(tr('theme'))
+        set_text(self, tr('theme'), 'setAccessibleName')
         for theme in ('dark', 'light', 'system'):
-            self.addItem(tr(theme), theme)
+            add_item(self, tr(theme), theme)
 
 
 class PageHeader(QWidget):
@@ -79,8 +80,8 @@ class PageHeader(QWidget):
         layout.addWidget(self.subtitle)
 
     def set_page(self, title_key: str, subtitle_key: str) -> None:
-        self.title.setText(tr(title_key))
-        self.subtitle.setText(tr(subtitle_key))
+        set_text(self.title, tr(title_key))
+        set_text(self.subtitle, tr(subtitle_key))
         self.subtitle.show()
 
 
@@ -144,7 +145,7 @@ class WrappingLayout(QLayout):
 class ContextToolbar(QWidget):
     def __init__(self) -> None:
         super().__init__()
-        self.setAccessibleName(tr('page_actions'))
+        set_text(self, tr('page_actions'), 'setAccessibleName')
         self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
         self.actions = WrappingLayout(self)
 
@@ -183,8 +184,8 @@ class StatusBadge(QLabel):
         if tone not in ('neutral', 'success', 'warning', 'danger'):
             raise ValueError(tone)
         self.setTextFormat(Qt.PlainText)
-        self.setText(tr(key))  # Meaning is always present as text, independent of color.
-        self.setAccessibleName(tr(key))
+        set_text(self, tr(key))  # Meaning is always present as text, independent of color.
+        set_text(self, tr(key), 'setAccessibleName')
         self.setProperty('role', 'badge')
         self.setProperty('tone', tone)
 
@@ -192,7 +193,7 @@ class StatusBadge(QLabel):
 class CollapsibleSection(Card):
     def __init__(self, title_key: str, expanded: bool = False) -> None:
         super().__init__()
-        self.toggle = QPushButton(tr(title_key))
+        self.toggle = with_text(QPushButton(), tr(title_key))
         style_button(self.toggle)
         self.toggle.setCheckable(True)
         self.toggle.setChecked(expanded)
@@ -209,7 +210,7 @@ class CollapsibleSection(Card):
         self.toggle.setChecked(expanded)
         self.body.setVisible(expanded)
         self.toggle.setIcon(QIcon(':/photoagent/' + ('collapse.svg' if expanded else 'expand.svg')))
-        self.toggle.setAccessibleDescription(tr('section_expanded' if expanded else 'section_collapsed'))
+        set_text(self.toggle, tr('section_expanded' if expanded else 'section_collapsed'), 'setAccessibleDescription')
 
 
 class TechnicalDetails(CollapsibleSection):
@@ -219,28 +220,28 @@ class TechnicalDetails(CollapsibleSection):
         self.text = QPlainTextEdit()
         self.text.setReadOnly(True)
         self.text.setTabChangesFocus(True)
-        self.text.setAccessibleName(tr('technical_details'))
+        set_text(self.text, tr('technical_details'), 'setAccessibleName')
         self.text.setMaximumHeight(160)
         self.body_layout.addWidget(self.text)
         self.set_detail('')
 
     def set_detail(self, detail: str) -> None:
-        self.text.setPlainText(detail)
+        set_text(self.text, detail, 'setPlainText')
         self.set_expanded(False)
         self.setVisible(bool(detail))
 
 
 def button(key: str, callback: Callable, layout: QLayout, *, variant: str | None = None) -> QPushButton:
-    widget = QPushButton(tr(key))
+    widget = with_text(QPushButton(), tr(key))
     variant = variant or ('danger' if key in ('selected_move', 'bulk_move', 'approve')
                           else 'primary' if key in ('start', 'save', 'compare') else 'secondary')
     style_button(widget, variant)
     if key in ('selected_move', 'bulk_move', 'restore'):
         widget.setProperty('operation', True)
     if key in ('selected_move', 'bulk_move', 'move_copy', 'approve'):
-        widget.setAccessibleDescription(tr('quarantine_description_action'))
+        set_text(widget, tr('quarantine_description_action'), 'setAccessibleDescription')
     elif key in ('restore', 'restore_operation'):
-        widget.setAccessibleDescription(tr('restore_description_action'))
+        set_text(widget, tr('restore_description_action'), 'setAccessibleDescription')
     widget.clicked.connect(callback)
     layout.addWidget(widget)
     return widget
@@ -258,7 +259,7 @@ class PhotoView(Card):
         self.view = QGraphicsView(self.scene)
         self.view.setDragMode(QGraphicsView.ScrollHandDrag)
         self.view.setFocusPolicy(Qt.StrongFocus)
-        self.view.setAccessibleName(tr('compare'))
+        set_text(self.view, tr('compare'), 'setAccessibleName')
         self.view.setMinimumSize(120, 120)
         self.view.viewport().installEventFilter(self)
         self.fitted = True
@@ -278,21 +279,21 @@ class PhotoView(Card):
         for key, callback, shortcut in (('zoom_in', lambda: self.zoom(1.25), '+'),
                                         ('zoom_out', lambda: self.zoom(.8), '-'), ('fit', self.fit, 'F')):
             control = button(key, callback, controls)
-            control.setToolTip(tr(key))
-            control.setText('+' if key == 'zoom_in' else '−' if key == 'zoom_out' else tr('fit_short'))
+            set_text(control, tr(key), 'setToolTip')
+            set_text(control, '+' if key == 'zoom_in' else '−' if key == 'zoom_out' else tr('fit_short'))
             self.preview_buttons.append(control)
             binding = QShortcut(QKeySequence(shortcut), self)
             binding.setContext(Qt.WidgetWithChildrenShortcut)
             binding.activated.connect(callback)
-        self.zoom_label = QLabel('100%')
+        self.zoom_label = with_text(QLabel(), '100%')
         self.zoom_label.setProperty('role', 'small')
         controls.addWidget(self.zoom_label)
         self.enlarge = button('enlarge_preview', self.show_enlarged, controls)
-        self.enlarge.setToolTip(tr('enlarge_preview'))
+        set_text(self.enlarge, tr('enlarge_preview'), 'setToolTip')
         self.keep_photo = button('keep_photo', lambda: None, layout)
         self.keep_photo.setCheckable(True)
         self.keep_photo.setProperty('choice', True)
-        self.keep_photo.setAccessibleDescription(tr('keep_description'))
+        set_text(self.keep_photo, tr('keep_description'), 'setAccessibleDescription')
         self.details = CollapsibleSection('photo_details')
         self.details.content.setContentsMargins(8, 8, 8, 8)
         self.full_metadata = path_label('', 'small')
@@ -312,21 +313,21 @@ class PhotoView(Card):
         self.scene.clear()
         self.state = key
         message = tr(key, *args)
-        self.placeholder.setToolTip(message)
-        self.placeholder.setText(message if len(message) <= 200 else message[:197] + '…')
-        self.placeholder.setAccessibleName(self.placeholder.text())
+        set_text(self.placeholder, message, 'setToolTip')
+        set_text(self.placeholder, message)
+        set_text(self.placeholder, message, 'setAccessibleName')
         self.preview.setCurrentWidget(self.placeholder)
-        self.zoom_label.setText('—')
+        set_text(self.zoom_label, '—')
         for control in self.preview_buttons:
             control.setEnabled(False)
         self.enlarge.setEnabled(False)
 
     def reset(self) -> None:
-        self.metadata.setText(tr('select_pair'))
+        set_text(self.metadata, tr('select_pair'))
         self.keep_photo.setChecked(False)
-        self.keep_photo.setText(tr('keep_photo'))
-        self.keep_photo.setAccessibleName(tr('keep_photo'))
-        self.full_metadata.clear()
+        set_text(self.keep_photo, tr('keep_photo'))
+        set_text(self.keep_photo, tr('keep_photo'), 'setAccessibleName')
+        set_text(self.full_metadata, '')
         self.error_details.set_detail('')
         self.details.set_expanded(False)
         self.show_state('select_pair')
@@ -336,9 +337,9 @@ class PhotoView(Card):
         self.show_state('preview_loading')
         self.photo = photo
         self.update_summary()
-        self.metadata.setToolTip(photo.path)
-        self.keep_photo.setAccessibleName(tr('keep_named_photo', photo.path))
-        self.full_metadata.setText(tr('metadata', photo.path, photo.image_format or photo.ext,
+        set_text(self.metadata, photo.path, 'setToolTip')
+        set_text(self.keep_photo, tr('keep_named_photo', photo.path), 'setAccessibleName')
+        set_text(self.full_metadata, tr('metadata', photo.path, photo.image_format or photo.ext,
             photo.width, photo.height, photo.size, photo.sha256, tr('yes' if photo.is_raw else 'no')))
         self.details.set_expanded(False)
 
@@ -348,7 +349,7 @@ class PhotoView(Card):
         photo = self.photo
         name = self.metadata.fontMetrics().elidedText(Path(photo.path).name, Qt.ElideMiddle,
                                                      max(80, self.metadata.width()))
-        self.metadata.setText(tr('photo_summary', name, photo.image_format or photo.ext,
+        set_text(self.metadata, tr('photo_summary', name, photo.image_format or photo.ext,
                                 photo.width, photo.height, size_text(photo.size)))
 
     def resizeEvent(self, event) -> None:
@@ -376,7 +377,7 @@ class PhotoView(Card):
         if not self.scene.items():
             return
         self.view.fitInView(self.scene.sceneRect(), Qt.KeepAspectRatio)
-        self.zoom_label.setText(f'{self.view.transform().m11() * 100:.0f}%')
+        set_text(self.zoom_label, f'{self.view.transform().m11() * 100:.0f}%')
 
     def zoom(self, factor: float) -> None:
         if self.state != 'preview_ready':
@@ -385,7 +386,7 @@ class PhotoView(Card):
         if .01 <= scale <= 32:
             self.fitted = False
             self.view.scale(factor, factor)
-            self.zoom_label.setText(f'{scale * 100:.0f}%')
+            set_text(self.zoom_label, f'{scale * 100:.0f}%')
 
     def eventFilter(self, watched, event) -> bool:
         if event.type() == QEvent.Resize and self.fitted:
@@ -401,14 +402,14 @@ class PhotoView(Card):
             return
         dialog = QDialog(self)
         dialog.setAttribute(Qt.WA_DeleteOnClose)
-        dialog.setWindowTitle(tr('enlarge_preview'))
+        set_text(dialog, tr('enlarge_preview'), 'setWindowTitle')
         dialog.resize(1000, 760)
         layout = QVBoxLayout(dialog)
         scene = QGraphicsScene(dialog)
         scene.addPixmap(self.scene.items()[0].pixmap())
         view = QGraphicsView(scene)
         view.setDragMode(QGraphicsView.ScrollHandDrag)
-        view.setAccessibleName(self.view.accessibleName())
+        set_text(view, text_of(self.view, 'setAccessibleName'), 'setAccessibleName')
         layout.addWidget(view)
         layout.addWidget(text_label(tr('preview_note'), 'small'))
         actions_host = ContextToolbar()
@@ -440,7 +441,7 @@ class PlanDialog(QDialog):
         super().__init__(parent)
         self.plan = plan
         self.approval = None
-        self.setWindowTitle(tr('plan'))
+        set_text(self, tr('plan'), 'setWindowTitle')
         self.resize(900, 620)
         screen = self.screen().availableGeometry()
         self.resize(min(900, int(screen.width() * .94)), min(620, int(screen.height() * .94)))
@@ -450,18 +451,18 @@ class PlanDialog(QDialog):
         summary = QPlainTextEdit()
         summary.setReadOnly(True)
         summary.setTabChangesFocus(True)
-        summary.setAccessibleName(tr('plan_paths'))
+        set_text(summary, tr('plan_paths'), 'setAccessibleName')
         descriptions = []
         for move in plan.moves:
             descriptions.append(tr('move_summary', move.source, move.destination,
                 move.keeper.path if move.keeper else tr('restore_original')))
-        summary.setPlainText('\n\n'.join(descriptions))
+        set_text(summary, join_text(descriptions, '\n\n'), 'setPlainText')
         layout.addWidget(summary, 1)
         warnings = []
         text = QPlainTextEdit()
         text.setReadOnly(True)
         text.setTabChangesFocus(True)
-        text.setAccessibleName(tr('technical_details'))
+        set_text(text, tr('technical_details'), 'setAccessibleName')
         lines = [tr('plan_count', plan.id, len(plan.moves))]
         for move in plan.moves:
             if move.kind != Kind.EXACT:
@@ -480,30 +481,30 @@ class PlanDialog(QDialog):
             if move.keeper:
                 lines.append(tr('plan_keeper', move.keeper.path, move.keeper.sha256))
             lines.append('')
-        text.setPlainText('\n'.join(lines))
-        self.warnings = text_label('\n'.join(dict.fromkeys(warnings)), 'metadata')
-        self.warnings.setAccessibleName(tr('plan_warnings'))
+        set_text(text, join_text(lines), 'setPlainText')
+        self.warnings = text_label(join_text(dict.fromkeys(warnings)), 'metadata')
+        set_text(self.warnings, tr('plan_warnings'), 'setAccessibleName')
         layout.addWidget(self.warnings)
         self.details = CollapsibleSection('technical_details')
         self.details.body_layout.addWidget(text)
         layout.addWidget(self.details)
         self.raw = QLineEdit()
-        self.raw.setPlaceholderText(tr('raw_prompt'))
-        self.raw.setAccessibleName(tr('raw_prompt'))
+        set_text(self.raw, tr('raw_prompt'), 'setPlaceholderText')
+        set_text(self.raw, tr('raw_prompt'), 'setAccessibleName')
         self.raw.setVisible(any(m.raw for m in plan.moves))
         layout.addWidget(self.raw)
-        self.legacy = QCheckBox(tr('legacy_confirm'))
+        self.legacy = with_text(QCheckBox(), tr('legacy_confirm'))
         self.legacy.setVisible(any(m.legacy for m in plan.moves))
         layout.addWidget(self.legacy)
         # A plain row keeps both actions in the Tab chain. QDialogButtonBox can
         # reset a non-auto-default accept button's focus policy during relayout.
         buttons = QHBoxLayout()
         buttons.addStretch()
-        self.confirm = QPushButton(tr('approve'))
+        self.confirm = with_text(QPushButton(), tr('approve'))
         buttons.addWidget(self.confirm)
         style_button(self.confirm, 'danger')
         self.confirm.setAutoDefault(False)
-        self.cancel = cancel = QPushButton(tr('cancel'))
+        self.cancel = cancel = with_text(QPushButton(), tr('cancel'))
         buttons.addWidget(cancel)
         style_button(cancel)
         cancel.setDefault(True)

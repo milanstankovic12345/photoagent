@@ -1,0 +1,328 @@
+[
+  {
+    "sheet": "100/review-matrix-1280.jpg",
+    "captures": [
+      "matrix-1280-dark-dashboard.png",
+      "matrix-1280-dark-scan.png",
+      "matrix-1280-dark-duplicates.png",
+      "matrix-1280-dark-history.png",
+      "matrix-1280-dark-settings.png",
+      "matrix-1280-dark-compare.png",
+      "matrix-1280-light-dashboard.png",
+      "matrix-1280-light-scan.png",
+      "matrix-1280-light-duplicates.png",
+      "matrix-1280-light-history.png",
+      "matrix-1280-light-settings.png",
+      "matrix-1280-light-compare.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "100/review-matrix-1366.jpg",
+    "captures": [
+      "matrix-1366-dark-dashboard.png",
+      "matrix-1366-dark-scan.png",
+      "matrix-1366-dark-duplicates.png",
+      "matrix-1366-dark-history.png",
+      "matrix-1366-dark-settings.png",
+      "matrix-1366-dark-compare.png",
+      "matrix-1366-light-dashboard.png",
+      "matrix-1366-light-scan.png",
+      "matrix-1366-light-duplicates.png",
+      "matrix-1366-light-history.png",
+      "matrix-1366-light-settings.png",
+      "matrix-1366-light-compare.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "100/review-matrix-1650.jpg",
+    "captures": [
+      "matrix-1650-dark-dashboard.png",
+      "matrix-1650-dark-scan.png",
+      "matrix-1650-dark-duplicates.png",
+      "matrix-1650-dark-history.png",
+      "matrix-1650-dark-settings.png",
+      "matrix-1650-dark-compare.png",
+      "matrix-1650-light-dashboard.png",
+      "matrix-1650-light-scan.png",
+      "matrix-1650-light-duplicates.png",
+      "matrix-1650-light-history.png",
+      "matrix-1650-light-settings.png",
+      "matrix-1650-light-compare.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "100/review-matrix-1920.jpg",
+    "captures": [
+      "matrix-1920-dark-dashboard.png",
+      "matrix-1920-dark-scan.png",
+      "matrix-1920-dark-duplicates.png",
+      "matrix-1920-dark-history.png",
+      "matrix-1920-dark-settings.png",
+      "matrix-1920-dark-compare.png",
+      "matrix-1920-light-dashboard.png",
+      "matrix-1920-light-scan.png",
+      "matrix-1920-light-duplicates.png",
+      "matrix-1920-light-history.png",
+      "matrix-1920-light-settings.png",
+      "matrix-1920-light-compare.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "100/review-states-1.jpg",
+    "captures": [
+      "dark-dashboard-empty.png",
+      "light-dashboard-empty.png",
+      "dark-scan-empty.png",
+      "light-scan-empty.png",
+      "dark-duplicates-empty.png",
+      "light-duplicates-empty.png",
+      "dark-history-empty.png",
+      "light-history-empty.png",
+      "dark-scan-sources.png",
+      "light-scan-sources.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "100/review-states-2.jpg",
+    "captures": [
+      "dark-scan-running.png",
+      "dark-scan-cancelled.png",
+      "light-scan-running.png",
+      "light-scan-cancelled.png",
+      "dark-scan-complete.png",
+      "light-scan-complete.png",
+      "dark-duplicates-list.png",
+      "light-duplicates-list.png",
+      "dark-duplicates-filtered.png",
+      "light-duplicates-filtered.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "100/review-states-3.jpg",
+    "captures": [
+      "dark-exact-three-members.png",
+      "light-exact-three-members.png",
+      "dark-compare-keeper.png",
+      "light-compare-keeper.png",
+      "dark-compare-keep-both.png",
+      "light-compare-keep-both.png",
+      "dark-compare-loading.png",
+      "dark-compare-unavailable.png",
+      "dark-compare-details.png",
+      "light-compare-loading.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "100/review-states-4.jpg",
+    "captures": [
+      "light-compare-unavailable.png",
+      "light-compare-details.png",
+      "dark-confirmation.png",
+      "light-confirmation.png",
+      "dark-confirmation-rejected.png",
+      "light-confirmation-rejected.png",
+      "dark-confirmation-warnings.png",
+      "light-confirmation-warnings.png",
+      "dark-history-populated.png",
+      "light-history-populated.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "100/review-states-5.jpg",
+    "captures": [
+      "dark-history-after-restart.png",
+      "light-history-after-restart.png",
+      "dark-restore-conflict.png",
+      "light-restore-conflict.png",
+      "dark-restore-confirmation.png",
+      "light-restore-confirmation.png",
+      "dark-history-restored.png",
+      "light-history-restored.png",
+      "dark-visual-review.png",
+      "light-visual-review.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "100/review-states-6.jpg",
+    "captures": [
+      "dark-scan-errors.png",
+      "light-scan-errors.png",
+      "dark-scan-error-details.png",
+      "light-scan-error-details.png",
+      "dark-dashboard-incomplete.png",
+      "light-dashboard-incomplete.png",
+      "dark-operation-refused.png",
+      "light-operation-refused.png",
+      "dark-settings-custom.png",
+      "light-settings-custom.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "100/review-states-7.jpg",
+    "captures": [
+      "dark-settings-matching.png",
+      "dark-settings-storage-about.png",
+      "light-settings-matching.png",
+      "light-settings-storage-about.png",
+      "light-settings-persisted.png",
+      "system-light.png",
+      "system-dark.png",
+      "system-fallback.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "125/review-matrix-1280.jpg",
+    "captures": [
+      "matrix-1280-dark-dashboard.png",
+      "matrix-1280-dark-scan.png",
+      "matrix-1280-dark-duplicates.png",
+      "matrix-1280-dark-history.png",
+      "matrix-1280-dark-settings.png",
+      "matrix-1280-dark-compare.png",
+      "matrix-1280-light-dashboard.png",
+      "matrix-1280-light-scan.png",
+      "matrix-1280-light-duplicates.png",
+      "matrix-1280-light-history.png",
+      "matrix-1280-light-settings.png",
+      "matrix-1280-light-compare.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "125/review-matrix-1366.jpg",
+    "captures": [
+      "matrix-1366-dark-dashboard.png",
+      "matrix-1366-dark-scan.png",
+      "matrix-1366-dark-duplicates.png",
+      "matrix-1366-dark-history.png",
+      "matrix-1366-dark-settings.png",
+      "matrix-1366-dark-compare.png",
+      "matrix-1366-light-dashboard.png",
+      "matrix-1366-light-scan.png",
+      "matrix-1366-light-duplicates.png",
+      "matrix-1366-light-history.png",
+      "matrix-1366-light-settings.png",
+      "matrix-1366-light-compare.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "125/review-matrix-1650.jpg",
+    "captures": [
+      "matrix-1650-dark-dashboard.png",
+      "matrix-1650-dark-scan.png",
+      "matrix-1650-dark-duplicates.png",
+      "matrix-1650-dark-history.png",
+      "matrix-1650-dark-settings.png",
+      "matrix-1650-dark-compare.png",
+      "matrix-1650-light-dashboard.png",
+      "matrix-1650-light-scan.png",
+      "matrix-1650-light-duplicates.png",
+      "matrix-1650-light-history.png",
+      "matrix-1650-light-settings.png",
+      "matrix-1650-light-compare.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "125/review-matrix-1920.jpg",
+    "captures": [
+      "matrix-1920-dark-dashboard.png",
+      "matrix-1920-dark-scan.png",
+      "matrix-1920-dark-duplicates.png",
+      "matrix-1920-dark-history.png",
+      "matrix-1920-dark-settings.png",
+      "matrix-1920-dark-compare.png",
+      "matrix-1920-light-dashboard.png",
+      "matrix-1920-light-scan.png",
+      "matrix-1920-light-duplicates.png",
+      "matrix-1920-light-history.png",
+      "matrix-1920-light-settings.png",
+      "matrix-1920-light-compare.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "150/review-matrix-1280.jpg",
+    "captures": [
+      "matrix-1280-dark-dashboard.png",
+      "matrix-1280-dark-scan.png",
+      "matrix-1280-dark-duplicates.png",
+      "matrix-1280-dark-history.png",
+      "matrix-1280-dark-settings.png",
+      "matrix-1280-dark-compare.png",
+      "matrix-1280-light-dashboard.png",
+      "matrix-1280-light-scan.png",
+      "matrix-1280-light-duplicates.png",
+      "matrix-1280-light-history.png",
+      "matrix-1280-light-settings.png",
+      "matrix-1280-light-compare.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "150/review-matrix-1366.jpg",
+    "captures": [
+      "matrix-1366-dark-dashboard.png",
+      "matrix-1366-dark-scan.png",
+      "matrix-1366-dark-duplicates.png",
+      "matrix-1366-dark-history.png",
+      "matrix-1366-dark-settings.png",
+      "matrix-1366-dark-compare.png",
+      "matrix-1366-light-dashboard.png",
+      "matrix-1366-light-scan.png",
+      "matrix-1366-light-duplicates.png",
+      "matrix-1366-light-history.png",
+      "matrix-1366-light-settings.png",
+      "matrix-1366-light-compare.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "150/review-matrix-1650.jpg",
+    "captures": [
+      "matrix-1650-dark-dashboard.png",
+      "matrix-1650-dark-scan.png",
+      "matrix-1650-dark-duplicates.png",
+      "matrix-1650-dark-history.png",
+      "matrix-1650-dark-settings.png",
+      "matrix-1650-dark-compare.png",
+      "matrix-1650-light-dashboard.png",
+      "matrix-1650-light-scan.png",
+      "matrix-1650-light-duplicates.png",
+      "matrix-1650-light-history.png",
+      "matrix-1650-light-settings.png",
+      "matrix-1650-light-compare.png"
+    ],
+    "visually_reviewed": false
+  },
+  {
+    "sheet": "150/review-matrix-1920.jpg",
+    "captures": [
+      "matrix-1920-dark-dashboard.png",
+      "matrix-1920-dark-scan.png",
+      "matrix-1920-dark-duplicates.png",
+      "matrix-1920-dark-history.png",
+      "matrix-1920-dark-settings.png",
+      "matrix-1920-dark-compare.png",
+      "matrix-1920-light-dashboard.png",
+      "matrix-1920-light-scan.png",
+      "matrix-1920-light-duplicates.png",
+      "matrix-1920-light-history.png",
+      "matrix-1920-light-settings.png",
+      "matrix-1920-light-compare.png"
+    ],
+    "visually_reviewed": false
+  }
+]

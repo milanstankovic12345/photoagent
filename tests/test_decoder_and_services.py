@@ -139,7 +139,7 @@ def test_preflight_and_translation_fallback():
     from app.i18n import tr
     assert tr("scan_progress", 4, language="en") == "Inspected 4 photographs..."
     assert "4" in tr("scan_progress", 4, language="missing")
-    assert tr("untranslated_key", language="en") == "untranslated_key"
+    assert tr("untranslated_key", language="en") == tr("message_unavailable", language="en")
 
 
 @pytest.mark.raw_asset

@@ -15,7 +15,8 @@ from app.core.queries import DashboardSummary, MatchRow, ScanProgress
 from app.ui.qt.components import (Card, CollapsibleSection, ContextToolbar, ElidedPathLabel, EmptyState,
                                   StatCard, StatusBadge, TechnicalDetails, ThemeSelector,
                                   button, path_label, text_label)
-from app.ui.qt.strings import tr
+from app.ui.qt.localization import set_text, text_of, language_manager
+from app.ui.qt.strings import tr, join_text, error_text
 
 
 def size_text(value: int | float) -> str:
@@ -41,7 +42,7 @@ class CandidateCard(Card):
         metadata = QVBoxLayout()
         content.addLayout(metadata, 1)
         name = path_label(Path(photo.path).name, 'section')
-        name.setToolTip(photo.path)
+        set_text(name, photo.path, 'setToolTip')
         metadata.addWidget(name)
         metadata.addWidget(text_label(tr('candidate_metadata', photo.image_format or photo.ext,
             photo.width, photo.height), 'metadata'))
@@ -54,13 +55,13 @@ class CandidateCard(Card):
         self.loaded = True
         self.error_details.set_detail(error if image is None or image.isNull() else '')
         if image is None or image.isNull():
-            self.image.setText(tr('thumbnail_unavailable'))
-            self.image.setToolTip(tr('preview_error'))
+            set_text(self.image, tr('thumbnail_unavailable'))
+            set_text(self.image, tr('preview_error'), 'setToolTip')
         else:
-            self.image.setText('')
+            set_text(self.image, '')
             self.image.setPixmap(QPixmap.fromImage(image).scaled(self.image.size(),
                 Qt.KeepAspectRatio, Qt.SmoothTransformation))
-        self.image.setAccessibleName(tr('thumbnail_for', Path(self.row.match.dup.path).name))
+        set_text(self.image, tr('thumbnail_for', Path(self.row.match.dup.path).name), 'setAccessibleName')
 
 
 class DashboardScreen(QWidget):
@@ -104,6 +105,8 @@ class DashboardScreen(QWidget):
         self.recent.content.addWidget(self.roots)
         self.warning = text_label('', 'metadata')
         layout.addWidget(self.warning)
+        self.warning_details = TechnicalDetails()
+        layout.addWidget(self.warning_details)
         self.estimate = text_label(tr('estimate'), 'small')
         layout.addWidget(self.estimate)
         self.candidates_panel = QWidget()
@@ -125,19 +128,20 @@ class DashboardScreen(QWidget):
     def set_summary(self, value: DashboardSummary) -> None:
         for card, measurement in zip(self.stat_cards, (str(value.indexed), str(value.exact),
                 str(value.visual), size_text(value.potential_bytes))):
-            card.value.setText(measurement)
+            set_text(card.value, measurement)
         has_session = bool(value.session_id)
-        self.scan.setText(tr('scan_photos' if has_session else 'first_scan'))
-        self.scan.setAccessibleName(self.scan.text())
+        set_text(self.scan, tr('scan_photos' if has_session else 'first_scan'))
+        set_text(self.scan, text_of(self.scan), 'setAccessibleName')
         self.empty.setVisible(not has_session)
         self.recent.setVisible(has_session)
         self.estimate.setVisible(has_session)
-        self.session.setText(tr('recent_scan_summary',
+        set_text(self.session, tr('recent_scan_summary',
             datetime.fromtimestamp(value.started).astimezone().strftime('%d.%m.%Y. %H:%M'),
             tr('state_' + value.status), value.photo_count, value.exact, value.visual, value.errors)
             if has_session else '')
-        self.roots.setText('\n'.join(f'{p} · {tr("state_" + s)}' for p, s in value.roots))
-        self.warning.setText('\n'.join(tr(w) for w in value.warnings))
+        set_text(self.roots, join_text(tr('root_status', p, tr('state_' + s)) for p, s in value.roots))
+        set_text(self.warning, join_text(error_text(w) for w in value.warnings))
+        self.warning_details.set_detail('\n'.join(w for w in value.warnings if ':' in w))
         self.warning.setVisible(bool(value.warnings))
         self.review.setEnabled(bool(value.candidates))
         self.no_matches.setVisible(has_session and value.status == 'complete' and not (value.exact or value.visual))
@@ -220,8 +224,8 @@ class ScanScreen(QWidget):
         self.empty_sources = text_label(tr('empty_sources'), 'body')
         sources.content.addWidget(self.empty_sources)
         self.roots = QListWidget()
-        self.roots.setAccessibleName(tr('source'))
-        self.roots.setAccessibleDescription(tr('keyboard_sources'))
+        set_text(self.roots, tr('source'), 'setAccessibleName')
+        set_text(self.roots, tr('keyboard_sources'), 'setAccessibleDescription')
         self.roots.setMinimumHeight(100)
         self.roots.setMaximumHeight(230)
         sources.content.addWidget(self.roots)
@@ -241,7 +245,7 @@ class ScanScreen(QWidget):
         self.status = text_label(tr('scan_ready'), 'section')
         progress_card.content.addWidget(self.status)
         self.progress = QProgressBar()
-        self.progress.setAccessibleName(tr('scan_progress_name'))
+        set_text(self.progress, tr('scan_progress_name'), 'setAccessibleName')
         self.progress.setTextVisible(False)
         self.progress.setRange(0, 1)
         progress_card.content.addWidget(self.progress)
@@ -256,7 +260,7 @@ class ScanScreen(QWidget):
         self.errors = QPlainTextEdit()
         self.errors.setReadOnly(True)
         self.errors.setTabChangesFocus(True)
-        self.errors.setAccessibleName(tr('technical_details'))
+        set_text(self.errors, tr('technical_details'), 'setAccessibleName')
         self.errors.setMinimumHeight(100)
         self.errors.setMaximumHeight(200)
         self.error_section.body_layout.addWidget(self.errors)
@@ -271,6 +275,14 @@ class ScanScreen(QWidget):
         self.timer = QTimer(self)
         self.timer.setInterval(1000)
         self.timer.timeout.connect(self.tick)
+        language_manager().changed.connect(self.retranslate_sources)
+
+    def retranslate_sources(self) -> None:
+        for i in range(self.roots.count()):
+            item = self.roots.item(i)
+            path = item.toolTip()
+            message = text_of(self.source_labels[path])
+            item.setData(Qt.AccessibleTextRole, tr('source_status', path, message))
 
     def set_sources(self, roots: list[str], states: dict[str, str]) -> None:
         selected = self.roots.currentRow()
@@ -296,7 +308,7 @@ class ScanScreen(QWidget):
             values.addWidget(status)
             self.source_labels[path] = status
             remove = button('remove', lambda checked=False, target=item: self.remove_source(target), content)
-            remove.setAccessibleName(tr('remove_source', path))
+            set_text(remove, tr('remove_source', path), 'setAccessibleName')
             self.remove_buttons.append(remove)
             item.setSizeHint(QSize(0, 76))
             item.setToolTip(path)
@@ -313,7 +325,7 @@ class ScanScreen(QWidget):
         for path, state in states:
             if path in self.source_labels:
                 key = state if state in ('available', 'unavailable') else 'state_' + state
-                self.source_labels[path].setText(tr(key))
+                set_text(self.source_labels[path], tr(key))
                 for i in range(self.roots.count()):
                     item = self.roots.item(i)
                     if item.toolTip() == path:
@@ -322,20 +334,20 @@ class ScanScreen(QWidget):
     def begin(self) -> None:
         self.show_activity()
         self.started = time.monotonic()
-        self.status.setText(tr('checking_sources'))
-        self.errors.clear()
+        set_text(self.status, tr('checking_sources'))
+        set_text(self.errors, '', 'setPlainText')
         self.failure_detail = ''
         self.report_failure_detail = ''
-        self.error_summary.setText(tr('no_scan_errors'))
+        set_text(self.error_summary, tr('no_scan_errors'))
         self.error_section.set_expanded(False)
-        self.report.clear()
+        set_text(self.report, '')
         self.review.setEnabled(False)
         self.progress.setRange(0, 0)
         self.timer.start()
         self.tick()
 
     def tick(self) -> None:
-        self.elapsed.setText(tr('elapsed', int(time.monotonic() - self.started)))
+        set_text(self.elapsed, tr('elapsed', int(time.monotonic() - self.started)))
 
     def show_activity(self) -> None:
         # Keep progress/results above the source list on short windows, where
@@ -344,9 +356,9 @@ class ScanScreen(QWidget):
         self.layout().insertWidget(0, self.progress_card)
 
     def update_progress(self, value: ScanProgress) -> None:
-        self.status.setText(tr('progress', tr('phase_' + value.phase), value.discovered,
+        set_text(self.status, tr('progress', tr('phase_' + value.phase), value.discovered,
             value.processed, value.skipped, value.failed))
-        self.error_summary.setText(tr('scan_error_count', value.failed) if value.failed else tr('no_scan_errors'))
+        set_text(self.error_summary, tr('scan_error_count', value.failed) if value.failed else tr('no_scan_errors'))
         self.source_states(value.roots)
 
     def finish(self, value: DashboardSummary) -> None:
@@ -356,12 +368,12 @@ class ScanScreen(QWidget):
         if not value.session_id:
             return
         self.show_activity()
-        self.status.setText(tr('scan_result_summary', tr('state_' + value.status),
+        set_text(self.status, tr('scan_result_summary', tr('state_' + value.status),
             value.photo_count, value.exact_groups, value.visual, value.errors))
-        self.elapsed.setText(tr('elapsed', max(0, int(value.finished - value.started))) if value.finished else '')
-        self.error_summary.setText(tr('scan_error_count', value.errors) if value.errors else tr('no_scan_errors'))
+        set_text(self.elapsed, tr('elapsed', max(0, int(value.finished - value.started))) if value.finished else '')
+        set_text(self.error_summary, tr('scan_error_count', value.errors) if value.errors else tr('no_scan_errors'))
         if value.status == 'failed':
-            self.error_summary.setText(tr('scan_failure_help'))
+            set_text(self.error_summary, tr('scan_failure_help'))
         self.review.setEnabled(value.status in ('complete', 'incomplete') and bool(value.exact or value.visual))
 
     def fail(self, detail: str) -> None:
@@ -370,7 +382,7 @@ class ScanScreen(QWidget):
         self.timer.stop()
         self.progress.setRange(0, 1)
         self.progress.setValue(0)
-        self.status.setText(tr('scan_failed'))
-        self.error_summary.setText(tr('scan_failure_help'))
-        self.errors.setPlainText(detail)
+        set_text(self.status, tr('scan_failed'))
+        set_text(self.error_summary, tr('scan_failure_help'))
+        set_text(self.errors, detail, 'setPlainText')
         self.review.setEnabled(False)

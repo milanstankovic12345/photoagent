@@ -3,13 +3,51 @@
 `app/ui/qt/`, selected with `--ui qt`, contains bootstrap, controller, workers,
 screen components, named navigation, table model, themes and local SVG resources.
 Qt is now the default; `--ui tk` selects the retained Tkinter adapter. Both share the existing core.
-Full language switching and packaging remain future work.
+Qt supports English/Serbian runtime switching; Tk remains Serbian. Packaging remains future work.
 
-Task010 keeps the existing Qt/shared Serbian catalogs. `strings.tr` preserves
+Task012 stores the single authoritative catalogs in `app/i18n/en.json` and
+`sr_Latn.json`. The framework-independent translator provides safe English fallback;
+legacy Tk calls retain their Serbian default. Qt `strings.tr` returns readable text
+with a stable key/argument recipe. `localization.set_text` binds that recipe to the
+existing widget property; language changes rerender text with signals blocked,
+without rebuilding widgets, resetting models, restarting workers or touching plans.
+Models emit data/header changes; history cells and source accessibility roles update
+in place. Bindings are QObject children, so destroyed controls disconnect naturally.
+Composed messages retain their nested recipes; literal paths never become keys.
+
+An application-owned `LanguageManager` coordinates the Qt thread. The small native
+`QTranslator` adapter maps used framework strings to the same catalogs because the
+tested PySide6 distribution has no Serbian Latin qtbase catalog. It translates file
+picker and text-edit controls without maintaining duplicate application .ts/.qm files.
+The folder chooser is read-only and nonblocking, with a bound caption.
+Settings writes remain on the existing service thread; rapid choices retain every
+successful write as the rollback baseline. A failed write restores that baseline
+without changing a pending plan or consent. State-file absence selects English;
+legacy files with no language select Serbian; invalid values select English and warn.
+No database, matching or operation-journal format changes are involved.
+
+Task011 adds verification tools, without changing application services, widgets,
+matching, RAW extraction, SQLite schema or the recovery journal.
+`tools/capture_task011.py` constructs `MainWindow(temporary_home)` and generated
+photos, drives real workers and explicit synthetic operation approvals, and records
+widget geometry, physical pixels, DPR, horizontal scroll and toolbar containment.
+Each scale runs in a fresh Qt process. `tools/review_task011.py` verifies hashes
+and the complete 4-size × 2-theme × 6-surface matrix per scale, then assembles
+contact sheets. Its separate review marker records subsequent visual inspection;
+automated geometry assertions alone do not constitute visual acceptance.
+Stopped windows are disposed before opening replacements; completion is published
+only after workers and sandbox cleanup finish. Output directories must be new,
+so earlier evidence is retained. Temporary HOME,
+settings/index/journal/reports and decoder environment are isolated and restored.
+On Windows the shared Windows Temp path avoids putting real profile/library names
+in public screenshots. See [Stage H evidence and limits](design/TASK011_VERIFICATION.md).
+
+Historically, Task010 kept the Qt/shared Serbian catalogs. `strings.tr` preserved
 known shared fallbacks while replacing unknown keys/formatting failures with a
 readable message. `TechnicalDetails` presents raw diagnostics only on request;
 workers and safety services retain their technical contracts. English intentions
-are documentation in `docs/design/QT_TEXT_INVENTORY.json`, never a runtime catalog.
+were documentation in `docs/design/QT_TEXT_INVENTORY.json`. Task012 supersedes that
+inventory with the implemented catalog keys; runtime text lives only in `app/i18n/`.
 The shell defines per-screen keyboard order, while PlanDialog owns safe initial
 Cancel focus and consent handling. Path labels constrain long values; comparison
 stacks at narrow logical widths. See `docs/design/ACCESSIBILITY.md` for contracts
@@ -147,7 +185,8 @@ Full SHA is verified before/after preparation, including cache hits. The decoded
 QImage cache is capped at 64 MiB (UI pixmaps/in-flight buffers are separate).
 The 880→320 fingerprint path is unchanged; previews can grow to 2048 px.
 ThemeManager applies global palette/styles with System/Unknown dark fallback.
-All new UI messages use stable Serbian keys and translation fallback.
+UI messages use stable shared keys and translation fallback; Qt supports EN/SR,
+while Tk continues to request Serbian text.
 
 ## Actual components
 
@@ -166,7 +205,7 @@ All new UI messages use stable Serbian keys and translation fallback.
 | `app/safety/operations.py` | Frozen operation plans, approval validation, quarantine, recovery and restore. |
 | `app/services/` | Application orchestration, incremental indexing, settings, streaming reports and preflight. |
 | `app/ui/tk_app.py` | Existing desktop layout, main-thread dialogs/widgets, background coordination. |
-| `app/i18n/` | New safety/status resources and fallback; existing UI remains Serbian Latin. |
+| `app/i18n/` | Shared EN/SR catalogs, parameterized messages and safe fallback. Qt switches live; Tk uses Serbian. |
 | `tests/` | Synthetic fixtures, native filesystem, process interruption and hidden Tk regressions. |
 
 Core, matching and safety do not import Tkinter. The controller dispatches scanning,

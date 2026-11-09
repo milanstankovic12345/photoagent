@@ -1,5 +1,191 @@
 # PhotoAgent test evidence
 
+## Task012 — Qt EN/SR localization (2026-11-09)
+
+The [Task012 report](design/TASK012_VERIFICATION.md) lists implemented behavior,
+changed files, reviewed evidence and limits. Qt coverage includes 418 keys per
+language, matching parameters, safe fallback, count grammar, state migration,
+restart persistence, live scan/comparison/confirmation updates, RAW/legacy consent,
+failed and rapid preference saves, populated history, errors and framework dialogs.
+All photographs and operation state are synthetic and temporary. Qt framework
+settings are redirected to temporary INI paths; no package was installed. The
+existing Windows interpreter required the approved external runner because its
+Store-Python launcher could not start inside the restricted sandbox.
+
+Executed commands below use the existing `.venv`. Qt commands ran with
+`QT_QPA_PLATFORM=offscreen`; environment values were restored in `finally`.
+
+```powershell
+.venv/Scripts/python.exe -B -m pytest -p no:cacheprovider tests/test_task012.py -q -o faulthandler_timeout=90
+# Final: 22 passed in 187.27s; zero skips.
+
+.venv/Scripts/python.exe -B -m pytest -p no:cacheprovider tests/test_qt.py tests/test_qt_design_system.py tests/test_task008.py tests/test_task009.py tests/test_task010.py tests/test_task011.py -q -o faulthandler_timeout=90
+# 62 passed in 943.62s; zero skips.
+
+.venv/Scripts/python.exe -B -m pytest -p no:cacheprovider tests/test_operations.py tests/test_recovery.py tests/test_additional_safety.py tests/test_scanning.py tests/test_indexing.py tests/test_decoder_and_services.py tests/test_native_races.py tests/test_processes.py tests/test_task003_services.py -q -o faulthandler_timeout=90
+# Final: 121 passed, 2 skipped in 150.01s.
+
+.venv/Scripts/python.exe -B -m pytest -p no:cacheprovider tests/test_decoder_and_services.py::test_preflight_and_translation_fallback tests/test_ui.py -q -o faulthandler_timeout=90
+# 9 passed in 14.45s: 8 retained-Tk cases plus a repeated core fallback case.
+```
+
+These commands cover 213 distinct passing cases; the repeated fallback case is
+not counted twice. The two skips are exactly `test_valid_raw_asset` (no licensed
+valid RAW fixture; malformed RAW is exercised) and
+`test_linux_no_replace` (native Linux unavailable on Windows).
+The recorded skip output points to `tests/test_decoder_and_services.py:145` and
+`tests/test_native_races.py:116`. These are not claims of native Linux or valid RAW
+coverage. No skip caused by a missing Qt installation is counted as a UI pass.
+
+The four localized geometry cases cover EN/SR × Dark/Light and each loops over
+1280×720, 1366×768, 1650×900 and 1920×1080, including loaded comparison. The base
+Task012 run exercises actual DPR 1. Extra runs use fresh processes:
+
+```powershell
+$oldPlatform = $env:QT_QPA_PLATFORM
+$oldScale = $env:QT_SCALE_FACTOR
+try {
+    $env:QT_QPA_PLATFORM = 'offscreen'
+    foreach ($scale in @('1.25', '1.5')) {
+        $env:QT_SCALE_FACTOR = $scale
+        .venv/Scripts/python.exe -B -m pytest -p no:cacheprovider tests/test_task012.py -k localized_geometry -q -o faulthandler_timeout=90
+        if ($LASTEXITCODE -ne 0) { throw "Localized geometry failed at $scale" }
+    }
+} finally {
+    $env:QT_QPA_PLATFORM = $oldPlatform
+    $env:QT_SCALE_FACTOR = $oldScale
+}
+# Final 125%: 4 passed, 18 deselected in 53.77s.
+# Final 150%: 4 passed, 18 deselected in 57.18s.
+```
+
+That gives 288 main-page/comparison geometry states across the three DPRs, with
+zero primary-page horizontal overflow or overlapping/outside-window toolbar actions.
+Vertical scrolling and path/card elision remain intentional.
+
+Final captures were executed with `-m tools.capture_task012 --output
+docs/design/verification/task012/current/100` (then `/125` and `/150`), setting
+`QT_SCALE_FACTOR` to `1`, `1.25`, `1.5` in separate processes and restoring both Qt
+environment values afterward. Each run produced 32 PNGs and four review sheets;
+all three finished manifests record unchanged original bytes, actual DPR and hashes.
+All 12 final sheets were visually inspected: both languages, themes, source picker,
+confirmation and main flows. Count-first group labels remain visible; longer text
+wraps, comparison stacks at narrow widths, and controls remain reachable by scrolling.
+Native screen-reader, physical monitor/DPI, Linux and frozen packaging checks remain
+open. Tk remains Serbian; CLI/preflight text, CSV fields and technical diagnostics
+are outside the Qt translation scope.
+
+Development-run failures are retained here instead of being reported as passes:
+the first Task012 run had 11 passes and one fixture-confinement failure from a late
+service import; the next had 16 passes and one Windows asyncio/Popen import failure;
+the third had 16 passes and one geometry-helper dictionary-key typo. Fixing import
+order and using `toolbar_overlaps` resolved those harness errors. A later 20-case
+version passed, and the component/localization run passed 25 cases before the two
+final grammar/index-warning checks were added. The initial safety run had 120
+passes, 2 skips and one outdated assertion expecting an unknown translation key to
+leak into the UI; the assertion now expects the required readable fallback and the
+final safety run above passes. Preliminary screenshots are ignored beside the final
+`current/` evidence and are not included in its 96-image count. Initial visual review
+also led to a deterministic synthetic picker start folder and correct theme labels
+in the capture driver. The final captures include framework-settings isolation and
+the corrected group-count wording.
+
+## Task011 Stage H (2026-11-09)
+
+See the [verification report](design/TASK011_VERIFICATION.md) for screen-by-screen
+findings, evidence paths, fixture distinctions and open native acceptance gates.
+Windows / Python 3.12.10 / PySide6 6.12.0 / Fusion / offscreen, using the existing
+venv through the approved external runner. No packages installed, commits created
+or real photo libraries accessed. All operations used isolated synthetic fixtures.
+
+Executed focused commands (Qt environment restored in `finally`):
+
+```powershell
+$previous = $env:QT_QPA_PLATFORM
+try {
+    $env:QT_QPA_PLATFORM = 'offscreen'
+    .\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_qt.py tests/test_qt_design_system.py tests/test_task008.py tests/test_task009.py tests/test_task010.py tests/test_task003_services.py -q
+} finally { $env:QT_QPA_PLATFORM = $previous }
+# 78 passed in 987.29s (16:27), zero skips.
+
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_operations.py tests/test_recovery.py tests/test_additional_safety.py tests/test_scanning.py tests/test_indexing.py tests/test_decoder_and_services.py -q -o faulthandler_timeout=90
+# 87 passed, 1 skipped in 114.23s.
+```
+
+The sole core skip is `test_valid_raw_asset`: no licensed valid RAW
+asset is available; malformed RAW is exercised. No skip due to missing PySide6
+is accepted as a UI pass. Native races/process and Tk modules were not rerun,
+because no application/service contract changed; this is not a full-suite claim.
+The final suites cover 168 distinct passing test cases: 78 UI/services, 87 core,
+and 3 new Task011 tests. Running the latter at all three DPRs gives 174 successful
+test executions in total; the one RAW skip is separate. No failed pytest run is
+omitted from this Task011 evidence; the initial sandboxed interpreter could not
+launch and the two capture-driver failures are documented separately.
+
+Final new geometry tests run in three fresh Qt processes:
+
+```powershell
+$oldPlatform = $env:QT_QPA_PLATFORM
+$oldScale = $env:QT_SCALE_FACTOR
+try {
+    $env:QT_QPA_PLATFORM = 'offscreen'
+    foreach ($scale in @('1', '1.25', '1.5')) {
+        $env:QT_SCALE_FACTOR = $scale
+        .\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_task011.py -q -o faulthandler_timeout=90
+        if ($LASTEXITCODE -ne 0) { throw "Task011 tests failed at scale $scale" }
+    }
+} finally {
+    $env:QT_QPA_PLATFORM = $oldPlatform
+    $env:QT_SCALE_FACTOR = $oldScale
+}
+# 100%: 3 passed in 30.88s; 125%: 3 passed in 28.15s;
+# 150%: 3 passed in 31.34s. Zero skips (3 distinct tests, 9 executions).
+```
+
+An earlier revision of the three new tests passed in 30.98s before the additional
+actual-DPR assertion and query-settling wait; it is not added to the final count.
+
+Capture commands below describe the final run. On repetition, choose a new run ID;
+neither the capture driver nor review-sheet generator overwrites existing output.
+Environment variables are restored on success/failure. Extended states are captured
+at 100%; all three scales include every main page and loaded comparison at all
+four sizes in both themes. The recorded DPR and widget geometry, not contact-sheet
+dimensions, establish the offscreen scaling checks.
+
+```powershell
+$oldPlatform = $env:QT_QPA_PLATFORM
+$oldScale = $env:QT_SCALE_FACTOR
+$run = 'docs/design/verification/prompt-6.1/task011-20261109-r4'
+try {
+    $env:QT_QPA_PLATFORM = 'offscreen'
+    $env:QT_SCALE_FACTOR = '1'
+    .\.venv\Scripts\python.exe -B -m tools.capture_task011 --output "$run/100" --scenarios
+    if ($LASTEXITCODE -ne 0) { throw '100% capture failed' }
+    foreach ($scale in @('1.25', '1.5')) {
+        $env:QT_SCALE_FACTOR = $scale
+        $label = if ($scale -eq '1.25') { '125' } else { '150' }
+        .\.venv\Scripts\python.exe -B -m tools.capture_task011 --output "$run/$label"
+        if ($LASTEXITCODE -ne 0) { throw "Capture failed at scale $scale" }
+    }
+} finally {
+    $env:QT_QPA_PLATFORM = $oldPlatform
+    $env:QT_SCALE_FACTOR = $oldScale
+}
+.\.venv\Scripts\python.exe -B -m tools.review_task011 $run
+# Open and inspect the original PNGs/contact sheets before the following command:
+.\.venv\Scripts\python.exe -B -m tools.review_task011 $run --mark-reviewed
+git -c core.safecrlf=false diff --check
+```
+
+The final 100% capture and the 125/150% loop were launched in independent shell
+processes using the same commands above. All use separate disposable homes.
+The three earlier capture attempts remain alongside the final run and are not used
+as final passing evidence; the report explains the driver faults and interrupted
+shutdown. An early review call rejected the unfinished third-run manifest.
+Native Windows/Linux DPI, physical monitors/media, screen readers, valid RAW,
+full localization and packaging remain unverified. `tools/benchmark_ui.py` (Tk)
+was not used to claim Qt responsiveness; the real Qt heartbeat regression ran.
+
 ## Task010 accessibility and translation preparation (2026-11-09)
 
 Windows, Python 3.12.10, PySide6 6.12.0 / Fusion / offscreen. Existing Microsoft

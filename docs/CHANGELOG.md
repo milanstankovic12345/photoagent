@@ -1,5 +1,36 @@
 # Changelog
 
+## Task012 — Qt English / Serbian Latin localization — 2026-11-09
+
+- Added complete shared EN/SR catalogs with matching parameters and safe fallback,
+  including service errors, accessibility text, tooltips and used Qt framework controls.
+- Added live Settings language selection. Existing views, models, comparison choices,
+  previews, scan progress and open dialogs update without rebuilding or approving plans.
+- Fresh state starts in English; explicit EN/SR preferences persist; legacy state
+  without a language retains Serbian. Invalid values use English and produce a warning.
+- Language saves run on the service worker, including after a running scan. Failed
+  saves restore the last successful preference, including rapid consecutive changes.
+- Kept paths, technical diagnostics, matching rules, SHA verification, RAW consent,
+  operation journal and recovery formats unchanged. Tk remains Serbian only.
+- Added synthetic localization, restart, scan/consent, failure and scaling regressions;
+  see [TESTING.md](TESTING.md) for actual results and native/platform limitations.
+
+## Task011 — Visual verification and focused regressions — 2026-11-09
+
+- Added a disposable synthetic Qt capture driver with recorded logical/physical
+  geometry, actual DPR and primary-page/toolbar overflow checks at four target
+  resolutions in Dark and Light. Each scale uses a fresh process.
+- Added the extended scan/cancel/filter/compare/confirmation/quarantine/restart/
+  restore-conflict/settings journey, including explicit fixture-only approvals.
+  RAW/legacy warnings and preview failures are labeled presentation fixtures.
+- Added rendered geometry regressions and environment-restoration coverage, plus
+  hash/DPR/matrix validation and contact sheets with explicit visual-review records.
+- Recorded evidence, execution commands, findings and skipped native checks in
+  [the Stage H report](design/TASK011_VERIFICATION.md). Existing evidence is retained;
+  no application matching, persistence or file-operation logic is changed.
+- Full Prompt 6.1 acceptance, native platform/DPI verification, localization and
+  release packaging remain open; offscreen capture does not close those gates.
+
 ## Task010 — Accessibility and translation preparation — 2026-11-09
 
 - Inventoried Qt/shared text keys with English intentions for Task012, preserving

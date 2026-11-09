@@ -59,7 +59,7 @@ class ServiceWorker(QObject):
                 value = self.service.query_matches(*payload)
             elif action == 'groups':
                 value = self.service.query_groups(*payload)
-            elif action == 'settings':
+            elif action in ('settings', 'language'):
                 value = self.service.update_settings(payload)
             elif action == 'sources':
                 value = self.service.sources(payload)

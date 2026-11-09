@@ -1,0 +1,1171 @@
+{
+  "python": "3.12.10",
+  "platform": "Windows",
+  "qt_version": "6.12.0",
+  "qt_platform": "offscreen",
+  "scale_factor": 1.0,
+  "synthetic": true,
+  "captures": [
+    {
+      "file": "dark-dashboard-empty.png",
+      "theme": "dark",
+      "state": "dark-dashboard-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          710
+        ]
+      },
+      "sha256": "de1a42107518d317e9f4249a8d176f2e09e984a94a2de6ca8c1507ea65ced1eb",
+      "visually_reviewed": false
+    },
+    {
+      "file": "light-dashboard-empty.png",
+      "theme": "light",
+      "state": "light-dashboard-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          710
+        ]
+      },
+      "sha256": "9fdc8047415bccf12c2b165317d92fc51216a0a5e80653abe6ecfee639e33832",
+      "visually_reviewed": false
+    },
+    {
+      "file": "dark-scan-empty.png",
+      "theme": "dark",
+      "state": "dark-scan-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "914402c8a927583f45255ddd2875e86d16db5b664b5ac058c3592c36d92b448f",
+      "visually_reviewed": false
+    },
+    {
+      "file": "light-scan-empty.png",
+      "theme": "light",
+      "state": "light-scan-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "120d99227cab030fe963f80d7b92ab066498fd20b2c76a525f72bf8effcb372a",
+      "visually_reviewed": false
+    },
+    {
+      "file": "dark-duplicates-empty.png",
+      "theme": "dark",
+      "state": "dark-duplicates-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "7acd5bbde46e8a5d2d1b9c90b85759967f4bd129905970a369b581101059f45b",
+      "visually_reviewed": false
+    },
+    {
+      "file": "light-duplicates-empty.png",
+      "theme": "light",
+      "state": "light-duplicates-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "f9d01caf64efd843c3631a840a720a61014d1958451213b9978aa9d941120421",
+      "visually_reviewed": false
+    },
+    {
+      "file": "dark-history-empty.png",
+      "theme": "dark",
+      "state": "dark-history-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "c9254740a791f5bc797e399507aca598b11558b3bc71909c0ab37180ffd6f7a0",
+      "visually_reviewed": false
+    },
+    {
+      "file": "light-history-empty.png",
+      "theme": "light",
+      "state": "light-history-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "8f4ef9dfd29cd5c342c7545c6b336fc570a949b6788c9b29335a09c257b02680",
+      "visually_reviewed": false
+    },
+    {
+      "file": "dark-scan-sources.png",
+      "theme": "dark",
+      "state": "dark-scan-sources",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "5f262fa155c5a0d73c7e9c1e137ceb7a6dfe78915393660c7891823d11157032",
+      "visually_reviewed": false
+    },
+    {
+      "file": "light-scan-sources.png",
+      "theme": "light",
+      "state": "light-scan-sources",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "c6bf20bd205f793454c77a24cc7b1f9eed86c3ce874521d5fec65d1168fbe776",
+      "visually_reviewed": false
+    },
+    {
+      "file": "dark-scan-running.png",
+      "theme": "dark",
+      "state": "dark-scan-running",
+      "fixture": "delayed extraction",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "8df6df3d1542033206d6d633be5ad0584f090fe2dd958bea0815dcd35be762ed",
+      "visually_reviewed": false
+    },
+    {
+      "file": "dark-scan-cancelled.png",
+      "theme": "dark",
+      "state": "dark-scan-cancelled",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "9f760141d1321adc802e1e33f13f1887ae6549a29faba0f1742c690e140e1e7d",
+      "visually_reviewed": false
+    },
+    {
+      "file": "light-scan-running.png",
+      "theme": "light",
+      "state": "light-scan-running",
+      "fixture": "delayed extraction",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "5e43c124d90d775b5e1185b688f270a7c371ae7085603c3a6c14e04fb00baaea",
+      "visually_reviewed": false
+    },
+    {
+      "file": "light-scan-cancelled.png",
+      "theme": "light",
+      "state": "light-scan-cancelled",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "5e1301b59a6eb32bbe41857802be022eb9216f3367d2e301dd89c2fc551d8959",
+      "visually_reviewed": false
+    },
+    {
+      "file": "dark-scan-complete.png",
+      "theme": "dark",
+      "state": "dark-scan-complete",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "6d1b5dda4746c9cd3e9aac852e03b0aaa15421d759b5551d0e7c28c16aa55939",
+      "visually_reviewed": false
+    },
+    {
+      "file": "light-scan-complete.png",
+      "theme": "light",
+      "state": "light-scan-complete",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "ee4d9c0ca82b26d53c413c3a90a559d8a28d8d96665cf4d08b50e57b567da6d4",
+      "visually_reviewed": false
+    },
+    {
+      "file": "dark-duplicates-list.png",
+      "theme": "dark",
+      "state": "dark-duplicates-list",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 7,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "c13b4502f525c683640b4737aa280a2dc290b5e886eb9f9bd3a4d0b6a2898e6f",
+      "visually_reviewed": false
+    },
+    {
+      "file": "light-duplicates-list.png",
+      "theme": "light",
+      "state": "light-duplicates-list",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 7,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "535e6f5cc52ad7a0866383414025c1a862a9d5ed8d73f1b464ee99af173198cf",
+      "visually_reviewed": false
+    },
+    {
+      "file": "dark-duplicates-filtered.png",
+      "theme": "dark",
+      "state": "dark-duplicates-filtered",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "d3c2153e1836b829f9982a7471e53063d683912923f374700ca297af6ec99665",
+      "visually_reviewed": false
+    },
+    {
+      "file": "light-duplicates-filtered.png",
+      "theme": "light",
+      "state": "light-duplicates-filtered",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "2ec4081ac6371898e2c6c18dc92cd28d2cf76d1adc8175a68f68bfcc59f00896",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-dark-dashboard.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-dashboard",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 370,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          530
+        ]
+      },
+      "sha256": "0b898ee02eb8321030f62ae439d1272bfcfadf114e21943e2e8f31baf7dddf06",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-dark-scan.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-scan",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 119,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "95ba39fde209ba9aa85675caa4366ab9502d2a0c3b9049139d4aa17a2a490da2",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-dark-duplicates.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-duplicates",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 187,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "439d8072d34964d2f514937b60ac68d11a39300b87357582a6ce3d409a60ae2e",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-dark-history.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-history",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1024,
+          531
+        ]
+      },
+      "sha256": "57ce38fd7bb753abcd57a1806dd2e13750d40ac94029c817a9bea309ec8b56bf",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-dark-settings.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-settings",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 616,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "7a48939f4367d18be5d5b11418bb479616726751a4834b8c1b87c75a61c2ec3b",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-dark-compare.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-compare",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 169,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "0b3a44b5d718d0c77cca920acba1c6404b5101e1eeee0a20d819505694a93eec",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-light-dashboard.png",
+      "theme": "light",
+      "state": "matrix-1280-light-dashboard",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 370,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          530
+        ]
+      },
+      "sha256": "07ce416c72085376be21caee260422cfd896f27670c51bd1d97743b447aab0de",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-light-scan.png",
+      "theme": "light",
+      "state": "matrix-1280-light-scan",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 119,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "8560b9d25fac8627f9ab6c17763d0e3420ecd9c16fe8c478b1de3f3ac738f757",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-light-duplicates.png",
+      "theme": "light",
+      "state": "matrix-1280-light-duplicates",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 187,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "10b293f6f9bc3fb919440103b90c24dca09840c453d68a9f39236f4f2e28a1b1",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-light-history.png",
+      "theme": "light",
+      "state": "matrix-1280-light-history",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1024,
+          531
+        ]
+      },
+      "sha256": "607faa55d8c9564793aee09cf097b524ff7e0f291a8baef9c5b035223ff4dbbd",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-light-settings.png",
+      "theme": "light",
+      "state": "matrix-1280-light-settings",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 616,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "c550e64e472c263ae86842829650d25ed9ef9d9c176f05cecf8522910d419b76",
+      "visually_reviewed": false
+    },
+    {
+      "file": "matrix-1280-light-compare.png",
+      "theme": "light",
+      "state": "matrix-1280-light-compare",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 49,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "4f4c28ee8f0499a051ef2f0bed33fd8585bcb5e884c7b58d6370152ad7fbb739",
+      "visually_reviewed": false
+    }
+  ],
+  "checks": [],
+  "finished": false,
+  "method": "QWidget.grab, actual Qt event loop/workers/services. Physical target sizes are divided by QT_SCALE_FACTOR to exercise constrained logical space. No bitmap resizing used for DPI assertions. Internal metadata tables may scroll. Loading/unavailable preview and RAW/legacy warnings are presentation fixtures. Cancellation delays extraction but uses the real cancellation path. All moves explicitly approved and restricted to generated temporary files.",
+  "skipped": [
+    "Native Windows/Linux display and monitor DPI transitions",
+    "NVDA/Narrator, physical media and cross-drive operations",
+    "Successful RAW decode: no redistributable RAW fixture",
+    "Full localization, release audit and packaging (Task012/013)"
+  ]
+}

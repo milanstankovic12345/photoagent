@@ -9,7 +9,8 @@ operation journal remains authoritative. Warm cache hits still read full SHA-256
 Neither M2 nor M3 has a completed cross-platform gate: Linux was not run, and the
 1k/10k M3 benchmark stopped before its first scenario completed. Quality calibration,
 Task003 adds PySide6 and themes (now the default at the owner's request); manual acceptance,
-full localization and packaging remain open. Priorities follow
+Tk localization, native platform acceptance and packaging remain open. Qt localization
+and runtime switching are implemented by Task012 with synthetic coverage. Priorities follow
 [AGENTS.md](../AGENTS.md); finding IDs refer to [the audit](REVERSE_ENGINEERING.md).
 Each change must remain independently reviewable and preserve stronger existing checks.
 
@@ -19,7 +20,21 @@ with isolated keyboard journeys and offscreen Dark/Light scaling evidence. See
 It does not close the native assistive-technology/platform gate, Task011's complete
 redesign review, or L1/Task012's full localization and runtime language switching.
 
+Task011 implements Stage H's repeatable synthetic capture/geometry and regression
+workflow. [The verification report](design/TASK011_VERIFICATION.md) records current
+offscreen results and reviewed images across four sizes and three actual Qt DPRs.
+Native Windows/Linux DPI, monitor changes and assistive-technology checks remain
+open, so Prompt 6.1 is not declared fully accepted. L1/Task012 localization and
+Task013 release/package validation remain separate workstreams. Task012 is now implemented
+for Qt; the historical Stage H checks below do not verify it. No matcher,
+schema, recovery format or safety guarantee is changed by this stage.
+
 ## Prioritized backlog and dependencies
+
+Task012 implements L1 for the Qt interface: EN/SR catalogs, immediate switching,
+persistent preferences, legacy migration and safe fallback. See [TESTING.md](TESTING.md)
+for executed regression and scaling checks. Tk remains Serbian; native Linux,
+physical monitor/assistive-technology checks and packaging remain open gates.
 
 Dependencies are task IDs. T1's initial harness precedes safety changes; its broader
 fixture coverage grows with each milestone rather than delaying urgent P0 fixes.

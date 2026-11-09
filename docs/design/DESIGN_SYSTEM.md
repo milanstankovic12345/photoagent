@@ -19,7 +19,7 @@ Dialogs, menus, tooltips, lists, tables, inputs, previews and checkboxes share s
 | `button(key, callback, layout, variant=None)` | Accessible primary/secondary/danger action |
 | `PhotoView` | Empty/loading/unavailable/ready photo card and zoom controls |
 
-The button helper defaults scan/save/compare to primary, quarantine preparation to danger, and other actions to secondary. Plan confirmation uses danger while preserving all approval requirements and the safe default Cancel. New text uses stable strings.py keys; full language switching remains Task012.
+The button helper defaults scan/save/compare to primary, quarantine preparation to danger, and other actions to secondary. Plan confirmation uses danger while preserving all approval requirements and the safe default Cancel. Text uses stable shared EN/SR keys through strings.py; Task012 updates existing controls during language switching without changing choice or consent state.
 
 PhotoView receives metadata and decoded QImage results with no file access/decoding. `set_photo()` enters loading, `set_image()` shows the image or plain-text failure, and `reset()` clears stale metadata/previews. Zoom controls and shortcuts cannot zoom an unavailable image. Selection/filter invalidation resets both cards; controller generations still discard stale replies. The full photo-first layout remains Task008.
 

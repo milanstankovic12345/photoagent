@@ -1,0 +1,24 @@
+{
+    "date":  "2026-11-09",
+    "reviewer":  "Codex visual inspection",
+    "synthetic":  true,
+    "captured_images":  96,
+    "reviewed_sheets":  [
+                            "100/en-dark-review.jpg",
+                            "100/en-light-review.jpg",
+                            "100/sr_Latn-dark-review.jpg",
+                            "100/sr_Latn-light-review.jpg",
+                            "125/en-dark-review.jpg",
+                            "125/en-light-review.jpg",
+                            "125/sr_Latn-dark-review.jpg",
+                            "125/sr_Latn-light-review.jpg",
+                            "150/en-dark-review.jpg",
+                            "150/en-light-review.jpg",
+                            "150/sr_Latn-dark-review.jpg",
+                            "150/sr_Latn-light-review.jpg"
+                        ],
+    "hashes_and_dpr_verified":  true,
+    "manifest_completion_verified":  true,
+    "geometry_verified":  true,
+    "native_platform_acceptance":  false
+}

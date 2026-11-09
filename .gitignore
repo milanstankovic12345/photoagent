@@ -55,11 +55,17 @@ htmlcov/
 !/docs/design/DESIGN_SYSTEM.md
 !/docs/design/QT_TEXT_INVENTORY.json
 !/docs/design/ACCESSIBILITY.md
+!/docs/design/TASK011_VERIFICATION.md
+!/docs/design/TASK012_VERIFICATION.md
 !/docs/design/verification/
 /docs/design/verification/*
 !/docs/design/verification/task004/
 !/docs/design/verification/task005/
 !/docs/design/verification/task010/
+!/docs/design/verification/prompt-6.1/
+!/docs/design/verification/task012/
+/docs/design/verification/task012/*
+!/docs/design/verification/task012/current/
 /demo_photo_collection/
 .photo_agent_quarantine/
 /PhotoAgentReports/
