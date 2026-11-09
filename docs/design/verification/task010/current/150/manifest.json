@@ -1,0 +1,269 @@
+{
+  "platform": "Windows-11-10.0.26100-SP0",
+  "python": "3.12.10",
+  "qt_platform": "offscreen",
+  "scale_factor": 1.5,
+  "captures": [
+    {
+      "file": "dark-dashboard.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "90b10915a77b48366017477502ee277dc154e996128bfad8f015b4a2c3bde9ab"
+    },
+    {
+      "file": "dark-scan.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "870d9237a5727954ef80d05f7383d0ffa444e7c361abd5bf70860a1cbea4bd01"
+    },
+    {
+      "file": "dark-duplicates.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "ca9707d6d9217dadffe23a7872ed1c50f883045170cd471633ae63012e5951cf"
+    },
+    {
+      "file": "dark-history.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "3f53c9ea2516631958c79f76b040d64a2ce912aa4ef893036a111154ff132594"
+    },
+    {
+      "file": "dark-settings.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "b7e7a0cd3c7d4b7b2a071f78ba3d422f757afcc061c57b1d6e4941e2bf9d6fd0"
+    },
+    {
+      "file": "dark-compare-selected.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "b0816007bfc85c4eb478c73ed3b0de7599974f6693a650eb1c3e3b88d71e90d5"
+    },
+    {
+      "file": "dark-preview-details.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "9bc3bb043635c8b2c039969a229cfa6c9d7fa90afd2fb31855f8fdcf3d9c2141"
+    },
+    {
+      "file": "dark-confirmation.png",
+      "logical_size": [
+        501,
+        501
+      ],
+      "pixel_size": [
+        752,
+        752
+      ],
+      "dpr": 1.5,
+      "sha256": "4d68bfbe1e4b994598f7a65dcd724e9c25368f84af3a52097971233e1e3c0937"
+    },
+    {
+      "file": "dark-consent-warnings.png",
+      "logical_size": [
+        501,
+        501
+      ],
+      "pixel_size": [
+        752,
+        752
+      ],
+      "dpr": 1.5,
+      "sha256": "d4a6396cc5149344a2dd4facccad4dd74aba72a0c0720c2fb0991488e2aa088e"
+    },
+    {
+      "file": "dark-storage-error-details.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "7f8bcdb0255c6905fced017b1cf8746c0b9b8be482b1257e9d2f3d5b7dff556f"
+    },
+    {
+      "file": "light-dashboard.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "0180d5f77be0721cfc167139a518f653ea749c3e50f4991303795c9e383b4c60"
+    },
+    {
+      "file": "light-scan.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "12e2f6f65c282c54286aab8d318a41910e99b28a55252cf4bd9520a9e51cfed3"
+    },
+    {
+      "file": "light-duplicates.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "21d14dbf47a95e6f0c76b2cdd60d3368d642e112aeec297476e3cfcf4af294c7"
+    },
+    {
+      "file": "light-history.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "466ab3dd3898542493a726705eefa0bf3231daa210f2835a8f32ef73e9076e8f"
+    },
+    {
+      "file": "light-settings.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "6c9c27067c88c8029e33906553345f46214012d16f74e88172f5c4d93e989a07"
+    },
+    {
+      "file": "light-compare-selected.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "dabaa2819dfa66d29eb12fae212cb4f4d6861fef223f1a22db80b52f8463b710"
+    },
+    {
+      "file": "light-preview-details.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "c120471f703347caaf3525ca540c109d77dbea731a233487862b90297247ca18"
+    },
+    {
+      "file": "light-confirmation.png",
+      "logical_size": [
+        501,
+        501
+      ],
+      "pixel_size": [
+        752,
+        752
+      ],
+      "dpr": 1.5,
+      "sha256": "c0827b3a4e1c095871f3d6c9a5f0f8f1d2c9cf1922ccf6e1da376147a781ff98"
+    },
+    {
+      "file": "light-consent-warnings.png",
+      "logical_size": [
+        501,
+        501
+      ],
+      "pixel_size": [
+        752,
+        752
+      ],
+      "dpr": 1.5,
+      "sha256": "d238abe91e1ffdff724348ffd4310f794333463af605c81d77f34822820206e4"
+    },
+    {
+      "file": "light-storage-error-details.png",
+      "logical_size": [
+        853,
+        480
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.5,
+      "sha256": "585cd2436dd8135d875b9866c3b381cc5a0dcd5f1ad27af28567a6f5ce987d3f"
+    }
+  ],
+  "method": "Real Qt widgets/workers/services, generated photographs and temporary home. No moves executed. RAW/legacy/VISUAL warnings and unavailable preview are injected presentation fixtures; no successful RAW decode claimed. Physical display, screen reader and native DPI behavior unverified."
+}

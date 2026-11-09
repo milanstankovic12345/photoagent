@@ -53,10 +53,13 @@ htmlcov/
 /docs/design/*
 !/docs/design/UX_REDESIGN_PLAN.md
 !/docs/design/DESIGN_SYSTEM.md
+!/docs/design/QT_TEXT_INVENTORY.json
+!/docs/design/ACCESSIBILITY.md
 !/docs/design/verification/
 /docs/design/verification/*
 !/docs/design/verification/task004/
 !/docs/design/verification/task005/
+!/docs/design/verification/task010/
 /demo_photo_collection/
 .photo_agent_quarantine/
 /PhotoAgentReports/

@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Generic, TypeVar
 
-from app.core.models import Match
+from app.core.models import Match, Photo
 
 T = TypeVar('T')
 
@@ -58,6 +58,8 @@ class GroupRow:
     kind: str
     keeper_path: str
     members: int
+    samples: tuple[Photo, ...] = ()
+    potential_bytes: int | None = None
 
 
 @dataclass(frozen=True)
@@ -72,6 +74,11 @@ class DashboardSummary:
     errors: int = 0
     roots: tuple[tuple[str, str], ...] = ()
     warnings: tuple[str, ...] = ()
+    # Session measurements, independent of the count of the whole local index.
+    photo_count: int = 0
+    exact_groups: int = 0
+    finished: float = 0
+    candidates: tuple[MatchRow, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -83,6 +90,17 @@ class HistoryEntry:
     state: str
     error: str
     restorable: bool
+    # Manifest observations, never inferred from the latest transition or disk size.
+    moved_at: str | None = None
+    size: int | None = None
+    action: str = 'quarantine'
+    restored: bool = False
+
+
+@dataclass(frozen=True)
+class StorageSummary:
+    index_path: str
+    indexed: int
 
 
 @dataclass(frozen=True)

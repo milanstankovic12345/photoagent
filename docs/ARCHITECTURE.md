@@ -1,9 +1,119 @@
 # PhotoAgent v2.4 architecture
 
-Task003 adds `app/ui/qt/`, selected with `--ui qt`: bootstrap, controller, workers,
-six screens, table model, components, themes and compiled local SVG resources.
+`app/ui/qt/`, selected with `--ui qt`, contains bootstrap, controller, workers,
+screen components, named navigation, table model, themes and local SVG resources.
 Qt is now the default; `--ui tk` selects the retained Tkinter adapter. Both share the existing core.
 Full language switching and packaging remain future work.
+
+Task010 keeps the existing Qt/shared Serbian catalogs. `strings.tr` preserves
+known shared fallbacks while replacing unknown keys/formatting failures with a
+readable message. `TechnicalDetails` presents raw diagnostics only on request;
+workers and safety services retain their technical contracts. English intentions
+are documentation in `docs/design/QT_TEXT_INVENTORY.json`, never a runtime catalog.
+The shell defines per-screen keyboard order, while PlanDialog owns safe initial
+Cancel focus and consent handling. Path labels constrain long values; comparison
+stacks at narrow logical widths. See `docs/design/ACCESSIBILITY.md` for contracts
+and the limits of offscreen accessibility evidence.
+
+Task009 separates history/settings presentation into
+`app/ui/qt/quarantine_settings.py`, re-exported by `screens.py`. `HistoryEntry`
+adds optional manifest move-completion date and expected size, action and restore
+reference status without changing journal version 1. `at` retains its old meaning
+(latest transition and history sort order). Legacy import and recovery reconciliation
+timestamps never substitute for an unknown actual move time.
+
+`app/services/quarantine.py` resolves a selected operation's per-root quarantine
+folder and verifies current thumbnail input using root identity, containment,
+file identity, size, mtime and full SHA-256. Fresh ctime is used only after those
+surviving rename fields pass; PreviewService then validates the fresh full snapshot
+around decoding. The service worker prepares uncached 320 px history thumbnails;
+the controller cancels stale requests and rejects stale replies without making
+optional preview failures block Restore. Restore still uses the existing ID-specific
+prepare/PlanDialog/Approval/execute path. UI selection and refreshed rows use
+operation IDs; page changes clear selection and invalidate pending plans.
+
+Settings uses the existing patch-merge persistence and MatchingOptions limits.
+Presets 2/3, 4/6 and 8/10 describe search breadth without calibration claims;
+unrecognized threshold pairs remain Custom. ThemeSelector is shared with Dashboard.
+StorageSummary reads the actual active Index.path and physical-file count, including
+offline records and excluding missing/moved records. No measured cache occupancy,
+recovery cleanup, language switch, safety-disable control or schema migration is added.
+The package version `app.__version__` matches the documented 2.4 baseline.
+
+Task008 adds `app/ui/qt/gallery.py`: QListView/GroupModel/delegate render Grid/List
+cards without per-file widgets. GroupRow adds at most two Photo samples and an
+optional EXACT byte estimate. The read-only group query aggregates full direct
+groups despite search filters; byte estimates deduplicate physical identities and
+exclude files retained by any link. No matching/schema/journal changes are made.
+The gallery requests at most 24 groups/page, keeps at most 48 rendered thumbnails,
+and requests visible photos in batches of three at 320 px. Controller coalesces
+preview and thumbnail work separately to one dispatched request plus one latest
+pending request per channel. PreviewService still enforces its 64 MiB cache and
+fresh full-snapshot checks, including cache hits. GUI models/QPixmap stay on the GUI
+thread; all reads, validation and decoding remain in services/workers.
+
+Opening a group fetches bounded pages of all its direct links, independently of
+the gallery search. Direct-pair entry fetches the complete group when the current
+page does not already contain it. Comparison keeps a bounded snapshot of the
+listing query/page/rows/selection; Back restores that context and scroll without a
+new query. New scans, filters/sorts and completed operations discard that snapshot.
+Photo cards retain fit/zoom, compact error/loading states, an enlarged <=2048 px
+preview and collapsed metadata/heuristic details. Member navigation is collapsed
+below the photo actions; short windows scroll vertically.
+
+Qt review state is a per-scan in-memory set of directly reviewed MatchRow IDs,
+separate from journal transitions. It is not persisted. EXACT review tracks at most
+200 explicitly reviewed photos plus retained choices in one group; unchecked
+reviewed candidates can reference an explicitly retained SHA-identical photo.
+Unreviewed members remain untouched and multiple keepers are allowed. VISUAL uses
+only one displayed direct pair, never a transitive reanchoring. Keep Both clears
+the move proposal. Selection/query/keeper/navigation changes invalidate plans;
+debounced edits supersede old query/preparation responses immediately. Every
+proposal still goes through Application.prepare and PlanDialog -> explicit
+Approval -> Application.execute. Warnings and RAW/legacy consent remain visible;
+Enter cannot approve. Successful single moves expose a Restore action for their
+specific operation ID, rechecked through history and restore_plan. Failures report
+details and defer recovery authority to the journal.
+
+Task007 moves Dashboard/Scan presentation into `app/ui/qt/dashboard_scan.py`.
+DashboardSummary retains its existing fields and adds session photo count, EXACT
+group count, finished time and at most three MatchRow candidates. Read-only service
+queries count inspected session photos separately from whole-index physical files;
+EXACT groups use the existing grouping query. Estimated bytes count unique physical
+EXACT candidates, excluding any retained physical file and all VISUAL links. These
+cached estimates never authorize a move. No schema or matching changes are needed.
+
+The dashboard uses the existing preview thread/cache, with a separate cancellation
+event and request generation from comparison previews. Only viewport-intersecting
+candidate cards request thumbnails (320 px, at most three). Hiding/replacing the
+dashboard, starting a scan, cancellation and close supersede those responses.
+Source availability is read on the service thread before scanning. Sources retain
+their priority order, with reorder controls in a collapsed section. A scan-specific
+timer/progress state is independent of other service activity: unknown totals remain
+indeterminate, and overlapping discovered/processed/skipped/failed counts are never
+summed into a percentage. The activity card moves above sources during work and
+for results so status and elapsed time fit short windows. Completion uses the dashboard session query; report errors
+and worker failures have separate presentation. Existing service safety checks remain
+authoritative for all operations.
+
+Task006 supplies five `Route` destinations in `navigation.py`: Dashboard, Scan,
+Duplicates, Quarantine and Settings. The 208 logical-pixel sidebar uses the local
+brand resource and distinct Qt standard icons; Settings sits below a layout stretch.
+The shell owns one PageHeader, contextual toolbar area and status bar. Each screen
+owns its actions and body; WrappingLayout keeps toolbar actions above the scrollable
+content on narrow screens. Explicit Tab order follows the visible shell.
+DuplicatesFlow retains its list and comparison widgets in a nested stack. Enter or
+double-click opens a selected pair; Back/Alt+Left returns focus to the table. Named
+navigation retains live views; Back restores the bounded cached listing without
+fetching session data, so query, page/group offsets, sort, selection and scroll
+remain in memory. Leaving and
+returning to Duplicates also preserves its active inner view.
+
+Navigation/Back invalidate pending plans and reject an open confirmation; they
+never approve operations. Selection, filters, paging, sorting, root changes and new
+scans invalidate old selection/preview/plan state. Keeper choices invalidate plans;
+the fixed left/right photo previews retain their identity. The debounced search timer is stopped on scan/close. Service
+coordination, SQLite thread ownership and asynchronous shutdown remain unchanged.
 
 Task005 extends the same ThemeManager with semantic Dark/Light tokens, logical
 spacing/type metrics and one application stylesheet. Shared cards, headers,

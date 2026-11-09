@@ -11,10 +11,23 @@ needed, checks Python/dependencies/the selected toolkit, installs missing requir
 then starts `photo_agent.py`. Tcl/Tk is needed only for `--ui tk`.
 
 Double-click `start_windows.bat` to open the new Qt interface. Qt is also the default
-for `bash start_linux.sh` and `python -B photo_agent.py`. The six screens cover
-Dashboard, Scan, Duplicates, Compare, Quarantine history and Settings.
+for `bash start_linux.sh` and `python -B photo_agent.py`. The five destinations are
+Dashboard, Scan, Duplicates, Quarantine history and Settings. Open a selected pair
+with Enter, double-click or Compare inside Duplicates. Back to group (Alt+Left)
+preserves filters, sorting, group, result page and selection without reloading.
 Use `start_windows.bat --ui tk` (or `python -B photo_agent.py --ui tk`) for Tkinter.
 The theme defaults to Dark and respects any saved theme preference.
+Settings groups Appearance, Language, Scanning, Similarity Detection, Safety,
+Storage and About. Dashboard and Settings share the same Dark/Light/System control;
+theme changes save immediately. Source folders are listed in their saved priority
+order, with a link to edit them on Scan. Serbian Latin is the available UI language;
+full English/Serbian switching remains Task012.
+Task010 adds explicit keyboard focus order, distinct accessible preview names,
+readable error summaries with technical details on request, and wrapping paths and
+preview actions. Confirmation opens on Cancel; Enter never approves. At narrow
+logical widths comparison stacks the photographs vertically. English text intents
+are documented for future translation, without adding a partial English UI.
+See [accessibility behavior and verification limits](docs/design/ACCESSIBILITY.md).
 Qt mode needs PySide6 >=6.8,<7; preflight checks only the selected toolkit.
 See [Qt distribution notes](docs/QT_DISTRIBUTION.md).
 
@@ -33,27 +46,81 @@ python -B photo_agent.py
 
 ## Review workflow
 
+Qt Dashboard separates the whole local index from the latest scan's EXACT
+candidates and direct VISUAL links. Start your first scan, add folders, then Start
+Scan; advanced source ordering and error details are collapsed initially. Progress
+shows actual counts and elapsed time without inventing a percentage. Review Results
+opens Duplicates; a dashboard candidate opens its direct group. Up to three real
+candidates have previews loaded only while visible. Completed scans without matches
+are distinct from an application with no scan. CSV reports remain a secondary action;
+a report failure does not discard the scan. Failed, interrupted and cancelled scans
+cannot authorize quarantine.
+
 1. Add folders in priority order and start a scan. Missing/inaccessible sources and
    decoding failures produce an explicit incomplete result. Stop cancels work.
 2. EXACT means full SHA-256 equality. VISUAL means similarity only: review both
    photographs, edits and RAW/rendered representations. Quality ranking is heuristic.
-3. Select a row for side-by-side previews. A failed preview does not prevent binary
+3. Browse group cards in Grid/List, search names/paths, choose All, Exact Copies or
+   Similar Photos, and sort across the whole session. Open a group or select a row
+   for side-by-side previews. A failed preview does not prevent binary
    exact comparison, but disqualifies the pair from bulk operations.
-4. Prepare an individual or bulk plan. Read the scrollable source/keeper/destination
-   preview before confirming. RAW sources additionally require typing RAW.
+4. Qt: explicitly select Keep This Photo on either card. EXACT groups allow multiple
+   retained versions: checked photos remain; only explicitly reviewed, unchecked
+   photos enter the proposal (up to 200 reviewed photos per plan). Other group
+   members remain untouched. Expand the member list to browse pages. VISUAL choices
+   apply only to the displayed direct pair. Keep Both clears the move proposal.
+   Then prepare a plan and read its source/keeper/destination preview. Technical
+   details start collapsed; RAW/legacy/XMP/backup/non-exact warnings remain visible.
+   Approval requires the explicit button; Enter does not approve. RAW sources
+   additionally require typing RAW.
 5. Bulk accepts only decoded EXACT pairs within the same selected root, without RAW
    on either side or XMP sidecars. Copies across roots require individual review
    because they may be deliberate backups. XMP is never automatically moved.
-6. Qt: prepare restore of a selected eligible history row. Tkinter: restore the latest
+6. Qt: after one successful quarantine, contextual Restore targets that exact
+   operation ID through a new preparation/confirmation. History also permits
+   restoring a selected eligible row. Tkinter: restore the latest
    eligible entry. The application verifies bytes and
    identity again and never overwrites an existing original path. Legacy entries
    require an additional individual warning because their earlier bytes are unknown.
+
+Quarantine history shows the original name/location, recorded move completion time
+in UTC, manifest size, status and operation type. Missing legacy data and the actual
+move time of an operation discovered during crash recovery show “Nije dostupno”.
+The latest journal transition is not presented as the original move date. Selecting
+a row loads an optional thumbnail from its verified current quarantine destination;
+a failed preview does not prevent history review or service-based restore preparation.
+Selection is bound to the operation ID, including after refresh/pagination.
+Open Quarantine Folder opens that record's actual per-root folder, never a global
+quarantine directory. Existing restore destinations are preserved without fallback.
+
+Similarity search presets apply to the **next scan** after Save Settings:
+
+| Preset | pHash / dHash maximum distance |
+|---|---|
+| Strict | 2 / 3 |
+| Balanced (existing defaults) | 4 / 6 |
+| Broader Search | 8 / 10 |
+| Custom / Advanced | Existing or manually edited values, each 0–64 |
+
+These choices describe search breadth and are not qualitatively calibrated.
+Stricter settings can miss candidates; broader settings can include more false
+candidates. VISUAL always requires review. Custom thresholds survive theme changes
+and restarts; unknown settings keys and legacy history are retained on every write.
+Storage shows the active index path (including temporary fallback) and the number
+of indexed physical files excluding records marked missing/moved. Offline records
+remain counted. Preview cache is an in-memory LRU budget of 64 MiB, not measured disk
+usage or a cap on total process memory. History thumbnails are uncached. Recovery
+data cannot be cleared from Settings.
 
 The application moves photographs into `.photo_agent_quarantine/YYYY-MM-DD/` under
 the source root; it never permanently deletes them. It does not copy/delete across
 drives. Do not edit or reorganize the library while approving/executing a plan.
 
-The result table shows 200 rows per page. CSV and EXACT candidate selection cover the whole scan. Incomplete scans remain reviewable but do not authorize moves. The disposable index is `~/.photo_agent_index.sqlite3`; its loss never removes recovery history. Settings: `~/.photo_agent_state.json`. Journal: `~/.photo_agent_operations/`.
+Qt uses 24 group/member rows per page by default (service maximum: 200); Tk uses
+200 result rows per page. CSV and bulk EXACT selection cover the whole scan.
+Incomplete scans remain reviewable but do not authorize moves. The disposable
+index is `~/.photo_agent_index.sqlite3`; its loss never removes recovery history.
+Settings: `~/.photo_agent_state.json`. Journal: `~/.photo_agent_operations/`.
 Reports: `~/PhotoAgentReports/`. Legacy history is backed up before import. Do not
 remove manifests or backups while an operation needs recovery. A second application
 instance may scan, but only one instance may write settings/history or move files.
@@ -64,7 +131,11 @@ not free space. Dark/Light/System themes persist across restarts. Language switc
 is inactive in this milestone. pHash/dHash thresholds (0–64, defaults 4/6) apply only
 to the next scan; aspect stays 0.025. Preview zoom/pan/Fit uses a bitmap up to 2048 px;
 100% means preview pixels. Focus, noise and edit provenance are not measured.
-DERIVATIVE and SIMILAR_CAPTURE filters explain that recognition is unimplemented.
+Enlarged previews use the same bounded bitmap, never original full resolution.
+Photo Details exposes full paths/SHA and available metadata. Gallery review status
+records only UI decisions during the current scan/application session; it is not
+persisted and is independent of the operation journal. Qt hides unsupported
+DERIVATIVE/SIMILAR_CAPTURE/RAW+JPEG classifications.
 
 ## Synthetic demo and tests
 

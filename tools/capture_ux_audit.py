@@ -27,6 +27,7 @@ from PySide6.QtTest import QTest
 from PySide6.QtWidgets import QApplication, QMessageBox
 
 from app.ui.qt.window import MainWindow
+from app.ui.qt.navigation import Route
 
 
 def pump(predicate: Callable[[], bool], timeout: float = 60) -> None:
@@ -55,14 +56,15 @@ def generate(root: Path) -> None:
         image.save(root / 'e-other.png')
 
 
-def run(output: Path) -> None:
+def run(output: Path, width: int = 1280, height: int = 800) -> None:
     output = output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     manifest: dict = {
         'environment': {
             'python': platform.python_version(), 'platform': platform.platform(),
             'qt_platform': os.environ['QT_QPA_PLATFORM'], 'style': 'Fusion',
-            'viewport_logical': [1280, 800],
+            'viewport_logical': [width, height],
+            'scale_factor': os.environ.get('QT_SCALE_FACTOR', '1'),
             'versions': {name: importlib.metadata.version(name) for name in ('PySide6', 'Pillow')},
         },
         'method': 'Real Qt widgets, event loop, workers and services; window slots drive actions. '
@@ -100,8 +102,8 @@ def run(output: Path) -> None:
         })
         print('Captured ' + name, flush=True)
 
-    def page(window: MainWindow, index: int, name: str, state: str) -> None:
-        window.navigation.setCurrentRow(index)
+    def page(window: MainWindow, route: Route, name: str, state: str) -> None:
+        window.navigate(route)
         QApplication.processEvents()
         capture(name, window, state)
 
@@ -111,7 +113,7 @@ def run(output: Path) -> None:
     def create(home: Path) -> MainWindow:
         window = MainWindow(home)
         windows.append(window)
-        window.resize(1280, 800)
+        window.resize(width, height)
         window.show()
 
         def record(action: str, value) -> None:
@@ -140,15 +142,14 @@ def run(output: Path) -> None:
         original = {p.name: p.read_bytes() for p in photos.iterdir()}
         try:
             window = create(home)
-            names = ('dashboard', 'scan', 'duplicates', 'compare', 'quarantine', 'settings')
-            for i, name in enumerate(names):
-                page(window, i, f'{i + 1:02}-{name}-initial', 'No scan; empty application home')
+            for route in Route:
+                page(window, route, route.value + '-initial', 'No scan; empty application home')
 
             window.roots = [str(photos)]
             window.render_roots()
             window.controller.request('settings', {'roots': window.roots.copy()})
             settled(window)
-            page(window, 1, '07-scan-sources', 'One generated source, before scan')
+            page(window, Route.SCAN, '07-scan-sources', 'One generated source, before scan')
             progress_captured = []
 
             def progress(value) -> None:
@@ -164,8 +165,8 @@ def run(output: Path) -> None:
             assert any(row.kind == 'EXACT' and row.members == 3 for row in window.group_rows)
             assert any(row.kind == 'VISUAL' for row in window.group_rows)
             capture('09-scan-complete', window, 'Completed real scan of five generated photos')
-            page(window, 0, '10-dashboard-populated', 'Actual summary after completed scan')
-            page(window, 2, '11-duplicates-populated', 'Actual direct groups and candidate pairs')
+            page(window, Route.DASHBOARD, '10-dashboard-populated', 'Actual summary after completed scan')
+            page(window, Route.DUPLICATES, '11-duplicates-populated', 'Actual direct groups and candidate pairs')
             window.duplicates.search.setText('no-such-generated-photo')
             pump(lambda: window.query.text == 'no-such-generated-photo' and not window.controller.busy)
             capture('12-duplicates-no-filter-results', window, 'No result for literal search')
@@ -187,6 +188,7 @@ def run(output: Path) -> None:
             window.comparison.right.fit()
             capture('14-compare-exact', window, 'Both real generated previews loaded')
 
+            window.choose_keeper(False)
             window.prepare_selected()
             pump(lambda: window.plan_dialog is not None)
             dialog = window.plan_dialog
@@ -202,11 +204,11 @@ def run(output: Path) -> None:
             settled(window)
             assert not (photos / 'b-copy.png').exists()
             assert any(row.id == operation_id and row.restorable for row in window.history_rows)
-            page(window, 4, '16-quarantine-populated', 'Completed synthetic quarantine; one restorable operation')
+            page(window, Route.QUARANTINE, '16-quarantine-populated', 'Completed synthetic quarantine; one restorable operation')
             close(window)
             window = create(home)
             assert window.roots == [str(photos)]
-            page(window, 4, '17-quarantine-after-restart', 'New MainWindow and worker services; same private journal')
+            page(window, Route.QUARANTINE, '17-quarantine-after-restart', 'New MainWindow and worker services; same private journal')
             row = next(i for i, entry in enumerate(window.history_rows) if entry.id == operation_id)
             window.history.table.selectRow(row)
             window.restore()
@@ -223,13 +225,13 @@ def run(output: Path) -> None:
             (photos / 'bad.nef').write_bytes(b'synthetic invalid RAW')
             window.roots.append(str(sandbox / 'offline-drive'))
             window.render_roots()
-            window.navigation.setCurrentRow(1)
+            window.navigate(Route.SCAN)
             window.start_scan()
             settled(window)
             assert window.status == 'incomplete' and window.scan.errors.toPlainText()
             assert not window.duplicates.bulk.isEnabled()
             capture('20-scan-errors-offline', window, 'Incomplete scan: malformed RAW and missing synthetic drive')
-            page(window, 0, '21-dashboard-incomplete', 'Actual incomplete/offline warnings; review only')
+            page(window, Route.DASHBOARD, '21-dashboard-incomplete', 'Actual incomplete/offline warnings; review only')
             manifest['checks'].append('Incomplete scan disables bulk quarantine')
 
             # A real worker rejects preparation from an incomplete session; no injected error text.
@@ -239,7 +241,7 @@ def run(output: Path) -> None:
             box = window.findChildren(QMessageBox)[-1]
             capture('22-operation-error', box, 'Worker rejects incomplete_scan; real error dialog')
             box.reject()
-            page(window, 5, '23-settings-populated', 'Current controls and actual private index location')
+            page(window, Route.SETTINGS, '23-settings-populated', 'Current controls and actual private index location')
             window.preferences.theme.setCurrentIndex(window.preferences.theme.findData('light'))
             settled(window)
             capture('24-settings-light', window, 'Existing Light theme after actual settings persistence')
@@ -264,4 +266,7 @@ def run(output: Path) -> None:
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
-    run(parser.parse_args().output)
+    parser.add_argument('--width', type=int, default=1280)
+    parser.add_argument('--height', type=int, default=800)
+    args = parser.parse_args()
+    run(args.output, args.width, args.height)

@@ -1,5 +1,409 @@
 # PhotoAgent test evidence
 
+## Task010 accessibility and translation preparation (2026-11-09)
+
+Windows, Python 3.12.10, PySide6 6.12.0 / Fusion / offscreen. Existing Microsoft
+Store Python cannot launch within the filesystem sandbox; the existing `.venv`
+was run through the approved external runner. No packages were installed. All
+photos, settings, indexes, journals, quarantine moves and restores were temporary
+synthetic fixtures. Existing uncommitted Task007–009 work was retained.
+
+Final passing regression runs, **89 distinct cases, zero skips**:
+
+```powershell
+$env:QT_QPA_PLATFORM = 'offscreen'
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_task008.py tests/test_task009.py tests/test_task010.py tests/test_operations.py tests/test_recovery.py tests/test_additional_safety.py -x -q -o faulthandler_timeout=90
+# 63 passed in 354.31s; this collection preceded the added empty-plan case.
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_qt.py tests/test_qt_design_system.py tests/test_task010.py::test_empty_plan_message_is_nonblocking_and_cannot_approve -x -q -o faulthandler_timeout=90
+# 26 passed in 269.37s, including the added empty-plan case.
+git -c core.safecrlf=false diff --check
+# Passed.
+```
+
+The final Task010 module contains 11 cases: ten in the first command and the new
+empty-plan case in the second. Coverage includes actual keyboard source addition
+(folder chooser returns a fixture path), filters, group activation, comparison,
+Keep Both, cancelled and explicitly approved synthetic quarantine, history restore,
+Settings save, RAW/legacy consent, visible contextual warnings, Enter rejection,
+initial Cancel focus and focus return. Tests also check safe missing-key/format
+fallback and all 291 inventory keys; shared English resources and Serbian settings
+are preserved. Errors retain selectable plain-text diagnostics behind a keyboard
+toggle. Other checks cover distinct accessible preview names, `QAccessible` names,
+Unicode glyph support through `inFontUcs4`, long paths and expanded future labels,
+read-only table/editor Tab escape, enlarged-preview Close/focus return, painted
+focus/selection differences and thumbnails remaining visible under gallery focus.
+Existing contrast checks cover text >=4.5:1 and control/focus outlines >=3:1 in
+both themes. Existing RAW/XMP/backup/no-overwrite/recovery/cancellation checks ran.
+
+During development, new tests exposed hidden-row gallery focus, initial dialog
+focus replacement, an approval button missing from Tab order, table Tab trapping,
+enlarged-preview focus return and narrow comparison overflow. These were fixed.
+Visual review found the gallery focus rectangle filling over the card and a poor
+icon-only enlarge action; the rectangle is now unfilled and enlargement has a
+readable text button. A combined regression first failed after 14 passes because a
+hidden gallery refresh cancelled Dashboard thumbnails; the isolated test passed
+after ownership-aware cancellation, and the final Qt run covers it with an added
+late-refresh assertion. An initial glyph assertion used `inFont(str)`; explicit
+Unicode codepoint checks with `inFontUcs4` passed in both themes.
+
+One subsequent long combined offscreen process stopped making progress at
+`test_exact_multiple_keepers_pagination_and_no_default_move` and was terminated;
+it is **not** reported as a passing run. The case passed alone in 28.67s and in
+the final fresh group above. Its original hang was not reproduced or conclusively
+diagnosed. The empty-plan message was also changed to a nonblocking, localized
+Close-only message and given its own passing test; this is not claimed as proof
+of that earlier hang's cause. The final evidence consists of the two clean groups,
+not a single complete repository-suite invocation. Earlier baseline design checks
+passed 5 cases and the initial focused design/query/sidebar set passed 8 cases.
+
+Capture commands (each scale uses a fresh Qt process; choose a new output
+directory on subsequent runs):
+
+```powershell
+$env:QT_QPA_PLATFORM = 'offscreen'
+$env:QT_SCALE_FACTOR = '1'
+.\.venv\Scripts\python.exe -B -m tools.capture_task010 --output docs/design/verification/task010/current/100
+$env:QT_SCALE_FACTOR = '1.25'
+.\.venv\Scripts\python.exe -B -m tools.capture_task010 --output docs/design/verification/task010/current/125
+$env:QT_SCALE_FACTOR = '1.5'
+.\.venv\Scripts\python.exe -B -m tools.capture_task010 --output docs/design/verification/task010/current/150
+.\.venv\Scripts\python.exe -B -m tools.review_task010 docs/design/verification/task010/current
+# 20 captures per scale verified: SHA-256, image dimensions and actual DPR.
+# Six review sheets created and opened; 60 original captures retained.
+```
+
+Captured logical sizes are 1280×720, 1024×576 and 853×480; actual Qt DPR is 1,
+1.25 and 1.5 respectively, producing 1280×720 pixel main-window captures (subject
+to Qt rounding). These are real `QT_SCALE_FACTOR` runs, not resized screenshots.
+Main pages, selected comparison, unavailable preview/open details, normal and
+RAW/legacy/VISUAL/XMP confirmations and Settings diagnostics were reviewed in both
+themes. Long generated names/paths contain Serbian diacritics. The driver checks
+zero primary-page horizontal overflow and unchanged bytes of all generated photos;
+it never executes a move. Warning/preview failures are injected presentation
+fixtures, not successful RAW decoding or real disk failures. Gallery thumbnails
+are decoded through actual services. Tall content remains vertically scrollable.
+Only this session's superseded Task010 captures were removed; earlier task evidence
+was preserved. Final manifests and review sheets are under
+`docs/design/verification/task010/current/{100,125,150}/`.
+
+Manual NVDA/Narrator and other assistive-technology testing, native Windows/Linux
+physical-display DPI behavior, native folder chooser interaction, Task011's full
+resolution/state matrix, valid RAW decoding, physical-drive unplug/power loss and
+packaging were **not verified** in Task010. No full repository suite is claimed.
+Runtime language switching, English installation defaults and full catalog coverage
+remain Task012. `app/services/state.py` and shared `app/i18n/` resources were not
+changed by Task010.
+
+Task010 changed files: `.gitignore`, `README.md`,
+`app/ui/qt/{components,dashboard_scan,gallery,models,quarantine_settings,screens,strings,themes,window}.py`,
+`tests/{test_qt,test_qt_design_system,test_task010}.py`,
+`tools/{capture_task010,review_task010}.py`,
+`docs/{ARCHITECTURE,CHANGELOG,ROADMAP,TESTING}.md`,
+`docs/design/{ACCESSIBILITY.md,QT_TEXT_INVENTORY.json}`, the Task010 capture directory
+and the local `task/Task010.md` status. Other pre-existing working-tree changes
+were retained. Safety services, matching, decoder, schema and journal formats were
+not modified by this task.
+
+## Task009 quarantine and settings (2026-11-09)
+
+Windows, Python 3.12.10, PySide6 6.12.0 / Fusion / offscreen. Every photograph,
+index, journal, collision and move uses synthetic fixtures and isolated temporary
+directories. Existing Microsoft Store Python requires the approved external runner;
+no dependency installation or original-library access occurred.
+
+```powershell
+$env:QT_QPA_PLATFORM = 'offscreen'
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_qt.py::test_five_destinations_scan_compare_query_and_theme_restart -x -q
+# 1 passed in 33.20s
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_task009.py -x -q
+# 13 passed in 148.02s
+# Final repeat after readable columns/dates and folder-ID assertions:
+# 13 passed in 155.68s
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_task009.py::test_history_real_preview_confirmation_restart_and_empty_failure tests/test_task009.py::test_history_settings_errors_toolbar_and_unavailable_features -x -q
+# 3 passed in 87.66s after long-path wrapping.
+# Final repeat after empty/failure layout adjustment: 3 passed in 92.18s.
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests -q
+# 177 passed, 2 skipped in 1124.46s (18:44).
+.\.venv\Scripts\python.exe -B -m tools.capture_task009 --output docs/design/verification/task009
+# Completed: 20 PNGs and manifest.json; expected destination_occupied refusal logged.
+git diff --check
+# Passed.
+```
+
+The full run skipped exactly the licensed valid RAW fixture
+(`tests/test_decoder_and_services.py:145`) and native Linux execution
+(`tests/test_native_races.py:116`) on this Windows host. Corrupt/undecodable RAW,
+Windows file-operation safeguards, recovery and cancellation tests ran.
+
+An initial command also named a nonexistent `test_close_during_plan_does_not_execute`;
+collection rejected it and ran no tests. The corrected existing test above passed.
+Task009 cases cover read-only manifest observations versus later transitions,
+unknown legacy/reconciled dates, correct destination thumbnails and replacement
+identity rejection, per-root folders, actual fallback index location, ID-specific
+restart restore/collision/no-fallback, preset/custom/theme persistence, unknown
+keys/legacy/source ordering, refresh/page/stale-preview selection, actual Qt
+restore confirmation/restart, empty/load-error views, and both themes at 853×480.
+
+The full regression run started before the final column/date/wrapping/empty-state
+presentation adjustments and the additional folder-ID assertion. The final 13-case
+repeat covered readable dates/columns and folder-ID rejection; the final 3-case
+repeat covered long-path wrapping and the empty/failure layout. Safety movement,
+matching, decoding, storage schema and settings persistence were unchanged between
+these runs.
+
+Capture evidence is generated by `tools/capture_task009.py` under
+`docs/design/verification/task009/` (20 PNGs and manifest). It drives real workers,
+explicitly approves only synthetic quarantine, rejects restore plans, and verifies
+the real occupied-destination failure. The history-load failure is injected into
+presentation; it does not claim an actual disk failure. Captures include empty and
+populated history, Settings top/storage, and restore dialogs in Dark/Light at
+1280×800 and 853×480. Native OS folder launching and physical display interaction
+are outside this offscreen run; full English/Serbian switching is deferred to Task012.
+
+Changed Task009 sources: `app/__init__.py`, `app/core/queries.py`,
+`app/services/{application,queries,quarantine}.py`,
+`app/ui/qt/{components,controller,dashboard_scan,quarantine_settings,screens,strings,window,workers}.py`,
+`tests/test_task009.py`, `tools/capture_task009.py`, README, ARCHITECTURE,
+CHANGELOG, TESTING and `task/Task009.md`. Existing working-tree changes were retained.
+
+## Task008 duplicate gallery and comparison (2026-11-09)
+
+Windows 11, Python 3.12.10, PySide6/Fusion/offscreen. Every scan, preview,
+quarantine, restore and collision uses generated files, isolated home/index/journal
+and temporary directories. Microsoft Store Python could not launch inside the
+filesystem sandbox; existing `.venv` execution used the approved external runner.
+No package installation, commit, original-library access or safety-format change.
+
+Task008 changes core `GroupRow`, read-only group queries, Qt `gallery.py` (new),
+`components.py`, `models.py`, `screens.py`, `window.py`, `strings.py`, `controller.py`,
+`workers.py`, `tests/test_task008.py` (new), `tests/test_qt.py`,
+`tests/test_task003_services.py`, `tools/capture_task008.py` (new), the existing
+audit driver's explicit keeper choice, README, ARCHITECTURE, CHANGELOG and this
+document. Pre-existing Task005–007 working-copy changes are retained.
+
+New cases cover actual gallery images, Grid/List and Back context, group expansion
+beyond the search result, 3+ EXACT members, multiple retained photos across pages,
+Keep Both invalidation, no default movement, VISUAL A–B/B–C without A–C inference,
+Enter rejection and collapsed plan details, operation-specific Restore through
+restart and a no-overwrite collision, whole-session group search/numeric sort,
+bounded samples and byte estimates, coalesced requests/stale responses, and
+no-scan/filter/loading/query-error/stale presentation. Existing operations/recovery,
+RAW/XMP/backup guards, stale source/keeper and cancellation assertions are preserved.
+
+```powershell
+$env:QT_QPA_PLATFORM = 'offscreen'
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests -q
+# 160 passed, 2 skipped in 788.46s
+```
+
+This full collection ran before the final photo-first layout, cached Back-context
+adjustments and additional query/state/navigation tests. It skipped the licensed valid RAW asset and native Linux
+race test on Windows; corrupt/undecodable RAW and Windows safety paths ran.
+
+The final affected Qt/service collection and a later navigation race case passed:
+
+```powershell
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_task008.py tests/test_qt.py tests/test_qt_design_system.py tests/test_task003_services.py -x -q
+# 53 passed in 595.22s
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_task008.py::test_late_group_response_does_not_navigate_after_leaving_duplicates -x -q
+# 1 passed in 19.05s
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_task008.py::test_gallery_group_open_images_modes_back_and_explicit_decision tests/test_task008.py::test_late_group_response_does_not_navigate_after_leaving_duplicates -x -q
+# 2 passed in 56.10s after the final opening-intent invalidation changes
+```
+
+The race case was added after the 53-test collection started. It verifies that
+leaving Duplicates cancels an in-flight group-opening intent; an old query response
+cannot navigate the user back. Sorting, filtering, selection, paging and new scans
+also invalidate that opening intent. Concurrent verification runs share host CPU;
+these timings are evidence of execution, not performance benchmarks.
+
+The final keeper-label/reset change was checked at 150% Qt scale:
+
+```powershell
+$env:QT_SCALE_FACTOR = '1.5'
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_qt_design_system.py tests/test_qt.py::test_sidebar_keyboard_and_context_actions_at_small_viewport tests/test_task008.py::test_exact_multiple_keepers_pagination_and_no_default_move -x -q
+# 8 passed in 54.97s
+```
+
+Visual verification used:
+
+```powershell
+.\.venv\Scripts\python.exe -B -m tools.capture_task008 --output .benchmarks/task008-verified
+```
+
+21 local screenshots plus a manifest are in `.benchmarks/task008-verified/`
+(ignored generated evidence; use a new output directory to repeat). Both Dark and
+Light cover Grid/List, comparison, compact unavailable preview and rejected plan
+at 1280×800 and 853×480. The no-session state is also captured. Real images/workers
+are used; the unavailable-state image injects a view error, as documented in the
+manifest. All plans are rejected and the driver verifies unchanged fixture bytes.
+Inspected large/small comparison, grid, confirmation and unavailable screenshots;
+both photos retain proportions and all four comparison captures measured zero
+horizontal overflow. Short windows scroll vertically to actions/member details.
+Initial inspection exposed below-fold photos and an oversized All Groups tile;
+these were corrected. Development tests also exposed Back focus changing scroll
+and a zero-timestamp fixture unsupported by Windows; both were corrected.
+
+Limits: previews/enlargement remain <=2048 px; review decisions last only for the
+current scan/application session. Estimates are cached potential EXACT bytes,
+never an approved plan or space freed by same-disk quarantine. Native Linux,
+licensed valid RAW, physical DPI/display/media, full accessibility acceptance,
+large real-library benchmarks and packaging were not performed in Task008.
+
+## Task007 Dashboard and Scan (2026-11-09)
+
+Windows 11, Python 3.12.10, PySide6 6.12.0, Fusion/offscreen. Photographs, home,
+index, reports and operations remain confined to generated temporary fixtures.
+
+Task007 changes `app/core/queries.py`, `app/services/queries.py`, Qt
+`dashboard_scan.py`, `screens.py`, `window.py`, `controller.py`, `workers.py`,
+`strings.py`, `tests/test_qt.py`, `tests/test_task003_services.py`,
+`tools/capture_task007.py`, README, ARCHITECTURE, CHANGELOG and this document.
+Pre-existing Task005/006 work is retained; no commit or dependency install was made.
+
+Service cases check empty/no-session, one photo, exact pair and 3+ copies,
+whole-index versus latest-session counts, actual group versus candidate counts,
+bounded candidate samples, physical hardlinks, overlapping roots, simulated drives,
+offline roots, stale results and read-only queries. VISUAL bytes never contribute
+to the estimate. Existing approval/recovery/RAW/XMP guarantees remain under the
+regression suite. GUI cases cover the first-scan flow, source availability/order/
+removal, collapsed sections, real thumbnails, viewport bounds, stale thumbnail
+responses, cancelled/failed scans, retry, report failure and no-match completion.
+Failures both during matching and before a session exists keep their details and
+cannot turn an older successful session into a successful new attempt.
+
+```powershell
+$env:QT_QPA_PLATFORM = 'offscreen'
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests -q
+# 153 passed, 2 skipped in 442.61s
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_qt.py -k 'thumbnail_visibility or failure_before_new_session or source_availability_order' -x -q
+# 3 passed, 17 deselected in 49.70s
+$env:QT_SCALE_FACTOR = '1.5'
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_qt.py -k sidebar_keyboard -q
+# 2 passed, 18 deselected in 7.86s
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_qt.py -k 'dashboard_to_scan or thread_ownership or sidebar_keyboard' -q
+# 4 passed, 16 deselected in 21.94s
+```
+
+The full collection skipped the licensed valid RAW fixture and a native Linux
+race test on Windows. It ran before the last presentation-only adjustment moving
+the activity card above sources. The final four Qt tests above ran after that
+adjustment and assert that status/elapsed controls fit the short viewport, as well
+as cancellation, worker ownership, close and keyboard behavior. No service or
+safety code changed after the full collection was launched.
+
+Development runs exposed an obsolete header-title assertion and a new thumbnail
+test checking the replacement cancellation event rather than the in-flight event.
+The extended focused run before correcting that test had 35 passed, 1 failed in
+349.02s. The corrected cancellation assertion passes in the focused run above.
+An initial capture run also retained the generated bad RAW between themes; each
+theme now starts with the same five valid generated photographs.
+
+```powershell
+$env:QT_SCALE_FACTOR = '1'
+.\.venv\Scripts\python.exe -B -m tools.capture_task007 --output .benchmarks/task007-complete-normal --width 1280 --height 720
+$env:QT_SCALE_FACTOR = '1.5'
+.\.venv\Scripts\python.exe -B -m tools.capture_task007 --output .benchmarks/task007-complete-scaled --width 853 --height 480
+```
+
+Both final runs completed: 22 screenshots and five scenario checks each. All 44
+PNG SHA-256 values were verified against their manifests. Inspected empty, active,
+complete, failed and candidate/error detail views in both themes, including the
+short 150% viewport. Status, counts, elapsed time and Cancel remain visible at the
+top while working; other content scrolls. Manifests are in
+`.benchmarks/task007-complete-{normal,scaled}/manifest.json`. `git diff --check`
+passed after the final source/documentation review.
+
+Captures include empty Dashboard/Scan, available sources, actual scan progress,
+completion, candidate thumbnails and metrics, malformed RAW/offline errors,
+on-demand details and a matching fault in both themes. The matching exception is
+explicit fault injection; the worker, persisted failed session, result queries and
+UI failure path are real. All source bytes remain unchanged; workers stop before
+temporary cleanup. Screenshots and manifests are local ignored `.benchmarks`
+artifacts. No native Windows display DPI, Linux display, screen reader, licensed
+valid RAW, actual removable drive or distribution packaging was tested here.
+Full language switching remains Task012; new labels use stable Serbian keys.
+
+Earlier 100%/150% captures found activity below the fold on the short viewport;
+the activity card now moves first during scans and for results. The capture tool
+also allows 50 ms for queued layouts/painting to settle before grabbing wrapped
+labels. A diagnostic three-frame capture confirmed the 48 px two-line status
+height at 150%; no fixed height or truncation was added to the product.
+
+## Task006 shell and navigation (2026-11-09)
+
+Windows 11, Python 3.12.10, PySide6 6.12.0, Fusion/offscreen. All photograph,
+home/index, report and quarantine inputs were synthetic and temporary.
+
+```powershell
+$env:QT_QPA_PLATFORM = 'offscreen'
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests -q
+# 140 passed, 2 skipped, 0 failed in 319.60s
+$env:QT_SCALE_FACTOR = '1.5'
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_qt.py -k sidebar_keyboard -q
+# 2 passed, 12 deselected, 0 failed, 0 skipped in 7.20s
+```
+
+New Qt regressions exercise five named destinations, sidebar Tab/Shift+Tab/Enter,
+toolbar reachability and non-overlapping geometry at 1280x720 and 853x480 logical
+pixels, table Enter and Alt+Left, and at most one dominant action per visible view.
+A six-photo fixture exercises two actual EXACT groups with more than two members,
+nonzero group/result pages, descending sort, text/category filters and selection.
+Dispatch observers confirm opening, leaving, returning and Back issue no service
+queries or preview requests. Plan tests cover navigation during preparation,
+rejection without movement, removing selection, keeper change, cancellation,
+dialog focus restoration and close. Existing thread ownership, heartbeat,
+preview/cache, theme restart, explicit approval and recovery assertions are retained.
+
+The initial focused Qt/design-system run passed 15 tests. Development checks
+exposed a 30s timeout for six decoder processes under parallel load (the scan-only
+helper now waits up to 90s), Qt button-group Tab skipping, and modal focus being
+overridden during hide. The intermediate full run had 139 passed, 1 failed (the
+new modal-focus assertion), 2 skipped. After deferring focus restoration with an
+epoch guard, the isolated extended plan/focus test passed in 44.23s.
+
+The updated capture tool retains its isolated scan/quarantine/restart/restore,
+incomplete-scan refusal and persisted-theme assertions. These two runs completed,
+each with 23 captures and five scenario checks; all 46 PNG hashes matched their
+manifests in the ignored local `.benchmarks/` directory:
+
+```powershell
+$env:QT_SCALE_FACTOR = '1'
+.\.venv\Scripts\python.exe -B -m tools.capture_ux_audit --output .benchmarks/task006-normal --width 1280 --height 720
+$env:QT_SCALE_FACTOR = '1.5'
+.\.venv\Scripts\python.exe -B -m tools.capture_ux_audit --output .benchmarks/task006-scaled --width 853 --height 480
+```
+
+Inspected selected scan/list/comparison/settings captures at both scales and scaled
+dashboard/history. The scaled run renders at DPR 1.5, approximately 1280x720 physical
+pixels. Headers, sidebar and contextual actions remain accessible; the existing
+comparison body can require horizontal/vertical scrolling on the narrow viewport.
+The expected logged `incomplete_scan` exception is the captured safety refusal.
+Both capture runs preceded the final keyboard/focus/selection corrections. This is
+Qt scaling evidence, not a native Windows display-DPI or multi-monitor test.
+Physical DPI, native Linux, licensed valid RAW, screen readers and the full Task011
+matrix remain unverified. No real photograph library or physical drive was used.
+Sandbox launch of Store Python failed; tests/captures used the approved external
+runner against the existing project environment, without dependency installation.
+
+The full run above completed before the final small Qt current-row clearing change.
+That change clears the table's current row along with controller selection, allowing
+the same pair to be selected again after cancellation. The final Qt/design-system
+run below verifies the resulting UI revision, including that extra assertion.
+
+```powershell
+$env:QT_SCALE_FACTOR = '1'
+.\.venv\Scripts\python.exe -B -m pytest -p no:cacheprovider tests/test_qt.py tests/test_qt_design_system.py -q
+# 19 passed, 0 failed, 0 skipped in 200.50s
+git diff --check
+# passed
+```
+
+The full run's two skips are the licensed valid RAW fixture (unavailable) and native
+Linux execution (Windows host). Corrupt RAW is covered. Final diff review found
+changes only in Qt presentation/navigation, its tests/capture helper and docs;
+no backend, schema, decoder, journal or Tk changes.
+
 ## Task005 design system (2026-11-09)
 
 Windows 11, Python 3.12.10, Qt 6.12.0, Fusion/offscreen. Only temporary synthetic

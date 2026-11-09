@@ -65,6 +65,9 @@ def stylesheet(colors: dict[str, str]) -> str:
         QLineEdit { placeholder-text-color: %(secondary_text)s; }
         QPushButton { font-weight: 600; }
         QPushButton:hover, QPushButton:pressed { background: %(hover)s; }
+        QPushButton[navigation="true"] { text-align: left; padding: 10px 8px; }
+        QPushButton[navigation="true"]:checked { background: %(selection)s; color: %(text)s; }
+        QPushButton[choice="true"]:checked { background: %(selection)s; color: %(text)s; }
         QPushButton[variant="primary"] { background: %(primary)s; color: %(on_primary)s; border-color: %(primary)s; }
         QPushButton[variant="primary"]:hover, QPushButton[variant="primary"]:pressed {
             background: %(primary_hover)s; border-color: %(primary_hover)s;

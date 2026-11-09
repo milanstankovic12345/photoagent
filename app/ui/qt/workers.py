@@ -47,8 +47,8 @@ class ServiceWorker(QObject):
             elif action == 'scan':
                 value = self.service.scan_with_report(payload, None, cancel, progress=self.progress.emit)
             elif action == 'prepare':
-                pair, session = payload
-                value = self.service.prepare([pair], cancel, session=session)
+                pairs, session = payload
+                value = self.service.prepare(pairs, cancel, session=session)
             elif action == 'bulk':
                 value = self.service.prepare_session(payload, cancel)
             elif action == 'restore':
@@ -72,6 +72,12 @@ class ServiceWorker(QObject):
                 value = self.service.dashboard(payload)
             elif action == 'history':
                 value = self.service.history(payload)
+            elif action == 'history_preview':
+                value = (payload, self.service.history_preview(payload, cancel))
+            elif action == 'quarantine_folder':
+                value = (payload, self.service.quarantine_folder(payload))
+            elif action == 'storage':
+                value = self.service.storage_summary()
             else:
                 raise ValueError('unknown_action')
             self.result.emit(request, action, frozen(value))
@@ -92,7 +98,10 @@ class ServiceWorker(QObject):
 
 class PreviewWorker(QObject):
     result = Signal(int, object)
+    thumbnails = Signal(int, object)
     stopped = Signal()
+    preview_finished = Signal()
+    thumbnails_finished = Signal()
 
     def __init__(self) -> None:
         super().__init__()
@@ -100,6 +109,12 @@ class PreviewWorker(QObject):
 
     @Slot(int, object, object)
     def run(self, request: int, pair: Match, cancel: Event) -> None:
+        try:
+            self._run(request, pair, cancel)
+        finally:
+            self.preview_finished.emit()
+
+    def _run(self, request: int, pair: Match, cancel: Event) -> None:
         images = []
         for photo in (pair.keep, pair.dup):
             if cancel.is_set():
@@ -118,3 +133,25 @@ class PreviewWorker(QObject):
     def close(self) -> None:
         self.service.cache.clear()
         self.stopped.emit()
+
+    @Slot(int, object, object)
+    def run_thumbnails(self, request: int, photos: tuple, cancel: Event) -> None:
+        try:
+            self._run_thumbnails(request, photos, cancel)
+        finally:
+            self.thumbnails_finished.emit()
+
+    def _run_thumbnails(self, request: int, photos: tuple, cancel: Event) -> None:
+        images = []
+        for photo in photos[:3]:
+            if cancel.is_set():
+                return
+            try:
+                images.append((photo, self.service.get(photo, cancel, size=320), ''))
+            except Cancelled:
+                return
+            except Exception as exc:
+                log.warning('qt_thumbnail_failed', extra={'path': photo.path, 'reason': str(exc)})
+                images.append((photo, None, str(exc)))
+        if not cancel.is_set():
+            self.thumbnails.emit(request, tuple(images))

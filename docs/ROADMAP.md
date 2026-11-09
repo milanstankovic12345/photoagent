@@ -13,6 +13,12 @@ full localization and packaging remain open. Priorities follow
 [AGENTS.md](../AGENTS.md); finding IDs refer to [the audit](REVERSE_ENGINEERING.md).
 Each change must remain independently reviewable and preserve stronger existing checks.
 
+Task010 adds Qt accessibility fixes and a 291-key translation-intent inventory,
+with isolated keyboard journeys and offscreen Dark/Light scaling evidence. See
+[accessibility contracts](design/ACCESSIBILITY.md) and [executed checks](TESTING.md).
+It does not close the native assistive-technology/platform gate, Task011's complete
+redesign review, or L1/Task012's full localization and runtime language switching.
+
 ## Prioritized backlog and dependencies
 
 Dependencies are task IDs. T1's initial harness precedes safety changes; its broader

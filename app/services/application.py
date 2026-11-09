@@ -10,7 +10,10 @@ from queue import Queue
 import sqlite3
 from tempfile import TemporaryDirectory
 from threading import Event
-from typing import Callable, Iterable
+from typing import TYPE_CHECKING, Callable, Iterable
+
+if TYPE_CHECKING:
+    from PySide6.QtGui import QImage
 
 from app.core.models import Approval, Cancelled, Match, Plan, SafetyError, ScanSummary
 from app.safety.journal import Journal
@@ -22,7 +25,7 @@ from app.services.indexing import indexed_scan
 from app.services.reports import make_report
 from app.services.state import load_state, save_state, validated_settings
 from app.core.queries import (DashboardSummary, GroupRow, HistoryEntry, MatchRow, MatchingOptions,
-                              MatchQuery, PageResult, ScanProgress)
+                              MatchQuery, PageResult, ScanProgress, StorageSummary)
 from app.storage.index import Index, PAGE_SIZE
 
 log = logging.getLogger(__name__)
@@ -205,6 +208,22 @@ class Application:
     def history(self, query: MatchQuery = MatchQuery(sort='time', descending=True)) -> PageResult[HistoryEntry]:
         from app.services.queries import history
         return history(self.journal, query)
+
+    def history_preview(self, operation_id: str, cancel: Event) -> QImage:
+        from app.services.quarantine import quarantine_photo
+        from app.services.preview import PreviewService
+        photo = quarantine_photo(self.journal, operation_id, cancel)
+        # Small, uncached history thumbnails do not add another persistent cache.
+        return PreviewService(limit=0).get(photo, cancel, size=320)
+
+    def quarantine_folder(self, operation_id: str) -> str:
+        from app.services.quarantine import quarantine_folder
+        return str(quarantine_folder(self.journal, operation_id))
+
+    def storage_summary(self) -> StorageSummary:
+        return StorageSummary(str(self.index.path), self.index.db.execute(
+            "SELECT count(*) FROM (SELECT device,inode FROM photo_files "
+            "WHERE state NOT IN ('missing','moved') GROUP BY device,inode)").fetchone()[0])
 
     def execute(self, plan: Plan, approval: Approval, cancel: Event) -> tuple[str, ...]:
         try:

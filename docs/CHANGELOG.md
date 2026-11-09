@@ -1,5 +1,90 @@
 # Changelog
 
+## Task010 — Accessibility and translation preparation — 2026-11-09
+
+- Inventoried Qt/shared text keys with English intentions for Task012, preserving
+  Serbian display, shared resources and language validation. Unknown translation
+  keys and formatting failures now produce a readable fallback.
+- Centralized readable action/error copy. Raw diagnostics remain in collapsed,
+  selectable plain-text details rather than normal messages or thumbnail tooltips.
+- Defined page keyboard order, named source/filter/progress/preview controls and
+  text-based choices. Fixed keyboard entry into the group gallery's hidden row
+  and initial Cancel focus after asynchronous confirmation opening.
+- Wrapped long paths and preview controls; narrow comparisons stack vertically.
+  Added explicit enlarged-preview Close and focus return. Approval/RAW/legacy
+  checks and visible warnings remain mandatory; safety services are unchanged.
+- Kept hidden gallery/dashboard refreshes from cancelling the visible page's
+  thumbnail batch, discovered by the existing end-to-end Dashboard regression.
+- Added synthetic keyboard, accessibility API, rendered state and fallback tests,
+  plus a real Qt scale-factor capture driver. Native assistive technologies and
+  physical-display DPI behavior remain outside the offscreen verification.
+
+## Task009 — Quarantine and Settings — 2026-11-09
+
+- Replaced the technical history table with original names/locations, manifest move
+  dates and sizes, readable states and selected-file previews. Missing dates stay
+  unavailable; previews validate the current quarantine destination, never old source.
+- Bound selection, restore preparation and per-root folder opening to operation IDs.
+  Empty/load-failure states and no-overwrite errors remain explicit; optional thumbnail
+  failure does not block history or authorize a different operation.
+- Grouped Settings into Appearance, Language, Scanning, Similarity Detection, Safety,
+  Storage and About. Shared theme control persists immediately. Added documented
+  Strict 2/3, Balanced 4/6 and Broader 8/10 choices with preserved Custom thresholds,
+  existing source order, unknown keys and legacy history. Language remains Serbian Latin.
+- Reported the actual active index path/physical-file count and explained the memory
+  cache budget, offline behavior and version. Journal, matcher, schema and movement
+  safety checks are unchanged. Added synthetic service/Qt tests and capture driver.
+
+## Task008 — Duplicate gallery and integrated comparison — 2026-11-09
+
+- Added bounded Qt Grid/List group cards with actual thumbnails, full-session
+  search/sort, supported Exact/Similar filters, member counts, session-only review
+  decisions and physical EXACT byte estimates. Unsupported classifications are hidden.
+- Put fitted photos first, with readable size/format/dimensions, explicit retain
+  choices, collapsed details, bounded enlarged previews, and paginated direct members.
+  Back restores the listing query/page/selection/scroll. EXACT allows multiple
+  retained versions; VISUAL never infers a transitive match. Keep Both cancels proposals.
+- Kept Plan/Approval execution and all fresh verification. Confirmation separates
+  source/keeper/destination from technical details, keeps contextual warnings and
+  RAW/legacy consent visible, and prevents Enter approval. Single-move Restore uses
+  the completed operation ID and a new preparation/confirmation. Errors never report success.
+- Coalesced stale preview/thumbnail work and added synthetic UI/service/restart
+  coverage plus a repeatable dark/light capture tool. Safety, decoder, matcher,
+  schema, recovery formats and original photographs are unchanged.
+
+## Task007 — Dashboard and Scan — 2026-11-09
+
+- Added four Dashboard statistic cards, a recent-session summary, first-scan and
+  completed-without-matches states, theme/settings controls and direct review links.
+  At most three actual candidates show classification, format, dimensions and
+  asynchronous thumbnails, requested only for visible cards with stale-response guards.
+- Extended the compatible read-only dashboard contract with session photo count,
+  actual EXACT group count, finished time and bounded candidate rows. Whole-index
+  counts remain distinct from session candidates/links. Estimated bytes exclude
+  retained physical files, hardlink aliases and VISUAL guesses.
+- Added readable sources and availability, collapsed priority/error controls,
+  pre-scan source checks, actual progress counts and elapsed time, cancellation,
+  state-specific completion and Review Results. CSV failures remain secondary to
+  successful scans. Incomplete/failed/cancelled sessions retain operation restrictions.
+- Added synthetic service/UI coverage and a repeatable dark/light capture tool.
+  Matching, RAW extraction, schema, journal and operation verification are unchanged.
+
+## Task006 — Qt shell and navigation — 2026-11-09
+
+- Replaced six peer pages with five named destinations and a persistent comparison
+  view inside Duplicates. Back/Alt+Left preserves the group, query, pages and selection
+  without new service requests; Enter/double-click opens comparison.
+- Added a 208 px sidebar with distinct local Qt icons, Settings at the bottom,
+  one shared title/purpose header, wrapping contextual actions and explicit Tab order.
+  Main actions remain above scrollable content; each view has at most one dominant action.
+- Reject stale plans on navigation and keeper/selection changes; preserve explicit
+  approval, cancellation, worker-owned SQLite and asynchronous close. Restore focus
+  after plan dialogs and stop debounced search on scan/close.
+- Added navigation/state/focus/viewport regression coverage and adapted the existing
+  synthetic capture tool to named routes and configurable viewport dimensions.
+  Backend services and Tk fallback are unchanged; physical DPI/Linux/full Task011
+  accessibility acceptance remain open.
+
 ## Task005 — Qt design system — 2026-11-09
 
 - Extended Dark/Light themes with semantic colors, readable action text, stable

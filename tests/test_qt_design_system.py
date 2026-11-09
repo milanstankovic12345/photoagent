@@ -114,7 +114,9 @@ def test_photo_loading_unavailable_ready_and_reset(qtapp, scanned):
         assert not any(w.isEnabled() for w in view.preview_buttons)
         view.set_image(None, '<decode failed>')
         assert view.state == 'preview_error'
-        assert '<decode failed>' in view.placeholder.text()
+        assert view.placeholder.text() == tr('preview_error')
+        assert view.error_details.text.toPlainText() == '<decode failed>'
+        assert view.error_details.body.isHidden()
         assert view.placeholder.textFormat() == Qt.PlainText
         assert view.preview.currentWidget() is view.placeholder
         image = QImage(32, 24, QImage.Format_RGB32)

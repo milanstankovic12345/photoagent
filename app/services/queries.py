@@ -54,11 +54,24 @@ def groups(index: Index, session: str, query: MatchQuery) -> PageResult[GroupRow
     base = JOIN + where + ' GROUP BY m.kind,m.keeper'
     total = index.db.execute('SELECT count(*) FROM (SELECT m.keeper ' + base + ')', values).fetchone()[0]
     order = _sort(index, 'k', query.sort) + (' DESC' if query.descending else ' ASC') + ',m.kind,m.keeper'
-    rows = index.db.execute('''SELECT m.keeper,m.kind,k.path,
+    rows = index.db.execute('''SELECT m.keeper,m.kind,k.path,k.photo,
         (SELECT count(*)+1 FROM match_results a WHERE a.session_id=m.session_id
-         AND a.kind=m.kind AND a.keeper=m.keeper) AS n ''' + base
+         AND a.kind=m.kind AND a.keeper=m.keeper) AS n,
+        (SELECT e.photo FROM match_results a JOIN scan_entries e ON e.id=a.duplicate
+         WHERE a.session_id=m.session_id AND a.kind=m.kind AND a.keeper=m.keeper
+         ORDER BY a.id LIMIT 1) AS sample,
+        (SELECT coalesce(sum(size),0) FROM (
+            SELECT max(e.size) AS size FROM match_results a
+            JOIN scan_entries e ON e.id=a.duplicate
+            WHERE a.session_id=m.session_id AND a.kind='EXACT' AND a.keeper=m.keeper
+            AND e.device IS NOT NULL AND e.inode IS NOT NULL
+            AND NOT EXISTS (SELECT 1 FROM match_results b JOIN scan_entries kept ON kept.id=b.keeper
+                WHERE b.session_id=a.session_id AND kept.device=e.device AND kept.inode=e.inode)
+            GROUP BY e.device,e.inode)) AS space ''' + base
         + ' ORDER BY ' + order + ' LIMIT ? OFFSET ?', [*values, query.limit, query.offset])
-    return PageResult(tuple(GroupRow(r[0], r[1], r[2], r[3]) for r in rows), total, query.offset)
+    return PageResult(tuple(GroupRow(r['keeper'], r['kind'], r['path'], r['n'],
+        tuple(decode_photo(p) for p in (r['photo'], r['sample']) if p),
+        r['space'] if r['kind'] == 'EXACT' else None) for r in rows), total, query.offset)
 
 
 def dashboard(index: Index, session: str | None, warning: str) -> DashboardSummary:
@@ -70,10 +83,14 @@ def dashboard(index: Index, session: str | None, warning: str) -> DashboardSumma
         return DashboardSummary(indexed, warnings=(warning,) if warning else ())
     session = row['id']
     counts = dict(db.execute('SELECT kind,count(*) FROM match_results WHERE session_id=? GROUP BY kind', (session,)))
-    space = db.execute('''SELECT coalesce(sum(size),0) FROM (SELECT d.device,d.inode,max(d.size) AS size
-        FROM match_results m JOIN scan_entries d ON d.id=m.duplicate WHERE m.session_id=? AND m.kind='EXACT'
-        AND NOT EXISTS(SELECT 1 FROM match_results k WHERE k.session_id=m.session_id AND k.keeper=d.id)
-        GROUP BY d.device,d.inode)''', (session,)).fetchone()[0]
+    space = db.execute('''WITH retained AS (
+        SELECT DISTINCT e.device,e.inode FROM match_results m JOIN scan_entries e ON e.id=m.keeper
+        WHERE m.session_id=?)
+        SELECT coalesce(sum(size),0) FROM (SELECT d.device,d.inode,max(d.size) AS size
+        FROM match_results m JOIN scan_entries d ON d.id=m.duplicate
+        LEFT JOIN retained k ON k.device=d.device AND k.inode=d.inode
+        WHERE m.session_id=? AND m.kind='EXACT' AND d.device IS NOT NULL AND d.inode IS NOT NULL
+        AND k.device IS NULL GROUP BY d.device,d.inode)''', (session, session)).fetchone()[0]
     errors = db.execute("SELECT count(*) FROM scan_entries WHERE session_id=? AND error<>''", (session,)).fetchone()[0]
     roots = tuple(tuple(r) for r in db.execute('SELECT path,state FROM scan_session_roots WHERE session_id=? ORDER BY position', (session,)))
     warnings = [warning] if warning else []
@@ -81,8 +98,12 @@ def dashboard(index: Index, session: str | None, warning: str) -> DashboardSumma
         warnings.append('scan_review_only')
     if db.execute("SELECT 1 FROM scan_entries e JOIN photo_files f ON f.id=e.file_id WHERE e.session_id=? AND (f.state<>'present' OR f.sha256<>e.sha256) LIMIT 1", (session,)).fetchone():
         warnings.append('stale_results')
+    photos = db.execute('SELECT count(photo) FROM scan_entries WHERE session_id=?', (session,)).fetchone()[0]
+    exact_groups = groups(index, session, MatchQuery(kind='EXACT', limit=1)).total
+    candidates = matches(index, session, MatchQuery(limit=3)).items
     return DashboardSummary(indexed, session, row['state'], row['started'], counts.get('EXACT', 0),
-                            counts.get('VISUAL', 0), space, errors, roots, tuple(warnings))
+                            counts.get('VISUAL', 0), space, errors, roots, tuple(warnings),
+                            photos, exact_groups, row['finished'] or 0, candidates)
 
 
 def history(journal: Journal, query: MatchQuery) -> PageResult[HistoryEntry]:
@@ -100,6 +121,13 @@ def history(journal: Journal, query: MatchQuery) -> PageResult[HistoryEntry]:
         eligible = r['id'] not in restored and (r['state'] == 'legacy' or
                    r['state'] == 'complete' and move.get('action') == 'quarantine')
         detail = '\n'.join(t['detail'] for t in r['transitions'] if t.get('detail'))
-        entries.append(HistoryEntry(r['id'], event['at'], source, destination, r['state'], detail, eligible))
+        # Recovery's "reconciled" timestamp describes discovery after a crash,
+        # not the actual move. Legacy import time is likewise not a move date.
+        complete = next((t for t in r['transitions'] if t['state'] == 'complete'), None)
+        moved_at = (complete['at'] if move.get('action') == 'quarantine' and complete
+                    and complete.get('detail') != 'reconciled' else None)
+        entries.append(HistoryEntry(r['id'], event['at'], source, destination, r['state'], detail, eligible,
+                                    moved_at, move.get('expected', {}).get('size'),
+                                    move.get('action', 'quarantine'), r['id'] in restored))
     entries.sort(key=lambda e: (e.at, e.id), reverse=query.descending)
     return PageResult(tuple(entries[query.offset:query.offset + query.limit]), len(entries), query.offset)

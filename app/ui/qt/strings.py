@@ -1,7 +1,104 @@
 """Stable keys for the Serbian v2.4 interface; language selection follows later."""
-from app.i18n import tr as core_tr
+import logging
+
+from app.i18n import STRINGS
+
+log = logging.getLogger(__name__)
 
 SR = {
+    'quarantine_description': 'Fotografije u karantinu možete vratiti na izvornu lokaciju. Izaberite zapis i pregledajte plan pre potvrde.',
+    'quarantine_empty': 'Vaš karantin je prazan',
+    'quarantine_empty_detail': 'Ovde će se pojaviti istorija pomeranja. Fotografije premeštene u karantin mogu se vratiti kroz potvrđen plan.',
+    'open_quarantine_folder': 'Otvori folder karantina',
+    'original_location': 'Izvorna lokacija', 'moved_at': 'Datum premeštanja',
+    'not_available': 'Nije dostupno',
+    'history_selection': 'Operacija: {0}\nIzvor: {1}\nOdredište: {2}\nMože u pripremu vraćanja: {3}. Servis ponovo proverava fajl i odredište.',
+    'history_load_failed': 'Istorija nije dostupna. Vraćanje je onemogućeno. Proverite tehničke detalje.',
+    'state_restored': 'Vraćanje zabeleženo', 'state_not_moved': 'Nije pomereno',
+    'action_quarantine': 'Karantin', 'action_restore': 'Vraćanje',
+    'quarantine_preview_unavailable': 'Nema proverljivog fajla u karantinu za ovaj zapis.',
+    'quarantine_content_changed': 'Fajl u karantinu više ne odgovara zabeleženom identitetu i sadržaju.',
+    'quarantine_folder_unavailable': 'Folder karantina trenutno nije dostupan. Proverite vezu sa diskom.',
+    'folder_open_failed': 'Sistem nije uspeo da otvori izabrani folder karantina.',
+    'settings_appearance': 'Izgled', 'settings_appearance_detail': 'Tema je zajednička za sve stranice i dijaloge. Promena se odmah čuva.',
+    'settings_language': 'Jezik',
+    'settings_scanning': 'Skeniranje', 'edit_sources': 'Uredi izvore skeniranja',
+    'settings_source': '{0}. {1}',
+    'settings_similarity': 'Prepoznavanje sličnosti',
+    'matching_explanation': 'Pragovi služe pretrazi VISUAL kandidata; sličnost nije dokaz duplikata. Veći pragovi mogu uključiti druge kadrove i obrade. Sačuvajte izbor za naredno skeniranje. Preseti nisu kvalitativno kalibrisani.',
+    'matching_strict': 'Strogo (Strict)', 'matching_balanced': 'Uravnoteženo (Balanced)',
+    'matching_broader': 'Šira pretraga (Broader Search)', 'matching_custom': 'Prilagođeno (Custom / Advanced)',
+    'matching_strict_detail': 'pHash 2 / dHash 3 · uža pretraga može propustiti kandidate; lažna podudaranja su i dalje moguća.',
+    'matching_balanced_detail': 'pHash 4 / dHash 6 · postojeće podrazumevane vrednosti; svi VISUAL kandidati zahtevaju pregled.',
+    'matching_broader_detail': 'pHash 8 / dHash 10 · šira pretraga može dati više lažnih kandidata; potreban je pažljiv pregled.',
+    'matching_custom_detail': 'Vaši pragovi ostaju sačuvani. Napredne vrednosti 0–64 mogu povećati broj lažnih kandidata; nisu ocena kvaliteta.',
+    'settings_safety': 'Bezbednost',
+    'settings_safety_detail': 'Karantin je povratno pomeranje unutar izvornog korena. Svako pomeranje zahteva pripremu i potvrdu. Dnevnik podržava oporavak posle ponovnog pokretanja. Ne pomerajte ručno fajlove i ne brišite recovery podatke.',
+    'settings_storage': 'Skladištenje',
+    'preview_cache_detail': 'Preview LRU keš drži do 64 MiB dekodiranih slika u memoriji tokom rada. To nije prostor na disku niti izmerena trenutna zauzetost. Pojedinačni pregled može kratkotrajno zauzeti dodatnu memoriju; sličice istorije se ne keširaju. Recovery podaci su odvojeni i trajni.',
+    'storage_loading': 'Učitavanje podataka lokalnog indeksa…',
+    'storage_info': 'Aktivni indeks: {0}\nIndeksirane fotografije: {1} (fizički fajlovi, bez označenih nestalih i premeštenih; nedostupni diskovi ostaju zabeleženi).',
+    'storage_failed': 'Podaci o indeksu nisu dostupni. Proverite tehničke detalje.',
+    'settings_about': 'O aplikaciji', 'app_version': 'PhotoAgent · verzija {0}',
+    'offline_detail': 'PhotoAgent radi lokalno i bez interneta. Nema cloud servisa, naloga, telemetrije ni spoljnih AI API-ja.',
+    'duplicate_photos': 'Duplikati fotografija',
+    'filter_EXACT': 'Identične kopije', 'filter_VISUAL': 'Slične fotografije',
+    'sort': 'Sortiranje', 'grid': 'Mreža', 'list': 'Lista', 'view_mode': 'Način prikaza',
+    'sort_asc': 'Rastuće ↑', 'sort_desc': 'Opadajuće ↓',
+    'group_summary': '{0} fotografija · {1}', 'group_space': 'Moguća EXACT ušteda: {0}',
+    'needs_review': 'Čeka pregled', 'review_progress': 'Pregledanih veza: {0}',
+    'reviewed': 'Pregledano u ovoj sesiji',
+    'review_session_only': 'Odluke pregleda važe samo do zatvaranja aplikacije ili novog skeniranja; nisu dnevnik operacija.',
+    'query_loading': 'Učitavanje rezultata…', 'query_error': 'Rezultati nisu dostupni. Pokušajte ponovo ili otvorite tehničke detalje.',
+    'choose_keeper': 'Izaberite fotografiju koja ostaje. Pomeranje zahteva zasebnu potvrdu.',
+    'review_advice': 'Zadržite vredne verzije. Sličnost zahteva ručni pregled; karantin traži zasebnu potvrdu.',
+    'fit_short': 'Uklopi',
+    'direct_members': 'Direktni kandidati grupe · stranice',
+    'member_count': 'Fotografije u direktnoj grupi: {0} · pregled članova',
+    'keep_photo': 'Sačuvaj ovu fotografiju', 'keep_both': 'Sačuvaj obe',
+    'keep_chosen': 'Ostaje · izabrano',
+    'move_copy': 'Premesti u karantin', 'restore_operation': 'Vrati fotografiju',
+    'selection_summary': 'Predlog za karantin: {0} · izričito zadržano: {1}',
+    'selection_limit': 'Pregledajte najviše 200 fotografija po planu. Završite ili poništite izbor.',
+    'both_kept': 'Obe fotografije ostaju. Predlog za karantin je poništen.',
+    'photo_summary': '{0}\n{1} · {2} × {3} px · {4}',
+    'photo_details': 'Detalji fotografije', 'enlarge_preview': 'Uvećani pregled',
+    'photo_retained': 'Ostaje', 'photo_proposed': 'Predlog za karantin',
+    'technical_details': 'Tehnički detalji',
+    'plan_summary': 'Potvrda · fotografija za pomeranje: {0}',
+    'plan_reversible': 'Karantin je povratno pomeranje. Vraćanje prolazi novu pripremu i potvrdu; postojeći fajl se nikada ne prepisuje.',
+    'move_summary': 'IZVOR: {0}\nODREDIŠTE: {1}\nOSTAJE: {2}',
+    'restore_original': 'Vraćanje na izvornu lokaciju',
+    'operation_count': 'Uspešno pomereno fotografija: {0}. Rezultati i istorija se osvežavaju.',
+    'dashboard_title': 'PhotoAgent', 'scan_photos': 'Skeniraj fotografije',
+    'indexed_photos': 'Indeksirane fotografije', 'whole_index': 'Ceo lokalni indeks · fizički fajlovi',
+    'exact_candidates': 'EXACT kandidati', 'last_session_candidates': 'Poslednja sesija · broj direktnih kandidata',
+    'visual_links': 'Vizuelna podudaranja', 'last_session_links': 'Poslednja sesija · direktne VISUAL veze',
+    'estimated_space': 'Procenjena ušteda', 'exact_space_detail': 'Samo jedinstvene fizičke EXACT kopije, bez sačuvanih originala',
+    'first_scan': 'Pokreni prvo skeniranje',
+    'first_scan_detail': 'Dodajte foldere ili diskove. PhotoAgent lokalno traži podudaranja i čuva originale.',
+    'recent_scan': 'Poslednje skeniranje',
+    'recent_scan_summary': '{0} · {1}\nObrađene fotografije: {2} · EXACT kandidati: {3} · VISUAL veze: {4} · Neuspesi: {5}',
+    'recent_candidates': 'Kandidati za pregled', 'review_duplicates': 'Pregledaj duplikate',
+    'review_results': 'Pregledaj rezultate', 'review_candidate': 'Pregledaj kandidata',
+    'candidate_metadata': '{0} · {1} × {2} px',
+    'classification_EXACT': 'EXACT · identični bajtovi',
+    'classification_VISUAL': 'VISUAL · sličnost zahteva pregled',
+    'thumbnail_unavailable': 'Sličica nije dostupna', 'thumbnail_for': 'Sličica: {0}',
+    'no_matches': 'Skeniranje je završeno bez podudaranja.',
+    'no_matches_detail': 'Možete dodati još izvora ili pokrenuti novo skeniranje.',
+    'scan_sources': 'Folderi i diskovi',
+    'source_description': 'Dodajte izvore redom kojim želite da se pregledaju. Originali se ne menjaju.',
+    'empty_sources': 'Još nema izvora. Dodajte prvi folder da biste započeli.',
+    'advanced_sources': 'Napredno · prioritet izvora',
+    'source_priority': 'Redosled izvora utiče na izbor fotografije koja se čuva. Izaberite izvor i pomerite ga gore ili dole. Kopije na drugom disku mogu biti namerna rezerva.',
+    'remove_source': 'Ukloni izvor: {0}', 'checking_source': 'Dostupnost još nije proverena',
+    'checking_sources': 'Provera dostupnosti izvora…', 'elapsed': 'Proteklo vreme: {0} s',
+    'scan_ready': 'Izaberite izvore, pa pokrenite skeniranje.',
+    'scan_result_summary': '{0}\nFotografije: {1} · EXACT grupe: {2} · Moguće VISUAL veze: {3} · Neuspesi: {4}',
+    'no_scan_errors': 'Nema prijavljenih grešaka.', 'scan_error_count': 'Prijavljeni neuspesi: {0}. Detalji su dostupni ispod.',
+    'scan_failed': 'Skeniranje nije uspelo.',
+    'scan_failure_help': 'Proverite dostupnost izvora i slobodan prostor za lokalni indeks, pa pokušajte ponovo. Detalji su dostupni ispod.',
     'preview_loading': 'Učitavanje pregleda…',
     'section_expanded': 'Proširena sekcija', 'section_collapsed': 'Skupljena sekcija',
     'design_system': 'Zajedničke komponente',
@@ -9,6 +106,14 @@ SR = {
     'title': 'PhotoAgent · lokalni pregled fotografija',
     'dashboard': 'Pregled', 'scan': 'Skeniranje', 'duplicates': 'Duplikati',
     'compare': 'Poređenje', 'history': 'Karantin i vraćanje', 'settings': 'Podešavanja',
+    'navigation': 'Glavna navigacija', 'page_actions': 'Radnje stranice',
+    'back_to_group': 'Nazad na grupu', 'keeper': 'Fotografija koja se čuva',
+    'dashboard_purpose': 'Stanje lokalne kolekcije i poslednjeg skeniranja.',
+    'scan_purpose': 'Izaberite izvore i skenirajte fotografije bez menjanja originala.',
+    'duplicates_purpose': 'Pregledajte grupe i direktne kandidate. Odluke pregleda važe samo u ovoj sesiji.',
+    'compare_purpose': 'Pregledajte par i izaberite fotografiju koju želite da sačuvate.',
+    'history_purpose': 'Pregledajte istoriju karantina i pripremite bezbedno vraćanje.',
+    'settings_purpose': 'Podesite izgled i osetljivost narednog skeniranja.',
     'add': 'Dodaj folder', 'remove': 'Ukloni', 'up': 'Gore', 'down': 'Dole',
     'start': 'Pokreni skeniranje', 'cancel': 'Odustani', 'reports': 'Folder izveštaja',
     'previous': 'Prethodna', 'next': 'Sledeća', 'all': 'Sve kategorije',
@@ -16,7 +121,7 @@ SR = {
     'format': 'Format', 'size': 'Bajtova', 'dimensions': 'Dimenzije', 'path': 'Lokacija',
     'selected_move': 'Pripremi karantin izabranog para',
     'bulk_move': 'Pripremi sve podobne EXACT kopije cele sesije',
-    'restore': 'Pripremi vraćanje izabranog reda', 'refresh': 'Osveži',
+    'restore': 'Vrati fotografiju', 'refresh': 'Osveži',
     'empty': 'Nema rezultata za ovaj upit.',
     'unimplemented': 'Ova kategorija još nema prepoznavanje. Dostupne su EXACT i VISUAL veze.',
     'page': 'Redovi {0}–{1} od {2}', 'groups': 'Direktne grupe (keeper + kandidati)',
@@ -45,13 +150,13 @@ SR = {
     'legacy_confirm': 'Potvrđujem vraćanje sadašnjih bajtova iz stare istorije.',
     'no_plan': 'Nema podobnih kandidata. Grupno su dozvoljeni samo dekodirani EXACT parovi u istom korenu, bez RAW i XMP.',
     'error': 'Radnja nije završena. Proverite detalje i ponovite kada otklonite uzrok.',
-    'preview_error': 'Pregled nije dostupan: {0}', 'busy': 'Obrada je u toku…',
+    'preview_error': 'Pregled nije dostupan', 'busy': 'Obrada je u toku…',
     'closing': 'Čekam bezbedan završetak poslova…', 'ready': 'Spremno.',
     'scan_done': 'Skeniranje: {0} · fotografije: {1} · parovi: {2} · greške: {3}',
     'progress': '{0} · otkriveno: {1} · obrađeno: {2} · preskočeno: {3} · neuspešno: {4}',
     'phase_scan': 'Analiza', 'phase_matching': 'Poređenje',
     'phase_complete': 'Završeno', 'phase_incomplete': 'Nepotpuno', 'phase_cancelled': 'Otkazano',
-    'report_error': 'Skeniranje je sačuvano, ali CSV izveštaj nije napravljen: {0}',
+    'report_error': 'Skeniranje je sačuvano, ali CSV izveštaj nije napravljen. Proverite tehničke detalje.',
     'report_saved': 'CSV izveštaj: {0}', 'errors': 'Greške skeniranja',
     'dashboard_counts': 'Indeksirane fotografije: {0}\nEXACT kandidati: {1}\nDirektne VISUAL veze: {2}\nPotencijalne suvišne EXACT kopije: {3} B',
     'estimate': 'Procena nije odobren plan. Karantin na istom disku ne oslobađa prostor.',
@@ -76,11 +181,45 @@ SR = {
     'empty_plan': 'Nema podobnih operacija u planu.',
     'unavailable_source': 'Jedan ili više izvora trenutno nisu dostupni. Proverite vezu sa diskom.',
     'action_cancelled': 'Radnja je otkazana. Dnevnik prethodnih operacija je sačuvan.',
+    'message_unavailable': 'Poruka nije dostupna. Otvorite tehničke detalje ili pokušajte ponovo.',
+    'category_filter': 'Filtriraj po kategoriji',
+    'sort_direction': 'Promeni smer sortiranja',
+    'keyboard_groups': 'Strelicama izaberite grupu, a tasterom Enter otvorite poređenje.',
+    'keyboard_pairs': 'Strelicama izaberite par, a tasterom Enter otvorite poređenje.',
+    'keyboard_sources': 'Strelicama izaberite izvor. U naprednoj sekciji promenite njegov prioritet.',
+    'keyboard_history': 'Strelicama izaberite fotografiju, pa izaberite Vrati fotografiju za pregled plana.',
+    'selected_group': 'Izabrano · {0}',
+    'left_preview': 'Pregled leve fotografije', 'right_preview': 'Pregled desne fotografije',
+    'keep_named_photo': 'Sačuvaj ovu fotografiju: {0}',
+    'keep_description': 'Izbor samo priprema predlog. Fotografija se pomera tek posle pregleda i potvrde plana.',
+    'quarantine_description_action': 'Otvara pregled plana. Pomeranje zahteva zasebnu izričitu potvrdu.',
+    'restore_description_action': 'Otvara plan vraćanja izabrane fotografije. Postojeći fajl se nikada ne prepisuje.',
+    'plan_paths': 'Fotografije i lokacije u planu',
+    'plan_warnings': 'Važna upozorenja',
+    'scan_progress_name': 'Napredak skeniranja',
+    'close_preview': 'Zatvori pregled',
+    'close': 'Zatvori',
+    'hide_details': 'Sakrij tehničke detalje',
 }
 
 
 def tr(key: str, *args) -> str:
-    value = SR.get(key)
+    """Retain the shared SR/EN fallback, never expose an unknown technical key.
+
+    English intents live in documentation until Task012; this is still Serbian UI.
+    Formatting mistakes degrade to a readable message rather than crashing a view.
+    """
+    value = SR.get(key, STRINGS['sr_Latn'].get(key, STRINGS['en'].get(key)))
     if value is None:
-        return core_tr(key, *args)
-    return value.format(*args) if args else value
+        log.warning('qt_translation_missing', extra={'translation_key': key})
+        return SR['message_unavailable']
+    try:
+        return value.format(*args)
+    except (IndexError, KeyError, ValueError):
+        log.warning('qt_translation_format_failed', extra={'translation_key': key}, exc_info=True)
+        return SR['message_unavailable']
+
+
+def error_text(detail: str) -> str:
+    """Translate a known error identifier; keep arbitrary exceptions in details."""
+    return tr(detail.split(':', 1)[0]) if detail.split(':', 1)[0] in SR else tr('error')
