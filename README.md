@@ -1,6 +1,7 @@
-# PhotoAgent v2.4 (Qt acceptance pending)
+# PhotoAgent v2.5 (platform acceptance pending)
 
 Offline desktop application for reviewing exact and visually similar photographs.
+Serbian installation and usage: [README_SR.md](README_SR.md).
 Qt supports English and Serbian Latin; the retained Tk interface uses Serbian Latin.
 Python 3.12+; Windows 10/11 and Linux
 source adapters. Native Linux execution and valid RAW decoding are not yet verified.
@@ -48,6 +49,14 @@ For a normal launch with your saved application state:
 Use the isolated capture tool for testing; the CLI has no `--home` option.
 Qt mode needs PySide6 >=6.8,<7; preflight checks only the selected toolkit.
 See [Qt distribution notes](docs/QT_DISTRIBUTION.md).
+
+v2.5 adds editable Qt Linguist `.ts` sources and embedded `.qm` catalogs for all
+418 messages in each language. Settings → Language changes open pages, dialogs,
+accessibility labels and progress immediately; the selection survives restart.
+Display sizes, index totals and scan dates follow the selected locale. History
+dates remain explicitly UTC. File names, paths, hashes, formats and stored values
+stay literal. For translation editing, resource compilation, fallback behavior and
+packaging verification, see [Localization](docs/LOCALIZATION.md).
 
 Task013 adds a local **source ZIP + offline wheelhouse** candidate for Python 3.12
 Windows x64. Its separate installer verifies SHA-256 and creates a new `.runtime`;

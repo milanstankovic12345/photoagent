@@ -1,4 +1,4 @@
-# PhotoAgent v2.4 architecture
+# PhotoAgent v2.5 architecture
 
 `app/ui/qt/`, selected with `--ui qt`, contains bootstrap, controller, workers,
 screen components, named navigation, table model, themes and local SVG resources.
@@ -15,8 +15,14 @@ The ordinary `python -m app.scanning.decoder` child dispatch is preserved; no fr
 dispatch, backend/schema/journal change or uninstall behavior is introduced.
 See [RELEASE.md](RELEASE.md) for actual target, prerequisites and open gates.
 
-Task012 stores the single authoritative catalogs in `app/i18n/en.json` and
-`sr_Latn.json`. The framework-independent translator provides safe English fallback;
+v2.5 stores authoritative editable Qt TS catalogs in `app/i18n/en.ts` and
+`sr_Latn.ts`. `tools/build_translations.py` validates keys/placeholders, generates
+the JSON fallback catalogs and compiles QM resources embedded in
+`app/i18n/resources_rc.py`. Qt uses the compiled entries through QTranslator;
+`strings.QtMessage` retains the shared fallback and plural handling. The build
+requires no network. Source ZIPs include sources, compiled resources and build
+instructions. See [LOCALIZATION.md](LOCALIZATION.md).
+The framework-independent translator provides safe English fallback;
 legacy Tk calls retain their Serbian default. Qt `strings.tr` returns readable text
 with a stable key/argument recipe. `localization.set_text` binds that recipe to the
 existing widget property; language changes rerender text with signals blocked,
@@ -28,13 +34,17 @@ Composed messages retain their nested recipes; literal paths never become keys.
 An application-owned `LanguageManager` coordinates the Qt thread. The small native
 `QTranslator` adapter maps used framework strings to the same catalogs because the
 tested PySide6 distribution has no Serbian Latin qtbase catalog. It translates file
-picker and text-edit controls without maintaining duplicate application .ts/.qm files.
+picker and text-edit controls using the same compiled catalog keys and JSON fallback.
 The folder chooser is read-only and nonblocking, with a bound caption.
 Settings writes remain on the existing service thread; rapid choices retain every
 successful write as the rollback baseline. A failed write restores that baseline
 without changing a pending plan or consent. State-file absence selects English;
 legacy files with no language select Serbian; invalid values select English and warn.
 No database, matching or operation-journal format changes are involved.
+`formatting.FormattedText` retains original numeric/date values in text bindings;
+sizes, dashboard totals and scan dates reformat when the language changes.
+History rows reformat manifest bytes/dates in place; move timestamps remain UTC.
+Paths, hashes, formats and stored measurements remain unchanged.
 
 Task011 adds verification tools, without changing application services, widgets,
 matching, RAW extraction, SQLite schema or the recovery journal.

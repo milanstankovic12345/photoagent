@@ -1,5 +1,13 @@
 # Task013: local release candidate
 
+v2.5 localization update: subsequent source builds include editable TS, compiled
+QM, embedded Qt catalog resources, JSON fallbacks, `tools/build_translations.py`,
+`docs/LOCALIZATION.md` and `README_SR.md`. Before building, run
+`python -B -m tools.build_translations` and the localization tests. Use a new
+v2.5 output filename. The v2.4 artifacts/results below remain historical evidence;
+no previously generated archive is changed. The installed-runtime Qt smoke now
+also verifies every embedded translation. See [LOCALIZATION.md](LOCALIZATION.md).
+
 Requested 2026-11-09; owner selected **source ZIP + offline wheelhouse**. This
 replaces the historical task deferral. Version remains 2.4. There is no public
 release, frozen executable, bundled Python, automatic upgrade or uninstall.

@@ -1,8 +1,8 @@
 """Qt framework source strings mapped into the same catalog as application text.
 
 PySide6 does not ship a Serbian Latin qtbase catalog in the tested distribution.
-This small QTranslator covers the framework controls used by PhotoAgent; it does
-not maintain a second .ts/.qm copy of application messages.
+This QTranslator maps framework source text to stable PhotoAgent catalog keys.
+Compiled catalogs are embedded as Qt resources; JSON provides a non-Qt fallback.
 """
 from __future__ import annotations
 
@@ -64,5 +64,5 @@ class FrameworkTranslator(QTranslator):
         return False
 
     def translate(self, context: str, source: str, disambiguation: str | None = None, n: int = -1) -> str:
-        key = QT_KEYS.get(context, {}).get(source)
-        return translate(key, language=self.manager.language) if key else ''
+        key = source if context == 'PhotoAgent' else QT_KEYS.get(context, {}).get(source)
+        return translate(key, language=self.manager.language, lookup=self.manager.lookup) if key else ''

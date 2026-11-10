@@ -1,5 +1,87 @@
 # PhotoAgent test evidence
 
+## v2.5 — Localization resources (2026-11-09)
+
+The existing implementation already provided EN/SR catalogs, live switching,
+persistence and safe dialog bindings. v2.5 adds editable TS, embedded QM, locale
+formatting and packaging verification. All photo operations in these tests use
+generated fixtures under isolated temporary directories.
+
+Executed commands and results:
+
+```powershell
+.venv/Scripts/python.exe -B -m tools.build_translations
+# lrelease: 418 finished / 0 unfinished in each language; embedded resource generated.
+.venv/Scripts/python.exe -B -m tools.build_translations --check
+# en 418/418; sr_Latn 418/418; TS/JSON parity passes.
+
+# Baseline before implementation, using the native Windows platform plugin:
+.venv/Scripts/python.exe -B -m pytest -p no:cacheprovider tests/test_task012.py -q
+# 21 passed / 1 setup error in 422.67s: 30s Qt worker initialization timeout in
+# test_localized_geometry_at_target_sizes[sr_Latn-light]. This is not a passing run.
+
+# QT_QPA_PLATFORM=offscreen, restored after the command:
+.venv/Scripts/python.exe -B -m pytest -p no:cacheprovider tests/test_localization.py tests/test_task013.py -x -q -o faulthandler_timeout=90
+# 24 passed in 64.66s; this preceded the additional history ISO-format case.
+
+# Final display-format adjustment: preserve UTC history seconds.
+.venv/Scripts/python.exe -B -m pytest -p no:cacheprovider tests/test_localization.py -k 'history_date or locale_values' -q
+# 2 passed / 8 deselected in 7.19s.
+
+# QT_QPA_PLATFORM=offscreen; QT_SCALE_FACTOR=1.5; both restored afterward:
+.venv/Scripts/python.exe -B -m pytest -p no:cacheprovider tests/test_task012.py -k geometry -q -o faulthandler_timeout=90
+# 4 passed / 18 deselected in 60.72s; EN/SR × Dark/Light, four target sizes.
+
+# Native Windows plugin, isolated repeat of the initial setup-timeout case:
+.venv/Scripts/python.exe -B -m pytest -p no:cacheprovider 'tests/test_task012.py::test_localized_geometry_at_target_sizes[sr_Latn-light]' -q -o faulthandler_timeout=90
+# 1 passed in 12.54s. This isolated repeat did not reproduce the baseline timeout;
+# it does not certify the entire native suite or physical display behavior.
+
+# Settings regression after updating its stale version expectation 2.4 → 2.5:
+.venv/Scripts/python.exe -B -m pytest -p no:cacheprovider tests/test_task009.py::test_settings_sections_custom_theme_and_preset_restart -q -o faulthandler_timeout=90
+# 1 passed in 13.91s (offscreen). The long run had collected the old assertion.
+
+# Complete regression, QT_QPA_PLATFORM=offscreen (restored afterward):
+.venv/Scripts/python.exe -B -m pytest -p no:cacheprovider tests -q -o faulthandler_timeout=90
+# 237 passed / 1 failed / 2 skipped in 1556.37s (25:56).
+# The only failure was the old Task009 assertion __version__ == '2.4', collected
+# before its update to milestone 2.5. It passed in the targeted repeat above.
+```
+
+Across the complete regression and the corrected test's targeted repeat, **238
+distinct tests have passing results, with 2 skipped**. The complete invocation
+itself is not reported as a clean pass. No second full invocation was performed
+after this test-only expectation update. The final UTC-seconds display adjustment
+was checked by the focused `history_date or locale_values` command above.
+Exact skips: `test_valid_raw_asset` (no licensed valid RAW fixture) and
+`test_linux_no_replace` (native Linux unavailable on Windows). All localization
+tests passed in the full run. All four additional 150% geometry cases passed;
+the initial native setup-timeout case passed separately on repeat.
+
+Coverage inventory: **418 keys per language, 134 distinct literal Qt tr keys,
+63 distinct explicit SafetyError codes, 76 framework strings in 8 Qt contexts**.
+No missing catalog entries or explicit safety-error translations were found.
+The direct-widget-literal audit found only the untranslated product name
+`PhotoAgent`; numeric zoom text and technical units are intentionally stable.
+Critical quarantine/restore warnings have EN/SR entries. Raw diagnostics, filenames,
+paths, hashes, format names, internal identifiers and CSV fields remain literal.
+See [LOCALIZATION.md](LOCALIZATION.md) for build commands and fallback details.
+
+The new regressions validate TS/JSON parity, placeholders, unfinished/missing keys,
+stale fallback data, every compiled entry, framework translation, missing resource
+fallback, dynamic locale values and literal Unicode paths. They exercise explicit
+quarantine and restore confirmations against generated Unicode-named photographs,
+checking the restored bytes. An isolated subprocess loads embedded resources from
+an extracted source ZIP under a Unicode directory without importing this checkout.
+The existing Task012 suite additionally covers restart persistence, rapid-switch
+save failure rollback, running scans, error dialogs, consent preservation, and
+English/Serbian layout at four sizes in both themes.
+
+The synthetic source ZIP test uses synthetic wheel metadata and the development
+interpreter's installed Qt; it is not a fresh dependency-install or clean-OS test.
+Frozen executable packaging is not provided. Native Linux, physical screen reader,
+display DPI and a valid licensed RAW fixture remain separate acceptance gates.
+
 ## Task013 — Packaging and release audit (2026-11-09)
 
 Target available here: Windows 11 build 26100, CPython 3.12.10 x64, PySide6/Qt

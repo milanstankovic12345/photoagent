@@ -1,15 +1,22 @@
 """Bindings update presentation only, without rebuilding widgets or domain plans."""
 from __future__ import annotations
 
+import logging
 from typing import TypeVar
 
-from PySide6.QtCore import QLocale, QObject, QSignalBlocker, Signal, Slot
+from PySide6.QtCore import QLocale, QObject, QSignalBlocker, QTranslator, Signal, Slot
 from PySide6.QtWidgets import QApplication, QComboBox, QWidget
 
 from app.i18n import LANGUAGES, Message, render
+from app.i18n import resources_rc  # Registers compiled catalogs in frozen/source builds.
 from app.ui.qt.qt_translations import FrameworkTranslator
 
 Widget = TypeVar('Widget', bound=QWidget)
+log = logging.getLogger(__name__)
+
+
+def locale_for(language: str) -> QLocale:
+    return QLocale('sr_Latn_RS' if language == 'sr_Latn' else 'en_US')
 
 
 class LanguageManager(QObject):
@@ -18,9 +25,20 @@ class LanguageManager(QObject):
     def __init__(self, parent: QObject) -> None:
         super().__init__(parent)
         self.language = 'en'
+        self.catalogs: dict[str, QTranslator] = {}
+        for language in LANGUAGES:
+            catalog = QTranslator(self)
+            if catalog.load(f':/photoagent/i18n/{language}.qm'):
+                self.catalogs[language] = catalog
+            else:
+                log.warning('translation_resource_unavailable', extra={'language': language})
         self.apply_locale()
         self.framework = FrameworkTranslator(self)
         QApplication.installTranslator(self.framework)
+
+    def lookup(self, key: str, language: str) -> str:
+        catalog = self.catalogs.get(language)
+        return catalog.translate('PhotoAgent', key) if catalog else ''
 
     def set_language(self, language: str) -> None:
         language = language if language in LANGUAGES else 'en'
@@ -33,7 +51,7 @@ class LanguageManager(QObject):
             self.changed.emit()
 
     def apply_locale(self) -> None:
-        locale = QLocale('sr_Latn_RS' if self.language == 'sr_Latn' else 'en_US')
+        locale = locale_for(self.language)
         QLocale.setDefault(locale)
         for window in QApplication.topLevelWidgets():
             window.setLocale(locale)

@@ -1,7 +1,6 @@
 """Dashboard and scan presentation. Services supply every filesystem measurement."""
 from __future__ import annotations
 
-from datetime import datetime
 from pathlib import Path
 import time
 from typing import Callable
@@ -17,14 +16,7 @@ from app.ui.qt.components import (Card, CollapsibleSection, ContextToolbar, Elid
                                   button, path_label, text_label)
 from app.ui.qt.localization import set_text, text_of, language_manager
 from app.ui.qt.strings import tr, join_text, error_text
-
-
-def size_text(value: int | float) -> str:
-    for unit in ('B', 'KiB', 'MiB', 'GiB', 'TiB'):
-        if value < 1024 or unit == 'TiB':
-            return f'{value:.0f} {unit}' if unit == 'B' else f'{value:.1f} {unit}'
-        value /= 1024
-    raise AssertionError('unreachable')
+from app.ui.qt.formatting import date_text, number_text, size_text
 
 
 class CandidateCard(Card):
@@ -126,8 +118,8 @@ class DashboardScreen(QWidget):
             self.stats.addWidget(card, i // columns, i % columns)
 
     def set_summary(self, value: DashboardSummary) -> None:
-        for card, measurement in zip(self.stat_cards, (str(value.indexed), str(value.exact),
-                str(value.visual), size_text(value.potential_bytes))):
+        for card, measurement in zip(self.stat_cards, (number_text(value.indexed), number_text(value.exact),
+                number_text(value.visual), size_text(value.potential_bytes))):
             set_text(card.value, measurement)
         has_session = bool(value.session_id)
         set_text(self.scan, tr('scan_photos' if has_session else 'first_scan'))
@@ -136,7 +128,7 @@ class DashboardScreen(QWidget):
         self.recent.setVisible(has_session)
         self.estimate.setVisible(has_session)
         set_text(self.session, tr('recent_scan_summary',
-            datetime.fromtimestamp(value.started).astimezone().strftime('%d.%m.%Y. %H:%M'),
+            date_text(value.started),
             tr('state_' + value.status), value.photo_count, value.exact, value.visual, value.errors)
             if has_session else '')
         set_text(self.roots, join_text(tr('root_status', p, tr('state_' + s)) for p, s in value.roots))

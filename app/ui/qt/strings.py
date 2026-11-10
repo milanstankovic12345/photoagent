@@ -1,13 +1,23 @@
 """Qt adapter for the shared EN/SR catalogs and live text bindings."""
 from collections.abc import Iterable
-from app.i18n import Message, STRINGS, joined
-from app.ui.qt.localization import current_language
+from PySide6.QtWidgets import QApplication
+from app.i18n import Message, STRINGS, joined, translate
+from app.ui.qt.localization import current_language, language_manager
 
 SR = STRINGS['sr_Latn']
 
 
+class QtMessage(Message):
+    """Use compiled Qt catalogs, retaining the shared non-Qt fallback/grammar."""
+
+    @staticmethod
+    def _translate(key: str, args: tuple[object, ...], language: str) -> str:
+        return translate(key, args, language,
+                         lookup=language_manager().lookup if QApplication.instance() else None)
+
+
 def tr(key: str, *args: object) -> Message:
-    return Message(key, args, current_language())
+    return QtMessage(key, args, current_language())
 
 
 def join_text(parts: Iterable[str], separator: str = '\n') -> Message:

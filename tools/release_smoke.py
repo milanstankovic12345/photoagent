@@ -60,8 +60,13 @@ def phase(name: str, work: Path) -> dict:
             wait(lambda: window.settings and not window.controller.busy)
             for language in ('en', 'sr_Latn'):
                 window.apply_language(language)
-                from app.ui.qt.localization import current_language
+                from app.ui.qt.localization import current_language, language_manager
+                from app.i18n import STRINGS
                 require(current_language() == language, 'Language did not switch')
+                catalog = language_manager().catalogs.get(language)
+                require(catalog is not None, 'Embedded QM catalog missing')
+                require(all(catalog.translate('PhotoAgent', key) == text
+                            for key, text in STRINGS[language].items()), 'Compiled catalog mismatch')
                 for theme in ('dark', 'light', 'system'):
                     window.set_theme(theme)
                     wait(lambda: not window.controller.busy)

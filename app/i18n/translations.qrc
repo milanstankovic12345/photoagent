@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/photoagent/i18n">
+    <file>en.qm</file>
+    <file>sr_Latn.qm</file>
+  </qresource>
+</RCC>

@@ -1,7 +1,7 @@
 """Quarantine and Settings presentation; all file inspection stays in services."""
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime
 from pathlib import Path
 from typing import Callable
 
@@ -16,6 +16,7 @@ from app.ui.qt.components import (Card, CollapsibleSection, ContextToolbar, Empt
                                   TechnicalDetails, ThemeSelector, button, path_label, text_label)
 from app.ui.qt.localization import set_text, text_of, add_item, language_manager
 from app.ui.qt.strings import tr, join_text
+from app.ui.qt.formatting import FormattedText, number_text
 
 # Search breadth choices, not calibrated image-quality or duplicate confidence.
 MATCHING_PRESETS = {'strict': MatchingOptions(2, 3), 'balanced': MatchingOptions(),
@@ -29,7 +30,7 @@ def move_date(value: str | None) -> str:
         parsed = datetime.fromisoformat(value)
         if parsed.tzinfo is None:
             return tr('not_available')
-        return parsed.astimezone(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
+        return FormattedText('utc_date', parsed.timestamp())
     except ValueError:
         return tr('not_available')
 
@@ -100,7 +101,7 @@ class HistoryScreen(QWidget):
             entry = self.entries[self.table.item(row, 0).data(Qt.UserRole)]
             status = 'state_restored' if entry.restored and entry.state == 'complete' else 'state_' + entry.state
             for column, value in ((2, move_date(entry.moved_at)),
-                                  (3, str(entry.size) if entry.size is not None else tr('not_available')),
+                                  (3, number_text(entry.size) if entry.size is not None else tr('not_available')),
                                   (4, tr(status)), (5, tr('action_' + entry.action))):
                 item = self.table.item(row, column)
                 item.setText(value)
@@ -129,7 +130,7 @@ class HistoryScreen(QWidget):
             original = entry.source if entry.action == 'quarantine' else entry.destination
             status = ('state_restored' if entry.restored and entry.state == 'complete' else 'state_' + entry.state)
             columns = (Path(original).name, original, move_date(entry.moved_at),
-                       str(entry.size) if entry.size is not None else tr('not_available'),
+                       number_text(entry.size) if entry.size is not None else tr('not_available'),
                        tr(status), tr('action_' + entry.action))
             for j, text in enumerate(columns):
                 item = QTableWidgetItem(text)

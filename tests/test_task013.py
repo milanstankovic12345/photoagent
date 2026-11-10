@@ -24,7 +24,8 @@ def bundle_inputs(tmp_path):
     source = tmp_path / 'source'
     source.mkdir()
     names = ['app/__init__.py', 'app/i18n/en.json', 'app/i18n/sr_Latn.json',
-             'photo_agent.py', 'README.md', 'requirements.txt', 'tools/release_smoke.py',
+             'photo_agent.py', 'README.md', 'README_SR.md', 'requirements.txt', 'tools/release_smoke.py',
+             'tools/build_translations.py', 'docs/LOCALIZATION.md',
              'docs/ARCHITECTURE.md', 'docs/SECURITY.md', 'docs/TESTING.md',
              'docs/QT_DISTRIBUTION.md', 'docs/RELEASE.md', 'docs/CHANGELOG.md',
              'packaging/install_offline.py', 'packaging/start_offline.bat', 'packaging/start_offline.sh']

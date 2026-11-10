@@ -75,11 +75,12 @@ def build(wheelhouse: Path, lock: Path, output: Path, *, source: Path = ROOT) ->
     files: dict[str, bytes] = {}
     for path in sorted((source / 'app').rglob('*')):
         if path.is_file() and '__pycache__' not in path.parts and path.suffix in {
-                '.py', '.json', '.svg', '.qrc', '.qss'}:
+                '.py', '.json', '.svg', '.qrc', '.qss', '.ts', '.qm'}:
             safe_file(path, source)
             files[path.relative_to(source).as_posix()] = path.read_bytes()
-    for relative in ('photo_agent.py', 'README.md', 'requirements.txt',
-                     'tools/release_smoke.py', 'docs/ARCHITECTURE.md',
+    for relative in ('photo_agent.py', 'README.md', 'README_SR.md', 'requirements.txt',
+                     'tools/release_smoke.py', 'tools/build_translations.py',
+                     'docs/LOCALIZATION.md', 'docs/ARCHITECTURE.md',
                      'docs/SECURITY.md', 'docs/TESTING.md', 'docs/QT_DISTRIBUTION.md',
                      'docs/RELEASE.md', 'docs/CHANGELOG.md'):
         path = source / relative

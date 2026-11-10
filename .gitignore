@@ -49,6 +49,7 @@ htmlcov/
 !/docs/CHANGELOG.md
 !/docs/QT_DISTRIBUTION.md
 !/docs/RELEASE.md
+!/docs/LOCALIZATION.md
 !/docs/TASK003_IMPLEMENTATION.md
 !/docs/design/
 /docs/design/*

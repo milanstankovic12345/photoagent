@@ -1,5 +1,20 @@
 # Changelog
 
+## v2.5 — Localization resources and packaging — 2026-11-09
+
+- Preserved existing live EN/SR switching, safe dialog state and atomic language
+  preference persistence. Added editable Qt Linguist TS sources for 418 messages
+  per language, compiled QM catalogs and embedded Qt resources with JSON fallback.
+- Added offline translation build/check commands and TS/JSON/QM parity tests,
+  explicit SafetyError coverage, Unicode scan/quarantine/restore and isolated
+  extracted-package resource checks. No matching, schema or move logic changed.
+- Added locale-aware display sizes, dashboard totals and dates, retaining UTC in
+  history and literal filenames, paths, hashes and technical format names.
+- Added Serbian installation/usage and bilingual maintainer instructions; extended
+  release contents and installed-runtime smoke to include/verify compiled catalogs.
+- Native Linux, valid RAW, physical accessibility/DPI and clean-machine release
+  acceptance remain open. See TESTING.md for actual commands and outcomes.
+
 ## Task013 — Local source ZIP and offline wheelhouse — 2026-11-09
 
 - Added an exact Windows AMD64/CPython 3.12 runtime reference, allowlisted ZIP

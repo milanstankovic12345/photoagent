@@ -257,7 +257,7 @@ def test_settings_sections_custom_theme_and_preset_restart(desktop, tmp_path):
         assert (state['phash_max'], state['dhash_max']) == (4, 6)
         other.preferences.edit_sources.click()
         assert other.route == Route.SCAN
-        assert __version__ == '2.4' and 'app_version' in SR
+        assert __version__ == '2.5' and 'app_version' in SR
     finally:
         other.close()
         pump(lambda: other.finished)

@@ -1,5 +1,5 @@
 {
-  "scope": "Task012 Qt catalog inventory. Runtime catalogs are app/i18n/en.json and sr_Latn.json. Tk remains Serbian; technical diagnostics, paths and stored identifiers remain unchanged.",
+  "scope": "Qt text inventory. v2.5 editable sources are app/i18n/en.ts and sr_Latn.ts; tools/build_translations.py generates JSON fallbacks and embedded QM. Tk remains Serbian; technical diagnostics, paths and stored identifiers remain unchanged.",
   "english_intents": {
     "quarantine_description": "Restore quarantined photographs to their original location. Select an entry and review the plan before confirming.",
     "quarantine_empty": "Your quarantine is empty",

@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
-from typing import Iterable
+from typing import Callable, Iterable
 
 log = logging.getLogger(__name__)
 LANGUAGES = ('en', 'sr_Latn')
@@ -14,7 +14,8 @@ STRINGS: dict[str, dict[str, str]] = {
 }
 
 
-def translate(key: str, args: tuple[object, ...] = (), language: str = 'en') -> str:
+def translate(key: str, args: tuple[object, ...] = (), language: str = 'en', *,
+              lookup: Callable[[str, str], str] | None = None) -> str:
     """Unknown languages use English; missing keys/format errors stay readable."""
     catalog = STRINGS.get(language, STRINGS['en'])
     # Count-first group labels stay readable on small cards. Serbian needs the
@@ -27,7 +28,7 @@ def translate(key: str, args: tuple[object, ...] = (), language: str = 'en') -> 
         else:
             form = 'one' if count == 1 else 'other'
         key += '_' + form
-    value = catalog.get(key, STRINGS['en'].get(key))
+    value = (lookup(key, language) if lookup else None) or catalog.get(key, STRINGS['en'].get(key))
     if value is None:
         log.warning('translation_missing', extra={'translation_key': key, 'language': language})
         return catalog.get('message_unavailable', STRINGS['en']['message_unavailable'])
@@ -48,16 +49,18 @@ class Message(str):
     Arguments are captured when displayed, never recovered by parsing translated
     text. Paths and hashes stay literal even when they resemble a catalog entry.
     """
+    _translate = staticmethod(translate)
+
     def __new__(cls, key: str | None, args: tuple[object, ...], language: str,
                 separator: str = '') -> Message:
-        value = (translate(key, args, language) if key is not None
+        value = (cls._translate(key, args, language) if key is not None
                  else separator.join(str(render(part, language)) for part in args))
         instance = super().__new__(cls, value)
         instance.key, instance.args, instance.separator = key, args, separator
         return instance
 
     def translated(self, language: str) -> str:
-        return (translate(self.key, self.args, language) if self.key is not None
+        return (self._translate(self.key, self.args, language) if self.key is not None
                 else self.separator.join(str(render(part, language)) for part in self.args))
 
 

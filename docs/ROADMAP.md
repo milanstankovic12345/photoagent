@@ -1,5 +1,12 @@
 ﻿# PhotoAgent v2 implementation roadmap
 
+v2.5 localization (2026-11-09) extends the existing Qt L1 implementation with
+editable Linguist TS sources, embedded QM catalogs, JSON fallback, locale-aware
+display values, English/Serbian installation guidance and isolated packaged-resource
+verification. [LOCALIZATION.md](LOCALIZATION.md) documents the maintenance/build
+workflow; [TESTING.md](TESTING.md) records actual checks. This does not close the
+native Linux, physical accessibility/DPI, valid RAW or clean-OS release gates.
+
 Task013 (2026-11-09): local source ZIP/offline-wheelhouse tooling is implemented
 for the owner's selected format, with hash verification and synthetic installed
 runtime rehearsal. [RELEASE.md](RELEASE.md) documents actual contents, dependency

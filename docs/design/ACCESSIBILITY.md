@@ -1,8 +1,10 @@
 # Qt accessibility and localization
 
 Task010 established the accessibility behavior below; Task012 adds English and
-Serbian Latin runtime switching. Both authoritative catalogs live in `app/i18n/`
-as UTF-8 JSON. [QT_TEXT_INVENTORY.json](QT_TEXT_INVENTORY.json) documents their
+Serbian Latin runtime switching. v2.5 authoritative catalogs live in `app/i18n/`
+as UTF-8 Qt TS sources, compiled to embedded QM with generated JSON fallback.
+See [build and editing instructions](../LOCALIZATION.md).
+[QT_TEXT_INVENTORY.json](QT_TEXT_INVENTORY.json) documents their
 current keys and is never loaded at runtime. Native Qt framework messages used by
 the app map into the same catalogs through a small QTranslator adapter.
 
