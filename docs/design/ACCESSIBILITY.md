@@ -1,5 +1,21 @@
 # Qt accessibility and localization
 
+Task015 (2026-11-10) refines shared presentation with 1 px control outlines,
+discreet card separators and a local line icon family. Navigation, disclosure and
+embedded preview/source containers keep a visible keyboard focus without nested
+decorative boxes. Checked navigation retains its contour when focus is elsewhere;
+focus has its own contrasting outline when the selected destination is focused.
+Checkbox and item focus outlines stay 2 px. Border widths, content rectangles and
+layout geometry remain stable across hover/focus/selection.
+
+Icons supplement existing translated labels and accessible names. Disabled icons
+use readable semantic foregrounds; primary/danger icons use their action's text
+color. System changes repaint the same icon objects, preserving filter, route,
+language and theme choices. No photograph-opening behavior is added. New rendered
+contrast/HiDPI/keyboard/choice tests and inspected captures are documented in
+[Task015 evidence](verification/task015-20261110/README.md). Native accessibility,
+screen readers and physical high-DPI remain unverified.
+
 Task010 established the accessibility behavior below; Task012 adds English and
 Serbian Latin runtime switching. v2.5 authoritative catalogs live in `app/i18n/`
 as UTF-8 Qt TS sources, compiled to embedded QM with generated JSON fallback.

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from PySide6 import QtSvg  # Load SVG runtime before icon-engine DLLs on Windows.
 from PySide6.QtCore import QEvent, QRect, QSize, QTimer, Qt
-from PySide6.QtGui import QIcon, QKeySequence, QPixmap, QShortcut
+from PySide6.QtGui import QKeySequence, QPixmap, QShortcut
 from PySide6.QtWidgets import (QCheckBox, QComboBox, QDialog, QGraphicsScene,
     QGraphicsView, QHBoxLayout, QLabel, QLineEdit, QPlainTextEdit, QPushButton,
     QVBoxLayout, QWidget, QFrame, QLayout, QLayoutItem, QSizePolicy, QStackedLayout)
@@ -13,6 +13,7 @@ from PySide6.QtGui import QImage
 from app.ui.qt.localization import set_text, text_of, add_item, with_text
 from app.ui.qt.strings import tr, join_text
 from app.ui.qt.themes import SPACING
+from app.ui.qt.icons import set_combo_icon, set_icon
 from app.ui.qt import resources_rc  # Register icons even when used without MainWindow.
 
 
@@ -65,6 +66,7 @@ class ThemeSelector(QComboBox):
         set_text(self, tr('theme'), 'setAccessibleName')
         for theme in ('dark', 'light', 'system'):
             add_item(self, tr(theme), theme)
+        set_combo_icon(self, 'theme')
 
 
 class PageHeader(QWidget):
@@ -193,8 +195,11 @@ class StatusBadge(QLabel):
 class CollapsibleSection(Card):
     def __init__(self, title_key: str, expanded: bool = False) -> None:
         super().__init__()
+        self.setProperty('role', 'section')
+        self.content.setContentsMargins(0, 0, 0, 0)
         self.toggle = with_text(QPushButton(), tr(title_key))
         style_button(self.toggle)
+        self.toggle.setProperty('disclosure', True)
         self.toggle.setCheckable(True)
         self.toggle.setChecked(expanded)
         self.content.addWidget(self.toggle)
@@ -209,7 +214,7 @@ class CollapsibleSection(Card):
     def set_expanded(self, expanded: bool) -> None:
         self.toggle.setChecked(expanded)
         self.body.setVisible(expanded)
-        self.toggle.setIcon(QIcon(':/photoagent/' + ('collapse.svg' if expanded else 'expand.svg')))
+        set_icon(self.toggle, 'collapse' if expanded else 'expand')
         set_text(self.toggle, tr('section_expanded' if expanded else 'section_collapsed'), 'setAccessibleDescription')
 
 
@@ -236,6 +241,15 @@ def button(key: str, callback: Callable, layout: QLayout, *, variant: str | None
     variant = variant or ('danger' if key in ('selected_move', 'bulk_move', 'approve')
                           else 'primary' if key in ('start', 'save', 'compare') else 'secondary')
     style_button(widget, variant)
+    glyph = {
+        'first_scan': 'scan', 'start': 'scan', 'add': 'folder', 'edit_sources': 'folder',
+        'review_duplicates': 'duplicates', 'review_results': 'duplicates', 'compare': 'duplicates',
+        'settings': 'settings', 'selected_move': 'quarantine', 'bulk_move': 'quarantine',
+        'move_copy': 'quarantine', 'restore': 'restore', 'restore_operation': 'restore',
+        'reports': 'open_external', 'open_quarantine_folder': 'open_external', 'sort_asc': 'sort',
+    }.get(key)
+    if glyph:
+        set_icon(widget, glyph)
     if key in ('selected_move', 'bulk_move', 'restore'):
         widget.setProperty('operation', True)
     if key in ('selected_move', 'bulk_move', 'move_copy', 'approve'):
@@ -251,12 +265,13 @@ class PhotoView(Card):
     def __init__(self) -> None:
         super().__init__()
         layout = self.content
-        layout.setContentsMargins(12, 12, 12, 12)
+        layout.setContentsMargins(*([SPACING[2]] * 4))
         self.metadata = path_label(tr('select_pair'), 'metadata')
         layout.addWidget(self.metadata)
         self.metadata.setMaximumHeight(52)
         self.scene = QGraphicsScene(self)
         self.view = QGraphicsView(self.scene)
+        self.view.setProperty('embedded', True)
         self.view.setDragMode(QGraphicsView.ScrollHandDrag)
         self.view.setFocusPolicy(Qt.StrongFocus)
         set_text(self.view, tr('compare'), 'setAccessibleName')
@@ -295,7 +310,7 @@ class PhotoView(Card):
         self.keep_photo.setProperty('choice', True)
         set_text(self.keep_photo, tr('keep_description'), 'setAccessibleDescription')
         self.details = CollapsibleSection('photo_details')
-        self.details.content.setContentsMargins(8, 8, 8, 8)
+        self.details.content.setContentsMargins(0, SPACING[1], 0, 0)
         self.full_metadata = path_label('', 'small')
         self.full_metadata.setFocusPolicy(Qt.StrongFocus)
         self.details.body_layout.addWidget(self.full_metadata)

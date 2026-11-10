@@ -1,5 +1,17 @@
 # Changelog
 
+## Task015 — Shared surfaces, outlines and icons — 2026-11-10
+
+- Refined the existing Dark/Light/System tokens and styles into page, panel,
+  card and selected surfaces. Reduced control outlines to a fixed 1 px and
+  removed nested disclosure/preview/source decoration while preserving focus.
+- Added fifteen original CC0 line icons embedded in Qt resources, with live
+  theme, disabled, selected, action-foreground and HiDPI rendering. Applied them
+  to existing navigation, search/filter/sort, preferences, folder and restore
+  controls. No page flow or photograph-opening feature was added.
+- Added rendering/contrast/geometry tests and a presentation-only capture tool.
+  See the Task015 verification record for executed results and limitations.
+
 ## v2.5 — Localization resources and packaging — 2026-11-09
 
 - Preserved existing live EN/SR switching, safe dialog state and atomic language

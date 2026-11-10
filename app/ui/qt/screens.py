@@ -9,6 +9,7 @@ from app.ui.qt.components import CollapsibleSection, ContextToolbar, PhotoView, 
 from app.ui.qt.dashboard_scan import DashboardScreen, ScanScreen
 from app.ui.qt.models import MatchModel
 from app.ui.qt.gallery import GroupView
+from app.ui.qt.icons import icon, set_combo_icon
 from app.ui.qt.localization import set_text, add_item, with_text
 from app.ui.qt.strings import tr
 from app.ui.qt.quarantine_settings import HistoryScreen, SettingsScreen
@@ -73,6 +74,7 @@ class DuplicatesScreen(QWidget):
         self.search = QLineEdit()
         set_text(self.search, tr('search'), 'setPlaceholderText')
         set_text(self.search, tr('search'), 'setAccessibleName')
+        self.search.addAction(icon('search'), QLineEdit.LeadingPosition).setEnabled(False)
         self.search.textChanged.connect(changed)
         filters.addWidget(self.search, 1)
         options = ContextToolbar()
@@ -82,11 +84,13 @@ class DuplicatesScreen(QWidget):
         add_item(self.kind, tr('all'), '')
         for kind in ('EXACT', 'VISUAL'):
             add_item(self.kind, tr('filter_' + kind), kind)
+        set_combo_icon(self.kind, 'filter')
         self.kind.currentIndexChanged.connect(changed)
         options.actions.addWidget(self.kind)
         self.sort_order = QComboBox()
         for key in MatchModel.columns:
             add_item(self.sort_order, tr(key), key)
+        set_combo_icon(self.sort_order, 'sort')
         set_text(self.sort_order, tr('sort'), 'setAccessibleName')
         self.sort_order.currentIndexChanged.connect(sort)
         options.actions.addWidget(self.sort_order)

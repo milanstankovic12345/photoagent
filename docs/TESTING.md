@@ -1,5 +1,29 @@
 # PhotoAgent test evidence
 
+## Task015 — Shared surfaces and icons (2026-11-10)
+
+Executed in the existing Python 3.12 environment with Qt/Fusion offscreen:
+
+```powershell
+$env:QT_QPA_PLATFORM='offscreen'
+.venv/Scripts/python.exe -B -m pytest tests/test_qt_design_system.py -q
+# Final focused run: 25 passed in 3.80s; exit 0, no skips.
+.venv/Scripts/python.exe -B -m pytest tests/test_qt.py tests/test_task008.py tests/test_task009.py tests/test_task010.py tests/test_task011.py tests/test_task012.py -q
+# 77 passed, 1 failed, 1 setup error in 10367.74s; two Task008 worker timeouts.
+.venv/Scripts/python.exe -B -m pytest tests/test_task008.py -q -x
+# 10 passed in 209.02s, including both timeout-affected cases at unchanged limits.
+.venv/Scripts/python.exe -B -m pytest tests/test_qt.py::test_source_availability_order_removal_and_collapsed_priority -q
+# 1 passed in 11.02s after the final source-container property placement.
+.venv/Scripts/python.exe -B -m tools.capture_task015 --output docs/design/verification/task015-20261110
+# 17 inspected captures; synthetic presentation only, no photo I/O or approvals.
+```
+
+See [Task015 evidence](design/verification/task015-20261110/README.md) for exact
+regression results, early corrected test-fixture failures, hashes, review and
+limits. Text/control contrast, icon states and 2× rendering, actual focus,
+stable geometry and live locale/theme selection are covered. Physical DPI,
+native Linux, real OS theme events and screen readers remain unverified.
+
 ## v2.5 — Localization resources (2026-11-09)
 
 The existing implementation already provided EN/SR catalogs, live switching,

@@ -2,14 +2,17 @@
 import pytest
 
 pytest.importorskip('PySide6')
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QColor, QImage, QPalette
+from PySide6.QtCore import QSize, Qt
+from PySide6.QtGui import QColor, QIcon, QImage, QPalette
 from PySide6.QtTest import QTest
-from PySide6.QtWidgets import QApplication, QCheckBox, QToolTip, QVBoxLayout, QWidget
+from PySide6.QtWidgets import (QApplication, QCheckBox, QLineEdit, QTableWidget,
+                              QTableWidgetItem, QToolTip, QVBoxLayout, QWidget)
 
 from app.ui.qt.components import CollapsibleSection, PhotoView, StatusBadge, button
 from app.ui.qt.strings import tr
 from app.ui.qt.themes import ThemeManager, TOKENS
+from app.ui.qt.icons import ICON_NAMES, icon
+from app.ui.qt.navigation import Route, Sidebar
 
 
 @pytest.fixture(scope='module')
@@ -134,3 +137,133 @@ def test_photo_loading_unavailable_ready_and_reset(qtapp, scanned):
         assert badge.text() == badge.accessibleName() == tr('state_complete')
     finally:
         view.close()
+
+
+def painted_color(image: QImage, color: str) -> bool:
+    target = QColor(color).rgb()
+    return any(image.pixelColor(x, y).alpha() > 200 and image.pixelColor(x, y).rgb() == target
+               for x in range(image.width()) for y in range(image.height()))
+
+
+@pytest.mark.parametrize('name', ICON_NAMES)
+def test_local_icons_recolor_same_instance_across_system_changes(qtapp, name):
+    theme = ThemeManager(qtapp)
+    glyph = icon(name)
+    try:
+        for scheme, active in ((Qt.ColorScheme.Light, 'light'), (Qt.ColorScheme.Dark, 'dark'),
+                               (Qt.ColorScheme.Unknown, 'dark')):
+            theme.apply('system', scheme)
+            assert theme.preference == 'system' and theme.active == active
+            colors = TOKENS[active]
+            for mode, token in ((QIcon.Normal, 'text'), (QIcon.Active, 'text'),
+                                (QIcon.Selected, 'text'), (QIcon.Disabled, 'disabled_text')):
+                for state in (QIcon.Off, QIcon.On):
+                    pixmap = glyph.pixmap(QSize(20, 20), 2.0, mode, state)
+                    assert not pixmap.isNull() and pixmap.devicePixelRatio() == 2.0
+                    assert pixmap.size() == QSize(40, 40)
+                    assert painted_color(pixmap.toImage(), colors[token]), (name, active, mode, state)
+                    backgrounds = ('disabled',) if mode == QIcon.Disabled else ('surface', 'elevated', 'selection', 'hover')
+                    assert all(contrast(colors[token], colors[b]) >= 3 for b in backgrounds)
+    finally:
+        theme.deleteLater()
+
+
+@pytest.mark.parametrize('active', TOKENS)
+def test_action_icons_and_disabled_controls_use_readable_rendered_colors(qtapp, active):
+    theme = ThemeManager(qtapp)
+    theme.apply(active)
+    host = QWidget()
+    layout = QVBoxLayout(host)
+    controls = [button(key, lambda: None, layout, variant=variant) for key, variant in
+                (('start', 'primary'), ('settings', 'secondary'), ('move_copy', 'danger'))]
+    host.show()
+    QApplication.processEvents()
+    try:
+        for control, foreground in zip(controls, ('on_primary', 'text', 'on_danger')):
+            assert painted_color(control.icon().pixmap(20, 20).toImage(), TOKENS[active][foreground])
+            control.setEnabled(False)
+            QApplication.processEvents()
+            image = control.grab().toImage()
+            assert painted_color(image, TOKENS[active]['disabled'])
+            assert painted_color(control.icon().pixmap(20, 20, QIcon.Disabled).toImage(),
+                                 TOKENS[active]['disabled_text'])
+    finally:
+        host.close()
+        theme.deleteLater()
+
+
+def test_icons_preserve_filter_language_and_theme_choices_on_live_changes(qtapp):
+    from app.ui.qt.localization import language_manager
+    from app.ui.qt.quarantine_settings import SettingsScreen
+    from app.ui.qt.screens import DuplicatesScreen
+
+    theme = ThemeManager(qtapp)
+    language = language_manager()
+    previous_language = language.language
+    noop = lambda *args: None
+    listing = DuplicatesScreen(*([noop] * 10))
+    settings = SettingsScreen(*([noop] * 4))
+    listing.kind.setCurrentIndex(listing.kind.findData('EXACT'))
+    listing.search.setText('synthetic.png')
+    settings.theme.setCurrentIndex(settings.theme.findData('system'))
+    settings.language.setCurrentIndex(settings.language.findData('sr_Latn'))
+    try:
+        for locale, scheme in (('sr_Latn', Qt.ColorScheme.Light), ('en', Qt.ColorScheme.Dark)):
+            language.set_language(locale)
+            theme.apply('system', scheme)
+            assert listing.kind.currentData() == 'EXACT' and listing.search.text() == 'synthetic.png'
+            assert settings.theme.currentData() == 'system' and settings.language.currentData() == 'sr_Latn'
+            assert not listing.search.actions()[0].icon().isNull()
+            for control, role in ((listing.kind, 'filter'), (listing.sort_order, 'sort'),
+                                  (settings.theme, 'theme'), (settings.language, 'language')):
+                assert control.property('icon_role') == role
+                assert control.accessibleName()
+                for index in range(control.count()):
+                    assert painted_color(control.itemIcon(index).pixmap(20, 20).toImage(),
+                                         TOKENS[theme.active]['text'])
+    finally:
+        listing.close()
+        settings.close()
+        language.set_language(previous_language)
+        theme.deleteLater()
+
+
+@pytest.mark.parametrize('active', TOKENS)
+def test_selected_navigation_focus_and_control_content_geometry(qtapp, active):
+    theme = ThemeManager(qtapp)
+    theme.apply(active)
+    host = QWidget()
+    layout = QVBoxLayout(host)
+    sidebar = Sidebar()
+    layout.addWidget(sidebar)
+    field = QLineEdit('synthetic')
+    layout.addWidget(field)
+    table = QTableWidget(2, 1)
+    table.setItem(0, 0, QTableWidgetItem('Synthetic A'))
+    table.setItem(1, 0, QTableWidgetItem('Synthetic B'))
+    layout.addWidget(table)
+    host.show()
+    host.activateWindow()
+    QApplication.processEvents()
+    try:
+        control = sidebar.buttons[Route.SCAN]
+        assert [w.property('icon_role') for w in sidebar.buttons.values()] == [
+            'dashboard', 'scan', 'duplicates', 'quarantine', 'settings']
+        before = (control.geometry(), control.contentsRect(), field.geometry(), field.contentsRect(),
+                  table.geometry(), table.visualRect(table.model().index(0, 0)))
+        for selected in (Route.SCAN, Route.DASHBOARD, Route.SCAN):
+            sidebar.select(selected)
+            control.setFocus()
+            QTest.mouseMove(control, control.rect().center())
+            QApplication.processEvents()
+            assert painted_color(control.grab().toImage(), TOKENS[active]['focus'])
+            table.selectRow(1)
+            assert before == (control.geometry(), control.contentsRect(), field.geometry(), field.contentsRect(),
+                              table.geometry(), table.visualRect(table.model().index(0, 0)))
+        for target in (field, table):
+            target.setFocus()
+            QApplication.processEvents()
+            assert painted_color(target.grab().toImage(), TOKENS[active]['focus'])
+    finally:
+        host.close()
+        theme.deleteLater()

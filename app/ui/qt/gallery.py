@@ -6,13 +6,14 @@ from pathlib import Path
 from typing import Callable
 
 from PySide6.QtCore import QAbstractListModel, QModelIndex, QRect, QSize, QTimer, Qt
-from PySide6.QtGui import QImage, QPalette, QPixmap
+from PySide6.QtGui import QImage, QPalette, QPen, QPixmap
 from PySide6.QtWidgets import QListView, QStyle, QStyledItemDelegate
 
 from app.core.queries import GroupRow
 from app.ui.qt.dashboard_scan import size_text
 from app.ui.qt.localization import set_text, language_manager
 from app.ui.qt.strings import tr
+from app.ui.qt.themes import RADII
 
 
 class GroupModel(QAbstractListModel):
@@ -65,8 +66,8 @@ class GroupDelegate(QStyledItemDelegate):
         palette = option.palette
         rect = option.rect.adjusted(4, 4, -4, -4)
         painter.setPen(palette.color(QPalette.Mid))
-        painter.setBrush(palette.color(QPalette.Highlight if selected else QPalette.Base))
-        painter.drawRoundedRect(rect, 8, 8)
+        painter.setBrush(palette.color(QPalette.Highlight if selected else QPalette.AlternateBase))
+        painter.drawRoundedRect(rect, RADII['card'], RADII['card'])
         painter.setPen(palette.color(QPalette.HighlightedText if selected else QPalette.Text))
         row = index.data(Qt.UserRole)
         if row is None:
@@ -100,7 +101,7 @@ class GroupDelegate(QStyledItemDelegate):
                              option.fontMetrics.elidedText(line, Qt.ElideMiddle, text_rect.width()))
             text_rect.translate(0, 24)
         if option.state & QStyle.State_HasFocus:
-            painter.setPen(palette.color(QPalette.Link))
+            painter.setPen(QPen(palette.color(QPalette.Link), 2))
             painter.setBrush(Qt.NoBrush)  # Focus outline must not cover the card contents.
             painter.drawRect(rect.adjusted(2, 2, -2, -2))
         painter.restore()

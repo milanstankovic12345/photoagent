@@ -8,13 +8,14 @@ from typing import Callable
 from PySide6.QtCore import QEvent, QSize, QTimer, Qt
 from PySide6.QtGui import QImage, QPixmap
 from PySide6.QtWidgets import (QGridLayout, QHBoxLayout, QLabel, QListWidget,
-    QListWidgetItem, QPlainTextEdit, QProgressBar, QScrollArea, QStyle, QVBoxLayout, QWidget)
+    QListWidgetItem, QPlainTextEdit, QProgressBar, QScrollArea, QVBoxLayout, QWidget)
 
 from app.core.queries import DashboardSummary, MatchRow, ScanProgress
 from app.ui.qt.components import (Card, CollapsibleSection, ContextToolbar, ElidedPathLabel, EmptyState,
                                   StatCard, StatusBadge, TechnicalDetails, ThemeSelector,
                                   button, path_label, text_label)
 from app.ui.qt.localization import set_text, text_of, language_manager
+from app.ui.qt.icons import IconLabel
 from app.ui.qt.strings import tr, join_text, error_text
 from app.ui.qt.formatting import date_text, number_text, size_text
 
@@ -216,6 +217,7 @@ class ScanScreen(QWidget):
         self.empty_sources = text_label(tr('empty_sources'), 'body')
         sources.content.addWidget(self.empty_sources)
         self.roots = QListWidget()
+        self.roots.setProperty('embedded', True)
         set_text(self.roots, tr('source'), 'setAccessibleName')
         set_text(self.roots, tr('keyboard_sources'), 'setAccessibleDescription')
         self.roots.setMinimumHeight(100)
@@ -288,9 +290,7 @@ class ScanScreen(QWidget):
             item = QListWidgetItem(self.roots)
             row = QWidget()
             content = QHBoxLayout(row)
-            icon = QLabel()
-            icon.setPixmap(self.style().standardIcon(QStyle.SP_DirIcon).pixmap(24, 24))
-            content.addWidget(icon)
+            content.addWidget(IconLabel('folder'))
             values = QVBoxLayout()
             content.addLayout(values, 1)
             values.addWidget(ElidedPathLabel(path))

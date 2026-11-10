@@ -1,0 +1,457 @@
+{
+  "synthetic": true,
+  "finished": true,
+  "captures": [
+    {
+      "file": "01-compare-no-selection.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "beefd64877e0d34ea6390745756608d5ba724e603e8735ff5c4336a70aff1853",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 76,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": false
+    },
+    {
+      "file": "02-add-folder.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        656,
+        451
+      ],
+      "dpr": 1.0,
+      "sha256": "6baac70330c8e5be336326ea525da13eaa65d17870cc6df3e99a53f27f42f65f",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 14,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": false
+    },
+    {
+      "file": "03-scan-advanced.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "6a471505a09765e71336a14c76f9afeab4c2a94090d11a28464d08fe86a7362b",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 168,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": false
+    },
+    {
+      "file": "04-dashboard-candidates.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "b8fec58582d77ac9714c15143f206e58e99420634a4ba567bc5f89d71dfae51b",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 370,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          530
+        ]
+      },
+      "visually_reviewed": false
+    },
+    {
+      "file": "05-exact-members-expanded.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "c20494c46380a8206984ef9b412230f8296edfca022451882eb1c669e5eeb416",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 341,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": false
+    },
+    {
+      "file": "06-internal-enlarged-preview.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1000,
+        760
+      ],
+      "dpr": 1.0,
+      "sha256": "167c94e6470b58fed8bc315fc058cc3f87d891859ebe538c35f8af9f11257823",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 341,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": false
+    },
+    {
+      "file": "07-actual-photo-details.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "5010a17d9ea7c9496695ee8b1aabe042150896d57a128de19de37f0061ebf356",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 422,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": false
+    },
+    {
+      "file": "08-sr-review.png",
+      "fixture": "real",
+      "language": "sr_Latn",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "1d4e440e7a1c9c8b8587c690de392106307ba6cd94b5ed636f619e4f863d3dac",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 406,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": false
+    },
+    {
+      "file": "09-sr-settings-advanced.png",
+      "fixture": "real",
+      "language": "sr_Latn",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "72d22f1d46ac19aa4b54db99952e16209a4d6d11456d00f88efb20b989315085",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 734,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": false
+    },
+    {
+      "file": "10-settings-diagnostic.png",
+      "fixture": "presentation only: injected diagnostic, no failed write",
+      "language": "sr_Latn",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "ebc95de41847d2fefb2c779ecf96a47d26b1f51dd16c64e7dde445451c510281",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 988,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": false
+    },
+    {
+      "file": "11-duplicates-no-matches.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "c7ee5d5b8045fcc19dfc95bb5a170a4fddc910a735103352ff804e12f85ef9cb",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1024,
+          531
+        ]
+      },
+      "visually_reviewed": false
+    },
+    {
+      "file": "12-dashboard-no-matches.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "3091ad7c200c18190d43296b8ce22bc803f3abfdb84aa994e77f37d9315b5e93",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1024,
+          530
+        ]
+      },
+      "visually_reviewed": false
+    },
+    {
+      "file": "13-scan-actual-error-details.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "231739bf0a46cb96b29388278e2df8b72dc232a9e0774e02344d5d63af3aba7e",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 500,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": false
+    },
+    {
+      "file": "14-settings-current-sources.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "f9ddb542d9ce0883c880ed93eebb5270d5c8282c777fa7c2df10ed56ae559cae",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 753,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": false
+    }
+  ],
+  "checks": [
+    "Current preview double-click: no OS launch, keeper change, plan or enlarged viewer",
+    "All five generated original files remain byte-identical; no quarantine operations"
+  ],
+  "method": "Real Qt widgets/workers; QWidget.grab; offscreen Fusion, DPR 1. QTest double-click with mocked OS adapter. No moves in this supplement.",
+  "displayed_pairs": [
+    {
+      "id": 1,
+      "keeper_id": 1,
+      "match": {
+        "kind": "EXACT",
+        "keep": {
+          "path": "C:\\WINDOWS\\Temp\\photoagent-task014-ufiq06xl\\synthetic-photos\\a-original.png",
+          "root": "C:\\WINDOWS\\Temp\\photoagent-task014-ufiq06xl\\synthetic-photos",
+          "snapshot": {
+            "identity": {
+              "device": 11581071560873282802,
+              "inode": 844424933555571
+            },
+            "size": 13586,
+            "mtime_ns": 1794331788254719000,
+            "ctime_ns": 1794331788254719000,
+            "sha256": "3fc9d1a9eaf3545576d14ebc651cb4073f3941b964709a1d4af9f9520c396473"
+          },
+          "root_identity": {
+            "device": 11581071560873282802,
+            "inode": 844424933555570
+          },
+          "width": 640,
+          "height": 480,
+          "phash": "afb7c04a89e895cc",
+          "dhash": "695f5e4b49052773",
+          "is_raw": false,
+          "ext": ".png",
+          "decode_error": "",
+          "image_format": "PNG"
+        },
+        "dup": {
+          "path": "C:\\WINDOWS\\Temp\\photoagent-task014-ufiq06xl\\synthetic-photos\\b-copy.png",
+          "root": "C:\\WINDOWS\\Temp\\photoagent-task014-ufiq06xl\\synthetic-photos",
+          "snapshot": {
+            "identity": {
+              "device": 11581071560873282802,
+              "inode": 844424933555573
+            },
+            "size": 13586,
+            "mtime_ns": 1794331788254719000,
+            "ctime_ns": 1794331788254719000,
+            "sha256": "3fc9d1a9eaf3545576d14ebc651cb4073f3941b964709a1d4af9f9520c396473"
+          },
+          "root_identity": {
+            "device": 11581071560873282802,
+            "inode": 844424933555570
+          },
+          "width": 640,
+          "height": 480,
+          "phash": "afb7c04a89e895cc",
+          "dhash": "695f5e4b49052773",
+          "is_raw": false,
+          "ext": ".png",
+          "decode_error": "",
+          "image_format": "PNG"
+        },
+        "ph_distance": 0,
+        "dh_distance": 0
+      }
+    },
+    {
+      "id": 2,
+      "keeper_id": 1,
+      "match": {
+        "kind": "EXACT",
+        "keep": {
+          "path": "C:\\WINDOWS\\Temp\\photoagent-task014-ufiq06xl\\synthetic-photos\\a-original.png",
+          "root": "C:\\WINDOWS\\Temp\\photoagent-task014-ufiq06xl\\synthetic-photos",
+          "snapshot": {
+            "identity": {
+              "device": 11581071560873282802,
+              "inode": 844424933555571
+            },
+            "size": 13586,
+            "mtime_ns": 1794331788254719000,
+            "ctime_ns": 1794331788254719000,
+            "sha256": "3fc9d1a9eaf3545576d14ebc651cb4073f3941b964709a1d4af9f9520c396473"
+          },
+          "root_identity": {
+            "device": 11581071560873282802,
+            "inode": 844424933555570
+          },
+          "width": 640,
+          "height": 480,
+          "phash": "afb7c04a89e895cc",
+          "dhash": "695f5e4b49052773",
+          "is_raw": false,
+          "ext": ".png",
+          "decode_error": "",
+          "image_format": "PNG"
+        },
+        "dup": {
+          "path": "C:\\WINDOWS\\Temp\\photoagent-task014-ufiq06xl\\synthetic-photos\\c-copy.png",
+          "root": "C:\\WINDOWS\\Temp\\photoagent-task014-ufiq06xl\\synthetic-photos",
+          "snapshot": {
+            "identity": {
+              "device": 11581071560873282802,
+              "inode": 844424933555574
+            },
+            "size": 13586,
+            "mtime_ns": 1794331788254719000,
+            "ctime_ns": 1794331788254719000,
+            "sha256": "3fc9d1a9eaf3545576d14ebc651cb4073f3941b964709a1d4af9f9520c396473"
+          },
+          "root_identity": {
+            "device": 11581071560873282802,
+            "inode": 844424933555570
+          },
+          "width": 640,
+          "height": 480,
+          "phash": "afb7c04a89e895cc",
+          "dhash": "695f5e4b49052773",
+          "is_raw": false,
+          "ext": ".png",
+          "decode_error": "",
+          "image_format": "PNG"
+        },
+        "ph_distance": 0,
+        "dh_distance": 0
+      }
+    }
+  ]
+}

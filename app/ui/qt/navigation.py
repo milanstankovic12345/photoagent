@@ -1,12 +1,13 @@
 """Named destinations and a local, keyboard-accessible sidebar. No service calls."""
 from enum import StrEnum
 
-from PySide6.QtCore import QSize, Qt, Signal
+from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QIcon, QKeyEvent
 from PySide6.QtWidgets import (QHBoxLayout, QLabel, QPushButton,
-                              QStyle, QVBoxLayout, QWidget)
+                              QVBoxLayout, QWidget)
 
 from app.ui.qt.components import style_button, text_label
+from app.ui.qt.icons import set_icon
 from app.ui.qt.localization import set_text, with_text
 from app.ui.qt.strings import tr
 
@@ -37,8 +38,7 @@ class Sidebar(QWidget):
         # Keep every destination in the Tab chain; select() owns the one checked
         # item rather than relying on radio-style QButtonGroup focus handling.
         self.buttons: dict[Route, QPushButton] = {}
-        icons = (QStyle.SP_ComputerIcon, QStyle.SP_DirOpenIcon, QStyle.SP_FileDialogContentsView,
-                 QStyle.SP_DriveHDIcon, QStyle.SP_FileDialogDetailedView)
+        icons = ('dashboard', 'scan', 'duplicates', 'quarantine', 'settings')
         for route, icon in zip(Route, icons):
             if route == Route.SETTINGS:
                 layout.addStretch(1)
@@ -46,8 +46,7 @@ class Sidebar(QWidget):
             style_button(control)
             control.setProperty('navigation', True)
             control.setCheckable(True)
-            control.setIcon(self.style().standardIcon(icon))
-            control.setIconSize(QSize(24, 24))
+            set_icon(control, icon)
             control.clicked.connect(lambda checked=False, destination=route: self.activated.emit(destination))
             self.buttons[route] = control
             layout.addWidget(control)

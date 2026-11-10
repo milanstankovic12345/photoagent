@@ -1,1 +1,21 @@
-<RCC><qresource prefix="/photoagent"><file>photoagent.svg</file><file>check.svg</file><file>expand.svg</file><file>collapse.svg</file></qresource></RCC>
+<RCC>
+  <qresource prefix="/photoagent">
+    <file>photoagent.svg</file>
+    <file>check.svg</file>
+    <file>dashboard.svg</file>
+    <file>scan.svg</file>
+    <file>duplicates.svg</file>
+    <file>quarantine.svg</file>
+    <file>settings.svg</file>
+    <file>search.svg</file>
+    <file>filter.svg</file>
+    <file>sort.svg</file>
+    <file>theme.svg</file>
+    <file>language.svg</file>
+    <file>open_external.svg</file>
+    <file>restore.svg</file>
+    <file>expand.svg</file>
+    <file>collapse.svg</file>
+    <file>folder.svg</file>
+  </qresource>
+</RCC>

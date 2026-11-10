@@ -59,6 +59,7 @@ htmlcov/
 !/docs/design/ACCESSIBILITY.md
 !/docs/design/TASK011_VERIFICATION.md
 !/docs/design/TASK012_VERIFICATION.md
+!/docs/design/UI_REFINEMENT_PLAN.md
 !/docs/design/verification/
 /docs/design/verification/*
 !/docs/design/verification/task004/
@@ -66,6 +67,8 @@ htmlcov/
 !/docs/design/verification/task010/
 !/docs/design/verification/prompt-6.1/
 !/docs/design/verification/task012/
+!/docs/design/verification/task014-20261110/
+!/docs/design/verification/task015-20261110/
 /docs/design/verification/task012/*
 !/docs/design/verification/task012/current/
 /demo_photo_collection/

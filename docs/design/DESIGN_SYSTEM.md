@@ -1,4 +1,57 @@
-﻿# Task005 — Qt design system
+﻿# Qt design system
+
+## Task015 — surfaces, borders and local line icons (2026-11-10)
+
+The existing `themes.py` remains the only theme system. Its four surface levels
+are `background` (page), `surface` (inputs, tables, menus and dialogs), `elevated`
+(cards) and `selection` (selected rows and choices). `hover` is a transient state,
+not another permanent container level. Light cards are white over a pale page;
+Dark cards use the existing raised navy. Decorative `border` separators stay
+subtle; `control_border` and `focus` retain >=3:1 contrast on relevant surfaces.
+Text/secondary text and action foregrounds retain >=4.5:1 contrast.
+
+Spacing stays 4/8/12/16/24/32 logical px; shared card/preview insets use those
+tokens. Radii are 8 controls/badges and 12 cards, including painted group cards.
+Buttons and inputs reserve a fixed 1 px outline and remain at least 36 px high.
+Hover, focus, disabled and checked states change colors without changing padding
+or border width. Checkboxes and item focus retain their fixed 2 px outlines.
+Selected navigation has a visible contour; its keyboard focus can override that
+contour. Qt checked state remains available to accessibility APIs.
+
+`CollapsibleSection` is a frameless section with a named disclosure button,
+spacing and typography. Photo details no longer add another card frame; embedded
+preview/source containers hide decorative outer outlines while retaining focus.
+Unfocused navigation/disclosure buttons have transparent outlines. Main page
+layouts, navigation width and safety/confirmation behavior are unchanged.
+
+`icons.py` supplies one original local SVG family: 24-unit viewBox, 1.75-unit
+round strokes and 20 logical px optical size. SVGs are embedded in the existing
+Qt resource module. A small QIconEngine colors them at paint time, including
+disabled, primary/danger, selected and HiDPI rendering. Existing controls recolor
+when System changes without rebuilding choices or losing selection. See
+[ICONS.md](../../app/ui/qt/resources/ICONS.md) for CC0 provenance and regeneration.
+
+| Role | Current usage |
+|---|---|
+| Dashboard, Scan, Duplicates, Quarantine, Settings | Five sidebar destinations and relevant existing actions |
+| Search, Filter, Sort | Existing search field and filter/sort controls; all combo choices retain icons |
+| Theme, Language | Existing preference selectors, using stable item data |
+| Open externally | Existing reports/quarantine folder actions only; photograph opening remains Task021 |
+| Restore | Existing history/context restore actions |
+| Collapse/expand, Folder | Shared sections and source controls |
+
+Icons supplement localized text and accessible names. No new copy, translations,
+fonts, dependencies or network access are introduced. The brand and checkbox mark
+are preserved. Platform warning symbols in safety messages remain distinct from
+action/navigation icons.
+
+New rendering, keyboard, contrast, live EN/SR/System and geometry tests are in
+`tests/test_qt_design_system.py`. Task015 evidence and exact executed results are
+in [verification/task015-20261110/README.md](verification/task015-20261110/README.md).
+These are offscreen Windows/Fusion checks, not physical DPI or screen-reader
+certification. The Task005 notes below describe the original baseline.
+
+## Task005 baseline
 
 Stage B implemented 2026-11-09. The local target_reference.png was inspected for navy surfaces, card hierarchy and photo emphasis. Its photos and counts are illustrative. Screen layout/navigation remain Task006–009.
 

@@ -15,6 +15,7 @@ from app.core.queries import HistoryEntry, MatchingOptions, PageResult, StorageS
 from app.ui.qt.components import (Card, CollapsibleSection, ContextToolbar, EmptyState,
                                   TechnicalDetails, ThemeSelector, button, path_label, text_label)
 from app.ui.qt.localization import set_text, text_of, add_item, language_manager
+from app.ui.qt.icons import set_combo_icon
 from app.ui.qt.strings import tr, join_text
 from app.ui.qt.formatting import FormattedText, number_text
 
@@ -202,6 +203,7 @@ class SettingsScreen(QWidget):
         set_text(self.language, tr('settings_language'), 'setAccessibleName')
         add_item(self.language, tr('language_english'), 'en')
         add_item(self.language, tr('language_serbian'), 'sr_Latn')
+        set_combo_icon(self.language, 'language')
         self.language.currentIndexChanged.connect(language_changed)
         language.addWidget(self.language)
         scanning = section('settings_scanning', 'settings_roots')

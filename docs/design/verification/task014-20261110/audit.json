@@ -1,0 +1,5139 @@
+{
+  "task": "Task014",
+  "date_local": "2026-11-10",
+  "timezone": "Europe/Belgrade",
+  "source_commit": "95d5698eccd9335d115c77728b8f76feb1411cf5",
+  "initial_git_status": "clean",
+  "production_code_changed": false,
+  "created_at_utc": "2026-11-10T17:32:21.975153+00:00",
+  "references": [
+    {
+      "file": "docs/design/target_reference.png",
+      "exists": true,
+      "sha256": "afe27eb68af751335b0ff9d90c7521182471509177251941e2a16f121e996df1",
+      "visually_reviewed": true,
+      "role": "provided historical/concept reference; not current-run evidence"
+    },
+    {
+      "file": "docs/design/current_ui.png",
+      "exists": true,
+      "sha256": "908c44028672843e508bf7993c10ccd9be316641d401a1decde2f40fbd75a051",
+      "visually_reviewed": true,
+      "role": "provided historical/concept reference; not current-run evidence"
+    },
+    {
+      "file": "docs/design/reference_sidebar_icons.png",
+      "exists": true,
+      "sha256": "1988c347d6bf8f346209a8dc2c2932144eef911ceeb173e6932a390bf20f9ac5",
+      "visually_reviewed": true,
+      "role": "provided historical/concept reference; not current-run evidence"
+    }
+  ],
+  "runs": [
+    {
+      "manifest": "baseline/manifest.json",
+      "sha256": "0a80d6760ee107c0c50feb471b9945271d30184b186a9951f4269ed94245cafc",
+      "capture_count": 116,
+      "checks": [
+        "Rejected confirmation left every original byte unchanged",
+        "Approved synthetic move, fresh MainWindow restart, conflict refusal, approved restore",
+        "Restored originals byte-identical; conflicting synthetic content preserved separately",
+        "Actual incomplete scan refused bulk; RAW decode failure visible",
+        "Saved Light and custom 13/17 survived restart; injected System changes/fallback rendered",
+        "All 48 matrix page/comparison geometries passed at this Qt DPR"
+      ],
+      "python": "3.12.10",
+      "qt": "6.12.0",
+      "platform": "Windows",
+      "qt_platform": "offscreen"
+    },
+    {
+      "manifest": "supplement-r2/manifest.json",
+      "sha256": "41d842aa4c7219b9f7ba971fdf54ed924e187539793f9d1482641a7f351c8299",
+      "capture_count": 14,
+      "checks": [
+        "Current preview double-click: no OS launch, keeper change, plan or enlarged viewer",
+        "All five generated original files remain byte-identical; no quarantine operations"
+      ],
+      "python": null,
+      "qt": null,
+      "platform": null,
+      "qt_platform": null
+    }
+  ],
+  "captures": [
+    {
+      "file": "baseline/dark-dashboard-empty.png",
+      "theme": "dark",
+      "state": "dark-dashboard-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          710
+        ]
+      },
+      "sha256": "20eec5641de1ce3d3477719d5048684fded6b165c882a711c04b25eed7555818",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-01.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-dashboard-empty.png",
+      "theme": "light",
+      "state": "light-dashboard-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          710
+        ]
+      },
+      "sha256": "051032d5e665d732bccae3e9018e9b24ebb12e5147740245098dfdb627c84f4c",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-01.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-scan-empty.png",
+      "theme": "dark",
+      "state": "dark-scan-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "c0ce8bda29268403c528e4c0fa90d0a2679c0562a1e9e3ad36212e4047005910",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-01.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-scan-empty.png",
+      "theme": "light",
+      "state": "light-scan-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "80be247ff54a2e5161877814ffeb42b6a52a4c81158605b41d45a5251b3a2b31",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-01.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-duplicates-empty.png",
+      "theme": "dark",
+      "state": "dark-duplicates-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "35dd1e9d144cadacc880db37e4505e0fdd300cdb3412a1268cb7e2e8e09550a1",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-01.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-duplicates-empty.png",
+      "theme": "light",
+      "state": "light-duplicates-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "eed387ebbb9ac4c25c7b406c4f5247846e0f073d8ff8f775d9246e5c3a0d30c0",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-01.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-history-empty.png",
+      "theme": "dark",
+      "state": "dark-history-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "622c59d1c940fb5efc2477d040e9be29628ffc628fa129925598c294232f0b11",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-01.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-history-empty.png",
+      "theme": "light",
+      "state": "light-history-empty",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "04546c88141e12cfa20a9f324c26364b1530cde3772845442d509e96d18f4e5c",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-01.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-scan-sources.png",
+      "theme": "dark",
+      "state": "dark-scan-sources",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "d68c511383037ac28c3404c9e6969d8421b81746fb10b9d3f179d1cc7cb188ad",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-02.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-scan-sources.png",
+      "theme": "light",
+      "state": "light-scan-sources",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "da2c10d4dacd2e637d2b2ddb28736885a82f3d10a99eccb5a0ed4b1d90149571",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-02.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-scan-running.png",
+      "theme": "dark",
+      "state": "dark-scan-running",
+      "fixture": "delayed extraction",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "93bfa1a9198c9177891e5ff3b41a023a3a1b8ae2d88806968dc3de44cad135e1",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-02.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-scan-cancelled.png",
+      "theme": "dark",
+      "state": "dark-scan-cancelled",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "16e283538b3c1dde2a558b7a84f4dbe0994f76ab10ea833e346020ece95783b1",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-02.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-scan-running.png",
+      "theme": "light",
+      "state": "light-scan-running",
+      "fixture": "delayed extraction",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "23e1b6f3f3dc9a9c46d6628598d490bf851687d7446c1ad1ba2a2893389e37fa",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-02.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-scan-cancelled.png",
+      "theme": "light",
+      "state": "light-scan-cancelled",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "410f943f441f0a3038f88659411d754cc732778a64a374d2ef93aaccd4624e76",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-02.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-scan-complete.png",
+      "theme": "dark",
+      "state": "dark-scan-complete",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "dc839fb577c82d2a3027ddd24410563a1162e1210f19d5b11b80587a114fbc8c",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-02.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-scan-complete.png",
+      "theme": "light",
+      "state": "light-scan-complete",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "0eb644c51adbe2e52a5b77ee91e1e2fad02669eb31615cbbaf7e29d7c847d450",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-02.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-duplicates-list.png",
+      "theme": "dark",
+      "state": "dark-duplicates-list",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 7,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "f6cbd771b0e52b5f3ef1a85f24f915eb9a79874fc4e34e6ff9433828ebf958d6",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-03.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-duplicates-list.png",
+      "theme": "light",
+      "state": "light-duplicates-list",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 7,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "9318893f82ab9cc995de879d9d314f6e34015cb313bc8f0778944ff97c481ccf",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-03.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-duplicates-filtered.png",
+      "theme": "dark",
+      "state": "dark-duplicates-filtered",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "cdf2231464485a4b659ae7427e45b637ce76b55cfd39619a81bd7de259c46a6a",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-03.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-duplicates-filtered.png",
+      "theme": "light",
+      "state": "light-duplicates-filtered",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "a79010b1081ea3de1499dad34895d362e6b3be658b2683cb48abc3db5d846ffa",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-03.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1280-dark-dashboard.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-dashboard",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 370,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          530
+        ]
+      },
+      "sha256": "d3d8c84ca0db3afbfdf759562dc1aaf42a6a2b2ceabb0d7c25bea5d889e7b48a",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-03.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1280-dark-scan.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-scan",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 119,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "c5c11b0bd77d7b0b7dc1b65e264c397f0900a7fac1256a1feeeb1cdcfb6e0cec",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-03.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1280-dark-duplicates.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-duplicates",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 187,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "df3aa63fe0f71a8115d35aa8e1fd2859c4ca73234f31c29ceb712253aba27ffa",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-03.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1280-dark-history.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-history",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1024,
+          531
+        ]
+      },
+      "sha256": "03f556608cbd47eadbce946429e1c769c45b72b31f5b659ddb7d44191c2a17f1",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-03.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1280-dark-settings.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-settings",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 634,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "256e2c932a89079d0a305f8d7e80e5e3bef39725b8fc5d358e5f0341447a22ba",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-04.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1280-dark-compare.png",
+      "theme": "dark",
+      "state": "matrix-1280-dark-compare",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 149,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "ad63a68d914811aa61f39bd49aa1aed95a68ef10d9c3675ff0a7b7ce9e0ecfd4",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-04.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1280-light-dashboard.png",
+      "theme": "light",
+      "state": "matrix-1280-light-dashboard",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 370,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          530
+        ]
+      },
+      "sha256": "49925c73de01e3736e8206c8685ab536e9d5bf74ca1527a48bc27f24f45d666a",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-04.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1280-light-scan.png",
+      "theme": "light",
+      "state": "matrix-1280-light-scan",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 119,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "3feaafb4c9276d9c7ef3f40052fbf83e47a5bc5f88bea4057c891a12aa726433",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-04.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1280-light-duplicates.png",
+      "theme": "light",
+      "state": "matrix-1280-light-duplicates",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 187,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "35447a0c5c957d89addbabf4b980ea1ba6123a963db59492207e34f55dc72f28",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-04.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1280-light-history.png",
+      "theme": "light",
+      "state": "matrix-1280-light-history",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1024,
+          531
+        ]
+      },
+      "sha256": "36d409d59c7a9cb5f2676d1b9651538977144cacd04b952cde72ee8b8a3fc962",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-04.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1280-light-settings.png",
+      "theme": "light",
+      "state": "matrix-1280-light-settings",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 634,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "a1e1ad8f089ed88870ca6fa9bafe3922c62e24e3891c0084bf493a99340f15d7",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-04.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1280-light-compare.png",
+      "theme": "light",
+      "state": "matrix-1280-light-compare",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1280,
+        720
+      ],
+      "logical_size": [
+        1280,
+        720
+      ],
+      "window_logical": [
+        1280,
+        720
+      ],
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 133,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "sha256": "913b8360121cadc2d0b4b96d616b38b616e6dab1e4ef3f62e87cf29b3f40c3fa",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-04.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1366-dark-dashboard.png",
+      "theme": "dark",
+      "state": "matrix-1366-dark-dashboard",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1366,
+        768
+      ],
+      "logical_size": [
+        1366,
+        768
+      ],
+      "window_logical": [
+        1366,
+        768
+      ],
+      "pixel_size": [
+        1366,
+        768
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 322,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1096,
+          578
+        ]
+      },
+      "sha256": "f23a9b6d69f4a412421d07e848cd3b57ffe5a28d0a603cc8b2a5ee821630bf35",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-05.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1366-dark-scan.png",
+      "theme": "dark",
+      "state": "matrix-1366-dark-scan",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1366,
+        768
+      ],
+      "logical_size": [
+        1366,
+        768
+      ],
+      "window_logical": [
+        1366,
+        768
+      ],
+      "pixel_size": [
+        1366,
+        768
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 71,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1096,
+          579
+        ]
+      },
+      "sha256": "97115710f31962ea8d8abe267390aef2bf622f0401fafadbd3d8f3240157304f",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-05.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1366-dark-duplicates.png",
+      "theme": "dark",
+      "state": "matrix-1366-dark-duplicates",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1366,
+        768
+      ],
+      "logical_size": [
+        1366,
+        768
+      ],
+      "window_logical": [
+        1366,
+        768
+      ],
+      "pixel_size": [
+        1366,
+        768
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 139,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1096,
+          579
+        ]
+      },
+      "sha256": "5a79828979a74882cda3555865dc1b33ad37c8a332b89c811ab1bdb6dac83fb1",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-05.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1366-dark-history.png",
+      "theme": "dark",
+      "state": "matrix-1366-dark-history",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1366,
+        768
+      ],
+      "logical_size": [
+        1366,
+        768
+      ],
+      "window_logical": [
+        1366,
+        768
+      ],
+      "pixel_size": [
+        1366,
+        768
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1110,
+          579
+        ]
+      },
+      "sha256": "e2278473b69bccc6130a5ed2fe89c6d916ed9d4fdd4ff76fd88f393354831438",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-05.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1366-dark-settings.png",
+      "theme": "dark",
+      "state": "matrix-1366-dark-settings",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1366,
+        768
+      ],
+      "logical_size": [
+        1366,
+        768
+      ],
+      "window_logical": [
+        1366,
+        768
+      ],
+      "pixel_size": [
+        1366,
+        768
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 586,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1096,
+          579
+        ]
+      },
+      "sha256": "195a6df4ceb4974d1c2189a62aaa816f2b4088c310b499749cb9f1a2c8f10700",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-05.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1366-dark-compare.png",
+      "theme": "dark",
+      "state": "matrix-1366-dark-compare",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1366,
+        768
+      ],
+      "logical_size": [
+        1366,
+        768
+      ],
+      "window_logical": [
+        1366,
+        768
+      ],
+      "pixel_size": [
+        1366,
+        768
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 113,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1096,
+          579
+        ]
+      },
+      "sha256": "a684df506530529f85000f55fc8473212c052845b6f40c22a2ceb24dfe1d6a22",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-05.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1366-light-dashboard.png",
+      "theme": "light",
+      "state": "matrix-1366-light-dashboard",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1366,
+        768
+      ],
+      "logical_size": [
+        1366,
+        768
+      ],
+      "window_logical": [
+        1366,
+        768
+      ],
+      "pixel_size": [
+        1366,
+        768
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 322,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1096,
+          578
+        ]
+      },
+      "sha256": "5b77b914b4de9b4cc39b52e53e17635e965c97a2111bccbd96db1c89551d8dbb",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-05.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1366-light-scan.png",
+      "theme": "light",
+      "state": "matrix-1366-light-scan",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1366,
+        768
+      ],
+      "logical_size": [
+        1366,
+        768
+      ],
+      "window_logical": [
+        1366,
+        768
+      ],
+      "pixel_size": [
+        1366,
+        768
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 71,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1096,
+          579
+        ]
+      },
+      "sha256": "c12c363202abc051132dcb4400434a5aed2c2e698951630e0f8ae2d2177aed06",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-05.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1366-light-duplicates.png",
+      "theme": "light",
+      "state": "matrix-1366-light-duplicates",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1366,
+        768
+      ],
+      "logical_size": [
+        1366,
+        768
+      ],
+      "window_logical": [
+        1366,
+        768
+      ],
+      "pixel_size": [
+        1366,
+        768
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 139,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1096,
+          579
+        ]
+      },
+      "sha256": "272a420efee120073715adac6405c546fb84a2ed015daa7e53c6372e7f62517e",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-06.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1366-light-history.png",
+      "theme": "light",
+      "state": "matrix-1366-light-history",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1366,
+        768
+      ],
+      "logical_size": [
+        1366,
+        768
+      ],
+      "window_logical": [
+        1366,
+        768
+      ],
+      "pixel_size": [
+        1366,
+        768
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1110,
+          579
+        ]
+      },
+      "sha256": "8bd19b58caf480613f28867d494e00995fa426b3202703f51e6ea71e831d0447",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-06.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1366-light-settings.png",
+      "theme": "light",
+      "state": "matrix-1366-light-settings",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1366,
+        768
+      ],
+      "logical_size": [
+        1366,
+        768
+      ],
+      "window_logical": [
+        1366,
+        768
+      ],
+      "pixel_size": [
+        1366,
+        768
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 586,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1096,
+          579
+        ]
+      },
+      "sha256": "f086cc9efd1938a1901c93fffa8fcbe2ba3585a874db6e33e1ad7ccadf2b0067",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-06.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1366-light-compare.png",
+      "theme": "light",
+      "state": "matrix-1366-light-compare",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1366,
+        768
+      ],
+      "logical_size": [
+        1366,
+        768
+      ],
+      "window_logical": [
+        1366,
+        768
+      ],
+      "pixel_size": [
+        1366,
+        768
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 117,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1096,
+          579
+        ]
+      },
+      "sha256": "e393952eb00191aa0e504100548946849faba24d698f8dbb02c5ff035b201a03",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-06.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1650-dark-dashboard.png",
+      "theme": "dark",
+      "state": "matrix-1650-dark-dashboard",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 190,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          710
+        ]
+      },
+      "sha256": "cc14ef8923e86e2a224352b28a806d973f61be60e8a18d53e136a521844fc30f",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-06.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1650-dark-scan.png",
+      "theme": "dark",
+      "state": "matrix-1650-dark-scan",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "dc839fb577c82d2a3027ddd24410563a1162e1210f19d5b11b80587a114fbc8c",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-06.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1650-dark-duplicates.png",
+      "theme": "dark",
+      "state": "matrix-1650-dark-duplicates",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 7,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "bbc705e9772c50b8715d9be51be2879523deed68168867065684bd4fbf39f87a",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-06.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1650-dark-history.png",
+      "theme": "dark",
+      "state": "matrix-1650-dark-history",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "622c59d1c940fb5efc2477d040e9be29628ffc628fa129925598c294232f0b11",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-06.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1650-dark-settings.png",
+      "theme": "dark",
+      "state": "matrix-1650-dark-settings",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 420,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "8a9970687d18a9c2b3e5da34a022ed9e63f9fbb8992b55fec155a99a29732f3f",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-07.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1650-dark-compare.png",
+      "theme": "dark",
+      "state": "matrix-1650-dark-compare",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "8295cff6a8706c8edf490ee076f37b7d744bfb1f58f4b7e3f900ba1d0ff65358",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-07.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1650-light-dashboard.png",
+      "theme": "light",
+      "state": "matrix-1650-light-dashboard",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 190,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          710
+        ]
+      },
+      "sha256": "92a23a6270397d78505eb33599499928b64454dc02aa15256952f507fdd357d6",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-07.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1650-light-scan.png",
+      "theme": "light",
+      "state": "matrix-1650-light-scan",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "0eb644c51adbe2e52a5b77ee91e1e2fad02669eb31615cbbaf7e29d7c847d450",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-07.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1650-light-duplicates.png",
+      "theme": "light",
+      "state": "matrix-1650-light-duplicates",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 7,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "03a87e5200234dd1c5edc4f95741e88f022b502b25348904a0ec8a19a4da1b1d",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-07.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1650-light-history.png",
+      "theme": "light",
+      "state": "matrix-1650-light-history",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "04546c88141e12cfa20a9f324c26364b1530cde3772845442d509e96d18f4e5c",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-07.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1650-light-settings.png",
+      "theme": "light",
+      "state": "matrix-1650-light-settings",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 420,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "a063d3219836aa6ea002a4ff056066a973ea63a8c30ba3c28945157a81dccf18",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-07.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1650-light-compare.png",
+      "theme": "light",
+      "state": "matrix-1650-light-compare",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "9759b4abc341768bbb747bfc98f477293acb71b7c446656d776c6bdd9a9553e6",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-07.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1920-dark-dashboard.png",
+      "theme": "dark",
+      "state": "matrix-1920-dark-dashboard",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1920,
+        1080
+      ],
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "window_logical": [
+        1920,
+        1080
+      ],
+      "pixel_size": [
+        1920,
+        1080
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1664,
+          890
+        ]
+      },
+      "sha256": "5fce1db6d5c5cfc5ecb41aa37fbf06a8fc1f264232fe99195fe29dcc03424699",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-08.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1920-dark-scan.png",
+      "theme": "dark",
+      "state": "matrix-1920-dark-scan",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1920,
+        1080
+      ],
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "window_logical": [
+        1920,
+        1080
+      ],
+      "pixel_size": [
+        1920,
+        1080
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1664,
+          891
+        ]
+      },
+      "sha256": "db2e0cc9a00c46fd076a26da1eead7ec8c60e4ca3b865a70048236ce6ad4f5da",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-08.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1920-dark-duplicates.png",
+      "theme": "dark",
+      "state": "matrix-1920-dark-duplicates",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1920,
+        1080
+      ],
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "window_logical": [
+        1920,
+        1080
+      ],
+      "pixel_size": [
+        1920,
+        1080
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1664,
+          891
+        ]
+      },
+      "sha256": "9227702e35d008158c8755a1434619873c059df0e3ed5b0cf9bf7e1a4e46165a",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-08.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1920-dark-history.png",
+      "theme": "dark",
+      "state": "matrix-1920-dark-history",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1920,
+        1080
+      ],
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "window_logical": [
+        1920,
+        1080
+      ],
+      "pixel_size": [
+        1920,
+        1080
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1664,
+          891
+        ]
+      },
+      "sha256": "7826b52d121a22526d3f6d93fad5b8c1efa7730688b55d91364486b424c11c9d",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-08.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1920-dark-settings.png",
+      "theme": "dark",
+      "state": "matrix-1920-dark-settings",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1920,
+        1080
+      ],
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "window_logical": [
+        1920,
+        1080
+      ],
+      "pixel_size": [
+        1920,
+        1080
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 223,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1650,
+          891
+        ]
+      },
+      "sha256": "159f730d44ddbfa8903898a45ee0a42ed5d6c1f46885ebc4f903075961430a1e",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-08.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1920-dark-compare.png",
+      "theme": "dark",
+      "state": "matrix-1920-dark-compare",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1920,
+        1080
+      ],
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "window_logical": [
+        1920,
+        1080
+      ],
+      "pixel_size": [
+        1920,
+        1080
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1664,
+          891
+        ]
+      },
+      "sha256": "84c5eea93200cb1c8aa95c1709198709b12d3c24e984323f8ed54bc83e884e31",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-08.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1920-light-dashboard.png",
+      "theme": "light",
+      "state": "matrix-1920-light-dashboard",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1920,
+        1080
+      ],
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "window_logical": [
+        1920,
+        1080
+      ],
+      "pixel_size": [
+        1920,
+        1080
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1664,
+          890
+        ]
+      },
+      "sha256": "bbc20766976a86838bf3dc96530db7057ba581ac5dfb50d12924461a0415588f",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-08.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1920-light-scan.png",
+      "theme": "light",
+      "state": "matrix-1920-light-scan",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1920,
+        1080
+      ],
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "window_logical": [
+        1920,
+        1080
+      ],
+      "pixel_size": [
+        1920,
+        1080
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1664,
+          891
+        ]
+      },
+      "sha256": "f14654061557dbddce088747d4001155aeeed460166c95bb106d701094fbbfd5",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-08.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1920-light-duplicates.png",
+      "theme": "light",
+      "state": "matrix-1920-light-duplicates",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1920,
+        1080
+      ],
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "window_logical": [
+        1920,
+        1080
+      ],
+      "pixel_size": [
+        1920,
+        1080
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1664,
+          891
+        ]
+      },
+      "sha256": "beb00eeddcfef0b1ef67442f849097c1c6ff273da67e94b61c66ec4b2ef5e4f7",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-09.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1920-light-history.png",
+      "theme": "light",
+      "state": "matrix-1920-light-history",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1920,
+        1080
+      ],
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "window_logical": [
+        1920,
+        1080
+      ],
+      "pixel_size": [
+        1920,
+        1080
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1664,
+          891
+        ]
+      },
+      "sha256": "62aea579b69aa0244ce3ba2811ef3d3c3dbaccfcc99625c511a1084f16cff8a0",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-09.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1920-light-settings.png",
+      "theme": "light",
+      "state": "matrix-1920-light-settings",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1920,
+        1080
+      ],
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "window_logical": [
+        1920,
+        1080
+      ],
+      "pixel_size": [
+        1920,
+        1080
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 223,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1650,
+          891
+        ]
+      },
+      "sha256": "3bda0761b0941dc0ecb028dcc3206fc8b2bce4d3edc3cc0346d262dea5d5698f",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-09.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/matrix-1920-light-compare.png",
+      "theme": "light",
+      "state": "matrix-1920-light-compare",
+      "fixture": "real",
+      "matrix": true,
+      "target_physical": [
+        1920,
+        1080
+      ],
+      "logical_size": [
+        1920,
+        1080
+      ],
+      "window_logical": [
+        1920,
+        1080
+      ],
+      "pixel_size": [
+        1920,
+        1080
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1664,
+          891
+        ]
+      },
+      "sha256": "5acc987410df3a46d824a1bab661b565dd9b4e7655cb7cc426accc233b61ddc6",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-09.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-exact-three-members.png",
+      "theme": "dark",
+      "state": "dark-exact-three-members",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 7,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "83a6c970db788e87c446338f88ecb0d10f7b52c754d46ed0a8eb796ff47cb6dd",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-09.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-exact-three-members.png",
+      "theme": "light",
+      "state": "light-exact-three-members",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 7,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "3bcd485a00573ccf318bf3203c55e71832d5be0811ebb97b8ac9550e18cf9247",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-09.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-compare-keeper.png",
+      "theme": "dark",
+      "state": "dark-compare-keeper",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "d714d64437e9689516fa2f428630f78baf7add1949a8ab2d9e9ad669857eb84d",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-09.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-compare-keeper.png",
+      "theme": "light",
+      "state": "light-compare-keeper",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "2405b10ea4b1c89fcda1353f2fc2212bd7595b4d0bbfb45bd184790db9df6ec1",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-09.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-compare-keep-both.png",
+      "theme": "dark",
+      "state": "dark-compare-keep-both",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "0550c2e8b9b2c21665c588b71f3f5e78dc3babc7b718a631b403ec8f932fb7e3",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-10.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-compare-keep-both.png",
+      "theme": "light",
+      "state": "light-compare-keep-both",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "64dc030cfbf0ee949b53de103b9f45a5484585fa6930b3611fd99f4c70911101",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-10.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-compare-loading.png",
+      "theme": "dark",
+      "state": "dark-compare-loading",
+      "fixture": "presentation only",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "690e5659f4922e9982317404d8789b0b30f5fe6631ec3c557c9e8593d1f02174",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-10.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-compare-unavailable.png",
+      "theme": "dark",
+      "state": "dark-compare-unavailable",
+      "fixture": "presentation only",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "1cfbafb4fb332310568c99db088d36621c4079020c07aaa38d9c64c06feb5ed1",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-10.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-compare-details.png",
+      "theme": "dark",
+      "state": "dark-compare-details",
+      "fixture": "presentation only",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 363,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "ea6e373b12ad38ba333f6fa09fbb1952c97769c060bd7f686650f85e7d7bd3d0",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-10.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-compare-loading.png",
+      "theme": "light",
+      "state": "light-compare-loading",
+      "fixture": "presentation only",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 363,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "77b370ad18d2aa06fd66e301873b861d5147ace27b6757e0a6663a7f7564d2a3",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-10.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-compare-unavailable.png",
+      "theme": "light",
+      "state": "light-compare-unavailable",
+      "fixture": "presentation only",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 191,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "73fdc9c3392863fede4494e97703c9b14a8ac3c154e4abc9419a09da9fa44fe4",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-10.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-compare-details.png",
+      "theme": "light",
+      "state": "light-compare-details",
+      "fixture": "presentation only",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 363,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "61689c57011fccedb694196a567880043db20ac87dffa8b3236089e474ff9ea1",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-10.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-confirmation.png",
+      "theme": "dark",
+      "state": "dark-confirmation",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        752,
+        620
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        752,
+        620
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 363,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "628029793bd0ff363059663b97037ebd0164682f713709d91ef9a2026694a240",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-11.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-confirmation.png",
+      "theme": "light",
+      "state": "light-confirmation",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        752,
+        620
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        752,
+        620
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 363,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "7eec7ca2f63a04f17b6d9ec1bf179ae27e4b3dc6b205c2ff6b93e1845f3c3dee",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-11.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-confirmation-rejected.png",
+      "theme": "dark",
+      "state": "dark-confirmation-rejected",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 363,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "b5be1a1f0b06e1b81bf41f29ce22c49d59418842e485d1e6150f0a0e8d583dc6",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-11.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-confirmation-rejected.png",
+      "theme": "light",
+      "state": "light-confirmation-rejected",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 363,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "1c934b0ac364fcfc9a6c6081265e13a9b10edc0f7a2c056b8d779c028884cd59",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-11.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-confirmation-warnings.png",
+      "theme": "dark",
+      "state": "dark-confirmation-warnings",
+      "fixture": "presentation only; never executed",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        752,
+        620
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        752,
+        620
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 363,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "0a214826c64041ea0eeb284efaa5341f011305ceaf19e4fda8ea9cbff814da13",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-11.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-confirmation-warnings.png",
+      "theme": "light",
+      "state": "light-confirmation-warnings",
+      "fixture": "presentation only; never executed",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        752,
+        620
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        752,
+        620
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 363,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "503f80ac730bad462639f0db6da64651d81289f76017bd8d5564f2938c0f313e",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-11.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-history-populated.png",
+      "theme": "dark",
+      "state": "dark-history-populated",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "18ff199c8a08d087449bbfe9809e9a110c8acf013fc5ecdf5b225fe4aabfcb3b",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-11.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-history-populated.png",
+      "theme": "light",
+      "state": "light-history-populated",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "bed84d9d0f42b750af306818fea50b86e7492149164eaa1dce0097d8fb41a4e9",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-11.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-history-after-restart.png",
+      "theme": "dark",
+      "state": "dark-history-after-restart",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "38333b37c21e11cdb00affa2fd5d8386a2773d70a55ddc0d4acaf393df8246de",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-12.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-history-after-restart.png",
+      "theme": "light",
+      "state": "light-history-after-restart",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "5a839f1d5d00fedc5ecacc26351efe89e7790889568dd9db0b8e31de91dabc34",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-12.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-restore-conflict.png",
+      "theme": "dark",
+      "state": "dark-restore-conflict",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        400,
+        141
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        400,
+        141
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "53e8119ae603d20b826738186a20311346bf6a9babfe427b966fe787d9d249e1",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-12.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-restore-conflict.png",
+      "theme": "light",
+      "state": "light-restore-conflict",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        400,
+        141
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        400,
+        141
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "f4eeff47ce3ae3dce12a6fe716dc11948b130cbb23bf8b5da5ac9f6e7b7d3cde",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-12.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-restore-confirmation.png",
+      "theme": "dark",
+      "state": "dark-restore-confirmation",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        752,
+        620
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        752,
+        620
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "b90da5b3b3685fe175c996fadcff3bf4dc57363f54377b99e92013ba9dabbefa",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-12.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-restore-confirmation.png",
+      "theme": "light",
+      "state": "light-restore-confirmation",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        752,
+        620
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        752,
+        620
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "9dcc7d1a323da5fe67990db3f91d90e47405deafdc6c0200a791ca4d9b1ae89a",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-12.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-history-restored.png",
+      "theme": "dark",
+      "state": "dark-history-restored",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "ec27be535b3cc53ea54955ab6809d230771281f8b83ca9cf80d6d5fd27d611b1",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-12.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-history-restored.png",
+      "theme": "light",
+      "state": "light-history-restored",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "ad89b4959472a37b92c82f0d42743610803c4f133fc93c39df41bd11351fb881",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-12.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-visual-review.png",
+      "theme": "dark",
+      "state": "dark-visual-review",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "3ff5fe254a006a2f1a5363f2105d4db7fbfb4d75dfdc8f9d398b9d08a38eaf18",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-13.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-visual-review.png",
+      "theme": "light",
+      "state": "light-visual-review",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "bacde5a5b51088f9524554de9c04c6a11771d2e6ed9db1f45433b20d1fe5d391",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-13.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-scan-errors.png",
+      "theme": "dark",
+      "state": "dark-scan-errors",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "57c3eb3257fe35746d6bf980d012655782136415e8b47df73b7adf54b9c92fab",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-13.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-scan-errors.png",
+      "theme": "light",
+      "state": "light-scan-errors",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1394,
+          711
+        ]
+      },
+      "sha256": "85e8787942de8cce26e50c9b17d20292afc7f5f9ecefb975ca0e8232b3f56360",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-13.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-scan-error-details.png",
+      "theme": "dark",
+      "state": "dark-scan-error-details",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 247,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "d7820dd7673289e28b8fe2e926edb68d63ee113e5730beb8f331b3660200e524",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-13.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-scan-error-details.png",
+      "theme": "light",
+      "state": "light-scan-error-details",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 247,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "32029596463dce36633eebb876e611c83859f8df8ebfefcb8e7e77f65aece2fb",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-13.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-dashboard-incomplete.png",
+      "theme": "dark",
+      "state": "dark-dashboard-incomplete",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 269,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          710
+        ]
+      },
+      "sha256": "e4fae74434b866583ea17d263364afa028dc256a7e73d4c25370628f399d87d1",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-13.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-dashboard-incomplete.png",
+      "theme": "light",
+      "state": "light-dashboard-incomplete",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 269,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          710
+        ]
+      },
+      "sha256": "24c73454a8d40977344d6b6409210316b222d2c28212419375f0977cea631465",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-13.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-operation-refused.png",
+      "theme": "dark",
+      "state": "dark-operation-refused",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        400,
+        141
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        400,
+        141
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 269,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          710
+        ]
+      },
+      "sha256": "490579baea268f71918745b3c5e334df5596988134dfcbf4f658e534043361cd",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-14.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-operation-refused.png",
+      "theme": "light",
+      "state": "light-operation-refused",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        400,
+        141
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        400,
+        141
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 269,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          710
+        ]
+      },
+      "sha256": "e5e2c49ef428fe55994cb0936d08db7d4dcdfd4cb4b81d2ffb9b510010437bd5",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-14.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-settings-custom.png",
+      "theme": "dark",
+      "state": "dark-settings-custom",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 539,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "56e055dc85ef72ea91a6855bf2756675fcc9fad683bc094a51485c0cc64546c5",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-14.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-settings-custom.png",
+      "theme": "light",
+      "state": "light-settings-custom",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 539,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "762c34f2777b0157b00c75a4e1460ce63ddfd4be6e7bb87944e535f1b559d250",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-14.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-settings-matching.png",
+      "theme": "dark",
+      "state": "dark-settings-matching",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 539,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "56e055dc85ef72ea91a6855bf2756675fcc9fad683bc094a51485c0cc64546c5",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-14.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/dark-settings-storage-about.png",
+      "theme": "dark",
+      "state": "dark-settings-storage-about",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 539,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "6429102b70e5467da3ff445ec34bd9a9675c36f0b4f7e0ab64fbf220d9663512",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-14.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-settings-matching.png",
+      "theme": "light",
+      "state": "light-settings-matching",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 539,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "e4fa1b9e23fa791ec7e6c266ffe76ee4332af0fbb0abf842ca99e98b532dbe5e",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-14.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-settings-storage-about.png",
+      "theme": "light",
+      "state": "light-settings-storage-about",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 539,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "e4fa1b9e23fa791ec7e6c266ffe76ee4332af0fbb0abf842ca99e98b532dbe5e",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-14.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/light-settings-persisted.png",
+      "theme": "light",
+      "state": "light-settings-persisted",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 520,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "4e40a65ce795cffdd79f482d98b436928147ee9aca93eea7abaa9c0199e8a53d",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-15.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/system-light.png",
+      "theme": "light",
+      "state": "system-light",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 520,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "4e40a65ce795cffdd79f482d98b436928147ee9aca93eea7abaa9c0199e8a53d",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-15.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/system-dark.png",
+      "theme": "dark",
+      "state": "system-dark",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 520,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "5e491468b2d3c9d3c59c286a631d9ffc66a9e9f9c00409ecff3a274efd4ae0c6",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-15.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "baseline/system-fallback.png",
+      "theme": "dark",
+      "state": "system-fallback",
+      "fixture": "real",
+      "matrix": false,
+      "target_physical": [
+        1650,
+        900
+      ],
+      "logical_size": [
+        1650,
+        900
+      ],
+      "window_logical": [
+        1650,
+        900
+      ],
+      "pixel_size": [
+        1650,
+        900
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 520,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1380,
+          711
+        ]
+      },
+      "sha256": "5e491468b2d3c9d3c59c286a631d9ffc66a9e9f9c00409ecff3a274efd4ae0c6",
+      "visually_reviewed": true,
+      "review_sheet": "review-final-15.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/01-compare-no-selection.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "beefd64877e0d34ea6390745756608d5ba724e603e8735ff5c4336a70aff1853",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 76,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-15.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/02-add-folder.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        656,
+        451
+      ],
+      "dpr": 1.0,
+      "sha256": "6baac70330c8e5be336326ea525da13eaa65d17870cc6df3e99a53f27f42f65f",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 14,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-15.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/03-scan-advanced.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "6a471505a09765e71336a14c76f9afeab4c2a94090d11a28464d08fe86a7362b",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 168,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-15.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/04-dashboard-candidates.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "b8fec58582d77ac9714c15143f206e58e99420634a4ba567bc5f89d71dfae51b",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 370,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          530
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-15.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/05-exact-members-expanded.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "c20494c46380a8206984ef9b412230f8296edfca022451882eb1c669e5eeb416",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 341,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-16.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/06-internal-enlarged-preview.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1000,
+        760
+      ],
+      "dpr": 1.0,
+      "sha256": "167c94e6470b58fed8bc315fc058cc3f87d891859ebe538c35f8af9f11257823",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 341,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-16.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/07-actual-photo-details.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "5010a17d9ea7c9496695ee8b1aabe042150896d57a128de19de37f0061ebf356",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 422,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-16.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/08-sr-review.png",
+      "fixture": "real",
+      "language": "sr_Latn",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "1d4e440e7a1c9c8b8587c690de392106307ba6cd94b5ed636f619e4f863d3dac",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 406,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-16.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/09-sr-settings-advanced.png",
+      "fixture": "real",
+      "language": "sr_Latn",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "72d22f1d46ac19aa4b54db99952e16209a4d6d11456d00f88efb20b989315085",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 734,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-16.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/10-settings-diagnostic.png",
+      "fixture": "presentation only: injected diagnostic, no failed write",
+      "language": "sr_Latn",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "ebc95de41847d2fefb2c779ecf96a47d26b1f51dd16c64e7dde445451c510281",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 988,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-16.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/11-duplicates-no-matches.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "c7ee5d5b8045fcc19dfc95bb5a170a4fddc910a735103352ff804e12f85ef9cb",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1024,
+          531
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-16.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/12-dashboard-no-matches.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "3091ad7c200c18190d43296b8ce22bc803f3abfdb84aa994e77f37d9315b5e93",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1024,
+          530
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-16.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/13-scan-actual-error-details.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "231739bf0a46cb96b29388278e2df8b72dc232a9e0774e02344d5d63af3aba7e",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 500,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-17.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    },
+    {
+      "file": "supplement-r2/14-settings-current-sources.png",
+      "fixture": "real",
+      "language": "en",
+      "theme": "dark",
+      "pixel_size": [
+        1280,
+        720
+      ],
+      "dpr": 1.0,
+      "sha256": "f9ddb542d9ce0883c880ed93eebb5270d5c8282c777fa7c2df10ed56ae559cae",
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 753,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          1010,
+          531
+        ]
+      },
+      "visually_reviewed": true,
+      "review_sheet": "review-final-17.jpg",
+      "review_method": "contact sheet; representative originals additionally opened at full size"
+    }
+  ],
+  "review_sheets": [
+    {
+      "file": "review-final-01.jpg",
+      "sha256": "f5c7a6d4ad1a2baf19bc4a9f9ff386786276758818cead7208ea5df202a4c6e7",
+      "captures": [
+        "baseline/dark-dashboard-empty.png",
+        "baseline/light-dashboard-empty.png",
+        "baseline/dark-scan-empty.png",
+        "baseline/light-scan-empty.png",
+        "baseline/dark-duplicates-empty.png",
+        "baseline/light-duplicates-empty.png",
+        "baseline/dark-history-empty.png",
+        "baseline/light-history-empty.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-02.jpg",
+      "sha256": "8b047e6061d22634984657f162e6b538d50899805d346ff1e9945ad66f46616b",
+      "captures": [
+        "baseline/dark-scan-sources.png",
+        "baseline/light-scan-sources.png",
+        "baseline/dark-scan-running.png",
+        "baseline/dark-scan-cancelled.png",
+        "baseline/light-scan-running.png",
+        "baseline/light-scan-cancelled.png",
+        "baseline/dark-scan-complete.png",
+        "baseline/light-scan-complete.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-03.jpg",
+      "sha256": "fab1ad87bef5e38146e81366e622b3b324e32cce4eb3807ba23a084c3ffa34b7",
+      "captures": [
+        "baseline/dark-duplicates-list.png",
+        "baseline/light-duplicates-list.png",
+        "baseline/dark-duplicates-filtered.png",
+        "baseline/light-duplicates-filtered.png",
+        "baseline/matrix-1280-dark-dashboard.png",
+        "baseline/matrix-1280-dark-scan.png",
+        "baseline/matrix-1280-dark-duplicates.png",
+        "baseline/matrix-1280-dark-history.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-04.jpg",
+      "sha256": "6f0d10a8d5b14c832a45d1ba138b7961fd1d88ce30794df5db571ece35780194",
+      "captures": [
+        "baseline/matrix-1280-dark-settings.png",
+        "baseline/matrix-1280-dark-compare.png",
+        "baseline/matrix-1280-light-dashboard.png",
+        "baseline/matrix-1280-light-scan.png",
+        "baseline/matrix-1280-light-duplicates.png",
+        "baseline/matrix-1280-light-history.png",
+        "baseline/matrix-1280-light-settings.png",
+        "baseline/matrix-1280-light-compare.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-05.jpg",
+      "sha256": "9395e780f6975744148a738b8466abeaa43eafbba851aa94cbd739726acc9216",
+      "captures": [
+        "baseline/matrix-1366-dark-dashboard.png",
+        "baseline/matrix-1366-dark-scan.png",
+        "baseline/matrix-1366-dark-duplicates.png",
+        "baseline/matrix-1366-dark-history.png",
+        "baseline/matrix-1366-dark-settings.png",
+        "baseline/matrix-1366-dark-compare.png",
+        "baseline/matrix-1366-light-dashboard.png",
+        "baseline/matrix-1366-light-scan.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-06.jpg",
+      "sha256": "fe0e9bb74bb20d9365fb91e27d5ececcf994d0d3f300500bcbba35bb871c30e8",
+      "captures": [
+        "baseline/matrix-1366-light-duplicates.png",
+        "baseline/matrix-1366-light-history.png",
+        "baseline/matrix-1366-light-settings.png",
+        "baseline/matrix-1366-light-compare.png",
+        "baseline/matrix-1650-dark-dashboard.png",
+        "baseline/matrix-1650-dark-scan.png",
+        "baseline/matrix-1650-dark-duplicates.png",
+        "baseline/matrix-1650-dark-history.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-07.jpg",
+      "sha256": "fb2a37b98f6650a35c22458710aa17e47ffb0876097b2664bcab01ce772030cb",
+      "captures": [
+        "baseline/matrix-1650-dark-settings.png",
+        "baseline/matrix-1650-dark-compare.png",
+        "baseline/matrix-1650-light-dashboard.png",
+        "baseline/matrix-1650-light-scan.png",
+        "baseline/matrix-1650-light-duplicates.png",
+        "baseline/matrix-1650-light-history.png",
+        "baseline/matrix-1650-light-settings.png",
+        "baseline/matrix-1650-light-compare.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-08.jpg",
+      "sha256": "e776f771de854464f79705057c2f94f0bdbc046739aa8a6d73046b19824d4f35",
+      "captures": [
+        "baseline/matrix-1920-dark-dashboard.png",
+        "baseline/matrix-1920-dark-scan.png",
+        "baseline/matrix-1920-dark-duplicates.png",
+        "baseline/matrix-1920-dark-history.png",
+        "baseline/matrix-1920-dark-settings.png",
+        "baseline/matrix-1920-dark-compare.png",
+        "baseline/matrix-1920-light-dashboard.png",
+        "baseline/matrix-1920-light-scan.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-09.jpg",
+      "sha256": "7a0885be8ae08664f0fffec636bf9dcffef8478897b1ca28844138c96ff2015c",
+      "captures": [
+        "baseline/matrix-1920-light-duplicates.png",
+        "baseline/matrix-1920-light-history.png",
+        "baseline/matrix-1920-light-settings.png",
+        "baseline/matrix-1920-light-compare.png",
+        "baseline/dark-exact-three-members.png",
+        "baseline/light-exact-three-members.png",
+        "baseline/dark-compare-keeper.png",
+        "baseline/light-compare-keeper.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-10.jpg",
+      "sha256": "3c2ddd52815a2f286082affe36968e9bdaecfda0a635533eb81c07eeff6f5e29",
+      "captures": [
+        "baseline/dark-compare-keep-both.png",
+        "baseline/light-compare-keep-both.png",
+        "baseline/dark-compare-loading.png",
+        "baseline/dark-compare-unavailable.png",
+        "baseline/dark-compare-details.png",
+        "baseline/light-compare-loading.png",
+        "baseline/light-compare-unavailable.png",
+        "baseline/light-compare-details.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-11.jpg",
+      "sha256": "d3f0e419c7efa339e4126dab2fb593bd5c2b84e12a25eb507c72b8dd16fcb1c2",
+      "captures": [
+        "baseline/dark-confirmation.png",
+        "baseline/light-confirmation.png",
+        "baseline/dark-confirmation-rejected.png",
+        "baseline/light-confirmation-rejected.png",
+        "baseline/dark-confirmation-warnings.png",
+        "baseline/light-confirmation-warnings.png",
+        "baseline/dark-history-populated.png",
+        "baseline/light-history-populated.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-12.jpg",
+      "sha256": "c7da2ad7e709817cc0d1412317e91df5d6266e17dd6e3403779ab8f9c2ee8630",
+      "captures": [
+        "baseline/dark-history-after-restart.png",
+        "baseline/light-history-after-restart.png",
+        "baseline/dark-restore-conflict.png",
+        "baseline/light-restore-conflict.png",
+        "baseline/dark-restore-confirmation.png",
+        "baseline/light-restore-confirmation.png",
+        "baseline/dark-history-restored.png",
+        "baseline/light-history-restored.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-13.jpg",
+      "sha256": "03f2e449cb0830ac1a26a783de822f1b50f67a805f76e911c36d500a06a8b99b",
+      "captures": [
+        "baseline/dark-visual-review.png",
+        "baseline/light-visual-review.png",
+        "baseline/dark-scan-errors.png",
+        "baseline/light-scan-errors.png",
+        "baseline/dark-scan-error-details.png",
+        "baseline/light-scan-error-details.png",
+        "baseline/dark-dashboard-incomplete.png",
+        "baseline/light-dashboard-incomplete.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-14.jpg",
+      "sha256": "8e7b3b5448919b973ba52095271ed7917baeb0f79c37645b66f4874be47d0c8a",
+      "captures": [
+        "baseline/dark-operation-refused.png",
+        "baseline/light-operation-refused.png",
+        "baseline/dark-settings-custom.png",
+        "baseline/light-settings-custom.png",
+        "baseline/dark-settings-matching.png",
+        "baseline/dark-settings-storage-about.png",
+        "baseline/light-settings-matching.png",
+        "baseline/light-settings-storage-about.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-15.jpg",
+      "sha256": "13624794993272ee4468ebfe2eb2a672b732ecc0fd1fe43be9f87a06c30b84dc",
+      "captures": [
+        "baseline/light-settings-persisted.png",
+        "baseline/system-light.png",
+        "baseline/system-dark.png",
+        "baseline/system-fallback.png",
+        "supplement-r2/01-compare-no-selection.png",
+        "supplement-r2/02-add-folder.png",
+        "supplement-r2/03-scan-advanced.png",
+        "supplement-r2/04-dashboard-candidates.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-16.jpg",
+      "sha256": "61935449f7e5bf9d25ad6019a9d23f24222b8861a6b7773fa07c4eb8f9b728b7",
+      "captures": [
+        "supplement-r2/05-exact-members-expanded.png",
+        "supplement-r2/06-internal-enlarged-preview.png",
+        "supplement-r2/07-actual-photo-details.png",
+        "supplement-r2/08-sr-review.png",
+        "supplement-r2/09-sr-settings-advanced.png",
+        "supplement-r2/10-settings-diagnostic.png",
+        "supplement-r2/11-duplicates-no-matches.png",
+        "supplement-r2/12-dashboard-no-matches.png"
+      ],
+      "visually_reviewed": true
+    },
+    {
+      "file": "review-final-17.jpg",
+      "sha256": "f887cbc314db215a0bef4bcbba0be591c0d42603aac998d76155295359307b71",
+      "captures": [
+        "supplement-r2/13-scan-actual-error-details.png",
+        "supplement-r2/14-settings-current-sources.png"
+      ],
+      "visually_reviewed": true
+    }
+  ],
+  "commands": [
+    {
+      "command": ".venv/Scripts/python.exe -B <product-design>/skills/user-context/scripts/user_context_preflight.py",
+      "result": "exit 0; saved context missing; no external state written"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -B docs/design/verification/task014-20261110/capture.py (sandbox)",
+      "result": "exit 1 before Python start; Microsoft Store interpreter process creation failed; not a completed capture run"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -B docs/design/verification/task014-20261110/capture.py (approved runner)",
+      "result": "exit 0; 116 captures; sandbox cleaned after all workers stopped"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -B docs/design/verification/task014-20261110/supplement.py (approved runner, initial attempt)",
+      "result": "exit 0; 12 captures; original bytes preserved; sandbox cleaned; superseded after visual inspection found details below the viewport"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -B docs/design/verification/task014-20261110/supplement.py --output docs/design/verification/task014-20261110/supplement-r2 (approved runner)",
+      "result": "exit 0; 14 captures; corrected capture scroll timing, actual scan errors; original bytes preserved; sandbox cleaned"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -B -m pytest tests/test_task008.py tests/test_task009.py tests/test_task010.py tests/test_task012.py tests/test_qt_design_system.py -q",
+      "result": "exit 0; 61 passed in 815.35s (0:13:35); 0 skipped; 0 failed"
+    }
+  ],
+  "superseded_evidence": [
+    {
+      "directory": "supplement",
+      "manifest": "supplement/manifest.json",
+      "reason": "Process succeeded, but visual review found member/photo/settings details below the captured viewport. Replaced by new captures in supplement-r2; original files retained."
+    },
+    {
+      "file": "audit-initial.json",
+      "reason": "Initial index before correcting supplemental capture framing; unreviewed, excluded from final acceptance."
+    },
+    {
+      "files": "review-01.jpg through review-16.jpg",
+      "reason": "Initial review sheets retained; final set uses review-final-*."
+    }
+  ],
+  "limits": [
+    "Visual evidence is current Qt offscreen Fusion rendering, not native desktop interaction or full functional acceptance.",
+    "Only DPR 1 in this audit; 1280x720,1366x768,1650x900,1920x1080 for the six main surfaces in EN/Dark/Light.",
+    "Extended baseline scenarios at 1650x900; supplement at 1280x720 includes representative Serbian views.",
+    "No native Linux, physical Windows DPI/monitor transitions, NVDA/Narrator or physical drive tests.",
+    "No successful RAW decode, physical power-loss or real OS photo viewer launch.",
+    "System scheme changes injected; loading/unavailable and combined RAW/legacy warnings are presentation fixtures.",
+    "Settings diagnostic presentation was injected, not an actual failed settings write.",
+    "Existing driver manifest retains its historical Task011 name, 48-matrix description and skip wording; this audit is not a new Task011/012/013 acceptance claim.",
+    "Transient dashboard thumbnail loading in matrix captures is not evidence of a decode failure."
+  ],
+  "reviewed_at_utc": "2026-11-10T17:36:03.057056+00:00",
+  "additional_checks": [
+    "All 10 relative report links resolve",
+    "git diff --check passed",
+    "Final review sheets 01-14 are byte-identical to the already inspected initial sheets; final 15-17 separately opened",
+    "Tracked production source, tests and existing capture tools unchanged"
+  ],
+  "evidence_clarifications": [
+    "supplement-r2/01-compare-no-selection.png presents the real empty comparison widget through the audit driver; normal user flow disables Compare without a selection.",
+    "supplement-r2/09-sr-settings-advanced.png shows the lower Settings viewport with partial expanded thresholds; baseline/dark-settings-storage-about.png shows both full numeric values."
+  ],
+  "finished": true
+}

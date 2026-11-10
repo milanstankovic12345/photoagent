@@ -1,0 +1,184 @@
+{
+  "qt": "6.12.0",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "plugin": "offscreen",
+  "font": "Segoe UI",
+  "synthetic": true,
+  "scope": "Task015 shared presentation only. No application services, home, photo reads, moves or approvals. Confirmation paths are invented.",
+  "screenshots": [
+    {
+      "file": "dark-components.png",
+      "width": 1280,
+      "height": 1000,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "dark",
+      "active": "dark",
+      "sha256": "ab61d854ac74ae89cfa061e920c7117dae1457b9a2204017f5d04a8dbf2485fb"
+    },
+    {
+      "file": "dark-icons.png",
+      "width": 1100,
+      "height": 900,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "dark",
+      "active": "dark",
+      "sha256": "5d09ed1c68999d625398df02da3ea0482c498f848a3c6d06e172dda5f79b6fb2"
+    },
+    {
+      "file": "dark-confirmation.png",
+      "width": 752,
+      "height": 620,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "dark",
+      "active": "dark",
+      "sha256": "42031b1b2f6d59f40f758d70195d79270b8009535e10d6a3472d12216e339a06"
+    },
+    {
+      "file": "dark-menu.png",
+      "width": 205,
+      "height": 115,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "dark",
+      "active": "dark",
+      "sha256": "fed9e8c0f8419def84e7276d52b0a21fd07b10c7e384cfa2738de61c9b18e075"
+    },
+    {
+      "file": "dark-tooltip.png",
+      "width": 364,
+      "height": 54,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "dark",
+      "active": "dark",
+      "sha256": "892b295822ae1c380f159983cd63e87a534915dba623961912c3ca8612f9a496"
+    },
+    {
+      "file": "dark-filters.png",
+      "width": 1000,
+      "height": 400,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "dark",
+      "active": "dark",
+      "sha256": "cb1cd679e7d2d95792b668777489a3b874a323838fd245f43eee38615f82b2ed"
+    },
+    {
+      "file": "dark-components-sr.png",
+      "width": 1280,
+      "height": 1000,
+      "dpr": 1.0,
+      "language": "sr_Latn",
+      "preference": "dark",
+      "active": "dark",
+      "sha256": "2ba978f3b51713fcf21cef59767f8832b1e5c0e85bd2b99d29416518e7edf25d"
+    },
+    {
+      "file": "light-components.png",
+      "width": 1280,
+      "height": 1000,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "light",
+      "active": "light",
+      "sha256": "d6cd959ee765c5378aaaff9ed0ca1767ce6c6fc3c4da401bb7c6aa189255f3a3"
+    },
+    {
+      "file": "light-icons.png",
+      "width": 1100,
+      "height": 900,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "light",
+      "active": "light",
+      "sha256": "3d0bcabd80e27ed5450b873547ebf28e92e6129ad0649a8264851bc57bf45117"
+    },
+    {
+      "file": "light-confirmation.png",
+      "width": 752,
+      "height": 620,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "light",
+      "active": "light",
+      "sha256": "19188769fe8eba773154254f11d9a0d618325ff459334df6ab18a53d09447aaa"
+    },
+    {
+      "file": "light-menu.png",
+      "width": 205,
+      "height": 115,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "light",
+      "active": "light",
+      "sha256": "597218636a9cd57ec83fefd9279ca33f4ef4139e82c73a587630ef1d24ac7387"
+    },
+    {
+      "file": "light-tooltip.png",
+      "width": 364,
+      "height": 54,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "light",
+      "active": "light",
+      "sha256": "b3ab5fb9fbd62427223123fc3ee565aa58e3a0642757d53170747a4055b59872"
+    },
+    {
+      "file": "light-filters.png",
+      "width": 1000,
+      "height": 400,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "light",
+      "active": "light",
+      "sha256": "84cdd3b9787b2119a8dcd9aa9af0783f9f875c03e2e070a16a144256763c203a"
+    },
+    {
+      "file": "light-components-sr.png",
+      "width": 1280,
+      "height": 1000,
+      "dpr": 1.0,
+      "language": "sr_Latn",
+      "preference": "light",
+      "active": "light",
+      "sha256": "9063a00cb3373116b897152e208f9ecf30d9c72a748620ae0b9b1cf99ae00776"
+    },
+    {
+      "file": "system-light.png",
+      "width": 1100,
+      "height": 900,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "system",
+      "active": "light",
+      "sha256": "1e75a742f6eb01044ba8e35708a9782dfe0731e1b24c84f42d73f656b5f71401"
+    },
+    {
+      "file": "system-dark.png",
+      "width": 1100,
+      "height": 900,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "system",
+      "active": "dark",
+      "sha256": "50ca1622fdd63ac35837037fa5b9def2cef3de473ca63311346cf51ae5edd2f6"
+    },
+    {
+      "file": "system-fallback.png",
+      "width": 1100,
+      "height": 900,
+      "dpr": 1.0,
+      "language": "en",
+      "preference": "system",
+      "active": "dark",
+      "sha256": "50ca1622fdd63ac35837037fa5b9def2cef3de473ca63311346cf51ae5edd2f6"
+    }
+  ],
+  "checks": [
+    "Synthetic confirmation rejected in both themes; no Approval created.",
+    "System callbacks preserve theme choice and selected navigation route."
+  ]
+}
