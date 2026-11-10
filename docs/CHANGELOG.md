@@ -1,5 +1,19 @@
 # Changelog
 
+## Task016 — Compact collapsible navigation — 2026-11-10
+
+- Default to an icon rail, with a keyboard-accessible animated expand/collapse
+  toggle and session-local state. Expanded navigation shows localized labels;
+  both modes retain tooltips, native checked states and accessible names.
+- Keep application identity at the top and Settings at the bottom. Replace the
+  selected row contour with a subtle background and a persistent shape marker,
+  retaining contrasting keyboard focus in both themes.
+- Resize the existing sidebar without rebuilding pages or changing scan,
+  comparison, filter, selection or confirmation state. Add EN/SR TS messages
+  and regenerate JSON/QM resources through the existing offline build process.
+- Add focused interaction tests and synthetic real-window capture tooling.
+  See the Task016 verification record for executed checks and platform limits.
+
 ## Task015 — Shared surfaces, outlines and icons — 2026-11-10
 
 - Refined the existing Dark/Light/System tokens and styles into page, panel,

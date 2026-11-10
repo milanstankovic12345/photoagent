@@ -160,7 +160,7 @@ class MainWindow(QMainWindow):
         # order explicitly instead of inheriting Qt's widget-creation order.
         controls = [current.toolbar.actions.itemAt(i).widget()
                     for i in range(current.toolbar.actions.count())]
-        chain = [*self.navigation.buttons.values(), *controls]
+        chain = [self.navigation.toggle, *self.navigation.buttons.values(), *controls]
         for first, second in zip(chain, chain[1:]):
             QWidget.setTabOrder(first, second)
         target = (self.comparison.left.view if comparing else {

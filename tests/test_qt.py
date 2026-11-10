@@ -201,7 +201,7 @@ def test_sidebar_keyboard_and_context_actions_at_small_viewport(desktop, viewpor
     window.resize(*viewport)  # 853x480 is the logical space of 1280x720 at 150%.
     window.activateWindow()
     QApplication.processEvents()
-    assert 190 <= window.navigation.width() <= 220
+    assert window.navigation.collapsed and window.navigation.width() == 64
     buttons = window.navigation.buttons
     assert len({control.icon().cacheKey() for control in buttons.values()}) == 5
     dashboard, scanning = buttons[Route.DASHBOARD], buttons[Route.SCAN]

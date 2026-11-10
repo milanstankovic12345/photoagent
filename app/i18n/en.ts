@@ -2123,5 +2123,13 @@ Please check the file name.</translation>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
       <translation>{0} photographs · {1}</translation>
     </message>
+    <message>
+      <source>navigation_expand</source>
+      <translation>Expand navigation</translation>
+    </message>
+    <message>
+      <source>navigation_collapse</source>
+      <translation>Collapse navigation</translation>
+    </message>
   </context>
 </TS>

@@ -73,10 +73,15 @@ def stylesheet(colors: dict[str, str]) -> str:
             text-align: left; background: transparent; border-color: transparent;
         }
         QPushButton[navigation="true"] { padding: 10px %(gap)dpx; }
+        QPushButton[navigation="true"][compact="true"],
+        QPushButton[disclosure="true"][compact="true"] { text-align: center; }
         QPushButton[navigation="true"]:hover, QPushButton[disclosure="true"]:hover {
             background: %(hover)s;
         }
-        QPushButton[navigation="true"]:checked, QPushButton[choice="true"]:checked {
+        QPushButton[navigation="true"]:checked {
+            background: %(selection)s; color: %(text)s;
+        }
+        QPushButton[choice="true"]:checked {
             background: %(selection)s; color: %(text)s; border-color: %(control_border)s;
         }
         QPushButton[variant="primary"] { background: %(primary)s; color: %(on_primary)s; border-color: %(primary)s; }

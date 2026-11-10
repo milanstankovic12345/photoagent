@@ -1,5 +1,38 @@
 # PhotoAgent test evidence
 
+## Task016 — Collapsible navigation (2026-11-10)
+
+Windows CPython 3.12.10 / Qt 6.12.0 / Fusion offscreen, synthetic temporary homes
+and photographs only:
+
+```powershell
+$env:QT_QPA_PLATFORM='offscreen'
+.venv/Scripts/python.exe -B -m tools.build_translations
+.venv/Scripts/python.exe -B -m tools.build_translations --check
+# 420 finished entries per language; source/generated parity passes.
+.venv/Scripts/python.exe -B -m pytest tests/test_task016.py tests/test_qt_design_system.py -q
+# 31 passed in 60.25s; exit 0, no skips.
+$env:QT_SCALE_FACTOR='1.5'
+.venv/Scripts/python.exe -B -m pytest tests/test_task016.py -q
+# 6 passed in 56.30s; exit 0, no skips.
+$env:QT_SCALE_FACTOR='1'
+.venv/Scripts/python.exe -B -m pytest tests/test_qt.py tests/test_task008.py tests/test_task009.py tests/test_task010.py tests/test_task011.py tests/test_task012.py tests/test_localization.py -q -o faulthandler_timeout=120
+# 89 passed in 905.08s; exit 0, no skips.
+$env:QT_SCALE_FACTOR='1'
+.venv/Scripts/python.exe -B -m tools.capture_task016 --output docs/design/verification/task016-20261110/100
+$env:QT_SCALE_FACTOR='1.5'
+.venv/Scripts/python.exe -B -m tools.capture_task016 --output docs/design/verification/task016-20261110/150
+# 16 captures each; original fixture bytes unchanged, no approvals or moves.
+```
+
+All 32 saved capture hashes were independently verified. See the
+[Task016 record](design/verification/task016-20261110/README.md) for the earlier
+corrected test assumption, state/consent/scan checks, eight inspected renders and
+limits. Both themes/languages, five routes, nonzero comparison scroll, live
+confirmation and mid-animation scan reversals are covered. Real screen readers,
+physical DPI, OS theme events, native Linux, valid RAW and a new packaging build
+were not tested.
+
 ## Task015 — Shared surfaces and icons (2026-11-10)
 
 Executed in the existing Python 3.12 environment with Qt/Fusion offscreen:

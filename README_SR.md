@@ -30,6 +30,11 @@ operativnom sistemu, nativnom Linuxu i sa validnim RAW uzorkom ostaje otvorena.
 
 ## Jezik i izgled
 
+Bočna navigacija počinje sklopljena, sa ikonama. Strelica ispod logotipa proširuje
+traku i prikazuje nazive stranica. Zadržite pokazivač nad ikonom da vidite njen
+naziv; Tab bira kontrolu, a Space ili Enter sklapa/proširuje traku. Izbor režima
+ostaje tokom rada u istom prozoru, uz očuvan pregled i izbor fotografija.
+
 Otvorite **Settings → Language** i izaberite **Srpski (latinica)** ili **English**.
 Na srpskom se stranica zove **Podešavanja**. Promena se primenjuje odmah, uključujući
 otvorene potvrde, poruke o greškama, napredak i oznake za čitače ekrana. Ne potvrđuje

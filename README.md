@@ -14,7 +14,11 @@ then starts `photo_agent.py`. Tcl/Tk is needed only for `--ui tk`.
 
 Double-click `start_windows.bat` to open the new Qt interface. Qt is also the default
 for `bash start_linux.sh` and `python -B photo_agent.py`. The five destinations are
-Dashboard, Scan, Duplicates, Quarantine history and Settings. Open a selected pair
+Dashboard, Scan, Duplicates, Quarantine history and Settings. Navigate using the
+compact sidebar icons, or expand the navigation with the arrow below
+the application logo to show destination names. Hover an icon for its name;
+Tab and Space/Enter operate the toggle. The mode is retained for the current
+window session. Open a selected pair
 with Enter, double-click or Compare inside Duplicates. Back to group (Alt+Left)
 preserves filters, sorting, group, result page and selection without reloading.
 Use `start_windows.bat --ui tk` (or `python -B photo_agent.py --ui tk`) for Tkinter.
@@ -51,7 +55,7 @@ Qt mode needs PySide6 >=6.8,<7; preflight checks only the selected toolkit.
 See [Qt distribution notes](docs/QT_DISTRIBUTION.md).
 
 v2.5 adds editable Qt Linguist `.ts` sources and embedded `.qm` catalogs for all
-418 messages in each language. Settings → Language changes open pages, dialogs,
+420 messages in each language. Settings → Language changes open pages, dialogs,
 accessibility labels and progress immediately; the selection survives restart.
 Display sizes, index totals and scan dates follow the selected locale. History
 dates remain explicitly UTC. File names, paths, hashes, formats and stored values

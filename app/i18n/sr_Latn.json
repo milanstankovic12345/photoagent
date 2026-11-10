@@ -416,5 +416,7 @@
   "qt_tb": "%1 TB",
   "group_summary_one": "{0} fotografija · {1}",
   "group_summary_few": "{0} fotografije · {1}",
-  "group_summary_other": "{0} fotografija · {1}"
+  "group_summary_other": "{0} fotografija · {1}",
+  "navigation_expand": "Proširi navigaciju",
+  "navigation_collapse": "Sklopi navigaciju"
 }

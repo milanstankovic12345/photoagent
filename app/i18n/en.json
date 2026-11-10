@@ -416,5 +416,7 @@
   "qt_tb": "%1 TB",
   "group_summary_one": "{0} photograph · {1}",
   "group_summary_few": "{0} photographs · {1}",
-  "group_summary_other": "{0} photographs · {1}"
+  "group_summary_other": "{0} photographs · {1}",
+  "navigation_expand": "Expand navigation",
+  "navigation_collapse": "Collapse navigation"
 }

@@ -1,0 +1,378 @@
+{
+  "qt": "6.12.0",
+  "platform": "Windows",
+  "plugin": "offscreen",
+  "scale": "1",
+  "synthetic": true,
+  "scope": "Real application, disposable home/photos, no approvals or moves.",
+  "captures": [
+    {
+      "file": "en-dark-dashboard-compact.png",
+      "sha256": "682edc6be68daaac8d04ebd303060c7c295955b5a3b0b71b6ed60993adc38ee6",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 390,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          727,
+          291
+        ]
+      }
+    },
+    {
+      "file": "en-dark-dashboard-expanded.png",
+      "sha256": "57ac837ce344594b892403c20a1c1bfdff2426163049663c3470be60324b9515",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 466,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          247
+        ]
+      }
+    },
+    {
+      "file": "en-dark-scan-compact.png",
+      "sha256": "695213de50fbd66cc996f4009174dac6182c9f15eaabce876e2038dea1d53abe",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 307,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          727,
+          291
+        ]
+      }
+    },
+    {
+      "file": "en-dark-scan-expanded.png",
+      "sha256": "4f558b20ba78a92f7690e9a88115a4e6a251000d5c9510ab66067aa9e134194e",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 331,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          291
+        ]
+      }
+    },
+    {
+      "file": "en-dark-duplicates-compact.png",
+      "sha256": "ee26cda262bf30fce77b44dc66c46a426755d1971a07f578a5b68622d7b2e74f",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 425,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          727,
+          291
+        ]
+      }
+    },
+    {
+      "file": "en-dark-duplicates-expanded.png",
+      "sha256": "d69fc0be00845eea96b77712a1fb7a9a1c573eb501d282eab29b3912769abf62",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 425,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          291
+        ]
+      }
+    },
+    {
+      "file": "en-dark-history-compact.png",
+      "sha256": "0bd029f3a7d862b5dcf240ca1e92ad704d38e23fef52c60f169f82c6501efc5c",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          741,
+          291
+        ]
+      }
+    },
+    {
+      "file": "en-dark-history-expanded.png",
+      "sha256": "5e542fdd02c624329e417aae2659406429c31434904b027c46ce6b4e47748a76",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 0,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          597,
+          291
+        ]
+      }
+    },
+    {
+      "file": "en-dark-settings-compact.png",
+      "sha256": "86e2cca94d53fc4cc8ad77b82b6173dd4d49487efc214f1a54c503e04f37ad57",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 930,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          727,
+          291
+        ]
+      }
+    },
+    {
+      "file": "en-dark-settings-expanded.png",
+      "sha256": "d0fbc655e163d9a97d3fb63050a2680bda81b08c4a10d9de5107fc86c1834b49",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 981,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          291
+        ]
+      }
+    },
+    {
+      "file": "en-dark-compare-compact.png",
+      "sha256": "0e9968f679ba2133369894797622a7c92cc6c580c884b850e6ccd1ef66139bd6",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 328,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          727,
+          291
+        ]
+      }
+    },
+    {
+      "file": "en-dark-compare-expanded.png",
+      "sha256": "0931867abd276f7822ff6099f0c319ad838fcd8fadd5f7687836876ef10eedb6",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 890,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          291
+        ]
+      }
+    },
+    {
+      "file": "sr_Latn-light-scan-compact.png",
+      "sha256": "74f5333e8d3faac0548fa0bfa07d67f167cc69ee54110dd8c7929649a179575a",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 307,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          727,
+          291
+        ]
+      }
+    },
+    {
+      "file": "sr_Latn-light-scan-expanded.png",
+      "sha256": "1f3f348b036b3e87ecac2ae9e952f28a96f58ed3f7c8279b1f0de7e2b178a448",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 375,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          247
+        ]
+      }
+    },
+    {
+      "file": "sr_Latn-light-compare-compact.png",
+      "sha256": "bde46dd940317bbd77939c9c64fe874240ecbdd6cd69c80e1663860a2bd53621",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 289,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          727,
+          291
+        ]
+      }
+    },
+    {
+      "file": "sr_Latn-light-compare-expanded.png",
+      "sha256": "1b081e7f7a2678547b44258d2fb6ab2d65336b338d661a23c2319120182c3b3c",
+      "logical": [
+        853,
+        480
+      ],
+      "physical": [
+        853,
+        480
+      ],
+      "dpr": 1.0,
+      "layout": {
+        "page_horizontal_max": 0,
+        "page_vertical_max": 821,
+        "toolbar_outside": [],
+        "toolbar_overlaps": 0,
+        "viewport": [
+          583,
+          291
+        ]
+      }
+    }
+  ]
+}

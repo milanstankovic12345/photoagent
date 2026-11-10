@@ -6,6 +6,13 @@ Qt is now the default; `--ui tk` selects the retained Tkinter adapter. Both shar
 Qt supports English/Serbian runtime switching; Tk remains Serbian. Task013 adds a
 source ZIP/wheelhouse candidate; full platform release acceptance remains open.
 
+Task016 keeps the existing five `Route` pages and `Sidebar` instance. Sidebar owns
+only its session-local collapsed state and a 160 ms QVariantAnimation for its
+64/208 logical-pixel width. Native checkable buttons retain accessible state;
+localized bindings independently manage visible labels, tooltips and names.
+MainWindow includes the toggle in its existing Tab order. Resizing does not call
+navigation, services or confirmation invalidation and does not rebuild pages.
+
 `tools/build_release.py` packages allowlisted sources, catalogs, resource modules,
 hash-pinned runtime wheels and their notices. `packaging/install_offline.py` verifies
 the manifest before creating a new isolated `.runtime`; packaged launchers never

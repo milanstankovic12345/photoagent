@@ -1,10 +1,30 @@
 # Qt accessibility and localization
 
+Task016 (2026-11-10) adds session-local compact/expanded navigation. The default
+64 logical-pixel rail retains the application logo and five destinations; the
+208 logical-pixel expanded rail shows localized labels. Settings stays at the
+bottom. A 44-pixel checkable toggle precedes the destinations in Tab order;
+Space/Enter/Return activate it without moving focus. Its checked state means
+expanded, with a localized action name, tooltip and state description. Every
+destination retains a localized accessible name and tooltip in either mode,
+and native checked semantics. A persistent foreground marker identifies the
+active destination without relying on color alone. Selection has a subtle
+surface and no decorative contour; keyboard focus retains its own outline.
+
+The 160 ms event-loop animation resizes only Sidebar. Pages, queries, selections,
+scroll widgets, workers and confirmation dialogs remain alive. Repeated toggles
+reverse from the current width. Labels appear after expansion to avoid clipping.
+An open modal confirmation continues to block pointer access to the sidebar;
+programmatic resizing neither rejects it nor supplies consent. The mode lasts
+for the current window session and is not a new saved preference.
+See [Task016 evidence](verification/task016-20261110/README.md) for executed
+interaction, rendering, regression and scaled-layout checks and their limits.
+
 Task015 (2026-11-10) refines shared presentation with 1 px control outlines,
 discreet card separators and a local line icon family. Navigation, disclosure and
 embedded preview/source containers keep a visible keyboard focus without nested
-decorative boxes. Checked navigation retains its contour when focus is elsewhere;
-focus has its own contrasting outline when the selected destination is focused.
+decorative boxes. Task016 replaces the checked navigation contour with a persistent
+marker; focus has its own contrasting outline on the selected destination.
 Checkbox and item focus outlines stay 2 px. Border widths, content rectangles and
 layout geometry remain stable across hover/focus/selection.
 
