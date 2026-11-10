@@ -1,5 +1,32 @@
 ﻿# Qt design system
 
+## Task017 — Dashboard and Scan (2026-11-10)
+
+Dashboard places the latest session or first-scan guidance before four equally
+spaced metric cards. Indexed physical photographs describe the whole index;
+EXACT copies, VISUAL direct pairs and EXACT groups describe the latest session.
+No session means unavailable session values, not inferred zeroes. Savings are
+not displayed. Review duplicates becomes the primary action only for complete
+or incomplete sessions with candidates; during scanning Scan remains primary
+and opens the existing Scan page. Session roots are under Scan details; safety
+warnings remain outside disclosures.
+
+Scan exposes Add folder in its toolbar and labels source removal as list-only.
+Active/results status moves above sources on short windows. Ready/running,
+cancelled, failed, completed and incomplete states have explicit next steps.
+The indeterminate progress bar avoids invented percentages during traversal or
+matching. A completed scan fills it; cancelled/failed/incomplete scans do not
+pretend to be complete. Phase/processed count, elapsed time and source warnings
+stay visible. Other counters and report paths live under Scan details; the
+Reports folder action remains available there. Errors keep an outside summary
+with expandable paged technical text. Report-write failures also stay visible
+in the status card. EN/SR bindings and the existing Dark/Light/System styles
+update in place; changing primary/secondary action refreshes its icon color.
+
+See [Task017 evidence](verification/task017-20261110/README.md) for executed
+checks, captures and platform limits. Matching, traversal, cache and recovery
+implementations remain unchanged.
+
 ## Task015 — surfaces, borders and local line icons (2026-11-10)
 
 The existing `themes.py` remains the only theme system. Its four surface levels

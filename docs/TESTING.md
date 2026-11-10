@@ -1,5 +1,34 @@
 # PhotoAgent test evidence
 
+## Task017 — Dashboard and Scan (2026-11-10)
+
+Windows Python 3.12.10 / Qt Fusion offscreen; synthetic temporary homes/settings
+and photographs only. No new dependencies or real photo libraries used.
+
+```powershell
+$env:QT_QPA_PLATFORM='offscreen'
+.venv/Scripts/python.exe -B -m tools.build_translations --check
+# 434 finished messages per language; exit 0.
+$env:QT_SCALE_FACTOR='1'
+.venv/Scripts/python.exe -B -u -m pytest -q tests/test_task017.py tests/test_qt_design_system.py tests/test_localization.py tests/test_qt.py::test_report_failure_does_not_change_scan_result_and_no_matches_is_distinct
+# 42 passed in 130.69s; no skips.
+$env:QT_SCALE_FACTOR='1.5'
+.venv/Scripts/python.exe -B -u -m pytest -q tests/test_task017.py
+# 6 passed in 63.94s; no skips.
+$env:QT_SCALE_FACTOR='1'
+.venv/Scripts/python.exe -B -u -m pytest -q tests/test_task012.py::test_live_pages_filters_models_previews_and_restart tests/test_task017.py
+# 7 passed in 89.07s after the final source-label correction; no skips.
+```
+
+The earlier broad Qt/Task012/Task016/Task017/Tk/scanning/localization/design-system
+run had **108 passes and 3 failures in 633.53s**, with no skips. Its source-label,
+old metric assertion and rebuild-overlap failures were corrected and confirmed
+by fresh focused checks above; that entire 111-test command was not rerun.
+See [Task017 evidence](design/verification/task017-20261110/README.md) for commands,
+earlier diagnostic failures and the 100%/150% capture matrix. Native Linux,
+physical DPI, screen readers, real drives, valid RAW assets and a new package
+build were not tested.
+
 ## Task016 — Collapsible navigation (2026-11-10)
 
 Windows CPython 3.12.10 / Qt 6.12.0 / Fusion offscreen, synthetic temporary homes

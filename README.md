@@ -85,12 +85,15 @@ python -B photo_agent.py
 ## Review workflow
 
 Qt Dashboard separates the whole local index from the latest scan's EXACT
-candidates and direct VISUAL links. Start your first scan, add folders, then Start
-Scan; advanced source ordering and error details are collapsed initially. Progress
+candidate copies, direct VISUAL pairs and EXACT groups. Its main action changes
+from Scan to Review duplicates when reviewable results exist. Start your first
+scan, choose Add folder, then Start scan. Removing a source changes only the list,
+never its contents. Advanced source ordering, detailed counters and report paths
+are collapsed initially; warnings and the error summary stay visible. Progress
 shows actual counts and elapsed time without inventing a percentage. Review Results
 opens Duplicates; a dashboard candidate opens its direct group. Up to three real
 candidates have previews loaded only while visible. Completed scans without matches
-are distinct from an application with no scan. CSV reports remain a secondary action;
+are distinct from an application with no scan. The Reports folder action is under Scan details;
 a report failure does not discard the scan. Failed, interrupted and cancelled scans
 cannot authorize quarantine.
 
@@ -164,7 +167,7 @@ remove manifests or backups while an operation needs recovery. A second applicat
 instance may scan, but only one instance may write settings/history or move files.
 
 Qt search/sorting cover the entire session; groups use direct keeper links.
-Dashboard space estimates are not approved plans. Quarantine on the same disk does
+Candidate counts are not approved plans. Quarantine on the same disk does
 not free space. Dark/Light/System themes and EN/SR language preferences persist across
 restarts. pHash/dHash thresholds (0–64, defaults 4/6) apply only
 to the next scan; aspect stays 0.025. Preview zoom/pan/Fit uses a bitmap up to 2048 px;

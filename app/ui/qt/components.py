@@ -54,7 +54,10 @@ class ElidedPathLabel(QLabel):
 def style_button(widget: QPushButton, variant: str = 'secondary') -> None:
     if variant not in ('primary', 'secondary', 'danger'):
         raise ValueError(variant)
+    previous = widget.property('variant')
     widget.setProperty('variant', variant)
+    if previous != variant and widget.property('icon_role'):
+        set_icon(widget, widget.property('icon_role'))
     set_text(widget, text_of(widget), 'setAccessibleName')
     widget.setFocusPolicy(Qt.StrongFocus)
 
@@ -242,7 +245,7 @@ def button(key: str, callback: Callable, layout: QLayout, *, variant: str | None
                           else 'primary' if key in ('start', 'save', 'compare') else 'secondary')
     style_button(widget, variant)
     glyph = {
-        'first_scan': 'scan', 'start': 'scan', 'add': 'folder', 'edit_sources': 'folder',
+        'first_scan': 'scan', 'start': 'scan', 'add': 'folder', 'add_folder': 'folder', 'edit_sources': 'folder',
         'review_duplicates': 'duplicates', 'review_results': 'duplicates', 'compare': 'duplicates',
         'settings': 'settings', 'selected_move': 'quarantine', 'bulk_move': 'quarantine',
         'move_copy': 'quarantine', 'restore': 'restore', 'restore_operation': 'restore',

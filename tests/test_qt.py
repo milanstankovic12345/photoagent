@@ -621,6 +621,7 @@ def test_report_failure_does_not_change_scan_result_and_no_matches_is_distinct(d
     scan(window, collection)
     assert not errors and window.status == 'complete'
     assert window.scan.report.text().endswith(tr('report_error'))
+    assert not window.scan.report_warning.isHidden()
     assert 'synthetic report failure' in window.scan.errors.toPlainText()
     assert window.dashboard.no_matches.isVisible() and not window.dashboard.empty.isVisible()
     assert not window.dashboard.cards and not window.scan.review.isEnabled()

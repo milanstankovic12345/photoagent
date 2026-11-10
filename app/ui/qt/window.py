@@ -58,6 +58,7 @@ class MainWindow(QMainWindow):
         self.writable = False
         self.scan_active = False
         self.waiting_sources = False
+        self.cancelled_before_session = False
         self.root_states = {}
         self.search_timer = QTimer(self)
         self.search_timer.setSingleShot(True)
@@ -181,8 +182,9 @@ class MainWindow(QMainWindow):
         else:
             body = {
                 Route.DASHBOARD: [],  # Dynamic candidate actions retain their native order.
-                Route.SCAN: [self.scan.roots, *self.scan.remove_buttons, self.scan.add,
+                Route.SCAN: [self.scan.roots, *self.scan.remove_buttons,
                     self.scan.advanced.toggle, self.scan.up, self.scan.down,
+                    self.scan.details.toggle, self.scan.reports,
                     self.scan.error_section.toggle, self.scan.errors,
                     self.scan.error_previous, self.scan.error_next],
                 Route.DUPLICATES: [self.duplicates.search, self.duplicates.kind,
@@ -248,7 +250,7 @@ class MainWindow(QMainWindow):
                 self.duplicates.set_state(tr('no_session'), False)
             elif not value.exact and not value.visual:
                 set_text(self.duplicates.empty, tr('no_matches'))
-            if not self.scan_active:
+            if not self.scan_active and not self.cancelled_before_session:
                 # A failed attempt may precede creation of a new session. Keep
                 # that failure visible instead of rendering the older successful
                 # session as the result of the attempted scan.
@@ -266,7 +268,7 @@ class MainWindow(QMainWindow):
                 self.duplicates.groups.groups_model.review.clear()
                 self.request_matches()
                 self.request_groups()
-            if not self.scan_active:
+            if not self.scan_active and not self.cancelled_before_session:
                 self.status = 'failed' if self.scan.failure_detail else value.status
         elif action == 'sources':
             self.root_states = dict(value)
@@ -470,6 +472,7 @@ class MainWindow(QMainWindow):
         available = not busy and not self.controller.closing and not self.scan_active
         self.scan.start.setEnabled(available and any(self.root_states.get(root) == 'available' for root in self.roots))
         self.scan.cancel.setEnabled(self.scan_active and not self.controller.closing)
+        self.dashboard.set_scan_active(self.scan_active)
         for control in (self.scan.add, self.scan.up, self.scan.down, *self.scan.remove_buttons):
             control.setEnabled(available)
         self.dashboard.scan.setEnabled(not self.controller.closing)
@@ -547,6 +550,7 @@ class MainWindow(QMainWindow):
         self.duplicates.groups.groups_model.review.clear()
         self.search_timer.stop()
         self.scan_active = self.waiting_sources = True
+        self.cancelled_before_session = False
         self.status = 'running'
         self.dashboard.loading_enabled = False
         self.dashboard.pause_previews()
@@ -559,10 +563,9 @@ class MainWindow(QMainWindow):
         self.controller.cancel()
         if self.waiting_sources:
             self.waiting_sources = self.scan_active = False
+            self.cancelled_before_session = True
             self.status = 'cancelled'
-            self.scan.timer.stop()
-            set_text(self.scan.status, tr('state_cancelled'))
-            self.scan.progress.setRange(0, 1)
+            self.scan.cancelled()
             self.dashboard.loading_enabled = True
             self.dashboard.visible_timer.start()
         self.busy_changed(self.controller.busy)

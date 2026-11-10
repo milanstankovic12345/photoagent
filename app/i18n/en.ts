@@ -453,22 +453,22 @@ RETAIN: {2}</translation>
     <message>
       <source>exact_candidates</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>EXACT candidates</translation>
+      <translation>EXACT copies</translation>
     </message>
     <message>
       <source>last_session_candidates</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Last session, direct candidate count</translation>
+      <translation>Last scan · direct duplicate candidates</translation>
     </message>
     <message>
       <source>visual_links</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Visual matches</translation>
+      <translation>VISUAL pairs</translation>
     </message>
     <message>
       <source>last_session_links</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Last session, direct VISUAL links</translation>
+      <translation>Last scan · similar pairs to review</translation>
     </message>
     <message>
       <source>estimated_space</source>
@@ -564,7 +564,7 @@ Photographs processed: {2} · EXACT candidates: {3} · VISUAL links: {4} · Fail
     <message>
       <source>source_description</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Add sources in review order. Originals remain unchanged.</translation>
+      <translation>Add folders to scan. Removing a source only removes it from this list.</translation>
     </message>
     <message>
       <source>empty_sources</source>
@@ -2130,6 +2130,62 @@ Please check the file name.</translation>
     <message>
       <source>navigation_collapse</source>
       <translation>Collapse navigation</translation>
+    </message>
+    <message>
+      <source>exact_groups_stat</source>
+      <translation>EXACT groups</translation>
+    </message>
+    <message>
+      <source>last_scan_groups</source>
+      <translation>Last scan · identical file groups</translation>
+    </message>
+    <message>
+      <source>scan_details</source>
+      <translation>Scan details</translation>
+    </message>
+    <message>
+      <source>add_folder</source>
+      <translation>Add folder</translation>
+    </message>
+    <message>
+      <source>remove_source_help</source>
+      <translation>Remove from this list. Files in the folder stay unchanged.</translation>
+    </message>
+    <message>
+      <source>scan_sources_warning</source>
+      <translation>Sources needing attention: {0}. Check their status below and reconnect unavailable drives before scanning.</translation>
+    </message>
+    <message>
+      <source>scan_next_ready</source>
+      <translation>Add a folder, then start scanning. Originals stay unchanged.</translation>
+    </message>
+    <message>
+      <source>scan_next_running</source>
+      <translation>Scanning locally. You can cancel safely; no photographs are moved.</translation>
+    </message>
+    <message>
+      <source>scan_next_review</source>
+      <translation>Review the duplicate candidates next. Similar pairs need your judgment; nothing moves without confirmation.</translation>
+    </message>
+    <message>
+      <source>scan_next_clear</source>
+      <translation>No duplicate candidates found in this scan. Add another folder or scan again when your collection changes.</translation>
+    </message>
+    <message>
+      <source>scan_next_retry</source>
+      <translation>Check the sources and errors, then try scanning again.</translation>
+    </message>
+    <message>
+      <source>scan_next_partial</source>
+      <translation>Some sources could not be fully scanned. Available results are for review only; check sources and errors, then scan again.</translation>
+    </message>
+    <message>
+      <source>scan_next_cancelled</source>
+      <translation>Scanning was cancelled. Start again when ready; originals stay unchanged.</translation>
+    </message>
+    <message>
+      <source>scan_progress_summary</source>
+      <translation>{0} · photographs processed: {1}</translation>
     </message>
   </context>
 </TS>

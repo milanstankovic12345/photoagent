@@ -1,5 +1,21 @@
 # Changelog
 
+## Task017 — Clearer Dashboard and Scan — 2026-11-10
+
+- Put the latest scan/next step before compact, spaced metric cards. Distinguish
+  indexed physical photographs, EXACT candidate copies, VISUAL pairs and EXACT
+  groups. Show absent session measurements as unavailable and remove the savings
+  card. Promote Review duplicates only for reviewable results; otherwise promote Scan.
+- Put Add folder in the Scan toolbar and explain that removing a source changes
+  only the list. Keep source warnings beside scan status, simplify live progress,
+  and move counters/report paths into a collapsed details section. Report failures
+  and the error summary remain visible without expanding technical details.
+- Add state-specific next steps for ready, running, cancelled, failed, complete
+  and incomplete scans. Preserve pre-session cancellation across refresh and late
+  source replies. Preserve existing workers, matching, indexing and move safety.
+- Rebind icons when an action changes emphasis, add EN/SR messages and regenerate
+  catalogs. Add focused synthetic tests and real-window capture tooling/evidence.
+
 ## Task016 — Compact collapsible navigation — 2026-11-10
 
 - Default to an icon rail, with a keyboard-accessible animated expand/collapse

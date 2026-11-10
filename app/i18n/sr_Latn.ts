@@ -513,22 +513,22 @@ OSTAJE: {2}</translation>
     <message>
       <source>exact_candidates</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>EXACT kandidati</translation>
+      <translation>EXACT kopije</translation>
     </message>
     <message>
       <source>last_session_candidates</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Poslednja sesija · broj direktnih kandidata</translation>
+      <translation>Poslednje skeniranje · direktni kandidati</translation>
     </message>
     <message>
       <source>visual_links</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Vizuelna podudaranja</translation>
+      <translation>VISUAL parovi</translation>
     </message>
     <message>
       <source>last_session_links</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Poslednja sesija · direktne VISUAL veze</translation>
+      <translation>Poslednje skeniranje · slični parovi za pregled</translation>
     </message>
     <message>
       <source>estimated_space</source>
@@ -624,7 +624,7 @@ Obrađene fotografije: {2} · EXACT kandidati: {3} · VISUAL veze: {4} · Neuspe
     <message>
       <source>source_description</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Dodajte izvore redom kojim želite da se pregledaju. Originali se ne menjaju.</translation>
+      <translation>Dodajte foldere za skeniranje. Uklanjanje izvora uklanja samo stavku sa ove liste.</translation>
     </message>
     <message>
       <source>empty_sources</source>
@@ -2130,6 +2130,62 @@ Proverite naziv fajla.</translation>
     <message>
       <source>navigation_collapse</source>
       <translation>Sklopi navigaciju</translation>
+    </message>
+    <message>
+      <source>exact_groups_stat</source>
+      <translation>EXACT grupe</translation>
+    </message>
+    <message>
+      <source>last_scan_groups</source>
+      <translation>Poslednje skeniranje · grupe identičnih fajlova</translation>
+    </message>
+    <message>
+      <source>scan_details</source>
+      <translation>Detalji skeniranja</translation>
+    </message>
+    <message>
+      <source>add_folder</source>
+      <translation>Dodaj folder</translation>
+    </message>
+    <message>
+      <source>remove_source_help</source>
+      <translation>Ukloni sa ove liste. Fajlovi u folderu ostaju nepromenjeni.</translation>
+    </message>
+    <message>
+      <source>scan_sources_warning</source>
+      <translation>Izvori koji zahtevaju pažnju: {0}. Proverite status ispod i povežite nedostupne diskove pre skeniranja.</translation>
+    </message>
+    <message>
+      <source>scan_next_ready</source>
+      <translation>Dodajte folder, pa pokrenite skeniranje. Originali ostaju nepromenjeni.</translation>
+    </message>
+    <message>
+      <source>scan_next_running</source>
+      <translation>Lokalno skeniranje je u toku. Možete bezbedno otkazati; fotografije se ne premeštaju.</translation>
+    </message>
+    <message>
+      <source>scan_next_review</source>
+      <translation>Sledeći korak je pregled kandidata za duplikate. Slične parove procenjujete vi; ništa se ne premešta bez potvrde.</translation>
+    </message>
+    <message>
+      <source>scan_next_clear</source>
+      <translation>U ovom skeniranju nema kandidata za duplikate. Dodajte drugi folder ili ponovite skeniranje kada promenite kolekciju.</translation>
+    </message>
+    <message>
+      <source>scan_next_retry</source>
+      <translation>Proverite izvore i greške, pa pokušajte ponovo.</translation>
+    </message>
+    <message>
+      <source>scan_next_partial</source>
+      <translation>Neki izvori nisu potpuno skenirani. Dostupni rezultati služe samo za pregled; proverite izvore i greške, pa ponovite skeniranje.</translation>
+    </message>
+    <message>
+      <source>scan_next_cancelled</source>
+      <translation>Skeniranje je otkazano. Pokrenite ga ponovo kada budete spremni; originali ostaju nepromenjeni.</translation>
+    </message>
+    <message>
+      <source>scan_progress_summary</source>
+      <translation>{0} · obrađeno fotografija: {1}</translation>
     </message>
   </context>
 </TS>

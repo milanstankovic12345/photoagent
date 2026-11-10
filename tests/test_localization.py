@@ -87,13 +87,14 @@ def test_locale_values_reformat_open_widgets_and_preserve_literals(desktop):
     literal = 'C:/Fotografije/čćžšđ/ready/Фото/照片.png'
     label = QLabel(window)
     set_text(label, tr('photo_summary', literal, 'PNG', 128, 96, size_text(1536)))
-    summary = DashboardSummary(1234, 'synthetic', 'complete', 1794222000, potential_bytes=1536)
+    summary = DashboardSummary(1234, 'synthetic', 'complete', 1794222000,
+                               potential_bytes=1536, exact_groups=1234)
     window.dashboard.set_summary(summary)
     for language, amount, count in (('sr_Latn', '1,5 KiB', '1.234'), ('en', '1.5 KiB', '1,234')):
         choose_language(window, language)
         assert amount in label.text() and literal in label.text()
         assert window.dashboard.stat_cards[0].value.text() == count
-        assert window.dashboard.stat_cards[3].value.text() == amount
+        assert window.dashboard.stat_cards[3].value.text() == count
         assert date_text(summary.started) in window.dashboard.session.text()
         assert str(number_text(1234)) == count
         assert summary.indexed == 1234 and summary.potential_bytes == 1536

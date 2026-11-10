@@ -28,6 +28,19 @@ Za izgradnju i instalaciju lokalnog ZIP paketa bez interneta pogledajte
 [RELEASE.md](docs/RELEASE.md). Paket ne uključuje Python. Validacija na čistom
 operativnom sistemu, nativnom Linuxu i sa validnim RAW uzorkom ostaje otvorena.
 
+## Početak skeniranja
+
+Kontrolna tabla odvojeno prikazuje fotografije celog indeksa, EXACT kopije,
+VISUAL parove i EXACT grupe poslednjeg skeniranja. Glavna akcija vodi na
+skeniranje ili pregled duplikata, prema dostupnim rezultatima.
+
+Na stranici za skeniranje izaberite **Dodaj folder**, pa **Pokreni skeniranje**.
+Uklanjanje izvora menja samo listu; ne briše sadržaj foldera. Napredni redosled
+izvora, detaljni brojači i putanja CSV izveštaja nalaze se u sklopivim oblastima.
+Upozorenja o izvorima, greške i neuspeh čuvanja izveštaja ostaju dostupni.
+**Odustani** bezbedno prekida skeniranje; poruka zatim pokazuje sledeći korak.
+Pregled rezultata nepotpunog skeniranja ne dozvoljava premeštanje fotografija.
+
 ## Jezik i izgled
 
 Bočna navigacija počinje sklopljena, sa ikonama. Strelica ispod logotipa proširuje

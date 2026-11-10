@@ -140,6 +140,16 @@ Enter cannot approve. Successful single moves expose a Restore action for their
 specific operation ID, rechecked through history and restore_plan. Failures report
 details and defer recovery authority to the journal.
 
+Task017 refines the existing `app/ui/qt/dashboard_scan.py` presentation. The
+Dashboard prioritizes latest-scan guidance and selects its primary action from
+reviewable session state. Four metric cards distinguish index files, EXACT
+candidate copies, VISUAL pairs and EXACT groups; estimated bytes are no longer
+displayed. Scan uses collapsed advanced/details/errors areas with visible
+warnings, phase/count and state-specific guidance. The window preserves an
+attempt cancelled during source checks across late source/dashboard responses,
+until another scan starts. The existing controller generation checks remain
+intact; no scanning or safety service behavior changes.
+
 Task007 moves Dashboard/Scan presentation into `app/ui/qt/dashboard_scan.py`.
 DashboardSummary retains its existing fields and adds session photo count, EXACT
 group count, finished time and at most three MatchRow candidates. Read-only service
