@@ -30,6 +30,18 @@ operativnom sistemu, nativnom Linuxu i sa validnim RAW uzorkom ostaje otvorena.
 
 ## Početak skeniranja
 
+Task019 grupiše podešavanja u Izgled, Jezik, Skeniranje, Bezbednost i Skladište.
+Tema i jezik se čuvaju automatski; osetljivost sledećeg skeniranja čuva se dugmetom
+Sačuvaj. Uža, uravnotežena i šira pretraga koriste postojeće pragove; Prilagođeno
+zadržava vaše vrednosti. Tehnički podaci se mogu proširiti. Greška čuvanja je
+vidljiva i vraća poslednje uspešno sačuvane vrednosti.
+
+Karantin prikazuje naziv fotografije, prvobitnu lokaciju i status. Detalji operacije
+sadrže ID, zabeležene putanje, vreme i veličinu; putanja iz istorije nije potvrda
+trenutne lokacije fotografije. Konflikti, nedostupan disk i potreba za oporavkom
+ostaju vidljivi. Neuspeh sličice ne blokira pripremu vraćanja. Vraćanje i dalje
+zahteva pregled plana i potvrdu i nikada ne prepisuje postojeći fajl.
+
 Kontrolna tabla odvojeno prikazuje fotografije celog indeksa, EXACT kopije,
 VISUAL parove i EXACT grupe poslednjeg skeniranja. Glavna akcija vodi na
 skeniranje ili pregled duplikata, prema dostupnim rezultatima.

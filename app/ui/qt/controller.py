@@ -146,10 +146,10 @@ class Controller(QObject):
     @Slot(int, str, object)
     def _result(self, request: int, action: str, value: Any) -> None:
         self._settle(request)
-        if action == 'language' and not self.closing:
+        if action in ('language', 'settings') and not self.closing:
             # Every successful write matters for rollback, including a choice
             # superseded while the service thread was scanning or saving.
-            self.result.emit('language_saved', value)
+            self.result.emit(action + '_saved', value)
         if not self.closing and self.latest.get(action) == request:
             self.result.emit(action, value)
 

@@ -25,8 +25,9 @@ Back to group (Alt+Left) preserves filters, sorting, group, result page, scroll
 and selection without reloading.
 Use `start_windows.bat --ui tk` (or `python -B photo_agent.py --ui tk`) for Tkinter.
 The theme defaults to Dark and respects any saved theme preference.
-Settings groups Appearance, Language, Scanning, Similarity Detection, Safety,
-Storage and About. Dashboard and Settings share the same Dark/Light/System control;
+Settings groups Appearance, Language, Scanning, Safety and Storage. Similarity
+presets are under Scanning; source lists, thresholds, protection and storage
+details expand on request. Dashboard and Settings share the Dark/Light/System control;
 theme changes save immediately. Source folders are listed in their saved priority
 order, with a link to edit them on Scan. Settings → Language switches between
 English and Srpski (latinica) immediately, including open confirmations and previews,
@@ -57,7 +58,7 @@ Qt mode needs PySide6 >=6.8,<7; preflight checks only the selected toolkit.
 See [Qt distribution notes](docs/QT_DISTRIBUTION.md).
 
 v2.5 adds editable Qt Linguist `.ts` sources and embedded `.qm` catalogs for all
-420 messages in each language. Settings → Language changes open pages, dialogs,
+454 messages in each language. Settings → Language changes open pages, dialogs,
 accessibility labels and progress immediately; the selection survives restart.
 Display sizes, index totals and scan dates follow the selected locale. History
 dates remain explicitly UTC. File names, paths, hashes, formats and stored values
@@ -126,8 +127,11 @@ cannot authorize quarantine.
    identity again and never overwrites an existing original path. Legacy entries
    require an additional individual warning because their earlier bytes are unknown.
 
-Quarantine history shows the original name/location, recorded move completion time
-in UTC, manifest size, status and operation type. Missing legacy data and the actual
+Quarantine history shows the photograph name, original location and status. Operation
+details expand to show the ID, recorded paths, move completion time in UTC, manifest
+size and operation type. Recorded paths do not establish the current photo location.
+Conflicts, unavailable storage and recovery warnings remain visible; a failed restore
+message survives history refresh. Missing legacy data and the actual
 move time of an operation discovered during crash recovery show “Nije dostupno”.
 The latest journal transition is not presented as the original move date. Selecting
 a row loads an optional thumbnail from its verified current quarantine destination;
@@ -140,16 +144,18 @@ Similarity search presets apply to the **next scan** after Save Settings:
 
 | Preset | pHash / dHash maximum distance |
 |---|---|
-| Strict | 2 / 3 |
+| Narrow search | 2 / 3 |
 | Balanced (existing defaults) | 4 / 6 |
 | Broader Search | 8 / 10 |
-| Custom / Advanced | Existing or manually edited values, each 0–64 |
+| Custom (expand Advanced sensitivity) | Existing or manually edited values, each 0–64 |
 
 These choices describe search breadth and are not qualitatively calibrated.
 Stricter settings can miss candidates; broader settings can include more false
 candidates. VISUAL always requires review. Custom thresholds survive theme changes
 and restarts; unknown settings keys and legacy history are retained on every write.
-Storage shows the active index path (including temporary fallback) and the number
+Failed settings writes show a message and restore the last successfully saved
+preferences, including a theme saved just before a later queued choice failed.
+Storage shows the active index path under expandable details (including temporary fallback) and the number
 of indexed physical files excluding records marked missing/moved. Offline records
 remain counted. Preview cache is an in-memory LRU budget of 64 MiB, not measured disk
 usage or a cap on total process memory. History thumbnails are uncached. Recovery

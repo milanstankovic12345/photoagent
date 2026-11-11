@@ -85,7 +85,12 @@ class ServiceWorker(QObject):
             self.cancelled.emit(request, action)
         except Exception as exc:
             log.exception('qt_service_failure', extra={'action': action})
-            self.error.emit(request, action, str(exc))
+            # Keep OS diagnostics, but give recovery screens a stable, localized
+            # explanation when a recorded file/root is no longer reachable.
+            detail = str(exc)
+            if isinstance(exc, FileNotFoundError) and action in ('restore', 'history_preview', 'quarantine_folder'):
+                detail = 'history_file_unavailable: ' + detail
+            self.error.emit(request, action, detail)
 
     @Slot()
     def close(self) -> None:

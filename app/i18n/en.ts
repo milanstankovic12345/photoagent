@@ -6,7 +6,7 @@
     <message>
       <source>quarantine_description</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Restore quarantined photographs to their original location. Select an entry and review the plan before confirming.</translation>
+      <translation>Quarantine moves photographs reversibly. Select an item, review the restore plan and confirm to return it to its original location. Existing files are never overwritten.</translation>
     </message>
     <message>
       <source>quarantine_empty</source>
@@ -129,12 +129,12 @@ Eligible for restore preparation: {3}. The service rechecks the file and destina
     <message>
       <source>matching_explanation</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Thresholds find VISUAL candidates; similarity is not proof of duplication. Higher thresholds may include other captures and edits. Save your choice for the next scan. Presets are not calibrated for quality.</translation>
+      <translation>Choose how widely to search for similar photos. Similarity is not proof of duplication; every visual match needs review. Presets are not calibrated confidence scores and never approve quarantine.</translation>
     </message>
     <message>
       <source>matching_strict</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Strict</translation>
+      <translation>Narrow search</translation>
     </message>
     <message>
       <source>matching_balanced</source>
@@ -149,27 +149,27 @@ Eligible for restore preparation: {3}. The service rechecks the file and destina
     <message>
       <source>matching_custom</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Custom / Advanced</translation>
+      <translation>Custom</translation>
     </message>
     <message>
       <source>matching_strict_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>pHash 2 / dHash 3 · a narrower search may miss candidates; false matches remain possible.</translation>
+      <translation>Fewer similar candidates; some may be missed. Review each match.</translation>
     </message>
     <message>
       <source>matching_balanced_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>pHash 4 / dHash 6 · existing defaults; all VISUAL candidates require review.</translation>
+      <translation>The existing default search breadth. Review each similar candidate.</translation>
     </message>
     <message>
       <source>matching_broader_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>pHash 8 / dHash 10 · a broader search may produce more false candidates; review carefully.</translation>
+      <translation>More candidates, including other captures and edits. Review carefully.</translation>
     </message>
     <message>
       <source>matching_custom_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Your thresholds remain saved. Advanced values 0–64 may increase false candidates; they are not quality scores.</translation>
+      <translation>Your own thresholds. Review the advanced values, then Save for the next scan. These are not quality or confidence scores.</translation>
     </message>
     <message>
       <source>settings_safety</source>
@@ -910,7 +910,7 @@ Photographs: {1} · EXACT groups: {2} · Possible VISUAL links: {3} · Failures:
     <message>
       <source>sensitivity</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Advanced sensitivity for the next scan</translation>
+      <translation>Advanced sensitivity</translation>
     </message>
     <message>
       <source>phash</source>
@@ -935,7 +935,7 @@ Photographs: {1} · EXACT groups: {2} · Possible VISUAL links: {3} · Failures:
     <message>
       <source>locked</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Locked protection: plan confirmation, RAW/XMP protection, SHA-256 verification, no overwriting or permanent deletion. Aspect threshold: 0.025.</translation>
+      <translation>Always enforced: plan confirmation, RAW/XMP protection, SHA-256 verification, no overwriting or permanent deletion. Aspect threshold: 0.025.</translation>
     </message>
     <message>
       <source>settings_roots</source>
@@ -2218,6 +2218,56 @@ Please check the file name.</translation>
     <message>
       <source>sample_raw_jpeg_short</source>
       <translation>RAW + JPEG · previews</translation>
+    </message>
+    <message>
+      <source>history_quarantined</source>
+      <translation>In quarantine</translation>
+    </message>
+    <message>
+      <source>history_restored</source>
+      <translation>Restored</translation>
+    </message>
+    <message>
+      <source>history_origin</source>
+      <translation>Original location: {0}</translation>
+    </message>
+    <message>
+      <source>history_details</source>
+      <translation>Operation details</translation>
+    </message>
+    <message>
+      <source>history_metadata</source>
+      <translation>Date moved: {0}
+Size in bytes: {1}
+Operation type: {2}</translation>
+    </message>
+    <message>
+      <source>history_location_note</source>
+      <translation>These are recorded paths, not a verified current photo location. Open quarantine folder opens a folder; it does not open the photograph.</translation>
+    </message>
+    <message>
+      <source>settings_save_help</source>
+      <translation>Theme and language save automatically. Use Save to apply sensitivity to the next scan.</translation>
+    </message>
+    <message>
+      <source>settings_save_failed</source>
+      <translation>Settings could not be saved. The last saved preferences have been restored. Check technical details and try again.</translation>
+    </message>
+    <message>
+      <source>safety_details</source>
+      <translation>Protection details</translation>
+    </message>
+    <message>
+      <source>storage_details</source>
+      <translation>Index and preview cache details</translation>
+    </message>
+    <message>
+      <source>storage_count</source>
+      <translation>Indexed photographs: {0}</translation>
+    </message>
+    <message>
+      <source>history_file_unavailable</source>
+      <translation>Photograph or source folder unavailable. Reconnect the drive and check the file location. History is preserved.</translation>
     </message>
   </context>
 </TS>

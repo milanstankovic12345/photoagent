@@ -16,12 +16,33 @@ from app.ui.qt.components import (Card, CollapsibleSection, ContextToolbar, Empt
                                   TechnicalDetails, ThemeSelector, button, path_label, text_label)
 from app.ui.qt.localization import set_text, text_of, add_item, language_manager
 from app.ui.qt.icons import set_combo_icon
-from app.ui.qt.strings import tr, join_text
+from app.ui.qt.strings import SR, error_text, tr, join_text
 from app.ui.qt.formatting import FormattedText, number_text
 
 # Search breadth choices, not calibrated image-quality or duplicate confidence.
 MATCHING_PRESETS = {'strict': MatchingOptions(2, 3), 'balanced': MatchingOptions(),
                     'broader': MatchingOptions(8, 10)}
+
+
+def history_problem(entry: HistoryEntry) -> str:
+    """Surface recorded problems without interpreting journal paths as live files."""
+    problems = []
+    if entry.state in ('intent', 'blocked'):
+        problems.append(tr('recovery_required'))
+    for line in entry.error.splitlines():
+        key = line.split(':', 1)[0]
+        if key in SR:
+            problems.append(tr(key))
+    return join_text(problems, ' · ')
+
+
+def history_status(entry: HistoryEntry) -> str:
+    if entry.state == 'complete':
+        key = ('history_restored' if entry.action == 'restore' else
+               'state_restored' if entry.restored else 'history_quarantined')
+    else:
+        key = 'state_' + entry.state
+    return join_text(filter(None, (tr(key), history_problem(entry))), ' · ')
 
 
 def move_date(value: str | None) -> str:
@@ -42,6 +63,8 @@ class HistoryScreen(QWidget):
     def __init__(self, restore: Callable, page: Callable, open_folder: Callable) -> None:
         super().__init__()
         self.entries: dict[str, HistoryEntry] = {}
+        self.operation_error = ''
+        self.preview_error = ''
         layout = QVBoxLayout(self)
         self.toolbar = ContextToolbar()
         self.restore = button('restore', restore, self.toolbar.actions, variant='primary')
@@ -51,9 +74,9 @@ class HistoryScreen(QWidget):
         layout.addWidget(self.message)
         self.empty = EmptyState('quarantine_empty', 'quarantine_empty_detail')
         layout.addWidget(self.empty)
-        self.table = QTableWidget(0, 6)
+        self.table = QTableWidget(0, 3)
         set_text(self.table, [tr(k) for k in
-            ('name', 'original_location', 'moved_at', 'size', 'state', 'kind')], 'setHorizontalHeaderLabels')
+            ('name', 'original_location', 'state')], 'setHorizontalHeaderLabels')
         set_text(self.table, tr('history'), 'setAccessibleName')
         set_text(self.table, tr('keyboard_history'), 'setAccessibleDescription')
         self.table.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -70,6 +93,8 @@ class HistoryScreen(QWidget):
         header.setSectionResizeMode(0, QHeaderView.Interactive)
         header.resizeSection(0, 160)
         header.setSectionResizeMode(1, QHeaderView.Stretch)
+        header.setSectionResizeMode(2, QHeaderView.Interactive)
+        header.resizeSection(2, 220)
         self.table.setMinimumHeight(220)
         self.table.itemSelectionChanged.connect(self.selection_changed)
         layout.addWidget(self.table, 1)
@@ -82,12 +107,23 @@ class HistoryScreen(QWidget):
         layout.addWidget(self.pager)
         self.detail_card = Card()
         detail_layout = self.detail_card.content
+        self.selected_name = path_label('', 'section')
+        detail_layout.addWidget(self.selected_name)
+        self.selected_status = text_label('')
+        detail_layout.addWidget(self.selected_status)
+        self.notice = text_label('')
+        detail_layout.addWidget(self.notice)
         self.thumbnail = text_label(tr('thumbnail_unavailable'), 'metadata')
         self.thumbnail.setAlignment(Qt.AlignCenter)
         self.thumbnail.setFixedHeight(120)
         detail_layout.addWidget(self.thumbnail)
+        self.origin = path_label('', 'metadata')
+        detail_layout.addWidget(self.origin)
+        self.record_details = CollapsibleSection('history_details')
         self.details = path_label()
-        detail_layout.addWidget(self.details)
+        self.details.setFocusPolicy(Qt.StrongFocus)
+        self.record_details.body_layout.addWidget(self.details)
+        detail_layout.addWidget(self.record_details)
         layout.addWidget(self.detail_card)
         self.error_details = TechnicalDetails()
         layout.addWidget(self.error_details)
@@ -100,13 +136,9 @@ class HistoryScreen(QWidget):
         # Update cells in place: no selection signal, preview job or plan change.
         for row in range(self.table.rowCount()):
             entry = self.entries[self.table.item(row, 0).data(Qt.UserRole)]
-            status = 'state_restored' if entry.restored and entry.state == 'complete' else 'state_' + entry.state
-            for column, value in ((2, move_date(entry.moved_at)),
-                                  (3, number_text(entry.size) if entry.size is not None else tr('not_available')),
-                                  (4, tr(status)), (5, tr('action_' + entry.action))):
-                item = self.table.item(row, column)
-                item.setText(value)
-                item.setToolTip(value)
+            item = self.table.item(row, 2)
+            item.setText(history_status(entry))
+            item.setToolTip(history_status(entry))
 
     @property
     def selected_entry(self) -> HistoryEntry | None:
@@ -129,10 +161,7 @@ class HistoryScreen(QWidget):
         self.table.setRowCount(len(value.items))
         for i, entry in enumerate(value.items):
             original = entry.source if entry.action == 'quarantine' else entry.destination
-            status = ('state_restored' if entry.restored and entry.state == 'complete' else 'state_' + entry.state)
-            columns = (Path(original).name, original, move_date(entry.moved_at),
-                       number_text(entry.size) if entry.size is not None else tr('not_available'),
-                       tr(status), tr('action_' + entry.action))
+            columns = (Path(original).name, original, history_status(entry))
             for j, text in enumerate(columns):
                 item = QTableWidgetItem(text)
                 item.setData(Qt.UserRole, entry.id)
@@ -141,9 +170,9 @@ class HistoryScreen(QWidget):
             if entry.id == selected_id:
                 self.table.selectRow(i)
         self.table.blockSignals(False)
-        set_text(self.message, '')
-        self.message.hide()
-        self.error_details.set_detail('')
+        # Refreshes must not erase a failed restore while its history reloads.
+        set_text(self.message, error_text(self.operation_error) if self.operation_error else '')
+        self.message.setVisible(bool(self.operation_error))
         self.empty.setVisible(value.total == 0)
         self.empty_space.setVisible(not value.items)
         self.table.setVisible(bool(value.items))
@@ -156,17 +185,53 @@ class HistoryScreen(QWidget):
     def selection_details(self) -> None:
         entry = self.selected_entry
         self.detail_card.setVisible(entry is not None)
+        self.preview_error = ''
         self.thumbnail.clear()
+        set_text(self.thumbnail, '', 'setToolTip')
         set_text(self.thumbnail, tr('preview_loading') if entry and entry.restorable else tr('thumbnail_unavailable'))
         set_text(self.thumbnail, text_of(self.thumbnail), 'setAccessibleName')
-        self.error_details.set_detail(entry.error if entry else '')
+        self.update_notice()
         if entry:
-            set_text(self.details, tr('history_selection', entry.id, entry.source, entry.destination,
-                                    tr('yes' if entry.restorable else 'no')))
+            original = entry.source if entry.action == 'quarantine' else entry.destination
+            set_text(self.selected_name, Path(original).name)
+            set_text(self.selected_status, history_status(entry))
+            set_text(self.origin, tr('history_origin', original))
+            set_text(self.details, join_text((
+                tr('history_selection', entry.id, entry.source, entry.destination,
+                   tr('yes' if entry.restorable else 'no')),
+                tr('history_metadata', move_date(entry.moved_at),
+                   number_text(entry.size) if entry.size is not None else tr('not_available'),
+                   tr('action_' + entry.action)), tr('history_location_note'))))
+
+    def update_notice(self) -> None:
+        entry = self.selected_entry
+        problem = history_problem(entry) if entry else ''
+        preview = error_text(self.preview_error) if self.preview_error else ''
+        set_text(self.notice, join_text(filter(None, (problem, preview))))
+        self.notice.setVisible(bool(problem or preview))
+        self.error_details.set_detail('\n'.join(filter(None, (
+            self.operation_error, entry.error if entry else '', self.preview_error))))
+
+    def preview_failed(self, detail: str) -> None:
+        self.preview_error = detail
+        self.thumbnail.clear()
+        set_text(self.thumbnail, tr('thumbnail_unavailable'))
+        set_text(self.thumbnail, tr('thumbnail_unavailable'), 'setAccessibleName')
+        set_text(self.thumbnail, error_text(detail), 'setToolTip')
+        self.update_notice()
+
+    def show_operation_error(self, detail: str) -> None:
+        self.operation_error = detail
+        set_text(self.message, error_text(detail) if detail else '')
+        self.message.setVisible(bool(detail))
+        self.update_notice()
 
     def show_preview(self, operation_id: str, image: QImage) -> None:
         entry = self.selected_entry
         if entry and entry.id == operation_id:
+            if image.isNull():
+                self.preview_failed('preview_error')
+                return
             set_text(self.thumbnail, '')
             self.thumbnail.setPixmap(QPixmap.fromImage(image).scaled(200, 120, Qt.KeepAspectRatio, Qt.SmoothTransformation))
             set_text(self.thumbnail, tr('thumbnail_for', Path(entry.source).name), 'setAccessibleName')
@@ -186,12 +251,18 @@ class SettingsScreen(QWidget):
         layout = QVBoxLayout(self)
         self.toolbar = ContextToolbar()
         self.save = button('save', save, self.toolbar.actions)
+        layout.addWidget(text_label(tr('settings_save_help'), 'metadata'))
+        self.message = text_label('')
+        self.message.hide()
+        layout.addWidget(self.message)
+        self.sections: dict[str, Card] = {}
 
         def section(key: str, description: str) -> QVBoxLayout:
             card = Card()
             card.content.addWidget(text_label(tr(key), 'section'))
             card.content.addWidget(text_label(tr(description), 'metadata'))
             layout.addWidget(card)
+            self.sections[key] = card
             return card.content
 
         appearance = section('settings_appearance', 'settings_appearance_detail')
@@ -207,19 +278,23 @@ class SettingsScreen(QWidget):
         self.language.currentIndexChanged.connect(language_changed)
         language.addWidget(self.language)
         scanning = section('settings_scanning', 'settings_roots')
-        self.roots = path_label()
-        scanning.addWidget(self.roots)
         self.edit_sources = button('edit_sources', edit_sources, scanning)
-        matching = section('settings_similarity', 'matching_explanation')
+        self.source_details = CollapsibleSection('scan_sources')
+        self.roots = path_label()
+        self.roots.setFocusPolicy(Qt.StrongFocus)
+        self.source_details.body_layout.addWidget(self.roots)
+        scanning.addWidget(self.source_details)
+        scanning.addWidget(text_label(tr('settings_similarity'), 'section'))
+        scanning.addWidget(text_label(tr('matching_explanation'), 'metadata'))
         self.preset = QComboBox()
         set_text(self.preset, tr('settings_similarity'), 'setAccessibleName')
         for key in (*MATCHING_PRESETS, 'custom'):
             add_item(self.preset, tr('matching_' + key), key)
-        matching.addWidget(self.preset)
+        scanning.addWidget(self.preset)
         self.preset_detail = text_label('')
-        matching.addWidget(self.preset_detail)
+        scanning.addWidget(self.preset_detail)
         self.advanced = CollapsibleSection('sensitivity')
-        matching.addWidget(self.advanced)
+        scanning.addWidget(self.advanced)
         form = QFormLayout()
         self.advanced.body_layout.addLayout(form)
         self.phash, self.dhash = QSpinBox(), QSpinBox()
@@ -231,14 +306,21 @@ class SettingsScreen(QWidget):
         self.preset.currentIndexChanged.connect(self.preset_changed)
         self.load_matching(4, 6)
         safety = section('settings_safety', 'settings_safety_detail')
-        safety.addWidget(text_label(tr('locked')))
-        storage = section('settings_storage', 'preview_cache_detail')
+        self.safety_details = CollapsibleSection('safety_details')
+        self.safety_details.body_layout.addWidget(text_label(tr('locked')))
+        safety.addWidget(self.safety_details)
+        storage = section('settings_storage', 'offline_detail')
+        self.storage_count = text_label(tr('storage_loading'))
+        storage.addWidget(self.storage_count)
+        self.storage_details = CollapsibleSection('storage_details')
+        storage.addWidget(self.storage_details)
         self.index = path_label(tr('storage_loading'))
-        storage.addWidget(self.index)
+        self.index.setFocusPolicy(Qt.StrongFocus)
+        self.storage_details.body_layout.addWidget(self.index)
+        self.storage_details.body_layout.addWidget(text_label(tr('preview_cache_detail'), 'metadata'))
         self.error_details = TechnicalDetails()
         storage.addWidget(self.error_details)
-        about = section('settings_about', 'offline_detail')
-        about.addWidget(text_label(tr('app_version', __version__)))
+        layout.addWidget(text_label(tr('app_version', __version__), 'metadata'))
         layout.addStretch()
 
     def load_matching(self, phash: int, dhash: int) -> None:
@@ -273,4 +355,10 @@ class SettingsScreen(QWidget):
 
     def show_storage(self, value: StorageSummary) -> None:
         self.error_details.set_detail('')
+        set_text(self.storage_count, tr('storage_count', number_text(value.indexed)))
         set_text(self.index, tr('storage_info', value.index_path, value.indexed))
+
+    def show_save_error(self, detail: str) -> None:
+        set_text(self.message, tr('settings_save_failed'))
+        self.message.show()
+        self.error_details.set_detail(detail)

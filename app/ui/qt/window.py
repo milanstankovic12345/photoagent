@@ -197,10 +197,14 @@ class MainWindow(QMainWindow):
                     self.duplicates.group_next, self.duplicates.table, self.duplicates.previous,
                     self.duplicates.next, self.duplicates.error_details.toggle, self.duplicates.error_details.text],
                 Route.QUARANTINE: [self.history.table, self.history.previous, self.history.next,
+                    self.history.record_details.toggle, self.history.details,
                     self.history.error_details.toggle, self.history.error_details.text],
                 Route.SETTINGS: [self.preferences.theme, self.preferences.language, self.preferences.edit_sources,
+                    self.preferences.source_details.toggle, self.preferences.roots,
                     self.preferences.preset, self.preferences.advanced.toggle,
                     self.preferences.phash, self.preferences.dhash,
+                    self.preferences.safety_details.toggle, self.preferences.storage_details.toggle,
+                    self.preferences.index,
                     self.preferences.error_details.toggle, self.preferences.error_details.text],
             }[self.route]
         chain = [*chain, *body]
@@ -381,6 +385,7 @@ class MainWindow(QMainWindow):
             if self.prepare_epoch == self.operation_epoch:
                 self.confirm(value)
         elif action == 'execute':
+            self.history.show_operation_error('')
             self.listing_context = None
             self.history_offset = 0
             self.operation_epoch += 1
@@ -392,14 +397,16 @@ class MainWindow(QMainWindow):
                 and plan.moves[0].action == 'quarantine' and value else None)
             self.executing_plan = None
             self.refresh()
-        elif action == 'language_saved':
+        elif action in ('language_saved', 'settings_saved'):
             self.settings = value
         elif action == 'language':
             self.settings = value
+            self.preferences.message.hide()
             self.apply_language(value['language'])
             set_text(self.statusBar(), tr('saved'), 'showMessage')
         elif action == 'settings':
             self.settings = value
+            self.preferences.message.hide()
             self.theme.apply(value['theme'])
             for combo in (self.preferences.theme, self.dashboard.theme):
                 combo.blockSignals(True)
@@ -425,17 +432,30 @@ class MainWindow(QMainWindow):
     def error(self, action: str, detail: str) -> None:
         if action == 'language':
             self.apply_language(self.settings['language'])
+            self.preferences.show_save_error(detail)
             set_text(self.statusBar(), tr('language_save_failed'), 'showMessage')
             self.show_error('language_save_failed: ' + detail)
             return
+        if action == 'settings':
+            # Service writes are atomic. Roll presentation back to the latest
+            # successful write, including one superseded by a queued request.
+            self.theme.apply(self.settings['theme'])
+            for combo in (self.preferences.theme, self.dashboard.theme):
+                combo.blockSignals(True)
+                combo.setCurrentIndex(combo.findData(self.settings['theme']))
+                combo.blockSignals(False)
+            self.apply_language(self.settings['language'])
+            self.preferences.load_matching(self.settings['phash_max'], self.settings['dhash_max'])
+            self.roots = list(self.settings['roots'])
+            self.render_roots()
+            self.preferences.show_save_error(detail)
+            self.show_error(detail)
+            return
         if action == 'history_preview':
-            self.history.thumbnail.clear()
-            set_text(self.history.thumbnail, tr('thumbnail_unavailable'))
-            set_text(self.history.thumbnail, tr('thumbnail_unavailable'), 'setAccessibleName')
-            set_text(self.history.thumbnail, error_text(detail), 'setToolTip')
-            self.history.error_details.set_detail(detail)
+            self.history.preview_failed(detail)
             return
         if action == 'storage':
+            set_text(self.preferences.storage_count, tr('storage_failed'))
             set_text(self.preferences.index, tr('storage_failed'))
             self.preferences.error_details.set_detail(detail)
             return
@@ -469,9 +489,7 @@ class MainWindow(QMainWindow):
             self.history.fail(detail)
             return
         if action in ('restore', 'execute'):
-            set_text(self.history.message, error_text(detail))
-            self.history.error_details.set_detail(detail)
-            self.history.message.show()
+            self.history.show_operation_error(detail)
         self.show_error(detail)
 
     def show_error(self, detail: str) -> None:

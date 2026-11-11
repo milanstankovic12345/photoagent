@@ -66,7 +66,7 @@
     <message>
       <source>quarantine_description</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Fotografije u karantinu možete vratiti na izvornu lokaciju. Izaberite zapis i pregledajte plan pre potvrde.</translation>
+      <translation>Karantin je reverzibilno premeštanje fotografija. Izaberite stavku, pregledajte plan vraćanja i potvrdite vraćanje na prvobitno mesto. Postojeći fajlovi se ne prepisuju.</translation>
     </message>
     <message>
       <source>quarantine_empty</source>
@@ -189,47 +189,47 @@ Može u pripremu vraćanja: {3}. Servis ponovo proverava fajl i odredište.</tra
     <message>
       <source>matching_explanation</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Pragovi služe pretrazi VISUAL kandidata; sličnost nije dokaz duplikata. Veći pragovi mogu uključiti druge kadrove i obrade. Sačuvajte izbor za naredno skeniranje. Preseti nisu kvalitativno kalibrisani.</translation>
+      <translation>Izaberite širinu pretrage sličnih fotografija. Sličnost nije dokaz duplikata; svako vizuelno poklapanje zahteva pregled. Preseti nisu kalibrisana mera sigurnosti i nikada ne odobravaju karantin.</translation>
     </message>
     <message>
       <source>matching_strict</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Strogo (Strict)</translation>
+      <translation>Uža pretraga</translation>
     </message>
     <message>
       <source>matching_balanced</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Uravnoteženo (Balanced)</translation>
+      <translation>Uravnoteženo</translation>
     </message>
     <message>
       <source>matching_broader</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Šira pretraga (Broader Search)</translation>
+      <translation>Šira pretraga</translation>
     </message>
     <message>
       <source>matching_custom</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Prilagođeno (Custom / Advanced)</translation>
+      <translation>Prilagođeno</translation>
     </message>
     <message>
       <source>matching_strict_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>pHash 2 / dHash 3 · uža pretraga može propustiti kandidate; lažna podudaranja su i dalje moguća.</translation>
+      <translation>Manje sličnih kandidata; neki mogu biti propušteni. Pregledajte svako poklapanje.</translation>
     </message>
     <message>
       <source>matching_balanced_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>pHash 4 / dHash 6 · postojeće podrazumevane vrednosti; svi VISUAL kandidati zahtevaju pregled.</translation>
+      <translation>Postojeća podrazumevana širina pretrage. Pregledajte svakog sličnog kandidata.</translation>
     </message>
     <message>
       <source>matching_broader_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>pHash 8 / dHash 10 · šira pretraga može dati više lažnih kandidata; potreban je pažljiv pregled.</translation>
+      <translation>Više kandidata, uključujući druge snimke i obrade. Pažljivo ih pregledajte.</translation>
     </message>
     <message>
       <source>matching_custom_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Vaši pragovi ostaju sačuvani. Napredne vrednosti 0–64 mogu povećati broj lažnih kandidata; nisu ocena kvaliteta.</translation>
+      <translation>Vaši pragovi. Pregledajte napredne vrednosti, pa ih sačuvajte za sledeće skeniranje. Ovo nisu ocene kvaliteta ili sigurnosti.</translation>
     </message>
     <message>
       <source>settings_safety</source>
@@ -970,7 +970,7 @@ Fotografije: {1} · EXACT grupe: {2} · Moguće VISUAL veze: {3} · Neuspesi: {4
     <message>
       <source>sensitivity</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Napredna osetljivost · važi za sledeće skeniranje</translation>
+      <translation>Napredna osetljivost</translation>
     </message>
     <message>
       <source>phash</source>
@@ -995,7 +995,7 @@ Fotografije: {1} · EXACT grupe: {2} · Moguće VISUAL veze: {3} · Neuspesi: {4
     <message>
       <source>locked</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Zaključana zaštita: potvrda plana, RAW/XMP zaštita, SHA-256 provera, bez prepisivanja i trajnog brisanja. Aspect prag: 0,025.</translation>
+      <translation>Obavezna zaštita: potvrda plana, RAW/XMP zaštita, SHA-256 provera, bez prepisivanja ili trajnog brisanja. Prag odnosa stranica: 0.025.</translation>
     </message>
     <message>
       <source>settings_roots</source>
@@ -2218,6 +2218,56 @@ Proverite naziv fajla.</translation>
     <message>
       <source>sample_raw_jpeg_short</source>
       <translation>RAW + JPEG · prikazi</translation>
+    </message>
+    <message>
+      <source>history_quarantined</source>
+      <translation>U karantinu</translation>
+    </message>
+    <message>
+      <source>history_restored</source>
+      <translation>Vraćeno</translation>
+    </message>
+    <message>
+      <source>history_origin</source>
+      <translation>Prvobitna lokacija: {0}</translation>
+    </message>
+    <message>
+      <source>history_details</source>
+      <translation>Detalji operacije</translation>
+    </message>
+    <message>
+      <source>history_metadata</source>
+      <translation>Datum premeštanja: {0}
+Veličina u bajtovima: {1}
+Vrsta operacije: {2}</translation>
+    </message>
+    <message>
+      <source>history_location_note</source>
+      <translation>Ovo su zabeležene putanje, a ne potvrđena trenutna lokacija fotografije. Otvori fasciklu karantina otvara fasciklu, a ne fotografiju.</translation>
+    </message>
+    <message>
+      <source>settings_save_help</source>
+      <translation>Tema i jezik se čuvaju automatski. Kliknite na Sačuvaj da se osetljivost primeni na sledeće skeniranje.</translation>
+    </message>
+    <message>
+      <source>settings_save_failed</source>
+      <translation>Podešavanja nisu sačuvana. Vraćene su poslednje sačuvane vrednosti. Proverite tehničke detalje i pokušajte ponovo.</translation>
+    </message>
+    <message>
+      <source>safety_details</source>
+      <translation>Detalji zaštite</translation>
+    </message>
+    <message>
+      <source>storage_details</source>
+      <translation>Detalji indeksa i keša pregleda</translation>
+    </message>
+    <message>
+      <source>storage_count</source>
+      <translation>Indeksirane fotografije: {0}</translation>
+    </message>
+    <message>
+      <source>history_file_unavailable</source>
+      <translation>Fotografija ili izvorna fascikla nije dostupna. Povežite disk i proverite lokaciju fajla. Istorija je sačuvana.</translation>
     </message>
   </context>
 </TS>

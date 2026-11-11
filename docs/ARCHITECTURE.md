@@ -102,8 +102,18 @@ Presets 2/3, 4/6 and 8/10 describe search breadth without calibration claims;
 unrecognized threshold pairs remain Custom. ThemeSelector is shared with Dashboard.
 StorageSummary reads the actual active Index.path and physical-file count, including
 offline records and excluding missing/moved records. No measured cache occupancy,
-recovery cleanup, language switch, safety-disable control or schema migration is added.
-The package version `app.__version__` matches the documented 2.4 baseline.
+recovery cleanup, safety-disable control or schema migration is added.
+The package version `app.__version__` is 2.5.
+
+Task019 reduces Quarantine to three columns and an operation-details disclosure.
+History messages distinguish completed restoration from a restore merely recorded
+for a previous quarantine entry; pending/blocked operations expose recovery guidance.
+Recorded paths never act as current-file proof. Restore/execute failures persist
+through page reloads; optional preview failures retain selection and restore eligibility.
+Settings has five groups, with similarity under Scanning. The controller forwards
+every successful settings write as `settings_saved`, just as `language_saved` does
+for language writes, so rollback uses the last persisted state even when a newer
+queued request fails. No service, schema, journal or matching rules change.
 
 Task018 refines the existing gallery with a painted Review group action, keyboard
 activation, and a separate thumbnail event region. Double-clicking the two-photo

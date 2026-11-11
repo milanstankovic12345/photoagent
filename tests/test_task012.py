@@ -255,8 +255,8 @@ def test_history_and_error_dialog_retranslate_in_place(desktop, collection):
     box = window.findChildren(QMessageBox)[0]
     choose_language(window, 'sr_Latn')
     assert window.history.selected_entry.id == selected
-    assert window.history.table.item(0, 4).text() == tr('state_complete')
-    assert window.history.table.horizontalHeaderItem(4).text() == tr('state')
+    assert window.history.table.item(0, 2).text() == tr('history_quarantined')
+    assert window.history.table.horizontalHeaderItem(2).text() == tr('state')
     assert box.informativeText() == tr('destination_occupied')
     assert box.detailedText() == 'destination_occupied: synthetic details'
     assert box.button(QMessageBox.Close).text() == tr('close')

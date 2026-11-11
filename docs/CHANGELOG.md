@@ -1,5 +1,20 @@
 # Changelog
 
+## Task019 — Recovery-focused Quarantine and grouped Settings — 2026-11-11
+
+- Reduce history to photograph, original location and status. Put journal IDs,
+  recorded paths, date, size and action in expandable operation details. Keep
+  recovery, conflict and offline messages visible, including after refresh.
+- Retain operation-ID selection, optional verified thumbnails, folder opening,
+  confirmed restore plans and no-overwrite guarantees across restarts. Recorded
+  paths are explicitly historical; photo opening remains Task021.
+- Group Settings into Appearance, Language, Scanning, Safety and Storage. Put
+  existing sensitivity presets under Scanning and technical data in disclosures.
+  Keep threshold values, Custom behavior and automatic/manual saving unchanged.
+- Roll back failed settings presentation to the latest successful persisted
+  choice, including rapid queued theme changes. Show save failures on the page.
+- Add EN/SR text, rebuilt Qt catalogs and synthetic UI/recovery regressions.
+
 ## Task018 — Clearer duplicate groups and filters — 2026-11-11
 
 - Simplify Grid/List cards around sample photographs, filename, member count,

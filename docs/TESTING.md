@@ -1,5 +1,31 @@
 # PhotoAgent test evidence
 
+## Task019 — Quarantine and Settings (2026-11-11)
+
+Windows Python 3.12.10 / Qt Fusion offscreen; generated photographs and temporary
+homes/settings/indexes/journals only. Full commands, changed files, reviewed
+captures and platform limits: [Task019 verification](design/verification/task019-20261111/README.md).
+
+- Final 100% Task019/Task009/localization/history/Task010 keyboard and consent
+  regressions: **55 passed in 438.14s**, no skips.
+- Final 150% Task019: **20 passed in 119.78s**, no skips.
+- Earlier broader operations/recovery/native races/Task012/Qt components run:
+  **83 passed, 1 failed, 1 skipped in 243.65s**. The old history localization test
+  expected column 4; it now checks column 2 and the clearer In quarantine label.
+  Its corrected version passes in the final combined run. The skipped native
+  Linux no-replace test cannot execute on Windows.
+- Translation build/check: **454 finished messages per language**.
+- **28 real-window captures** at 100%/150%, with EN/Dark 1280×900 and SR/Light
+  853×480; empty, active, conflict, offline, restored and Settings top/storage.
+  All screenshot hashes/dimensions/layout assertions pass. Both contact sheets
+  and representative full-size captures were visually inspected.
+- `git diff --check` passes; safety operations, journal, matching thresholds,
+  SQLite schema and decoder remain unchanged.
+
+No full-suite/release run, native Linux, physical DPI transitions, screen reader,
+real drives/photo libraries, valid RAW or power-loss validation was performed.
+Photograph opening remains Task021; Open quarantine folder retains its meaning.
+
 ## Task018 — Duplicate groups and filters (2026-11-11)
 
 Windows Python 3.12.10 / Qt Fusion offscreen, disposable synthetic state only.

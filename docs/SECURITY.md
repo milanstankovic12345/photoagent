@@ -91,6 +91,15 @@ If recovery is blocked, keep manifests, backups and both file paths. Reconnect t
 original storage and retry the action/restart to re-run reconciliation. Do not
 manually erase the journal or fall back to the old prototype to force a move.
 
+The Qt recovery screen (Task019) keeps recorded source/destination paths and
+operation IDs in expandable details. Those paths are history, not proof of the
+photograph's current location. Open quarantine folder remains a folder action.
+Conflict, recovery and unavailable-file/drive messages remain visible without
+expanding diagnostics; a restore failure survives history refresh. A missing
+thumbnail does not decide restore eligibility: the existing service prepares and
+revalidates the selected operation, then requires explicit approval. No recovery
+data can be removed through the reorganized Settings screen.
+
 ## Resource policy and limits
 
 ### Incremental index trust boundary (v2.2)
