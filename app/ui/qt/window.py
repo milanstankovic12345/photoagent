@@ -16,7 +16,7 @@ from app.ui.qt.controller import Controller
 from app.ui.qt.navigation import Route, Sidebar
 from app.ui.qt.screens import (CompareScreen, DashboardScreen, DuplicatesFlow, DuplicatesScreen,
                                HistoryScreen, ScanScreen, SettingsScreen, scroll_page)
-from app.ui.qt.localization import set_text, text_of, language_manager
+from app.ui.qt.localization import add_item, set_text, text_of, language_manager
 from app.ui.qt.strings import error_text, tr, join_text
 from app.ui.qt.themes import ThemeManager
 from app.ui.qt import resources_rc  # Registers bundled local resources.
@@ -40,9 +40,11 @@ class MainWindow(QMainWindow):
         self.retained = {}
         self.reviewed_photos = {}
         self.visual_choice = None
+        self.visual_both = False
         self.executing_plan = None
         self.restore_id = None
         self.open_group = False
+        self.pair_step_pending: int | None = None
         self.listing_context = None
         self.listing_pending: set[str] = set()
         self.listing_scroll = None
@@ -105,7 +107,9 @@ class MainWindow(QMainWindow):
         self.duplicates = DuplicatesScreen(self.query_edited, self.sort,
             self.change_page, self.selected, self.review_group, self.prepare_selected, self.prepare_bulk,
             self.group_changed, self.groups_page, self.controller.thumbnails)
-        self.comparison = CompareScreen(self.prepare_selected, self.back_to_duplicates, self.keep_both, self.change_page)
+        self.comparison = CompareScreen(self.prepare_selected, self.back_to_duplicates, self.keep_both,
+            self.change_page, self.step_pair)
+        self.comparison.pair_choice.currentIndexChanged.connect(self.select_pair)
         self.comparison.members.setModel(self.duplicates.model)
         self.comparison.members.setSelectionModel(self.duplicates.table.selectionModel())
         self.comparison.left.keep_photo.clicked.connect(lambda checked: self.choose_keeper(False, checked))
@@ -157,6 +161,7 @@ class MainWindow(QMainWindow):
         key = 'compare' if comparing else self.route.value
         self.header.set_page('dashboard_title' if self.route == Route.DASHBOARD else
             'scan_photos' if self.route == Route.SCAN else 'duplicate_photos' if key == 'duplicates' else key, key + '_purpose')
+        self.header.subtitle.setVisible(not comparing)
         current = self.comparison if comparing else self.screens[self.route]
         for toolbar in self.toolbars:
             toolbar.setVisible(toolbar is current.toolbar)
@@ -180,9 +185,9 @@ class MainWindow(QMainWindow):
             for photo in (self.comparison.left, self.comparison.right):
                 body.extend([photo.view, *photo.preview_buttons, photo.enlarge, photo.keep_photo,
                     photo.details.toggle, photo.full_metadata, photo.error_details.toggle, photo.error_details.text])
-            body.extend([self.comparison.both, self.comparison.prepare, self.comparison.context_restore,
-                self.comparison.member_section.toggle, self.comparison.previous,
-                self.comparison.next, self.comparison.members])
+            body.extend([self.comparison.member_section.toggle, self.comparison.previous,
+                self.comparison.next, self.comparison.members, self.comparison.both,
+                self.comparison.prepare, self.comparison.context_restore])
         else:
             body = {
                 Route.DASHBOARD: [],  # Dynamic candidate actions retain their native order.
@@ -327,6 +332,7 @@ class MainWindow(QMainWindow):
             set_text(self.scan.report, join_text(report_text))
             self.refresh()
         elif action == 'matches':
+            step_target = self.pair_step_pending
             self.total = value.total
             selected_id = self.selected_id
             selection = self.duplicates.table.selectionModel()
@@ -345,11 +351,15 @@ class MainWindow(QMainWindow):
             else:
                 if not (self.duplicates_flow.comparing and self.controller.selection is not None):
                     self.invalidate_selection(preserve_choices=True)
+            self.pair_step_pending = None
+            if step_target is not None and self.duplicates_flow.comparing and value.items:
+                self.duplicates.table.selectRow(0 if step_target > 0 else len(value.items) - 1)
             if self.open_group:
                 self.open_group = False
                 if value.items:
                     self.duplicates.table.selectRow(0)
                     self.compare()
+            self.update_pair_navigation()
         elif action == 'groups':
             self.group_rows = value.items
             self.group_total = value.total
@@ -533,6 +543,10 @@ class MainWindow(QMainWindow):
             and not self.controller.closing and not self.listing_pending and not self.search_timer.isActive())
         allowed = available and self.writable and self.status == 'complete'
         self.comparison.prepare.setEnabled(allowed and self.controller.selection is not None and bool(self.pending_pairs()))
+        for view in (self.comparison.left, self.comparison.right):
+            view.keep_photo.setEnabled(self.controller.selection is not None and not self.controller.closing)
+        self.comparison.both.setEnabled(self.controller.selection is not None and not self.controller.closing)
+        self.update_pair_navigation()
         self.duplicates.bulk.setEnabled(allowed and bool(self.session))
         entry = self.history.selected_entry
         self.history.restore.setEnabled(available and self.writable and entry is not None and entry.restorable)
@@ -634,13 +648,18 @@ class MainWindow(QMainWindow):
         self.invalidate_plan()
         self.controller.preview(None)
         self.selected_id = None
+        self.pair_step_pending = None
         if not preserve_choices:
             self.choice_context = None
             self.retained.clear()
             self.reviewed_photos.clear()
             self.visual_choice = None
+            self.visual_both = False
             self.duplicates.model.set_choices(set(), set())
         set_text(self.comparison.decision, tr('choose_keeper'))
+        set_text(self.comparison.proposed, '')
+        self.comparison.proposed.hide()
+        self.comparison.both.setChecked(False)
         for view in (self.comparison.left, self.comparison.right):
             view.keep_photo.setChecked(False)
         # Clear Qt's current row as well, so the same pair can be selected again
@@ -702,6 +721,46 @@ class MainWindow(QMainWindow):
             if self.duplicates_flow.comparing:
                 self.comparison.member_section.set_expanded(True)
 
+    def select_pair(self, index: int) -> None:
+        if 0 <= index < len(self.duplicates.model.rows):
+            self.comparison.members.selectRow(index)
+
+    def step_pair(self, direction: int) -> None:
+        """Visit stored direct links only; paging never approves an unseen photograph."""
+        if self.listing_pending or self.controller.closing:
+            return
+        rows = self.duplicates.model.rows
+        index = next((i for i, row in enumerate(rows) if row.id == self.selected_id), -1)
+        target = index + direction
+        if 0 <= target < len(rows):
+            self.select_pair(target)
+        elif 0 <= self.query.offset + direction * self.query.limit < self.total:
+            self.change_page(direction)
+            self.pair_step_pending = direction
+
+    def update_pair_navigation(self) -> None:
+        rows = self.duplicates.model.rows
+        combo = self.comparison.pair_choice
+        # Text bindings for removed items must not reappear on language changes.
+        combo.blockSignals(True)
+        if hasattr(combo, '_photoagent_texts'):
+            combo._photoagent_texts.values = {key: value for key, value in combo._photoagent_texts.values.items()
+                if key[0] != 'setItemText'}
+        combo.clear()
+        index = -1
+        for i, row in enumerate(rows):
+            add_item(combo, tr('pair_position', self.query.offset + i + 1, self.total,
+                Path(row.match.dup.path).name), row.id)
+            if row.id == self.selected_id:
+                index = i
+        combo.setCurrentIndex(index)
+        combo.blockSignals(False)
+        ready = bool(rows) and not self.listing_pending and not self.controller.closing
+        combo.setEnabled(ready)
+        self.comparison.pair_previous.setEnabled(ready and (index > 0 or self.query.offset > 0))
+        self.comparison.pair_next.setEnabled(ready and (index + 1 < len(rows)
+            or self.query.offset + len(rows) < self.total))
+
     def groups_page(self, direction: int) -> None:
         target = self.group_offset + direction * min(24, self.query.limit)
         if 0 <= target < self.group_total:
@@ -758,18 +817,28 @@ class MainWindow(QMainWindow):
             self.retained.clear()
             self.reviewed_photos.clear()
         self.visual_choice = None
+        self.visual_both = False
         self.controller.preview(row)
         pair = row.match
         self.comparison.left.set_photo(pair.keep)
         self.comparison.right.set_photo(pair.dup)
-        warnings = [tr('review_advice')]
+        set_text(self.comparison.left.recommendation,
+            tr('suggested_exact' if pair.kind == Kind.EXACT else 'suggested_heuristic'))
+        self.comparison.left.recommendation.show()
+        self.comparison.right.recommendation.hide()
+        for view in (self.comparison.left, self.comparison.right):
+            set_text(view.quality_note, tr('exact_order_note' if pair.kind == Kind.EXACT else 'heuristic'))
+        warnings = []
         if pair.keep.root != pair.dup.root:
             warnings.append(tr('cross_roots'))
         if pair.keep.is_raw or pair.dup.is_raw:
             warnings.append(tr('raw_warning'))
         if pair.kind.value == 'VISUAL':
             warnings.append(tr('visual_warning'))
+        if pair.kind != Kind.EXACT:
+            warnings.append(tr('preserve_derivatives'))
         set_text(self.comparison.warning, join_text(warnings))
+        self.comparison.warning.setVisible(bool(warnings))
         self.update_choice()
         self.busy_changed(self.controller.busy)
 
@@ -799,12 +868,16 @@ class MainWindow(QMainWindow):
             if not complete_page:
                 self.request_matches()
             else:
+                self.total = len(self.duplicates.model.rows)
+                set_text(self.comparison.member_page, tr('page', 1, self.total, self.total))
                 set_text(self.comparison.member_section.toggle, tr('member_count', group.members))
+        self.update_pair_navigation()
 
     def back_to_duplicates(self) -> None:
         if self.route != Route.DUPLICATES or not self.duplicates_flow.comparing or self.controller.closing:
             return
         self.invalidate_plan()
+        self.pair_step_pending = None
         self.duplicates_flow.show_comparison(False)
         restored = self.listing_context is not None
         if self.listing_context:
@@ -865,7 +938,9 @@ class MainWindow(QMainWindow):
             else:
                 self.retained.pop(keep.path, None)
         else:
-            self.visual_choice = Match(pair.kind, keep, other, pair.ph_distance, pair.dh_distance) if checked else None
+            self.visual_choice = (Match(pair.kind, keep, other, pair.ph_distance, pair.dh_distance) if checked
+                else Match(pair.kind, other, keep, pair.ph_distance, pair.dh_distance) if self.visual_both else None)
+            self.visual_both = False
         self.duplicates.groups.groups_model.review.setdefault((row.keeper_id, pair.kind.value), set()).add(row.id)
         self.update_choice()
         self.duplicates.groups.viewport().update()
@@ -884,17 +959,31 @@ class MainWindow(QMainWindow):
 
     def update_choice(self) -> None:
         row = self.controller.selection
+        pending = self.pending_pairs()
+        moving = {pair.dup.path for pair in pending}
         for view, photo in ((self.comparison.left, row.match.keep if row else None),
                             (self.comparison.right, row.match.dup if row else None)):
             view.keep_photo.setChecked(bool(photo and (photo.path in self.retained if row.match.kind == Kind.EXACT
-                else self.visual_choice and photo == self.visual_choice.keep)))
+                else self.visual_both or self.visual_choice and photo == self.visual_choice.keep)))
             set_text(view.keep_photo, tr('keep_chosen' if view.keep_photo.isChecked() else 'keep_photo'))
             set_text(view.keep_photo, tr('keep_named_photo', photo.path) if photo else text_of(view.keep_photo), 'setAccessibleName')
-        set_text(self.comparison.decision, tr('selection_summary', len(self.pending_pairs()),
-            len(self.retained) if row and row.match.kind == Kind.EXACT else int(bool(self.visual_choice))))
+            set_text(view.choice_status, tr('photo_retained' if view.keep_photo.isChecked()
+                else 'photo_proposed' if photo and photo.path in moving else 'photo_undecided'))
+        self.comparison.both.setChecked(bool(row and (all(p.path in self.retained
+            for p in (row.match.keep, row.match.dup)) if row.match.kind == Kind.EXACT else self.visual_both)))
+        set_text(self.comparison.decision, tr('selection_summary', len(pending),
+            len(self.retained) if row and row.match.kind == Kind.EXACT else 2 if self.visual_both else int(bool(self.visual_choice))))
+        # Keep the fixed action row usable even with three very long filenames.
+        metrics = self.comparison.proposed.fontMetrics()
+        names = ', '.join(metrics.elidedText(Path(pair.dup.path).name, Qt.ElideMiddle, 200)
+                          for pair in pending[:3])
+        set_text(self.comparison.proposed, tr('proposed_names', names, len(pending) - 3)
+            if len(pending) > 3 else tr('proposed_named', names) if pending else '')
+        set_text(self.comparison.proposed, '\n'.join(pair.dup.path for pair in pending), 'setToolTip')
+        self.comparison.proposed.setVisible(bool(pending))
         self.duplicates.model.set_choices(set(self.retained) if row and row.match.kind == Kind.EXACT else
-            {self.visual_choice.keep.path} if self.visual_choice else set(),
-            {pair.dup.path for pair in self.pending_pairs()})
+            {row.match.keep.path, row.match.dup.path} if row and self.visual_both else
+            {self.visual_choice.keep.path} if self.visual_choice else set(), moving)
 
     def keep_both(self) -> None:
         row = self.controller.selection
@@ -904,6 +993,7 @@ class MainWindow(QMainWindow):
         self.retained.clear()
         self.reviewed_photos.clear()
         self.visual_choice = None
+        self.visual_both = row.match.kind != Kind.EXACT
         if row.match.kind == Kind.EXACT:
             self.retained.update({p.path: p for p in (row.match.keep, row.match.dup)})
         self.duplicates.groups.groups_model.review.setdefault((row.keeper_id, row.match.kind.value), set()).add(row.id)

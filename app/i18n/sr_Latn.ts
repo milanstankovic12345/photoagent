@@ -2269,5 +2269,58 @@ Vrsta operacije: {2}</translation>
       <source>history_file_unavailable</source>
       <translation>Fotografija ili izvorna fascikla nije dostupna. Povežite disk i proverite lokaciju fajla. Istorija je sačuvana.</translation>
     </message>
+    <message>
+      <source>previous_pair</source>
+      <translation>Prethodni par</translation>
+    </message>
+    <message>
+      <source>exact_order_note</source>
+      <translation>Identičan sadržaj: predložena fotografija prati redosled izvora i putanja. To nije mera kvaliteta slike niti dozvola za premeštanje rezervnih kopija.</translation>
+    </message>
+    <message>
+      <source>next_pair</source>
+      <translation>Sledeći par</translation>
+    </message>
+    <message>
+      <source>direct_pair_choice</source>
+      <translation>Izaberite direktno poređenje</translation>
+    </message>
+    <message>
+      <source>pair_position</source>
+      <translation>Par {0} od {1} · {2}</translation>
+    </message>
+    <message>
+      <source>direct_pair_help</source>
+      <translation>Svako poređenje je sačuvana direktna veza. Koristite Prethodni par / Sledeći par ili izaberite par iznad fotografija. Izbor važi samo za fotografije koje izričito pregledate; ne odobrava ostale članove.</translation>
+    </message>
+    <message>
+      <source>photo_undecided</source>
+      <translation>Još nema izbora</translation>
+    </message>
+    <message>
+      <source>suggested_exact</source>
+      <translation>Predlog za čuvanje · redosled izvora, identičan sadržaj</translation>
+    </message>
+    <message>
+      <source>suggested_heuristic</source>
+      <translation>Predlog za čuvanje · heuristika, pregledajte obe verzije</translation>
+    </message>
+    <message>
+      <source>preserve_derivatives</source>
+      <translation>Sačuvajte vredne obrade i izvoze. RAW ne zamenjuje obrađeni JPEG.</translation>
+    </message>
+    <message>
+      <source>proposed_named</source>
+      <translation>Izabrane kopije: {0}</translation>
+    </message>
+    <message>
+      <source>proposed_names</source>
+      <translation>Izabrane kopije: {0} · i još {1} (sve putanje u potvrdi)</translation>
+    </message>
+    <message>
+      <source>photo_fingerprints</source>
+      <translation>pHash: {0}
+dHash: {1}</translation>
+    </message>
   </context>
 </TS>

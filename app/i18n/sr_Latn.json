@@ -452,5 +452,18 @@
   "safety_details": "Detalji zaštite",
   "storage_details": "Detalji indeksa i keša pregleda",
   "storage_count": "Indeksirane fotografije: {0}",
-  "history_file_unavailable": "Fotografija ili izvorna fascikla nije dostupna. Povežite disk i proverite lokaciju fajla. Istorija je sačuvana."
+  "history_file_unavailable": "Fotografija ili izvorna fascikla nije dostupna. Povežite disk i proverite lokaciju fajla. Istorija je sačuvana.",
+  "previous_pair": "Prethodni par",
+  "exact_order_note": "Identičan sadržaj: predložena fotografija prati redosled izvora i putanja. To nije mera kvaliteta slike niti dozvola za premeštanje rezervnih kopija.",
+  "next_pair": "Sledeći par",
+  "direct_pair_choice": "Izaberite direktno poređenje",
+  "pair_position": "Par {0} od {1} · {2}",
+  "direct_pair_help": "Svako poređenje je sačuvana direktna veza. Koristite Prethodni par / Sledeći par ili izaberite par iznad fotografija. Izbor važi samo za fotografije koje izričito pregledate; ne odobrava ostale članove.",
+  "photo_undecided": "Još nema izbora",
+  "suggested_exact": "Predlog za čuvanje · redosled izvora, identičan sadržaj",
+  "suggested_heuristic": "Predlog za čuvanje · heuristika, pregledajte obe verzije",
+  "preserve_derivatives": "Sačuvajte vredne obrade i izvoze. RAW ne zamenjuje obrađeni JPEG.",
+  "proposed_named": "Izabrane kopije: {0}",
+  "proposed_names": "Izabrane kopije: {0} · i još {1} (sve putanje u potvrdi)",
+  "photo_fingerprints": "pHash: {0}\ndHash: {1}"
 }

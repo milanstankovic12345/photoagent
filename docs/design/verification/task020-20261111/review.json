@@ -1,0 +1,67 @@
+{
+  "validated": 32,
+  "synthetic": true,
+  "manifests": [
+    {
+      "file": "100-verified\\manifest.json",
+      "sha256": "7d0adfac2d12532764d4f187b1bee52f91dc6c9d3d1ab471715f1d46f074c3cc"
+    },
+    {
+      "file": "150\\manifest.json",
+      "sha256": "d36da92c9ced45876b2771b33abee986e88f134b5852366ea940d62540be8e44"
+    }
+  ],
+  "inspected": [
+    {
+      "file": "100-verified\\exact-en-dark-1440.png",
+      "sha256": "78240ad2145017a3974f26f399e4a22e89a06c01d07b8d0b77aa26a1c3d10a1d"
+    },
+    {
+      "file": "100-verified\\exact-en-dark-853.png",
+      "sha256": "8b78eb8871972efbbf6dd67624dba0bb7ca410242b2bfbfa096d3cf2b91dc7f9"
+    },
+    {
+      "file": "100-verified\\exact-en-light-1440.png",
+      "sha256": "56ab39d07ac1a0325e2739b35abe681581582b77b4113a71cfd0050d8f987953"
+    },
+    {
+      "file": "100-verified\\exact-sr_Latn-dark-853.png",
+      "sha256": "a95c3a151f842f572530795572f224df85a1526939670c06400d4a113ac2700e"
+    },
+    {
+      "file": "100-verified\\exact-sr_Latn-light-1440.png",
+      "sha256": "6a2d7d3b5f0fa3fdc620aab9b0010592da66be3790ac24ffcadc0109eab13a71"
+    },
+    {
+      "file": "100-verified\\confirmation-sr_Latn-light.png",
+      "sha256": "2fcab5a1225a906a094097fa5eefd6bc2e298316c6402cc76aa812c443513e6c"
+    },
+    {
+      "file": "100-verified\\visual-en-dark.png",
+      "sha256": "399e5df69ed88db8fcb78d22bda9acecdb86d7f85181e60e192b173026f2bf36"
+    },
+    {
+      "file": "150\\exact-en-dark-1440.png",
+      "sha256": "309c25d9917e8425c66a18dd8bef211426ce0197037df00f2be989086380616c"
+    },
+    {
+      "file": "150\\exact-en-light-1440.png",
+      "sha256": "ded9cf3dfa6414cad49d000be6a23e3d01c7bb09d2630a59adde0c6b1e85a5fe"
+    },
+    {
+      "file": "150\\exact-sr_Latn-light-853.png",
+      "sha256": "b830b30147a3ce7c1e0aa46999d9cfb36b5342d0324c8ccfc0ced56aa4179184"
+    },
+    {
+      "file": "150\\visual-en-dark.png",
+      "sha256": "171283dbf1ee3eadbd2702676d70e4f1d7766e16eebce9d736fae968b601ad5f"
+    }
+  ],
+  "visual_review": "Listed originals opened and visually inspected by Codex; other captures have automated integrity/geometry checks only.",
+  "findings": [
+    "Large aligned previews and separate recommendation/choice labels.",
+    "Both languages/themes readable; narrow layouts scroll vertically while actions remain reachable.",
+    "Confirmation describes source/destination/keeper and retains explicit approval and Cancel."
+  ],
+  "native_platform_acceptance": false
+}

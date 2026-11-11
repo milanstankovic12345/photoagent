@@ -454,6 +454,19 @@
     "settings_save_failed": "Settings could not be saved. The last saved preferences have been restored. Check technical details and try again.",
     "safety_details": "Protection details",
     "storage_details": "Index and preview cache details",
-    "storage_count": "Indexed photographs: {0}"
+    "storage_count": "Indexed photographs: {0}",
+    "previous_pair": "Previous pair",
+    "exact_order_note": "Identical bytes: the suggested keeper follows source order and path ordering. This is not an image quality measurement or permission to move backup copies.",
+    "next_pair": "Next pair",
+    "direct_pair_choice": "Choose a direct comparison",
+    "pair_position": "Pair {0} of {1} · {2}",
+    "direct_pair_help": "Each comparison is a stored direct link. Browse with Previous pair / Next pair or choose a pair above the photos. Choosing a keeper applies only to photographs you explicitly review; it does not approve other members.",
+    "photo_undecided": "No choice yet",
+    "suggested_exact": "Suggested to keep · source order, identical bytes",
+    "suggested_heuristic": "Suggested to keep · heuristic, review both versions",
+    "preserve_derivatives": "Preserve valuable edits and exports. RAW does not replace an edited JPEG.",
+    "proposed_named": "Copies selected: {0}",
+    "proposed_names": "Copies selected: {0} · and {1} more (all paths in confirmation)",
+    "photo_fingerprints": "pHash: {0}\ndHash: {1}"
   }
 }

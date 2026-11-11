@@ -1,5 +1,21 @@
 # Changelog
 
+## Task020 — Photo-first comparison and explicit choices — 2026-11-11
+
+- Keep comparison inside Duplicates, with large aligned previews, basic photo
+  data first and paths/hashes/recommendation explanations in expandable details.
+  Distinguish suggested keepers, user retention and proposed movement.
+- Add direct-pair selection and Previous/Next pair across existing bounded pages.
+  Browsing adds no new move candidates; visual links never imply transitive matches.
+- Keep one bottom action row reachable during scrolling. Show proposed copy names;
+  Keep Both clears the proposal. Choices prepare no operation; Move to quarantine
+  enters the existing preflight/confirmation flow and Cancel leaves files intact.
+- Keep RAW, backup and derivative warnings visible, and retain all XMP, RAW consent,
+  hash/identity/containment, recovery and restore protections. Preserve plan/preview
+  invalidation and list context/focus when leaving review.
+- Add EN/SR text and compiled resources, synthetic interaction/safety regressions
+  and an isolated real-window capture/quarantine/restore driver.
+
 ## Task019 — Recovery-focused Quarantine and grouped Settings — 2026-11-11
 
 - Reduce history to photograph, original location and status. Put journal IDs,

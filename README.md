@@ -23,6 +23,16 @@ the selected group. Enter or double-click on a table row reviews that pair.
 Double-clicking a group's two-photo thumbnail does not select a file to open.
 Back to group (Alt+Left) preserves filters, sorting, group, result page, scroll
 and selection without reloading.
+Review shows filename, format, resolution and size beside large previews. Full
+paths, SHA-256, image hashes and recommendation explanations expand under
+Photograph details. Previous pair / Next pair and the pair selector visit stored
+direct links, including paginated groups. Browsing never selects another copy
+for movement. Suggested keepers and your choices have separate labels.
+Keep this photograph changes the proposal; Keep both clears it and retains both.
+The bottom action row stays visible while scrolling and names selected copies.
+Move to quarantine prepares the existing verified plan and opens confirmation;
+only explicit approval moves files. Cancel preserves the collection. After a
+single completed move, Restore photograph prepares its separate restore plan.
 Use `start_windows.bat --ui tk` (or `python -B photo_agent.py --ui tk`) for Tkinter.
 The theme defaults to Dark and respects any saved theme preference.
 Settings groups Appearance, Language, Scanning, Safety and Storage. Similarity
@@ -58,7 +68,7 @@ Qt mode needs PySide6 >=6.8,<7; preflight checks only the selected toolkit.
 See [Qt distribution notes](docs/QT_DISTRIBUTION.md).
 
 v2.5 adds editable Qt Linguist `.ts` sources and embedded `.qm` catalogs for all
-454 messages in each language. Settings → Language changes open pages, dialogs,
+467 messages in each language. Settings → Language changes open pages, dialogs,
 accessibility labels and progress immediately; the selection survives restart.
 Display sizes, index totals and scan dates follow the selected locale. History
 dates remain explicitly UTC. File names, paths, hashes, formats and stored values

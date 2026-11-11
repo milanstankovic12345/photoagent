@@ -1,5 +1,37 @@
 # PhotoAgent test evidence
 
+## Task020 — Photo-first review (2026-11-11)
+
+Windows Python 3.12.10 / PySide6 6.12.0 / Qt Fusion offscreen. Generated photographs
+and isolated temporary application/Qt state only. Exact commands, diagnostic
+failures, changed files and limits: [Task020 verification](design/verification/task020-20261111/README.md).
+
+- Task020 at DPR 1.5: **15 passed in 356.92s**, no skips. Covers
+  EN/SR × Dark/Light/System, sticky actions, narrow layouts, direct-link paging,
+  explicit choices, frozen/late plans, stale previews and visible safety warnings.
+- Combined Task020/Task008/Task010/Task018/Qt/Task012/localization at DPR 1:
+  **98 passed in 1405.02s**, no skips. This run preceded the last small VISUAL
+  member-table annotation and filename elision; the final focused/DPR 1.5 runs
+  cover those changes and the two subsequently added cases.
+- Operations/recovery/additional safety/native races: **40 passed, 1 skipped in
+  39.13s**. Skip: native Linux no-replace on Windows.
+- Final annotation/header focused check at DPR 1.5: **2 passed in 7.83s**;
+  initial header at DPR 1: **1 passed in 3.40s**.
+- Last filename-only UI refinement: **2 passed in 31.27s**, DPR 1.5. The added
+  sixteenth case checks three long names with expanded sidebar at 853×480;
+  the other case repeats ordinary SR/Light keyboard choices after the change.
+- Translation build/check: **467 finished messages per language**; inventory updated.
+- **32 verified real-window captures**, EN/SR × Dark/Light × narrow/wide at
+  100%/150%, plus confirmation, Keep Both, VISUAL and RAW/backup warning fixture.
+  Eleven representative originals manually inspected; all hashes, dimensions,
+  DPR and layout checks pass. Each capture driver verifies Cancel, explicit
+  synthetic quarantine/restore and restoration of every original byte.
+
+An early interrupted run and an early Qt native access violation are recorded
+there as unsuccessful diagnostics. No full-suite/release, native Linux, physical
+DPI transitions, screen reader, valid RAW, real library/drive or power-loss test
+was performed. Photo opening remains Task021. No safety/service/schema change.
+
 ## Task019 — Quarantine and Settings (2026-11-11)
 
 Windows Python 3.12.10 / Qt Fusion offscreen; generated photographs and temporary

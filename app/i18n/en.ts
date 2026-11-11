@@ -2269,5 +2269,58 @@ Operation type: {2}</translation>
       <source>history_file_unavailable</source>
       <translation>Photograph or source folder unavailable. Reconnect the drive and check the file location. History is preserved.</translation>
     </message>
+    <message>
+      <source>previous_pair</source>
+      <translation>Previous pair</translation>
+    </message>
+    <message>
+      <source>exact_order_note</source>
+      <translation>Identical bytes: the suggested keeper follows source order and path ordering. This is not an image quality measurement or permission to move backup copies.</translation>
+    </message>
+    <message>
+      <source>next_pair</source>
+      <translation>Next pair</translation>
+    </message>
+    <message>
+      <source>direct_pair_choice</source>
+      <translation>Choose a direct comparison</translation>
+    </message>
+    <message>
+      <source>pair_position</source>
+      <translation>Pair {0} of {1} · {2}</translation>
+    </message>
+    <message>
+      <source>direct_pair_help</source>
+      <translation>Each comparison is a stored direct link. Browse with Previous pair / Next pair or choose a pair above the photos. Choosing a keeper applies only to photographs you explicitly review; it does not approve other members.</translation>
+    </message>
+    <message>
+      <source>photo_undecided</source>
+      <translation>No choice yet</translation>
+    </message>
+    <message>
+      <source>suggested_exact</source>
+      <translation>Suggested to keep · source order, identical bytes</translation>
+    </message>
+    <message>
+      <source>suggested_heuristic</source>
+      <translation>Suggested to keep · heuristic, review both versions</translation>
+    </message>
+    <message>
+      <source>preserve_derivatives</source>
+      <translation>Preserve valuable edits and exports. RAW does not replace an edited JPEG.</translation>
+    </message>
+    <message>
+      <source>proposed_named</source>
+      <translation>Copies selected: {0}</translation>
+    </message>
+    <message>
+      <source>proposed_names</source>
+      <translation>Copies selected: {0} · and {1} more (all paths in confirmation)</translation>
+    </message>
+    <message>
+      <source>photo_fingerprints</source>
+      <translation>pHash: {0}
+dHash: {1}</translation>
+    </message>
   </context>
 </TS>

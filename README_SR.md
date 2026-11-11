@@ -66,6 +66,16 @@ EXACT fajlove i zahteva postojeći pregled plana i izričitu potvrdu.
 
 ## Jezik i izgled
 
+U pregledu fotografije imaju prednost: naziv, format, rezolucija i veličina su
+odmah vidljivi, a putanje, heševi i objašnjenja preporuke pod „Detalji fotografije”.
+„Prethodni par”, „Sledeći par” i izbor para prolaze kroz stvarne direktne veze,
+i između stranica grupe. Pregledanje sledećeg para ne bira novu kopiju za pomeranje.
+Predlog aplikacije i vaš izbor imaju odvojene oznake. „Sačuvaj ovu fotografiju”
+menja predlog; „Sačuvaj obe” ga prazni i čuva obe fotografije. Donji red ostaje
+dostupan tokom skrolovanja i prikazuje izabrane kopije. „Premesti u karantin”
+priprema proveren plan i otvara potvrdu. Odustajanje ne menja kolekciju.
+Posle jednog uspešnog pomeranja, „Vrati fotografiju” priprema zaseban plan vraćanja.
+
 Bočna navigacija počinje sklopljena, sa ikonama. Strelica ispod logotipa proširuje
 traku i prikazuje nazive stranica. Zadržite pokazivač nad ikonom da vidite njen
 naziv; Tab bira kontrolu, a Space ili Enter sklapa/proširuje traku. Izbor režima

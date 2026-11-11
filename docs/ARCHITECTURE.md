@@ -105,6 +105,18 @@ offline records and excluding missing/moved records. No measured cache occupancy
 recovery cleanup, safety-disable control or schema migration is added.
 The package version `app.__version__` is 2.5.
 
+Task020 keeps review inside `DuplicatesFlow`. Its comparison scroll area shares
+a wrapper with a fixed bottom decision/action row; photos and disclosures scroll
+without hiding the plan entry. Direct-pair navigation uses the existing paged
+MatchRows and shared selection model. Paging invalidates frozen plans and visits
+the next stored link without adding unreviewed photographs to the proposal.
+Preview request IDs, operation epochs, preflight and explicit PlanDialog approval
+remain authoritative. EXACT choices can retain multiple reviewed files; VISUAL
+choices remain specific to the current direct pair. Keep Both clears the proposal,
+with explicit retained states for both photographs. No service, matching, schema,
+decoder or journal code changes. Details distinguish source-order EXACT suggestions
+from the existing VISUAL quality heuristic, whose unmeasured factors remain explicit.
+
 Task019 reduces Quarantine to three columns and an operation-details disclosure.
 History messages distinguish completed restoration from a restore merely recorded
 for a previous quarantine entry; pending/blocked operations expose recovery guidance.

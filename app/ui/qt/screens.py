@@ -5,7 +5,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QComboBox, QHBoxLayout,
     QLabel, QLineEdit,
     QScrollArea, QSplitter, QStackedWidget, QTableView,
     QVBoxLayout, QWidget)
-from app.ui.qt.components import CollapsibleSection, ContextToolbar, PhotoView, TechnicalDetails, button, text_label
+from app.ui.qt.components import CollapsibleSection, ContextToolbar, PhotoView, TechnicalDetails, button, path_label, text_label
 from app.ui.qt.dashboard_scan import DashboardScreen, ScanScreen
 from app.ui.qt.models import MatchModel
 from app.ui.qt.gallery import GroupView
@@ -41,18 +41,24 @@ class DuplicatesFlow(QStackedWidget):
         super().__init__()
         self.listing = scroll_page(listing)
         self.comparison = scroll_page(comparison)
+        self.review_page = QWidget()
+        review_layout = QVBoxLayout(self.review_page)
+        review_layout.setContentsMargins(0, 0, 0, 0)
+        review_layout.addWidget(self.comparison, 1)
+        # Keep the decision and confirmation entry reachable while photos/details scroll.
+        review_layout.addWidget(comparison.footer)
         self.addWidget(self.listing)
-        self.addWidget(self.comparison)
+        self.addWidget(self.review_page)
         self.listing_scroll = (0, 0)
 
     @property
     def comparing(self) -> bool:
-        return self.currentWidget() is self.comparison
+        return self.currentWidget() is self.review_page
 
     def show_comparison(self, comparing: bool) -> None:
         if comparing and not self.comparing:
             self.listing_scroll = (self.listing.horizontalScrollBar().value(), self.listing.verticalScrollBar().value())
-        self.setCurrentWidget(self.comparison if comparing else self.listing)
+        self.setCurrentWidget(self.review_page if comparing else self.listing)
 
     def restore_listing_scroll(self) -> None:
         for bar, value in zip((self.listing.horizontalScrollBar(), self.listing.verticalScrollBar()), self.listing_scroll):
@@ -172,26 +178,45 @@ class DuplicatesScreen(QWidget):
 
 
 class CompareScreen(QWidget):
-    def __init__(self, prepare: Callable, back: Callable, keep_both: Callable, page: Callable) -> None:
+    def __init__(self, prepare: Callable, back: Callable, keep_both: Callable, page: Callable,
+                 step: Callable) -> None:
         super().__init__()
         layout = QVBoxLayout(self)
         self.toolbar = ContextToolbar()
         self.back = button('back_to_group', back, self.toolbar.actions)
         self.warning = label(tr('review_advice'), layout)
+        self.pair_navigation = self.toolbar
+        self.pair_previous = button('previous_pair', lambda: step(-1), self.pair_navigation.actions)
+        self.pair_choice = QComboBox()
+        self.pair_choice.setMinimumWidth(200)
+        self.pair_choice.setMaximumWidth(280)
+        self.pair_choice.setSizeAdjustPolicy(QComboBox.AdjustToMinimumContentsLengthWithIcon)
+        set_text(self.pair_choice, tr('direct_pair_choice'), 'setAccessibleName')
+        self.pair_navigation.actions.addWidget(self.pair_choice)
+        self.pair_next = button('next_pair', lambda: step(1), self.pair_navigation.actions)
         self.split = split = QSplitter()
         self.left, self.right = PhotoView(), PhotoView()
         set_text(self.left.view, tr('left_preview'), 'setAccessibleName')
         set_text(self.right.view, tr('right_preview'), 'setAccessibleName')
         split.addWidget(self.left)
         split.addWidget(self.right)
+        split.setSizes([1, 1])
         split.setChildrenCollapsible(False)
         layout.addWidget(split, 1)
-        self.decision = label(tr('choose_keeper'), layout)
-        footer = ContextToolbar()
-        layout.addWidget(footer)
-        self.both = button('keep_both', keep_both, footer.actions)
-        self.prepare = button('move_copy', prepare, footer.actions, variant='danger')
-        self.context_restore = button('restore_operation', lambda: None, footer.actions)
+        self.footer = QWidget()
+        footer_layout = QVBoxLayout(self.footer)
+        footer_layout.setContentsMargins(8, 4, 8, 4)
+        self.decision = label(tr('choose_keeper'), footer_layout)
+        self.proposed = path_label('', 'small')
+        footer_layout.addWidget(self.proposed)
+        self.footer_actions = ContextToolbar()
+        footer_layout.addWidget(self.footer_actions)
+        self.both = button('keep_both', keep_both, self.footer_actions.actions)
+        self.both.setCheckable(True)
+        self.both.setProperty('choice', True)
+        set_text(self.both, tr('keep_description'), 'setAccessibleDescription')
+        self.prepare = button('move_copy', prepare, self.footer_actions.actions, variant='danger')
+        self.context_restore = button('restore_operation', lambda: None, self.footer_actions.actions)
         self.context_restore.hide()
         self.member_section = CollapsibleSection('direct_members')
         layout.addWidget(self.member_section)
@@ -210,6 +235,7 @@ class CompareScreen(QWidget):
         self.members.setMaximumHeight(140)
         self.members.horizontalHeader().setStretchLastSection(True)
         self.member_section.body_layout.addWidget(self.members)
+        self.member_section.body_layout.addWidget(text_label(tr('direct_pair_help'), 'small'))
 
     def resizeEvent(self, event) -> None:
         super().resizeEvent(event)
@@ -228,7 +254,7 @@ class CompareScreen(QWidget):
         margins = self.layout().contentsMargins()
         required = (self.left.minimumSizeHint().width() + self.right.minimumSizeHint().width()
                     + self.split.handleWidth() + margins.left() + margins.right())
-        orientation = Qt.Vertical if available < max(640, required) else Qt.Horizontal
+        orientation = Qt.Vertical if available < max(760, required) else Qt.Horizontal
         if self.split.orientation() != orientation:
             self.split.setOrientation(orientation)
             self.layout().invalidate()
