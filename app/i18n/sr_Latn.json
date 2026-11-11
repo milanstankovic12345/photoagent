@@ -65,7 +65,7 @@
   "sort_desc": "Opadajuće ↓",
   "group_summary": "Broj fotografija: {0} · {1}",
   "group_space": "Moguća EXACT ušteda: {0}",
-  "needs_review": "Čeka pregled",
+  "needs_review": "Čeka pregled u ovoj sesiji",
   "review_progress": "Pregledanih veza: {0}",
   "reviewed": "Pregledano u ovoj sesiji",
   "review_session_only": "Odluke pregleda važe samo do zatvaranja aplikacije ili novog skeniranja; nisu dnevnik operacija.",
@@ -432,5 +432,13 @@
   "scan_next_retry": "Proverite izvore i greške, pa pokušajte ponovo.",
   "scan_next_partial": "Neki izvori nisu potpuno skenirani. Dostupni rezultati služe samo za pregled; proverite izvore i greške, pa ponovite skeniranje.",
   "scan_next_cancelled": "Skeniranje je otkazano. Pokrenite ga ponovo kada budete spremni; originali ostaju nepromenjeni.",
-  "scan_progress_summary": "{0} · obrađeno fotografija: {1}"
+  "scan_progress_summary": "{0} · obrađeno fotografija: {1}",
+  "review_group": "Pregledaj grupu",
+  "bulk_exact": "Pripremi identične kopije…",
+  "search_filter_sort": "Pretraga, filter i redosled grupa",
+  "group_guidance": "Slične fotografije su direktna podudaranja sa imenovanom fotografijom, ne dokaz identičnih kopija. Pregledajte ih pre odluke.",
+  "direct_pairs": "Direktni parovi fotografija",
+  "groups_count": "Grupe: {0}",
+  "sample_raw_jpeg": "Prikazani par sadrži RAW + JPEG. Zajednički original nije utvrđen; ostali članovi grupe mogu biti drugih formata.",
+  "sample_raw_jpeg_short": "RAW + JPEG · prikazi"
 }

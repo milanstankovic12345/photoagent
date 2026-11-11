@@ -105,6 +105,23 @@ offline records and excluding missing/moved records. No measured cache occupancy
 recovery cleanup, language switch, safety-disable control or schema migration is added.
 The package version `app.__version__` matches the documented 2.4 baseline.
 
+Task018 refines the existing gallery with a painted Review group action, keyboard
+activation, and a separate thumbnail event region. Double-clicking the two-photo
+thumbnail does not choose a file or open review. Search/filter/sort share one
+wrapping toolbar; stable service queries, IDs and paging remain authoritative.
+The cards and pair table use Exact Copies / Similar Photos; technical match
+classifications and EXACT byte estimates remain in details/tooltips. Similar
+groups describe direct links to the named photograph, never a transitive cluster.
+RAW + JPEG describes only two samples when a RAW flag and decoded JPEG format
+are present; it asserts neither group-wide formats nor a shared original.
+Needs Review is session-local direct-link choice coverage, not move history or
+a persisted review state. No RAW+JPEG/Needs Review/derivative filter is offered.
+Global query edits hide both old result views immediately, including debounce;
+member-only queries retain the current gallery while hiding old pairs. Both
+query responses must settle before global results appear. Error/cancellation
+invalidates the sibling response. Back also restores inner scrollbars, focus
+and the original pair ID when the model rows did not change during review.
+
 Task008 adds `app/ui/qt/gallery.py`: QListView/GroupModel/delegate render Grid/List
 cards without per-file widgets. GroupRow adds at most two Photo samples and an
 optional EXACT byte estimate. The read-only group query aggregates full direct

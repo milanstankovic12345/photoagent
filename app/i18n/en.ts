@@ -230,12 +230,12 @@ Indexed photographs: {1} (physical files, excluding missing and moved files; dis
     <message>
       <source>filter_EXACT</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Identical copies</translation>
+      <translation>Exact Copies</translation>
     </message>
     <message>
       <source>filter_VISUAL</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Similar photographs</translation>
+      <translation>Similar Photos</translation>
     </message>
     <message>
       <source>sort</source>
@@ -280,7 +280,7 @@ Indexed photographs: {1} (physical files, excluding missing and moved files; dis
     <message>
       <source>needs_review</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Awaiting review</translation>
+      <translation>Needs review in this session</translation>
     </message>
     <message>
       <source>review_progress</source>
@@ -2186,6 +2186,38 @@ Please check the file name.</translation>
     <message>
       <source>scan_progress_summary</source>
       <translation>{0} · photographs processed: {1}</translation>
+    </message>
+    <message>
+      <source>review_group</source>
+      <translation>Review group</translation>
+    </message>
+    <message>
+      <source>bulk_exact</source>
+      <translation>Prepare exact copies…</translation>
+    </message>
+    <message>
+      <source>search_filter_sort</source>
+      <translation>Search, filter and sort groups</translation>
+    </message>
+    <message>
+      <source>group_guidance</source>
+      <translation>Similar Photos are direct matches to the named photograph, not proof of identical copies. Review before deciding.</translation>
+    </message>
+    <message>
+      <source>direct_pairs</source>
+      <translation>Direct photo pairs</translation>
+    </message>
+    <message>
+      <source>groups_count</source>
+      <translation>Groups: {0}</translation>
+    </message>
+    <message>
+      <source>sample_raw_jpeg</source>
+      <translation>The previewed pair contains RAW + JPEG. A common original has not been established; other group members may have different formats.</translation>
+    </message>
+    <message>
+      <source>sample_raw_jpeg_short</source>
+      <translation>RAW + JPEG · previews</translation>
     </message>
   </context>
 </TS>

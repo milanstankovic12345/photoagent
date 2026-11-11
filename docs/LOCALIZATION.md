@@ -45,7 +45,7 @@ standard dialogs; bound widgets and models update in place, preserving selection
 preview images, zoom and frozen operation plans. No translated label is used as a
 database identifier, sorting field, file identity or confirmation token.
 
-Both languages currently contain **434/434 finished messages (100%)**, with no
+Both languages currently contain **442/442 finished messages (100%)**, with no
 missing explicit SafetyError codes or untranslated application safety warnings.
 Translation coverage means catalog/key/placeholder and rendered workflow coverage;
 it is not certification of every OS/Qt-provided string or linguistic proofreading.

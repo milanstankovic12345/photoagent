@@ -1,5 +1,30 @@
 # PhotoAgent test evidence
 
+## Task018 — Duplicate groups and filters (2026-11-11)
+
+Windows Python 3.12.10 / Qt Fusion offscreen, disposable synthetic state only.
+Full commands, the corrected diagnostic-test failure, file list and platform
+limits are in the [Task018 verification record](design/verification/task018-20261111/README.md).
+
+- New/Task008/Qt Back/prepare/keyboard regressions: **24 passed in 477.29s**.
+  This run preceded the final pair-reuse/table-space correction.
+- Final `pytest tests/test_task018.py -q`, 100%: **11 passed in 242.78s**.
+- Final Back entry points and Grid/List photo-versus-Review tests, 150%:
+  **4 passed in 135.58s**. Earlier full Task018 150%: **10 passed in 188.74s**.
+- Query error/cancellation, live localization, compiled/fallback catalogs and
+  gallery focus: **15 passed in 95.50s**.
+- Existing global query/sort/ID/group service tests: **3 passed in 4.46s**.
+- Translation build/check: **442 finished messages per language**.
+- Real-window captures: **66** across EN/SR × Dark/Light × narrow/wide ×
+  100%/150%, including Grid/List, empty, filtered-empty and loading. All hashes,
+  sizes and layout checks pass; all eight contact sheets were visually inspected.
+- `git diff --check` passes. All listed successful test runs have zero skips.
+
+No full-suite/release run, native Linux, physical DPI/monitor transitions,
+screen readers, real drives/libraries, valid RAW, power-loss or external photo
+viewer checks were performed. RAW+JPEG format-label tests use synthetic models;
+review coverage remains session-local, with no global RAW+JPEG/Needs Review filter.
+
 ## Task017 — Dashboard and Scan (2026-11-10)
 
 Windows Python 3.12.10 / Qt Fusion offscreen; synthetic temporary homes/settings

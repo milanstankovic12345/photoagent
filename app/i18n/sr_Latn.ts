@@ -340,7 +340,7 @@ Indeksirane fotografije: {1} (fizički fajlovi, bez označenih nestalih i preme�
     <message>
       <source>needs_review</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Čeka pregled</translation>
+      <translation>Čeka pregled u ovoj sesiji</translation>
     </message>
     <message>
       <source>review_progress</source>
@@ -2186,6 +2186,38 @@ Proverite naziv fajla.</translation>
     <message>
       <source>scan_progress_summary</source>
       <translation>{0} · obrađeno fotografija: {1}</translation>
+    </message>
+    <message>
+      <source>review_group</source>
+      <translation>Pregledaj grupu</translation>
+    </message>
+    <message>
+      <source>bulk_exact</source>
+      <translation>Pripremi identične kopije…</translation>
+    </message>
+    <message>
+      <source>search_filter_sort</source>
+      <translation>Pretraga, filter i redosled grupa</translation>
+    </message>
+    <message>
+      <source>group_guidance</source>
+      <translation>Slične fotografije su direktna podudaranja sa imenovanom fotografijom, ne dokaz identičnih kopija. Pregledajte ih pre odluke.</translation>
+    </message>
+    <message>
+      <source>direct_pairs</source>
+      <translation>Direktni parovi fotografija</translation>
+    </message>
+    <message>
+      <source>groups_count</source>
+      <translation>Grupe: {0}</translation>
+    </message>
+    <message>
+      <source>sample_raw_jpeg</source>
+      <translation>Prikazani par sadrži RAW + JPEG. Zajednički original nije utvrđen; ostali članovi grupe mogu biti drugih formata.</translation>
+    </message>
+    <message>
+      <source>sample_raw_jpeg_short</source>
+      <translation>RAW + JPEG · prikazi</translation>
     </message>
   </context>
 </TS>

@@ -41,6 +41,17 @@ Upozorenja o izvorima, greške i neuspeh čuvanja izveštaja ostaju dostupni.
 **Odustani** bezbedno prekida skeniranje; poruka zatim pokazuje sledeći korak.
 Pregled rezultata nepotpunog skeniranja ne dozvoljava premeštanje fotografija.
 
+Na stranici Duplikati izaberite **Pregledaj grupu** na kartici ili pritisnite
+Enter na izabranoj grupi. Pretraga, filter, sortiranje i mreža/lista su na jednom
+mestu. „Identične kopije” označava EXACT, a „Slične fotografije” direktne VISUAL
+veze koje zahtevaju pregled. Dvoklik na dve sličice grupe ne bira proizvoljnu
+fotografiju za otvaranje. „Nazad” (Alt+Left) vraća upit, stranicu, izbor i scroll.
+Oznaka RAW + JPEG opisuje samo formate prikazanog para, bez tvrdnje o zajedničkom
+originalu. „Čeka pregled u ovoj sesiji” prati odluke do novog skeniranja ili
+zatvaranja aplikacije; nije trajna evidencija. Globalni filteri za te dve oznake
+nisu dostupni. Priprema karantina za sve kopije ostaje ograničena na podobne
+EXACT fajlove i zahteva postojeći pregled plana i izričitu potvrdu.
+
 ## Jezik i izgled
 
 Bočna navigacija počinje sklopljena, sa ikonama. Strelica ispod logotipa proširuje

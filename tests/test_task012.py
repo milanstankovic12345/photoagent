@@ -133,7 +133,7 @@ def test_live_pages_filters_models_previews_and_restart(desktop, collection):
         assert window.duplicates.model.headerData(0, Qt.Horizontal) == tr('name')
         assert window.navigation.buttons[Route.SCAN].accessibleName() == tr('scan')
         assert window.scan.roots.item(0).data(Qt.AccessibleTextRole).endswith(tr('available'))
-        assert tr('classification_EXACT') == window.duplicates.model.data(window.duplicates.model.index(0, 1))
+        assert tr('filter_EXACT') == window.duplicates.model.data(window.duplicates.model.index(0, 1))
         assert tr('recent_scan_summary', 0, 0, 0, 0, 0, 0).split('\n')[1].split(':')[0] in window.dashboard.session.text()
     pump(lambda: not window.controller.busy)
     assert json.loads((window.home / '.photo_agent_state.json').read_text(encoding='utf-8'))['language'] == 'sr_Latn'

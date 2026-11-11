@@ -1,0 +1,14 @@
+{
+  "validated": 66,
+  "sheets": [
+    "100\\review-empty.png",
+    "100\\review-grid.png",
+    "100\\review-list.png",
+    "100\\review-filtered.png",
+    "150\\review-empty.png",
+    "150\\review-grid.png",
+    "150\\review-list.png",
+    "150\\review-filtered.png"
+  ],
+  "visual_review": "Requires opening the sheets/originals."
+}

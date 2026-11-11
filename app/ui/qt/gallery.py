@@ -5,7 +5,7 @@ from collections import OrderedDict
 from pathlib import Path
 from typing import Callable
 
-from PySide6.QtCore import QAbstractListModel, QModelIndex, QRect, QSize, QTimer, Qt
+from PySide6.QtCore import QAbstractListModel, QModelIndex, QRect, QSize, QTimer, Qt, Signal
 from PySide6.QtGui import QImage, QPalette, QPen, QPixmap
 from PySide6.QtWidgets import QListView, QStyle, QStyledItemDelegate
 
@@ -14,6 +14,13 @@ from app.ui.qt.dashboard_scan import size_text
 from app.ui.qt.localization import set_text, language_manager
 from app.ui.qt.strings import tr
 from app.ui.qt.themes import RADII
+
+
+def pair_formats(row: GroupRow) -> str:
+    """Describe only the two displayed samples, never the group's provenance."""
+    raw = any(p.is_raw for p in row.samples[:2])
+    jpeg = any(not p.is_raw and p.image_format.upper() == 'JPEG' for p in row.samples[:2])
+    return tr('sample_raw_jpeg') if raw and jpeg else ''
 
 
 class GroupModel(QAbstractListModel):
@@ -46,8 +53,12 @@ class GroupModel(QAbstractListModel):
             return Path(row.keeper_path).name
         if role in (Qt.ToolTipRole, Qt.AccessibleTextRole):
             failures = [tr('preview_error') for photo in row.samples if isinstance(self.images.get(photo), str)]
-            return '\n'.join((row.keeper_path, tr('group_summary', row.members, tr('classification_' + row.kind)),
-                self.review_text(row), tr('review_session_only'), tr('estimate'), *failures))
+            details = [row.keeper_path, tr('group_summary', row.members, tr('filter_' + row.kind)),
+                self.review_text(row), tr('review_session_only'), tr('classification_' + row.kind),
+                pair_formats(row), tr('review_group'), tr('keyboard_groups'), *failures]
+            if row.potential_bytes is not None:
+                details.extend((tr('group_space', size_text(row.potential_bytes)), tr('estimate')))
+            return '\n'.join(filter(None, details))
         if role == Qt.UserRole:
             return row
 
@@ -58,7 +69,16 @@ class GroupModel(QAbstractListModel):
 
 class GroupDelegate(QStyledItemDelegate):
     def sizeHint(self, option, index) -> QSize:
-        return QSize(248, 224) if self.parent().viewMode() == QListView.IconMode else QSize(248, 116)
+        return QSize(264, 252) if self.parent().viewMode() == QListView.IconMode else QSize(264, 148)
+
+    @staticmethod
+    def photo_rect(rect: QRect, grid: bool) -> QRect:
+        return QRect(rect.x() + 14, rect.y() + 14, rect.width() - 28 if grid else 170, 104)
+
+    @staticmethod
+    def review_rect(rect: QRect, grid: bool) -> QRect:
+        return QRect(rect.x() + (14 if grid else 198), rect.bottom() - 38,
+                     rect.width() - (28 if grid else 212), 28)
 
     def paint(self, painter, option, index) -> None:
         painter.save()
@@ -76,7 +96,7 @@ class GroupDelegate(QStyledItemDelegate):
             return
         model = index.model()
         grid = self.parent().viewMode() == QListView.IconMode
-        image_rect = QRect(rect.x() + 10, rect.y() + 10, rect.width() - 20 if grid else 150, 86)
+        image_rect = self.photo_rect(option.rect, grid)
         for i, photo in enumerate(row.samples[:2]):
             target = QRect(image_rect.x() + i * (image_rect.width() // 2 + 2), image_rect.y(),
                            image_rect.width() // 2 - 2, image_rect.height())
@@ -89,17 +109,24 @@ class GroupDelegate(QStyledItemDelegate):
             else:
                 painter.drawText(target, Qt.AlignCenter | Qt.TextWordWrap,
                                  tr('thumbnail_unavailable') if cached else tr('preview_loading'))
-        text_rect = rect.adjusted(12, 106, -12, -8) if grid else rect.adjusted(174, 8, -12, -8)
-        title = tr('selected_group', Path(row.keeper_path).name) if selected else Path(row.keeper_path).name
-        lines = [title, tr('group_summary', row.members, tr('classification_' + row.kind)),
+        if pair_formats(row):
+            badge = QRect(image_rect.x(), image_rect.bottom() - 19, image_rect.width(), 20)
+            painter.fillRect(badge, palette.color(QPalette.Base))
+            painter.setPen(palette.color(QPalette.Text))
+            painter.drawText(badge, Qt.AlignCenter, tr('sample_raw_jpeg_short'))
+            painter.setPen(palette.color(QPalette.HighlightedText if selected else QPalette.Text))
+        text_rect = rect.adjusted(10, 118, -10, -8) if grid else rect.adjusted(194, 8, -10, -8)
+        lines = [Path(row.keeper_path).name, tr('group_summary', row.members, tr('filter_' + row.kind)),
                  model.review_text(row)]
-        if row.potential_bytes is not None:
-            lines.append(tr('group_space', size_text(row.potential_bytes)))
         for line in lines:
             painter.drawText(QRect(text_rect.x(), text_rect.y(), text_rect.width(), 24),
                              Qt.AlignLeft | Qt.AlignVCenter,
                              option.fontMetrics.elidedText(line, Qt.ElideMiddle, text_rect.width()))
             text_rect.translate(0, 24)
+        action = self.review_rect(option.rect, grid)
+        painter.setPen(palette.color(QPalette.HighlightedText if selected else QPalette.Link))
+        painter.drawRoundedRect(action, RADII['card'], RADII['card'])
+        painter.drawText(action, Qt.AlignCenter, tr('review_group'))
         if option.state & QStyle.State_HasFocus:
             painter.setPen(QPen(palette.color(QPalette.Link), 2))
             painter.setBrush(Qt.NoBrush)  # Focus outline must not cover the card contents.
@@ -109,6 +136,8 @@ class GroupDelegate(QStyledItemDelegate):
 
 class GroupView(QListView):
     """One active batch of <=3, <=48 rendered thumbnails, <=24 group rows."""
+    review_requested = Signal(QModelIndex)
+
     def __init__(self, thumbnails: Callable) -> None:
         super().__init__()
         self.groups_model = GroupModel(self)
@@ -134,7 +163,7 @@ class GroupView(QListView):
         self.setWrapping(grid)
         self.setResizeMode(QListView.Adjust)
         self.setMovement(QListView.Static)
-        self.setGridSize(QSize(248, 224) if grid else QSize())
+        self.setGridSize(QSize(264, 252) if grid else QSize())
         self.setUniformItemSizes(True)
         self.setSpacing(2)
         self.timer.start()
@@ -147,7 +176,26 @@ class GroupView(QListView):
             self.setCurrentRow(1)
 
     def sizeHintForRow(self, row: int) -> int:
-        return 224 if self.viewMode() == QListView.IconMode else 116
+        return 252 if self.viewMode() == QListView.IconMode else 148
+
+    def mouseReleaseEvent(self, event) -> None:
+        super().mouseReleaseEvent(event)
+        index = self.indexAt(event.position().toPoint())
+        if event.button() == Qt.LeftButton and index.isValid() and index.row() > 0:
+            action = GroupDelegate.review_rect(self.visualRect(index), self.viewMode() == QListView.IconMode)
+            if action.contains(event.position().toPoint()):
+                self.review_requested.emit(index)
+
+    def mouseDoubleClickEvent(self, event) -> None:
+        index = self.indexAt(event.position().toPoint())
+        if index.isValid() and index.row() > 0:
+            # A group thumbnail contains two concrete files. It is not a target
+            # for opening an arbitrary file, nor a shortcut into group review.
+            photo = GroupDelegate.photo_rect(self.visualRect(index), self.viewMode() == QListView.IconMode)
+            if photo.contains(event.position().toPoint()):
+                event.accept()
+                return
+        super().mouseDoubleClickEvent(event)
 
     def currentRow(self) -> int:
         return self.currentIndex().row()

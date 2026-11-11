@@ -1,5 +1,21 @@
 # Changelog
 
+## Task018 — Clearer duplicate groups and filters — 2026-11-11
+
+- Simplify Grid/List cards around sample photographs, filename, member count,
+  session review coverage and an explicit Review group action. Use Exact Copies
+  and Similar Photos; keep technical classifications and estimates in details.
+- Combine search/filter/sort/view controls in one wrapping toolbar. Preserve
+  global queries, stable IDs and bounded pagination. Hide stale results during
+  loading/debounce, and reject sibling replies after query failure/cancellation.
+- Separate thumbnail double-click from group review; no arbitrary photo opens.
+  Restore original pair selection, focus and inner scroll when returning from
+  review, including when review changed selection within the same model page.
+- Describe RAW+JPEG only for the two proven samples, without provenance claims.
+  Keep review coverage session-local; unsupported global category/review filters
+  remain absent. Keep bulk preparation explicitly EXACT with existing approval.
+- Add EN/SR catalogs, focused regression tests and synthetic real-window captures.
+
 ## Task017 — Clearer Dashboard and Scan — 2026-11-10
 
 - Put the latest scan/next step before compact, spaced metric cards. Distinguish

@@ -44,6 +44,9 @@ class MainWindow(QMainWindow):
         self.restore_id = None
         self.open_group = False
         self.listing_context = None
+        self.listing_pending: set[str] = set()
+        self.listing_scroll = None
+        self.listing_focus = None
         self.group_offset = self.history_offset = self.error_offset = 0
         self.total = self.group_total = self.history_total = self.error_total = 0
         self.history_rows = ()
@@ -100,7 +103,7 @@ class MainWindow(QMainWindow):
             self.cancel, lambda: self.controller.request('reports'), self.errors_page,
             lambda: self.review_results(None))
         self.duplicates = DuplicatesScreen(self.query_edited, self.sort,
-            self.change_page, self.selected, self.compare, self.prepare_selected, self.prepare_bulk,
+            self.change_page, self.selected, self.review_group, self.prepare_selected, self.prepare_bulk,
             self.group_changed, self.groups_page, self.controller.thumbnails)
         self.comparison = CompareScreen(self.prepare_selected, self.back_to_duplicates, self.keep_both, self.change_page)
         self.comparison.members.setModel(self.duplicates.model)
@@ -109,6 +112,7 @@ class MainWindow(QMainWindow):
         self.comparison.right.keep_photo.clicked.connect(lambda checked: self.choose_keeper(True, checked))
         self.comparison.context_restore.clicked.connect(self.restore_context)
         self.duplicates.groups.activated.connect(self.activate_group)
+        self.duplicates.groups.review_requested.connect(self.activate_group)
         self.history = HistoryScreen(self.restore, self.history_page, self.open_quarantine_folder)
         self.history.selection_changed.connect(self.history_selected)
         self.preferences = SettingsScreen(self.save_settings, self.theme_changed,
@@ -205,7 +209,12 @@ class MainWindow(QMainWindow):
 
     def request_matches(self) -> None:
         if self.session:
-            self.duplicates.set_state(tr('query_loading'), bool(self.total or self.group_total))
+            self.listing_pending.add('matches')
+            # The gallery is still current when only its direct members change.
+            # Hide the old pairs immediately; global query changes hide both.
+            self.duplicates.set_state(tr('query_loading'), bool(self.group_rows) and self.query.keeper_id is not None)
+            self.duplicates.table.hide()
+            self.duplicates.pager.hide()
             # Once a group is selected, its member pager includes every direct
             # link. The gallery's session-wide search remains intact for Back.
             query = replace(self.query, text='') if self.query.keeper_id is not None else self.query
@@ -221,8 +230,22 @@ class MainWindow(QMainWindow):
             self.request_groups()
 
     def request_groups(self) -> None:
+        if not self.session:
+            return
+        self.listing_pending.add('groups')
+        self.duplicates.set_state(tr('query_loading'), False)
         self.controller.request('groups', (self.session, replace(self.query, keeper_id=None,
             kind=self.duplicates.kind.currentData(), offset=self.group_offset, limit=min(24, self.query.limit))))
+
+    def show_listing_state(self, action: str) -> None:
+        self.listing_pending.discard(action)
+        if self.listing_pending:
+            return
+        populated = bool(self.duplicates.model.rows or self.group_rows)
+        message = ('' if populated else tr('empty') if self.query.text or self.query.kind
+                   else tr('no_matches') if self.status == 'complete' else tr('scan_review_only'))
+        self.duplicates.table.show()
+        self.duplicates.set_state(message, populated)
 
     def result(self, action: str, value: Any) -> None:
         if action == 'initialize':
@@ -311,9 +334,7 @@ class MainWindow(QMainWindow):
             set_text(self.comparison.member_section.toggle, tr('member_count', value.total + 1)
                 if self.query.keeper_id is not None else tr('direct_members'))
             set_text(self.comparison.member_section.toggle, text_of(self.comparison.member_section.toggle), 'setAccessibleName')
-            self.duplicates.set_state('' if value.items else tr('empty') if self.query.text or self.query.kind
-                else tr('no_matches') if self.status == 'complete' else tr('scan_review_only'),
-                bool(value.items or self.group_total))
+            self.show_listing_state(action)
             index = next((i for i, r in enumerate(value.items) if r.id == selected_id), None)
             if index is not None:
                 self.duplicates.table.selectRow(index)
@@ -337,7 +358,8 @@ class MainWindow(QMainWindow):
             selection.blockSignals(False)
             set_text(self.duplicates.group_page, tr('page', value.offset + bool(value.items),
                 value.offset + len(value.items), value.total))
-            self.duplicates.set_state(text_of(self.duplicates.empty), bool(value.items or self.total))
+            set_text(self.duplicates.group_heading, tr('groups_count', value.total))
+            self.show_listing_state(action)
         elif action == 'history':
             self.history_rows = value.items
             self.history_total = value.total
@@ -389,6 +411,13 @@ class MainWindow(QMainWindow):
         elif action == 'cancelled':
             self.pending_prepare = False
             set_text(self.statusBar(), tr('action_cancelled'), 'showMessage')
+            if value in ('matches', 'groups'):
+                self.open_group = False
+                self.listing_pending.clear()
+                for query_action in ('matches', 'groups'):
+                    self.controller.latest.pop(query_action, None)
+                self.duplicates.set_state(tr('action_cancelled'), False)
+                self.invalidate_selection()
             if value == 'execute':
                 self.refresh()
         self.busy_changed(self.controller.busy)
@@ -428,6 +457,9 @@ class MainWindow(QMainWindow):
             self.refresh()
         if action in ('matches', 'groups'):
             self.open_group = False
+            self.listing_pending.clear()
+            for query_action in ('matches', 'groups'):
+                self.controller.latest.pop(query_action, None)
             self.duplicates.set_state(tr('query_error'), False)
             self.duplicates.error_details.set_detail(detail)
             self.invalidate_selection()
@@ -478,7 +510,9 @@ class MainWindow(QMainWindow):
         self.dashboard.scan.setEnabled(not self.controller.closing)
         if self.scan_active:
             self.scan.progress.setRange(0, 0)
-        self.duplicates.compare.setEnabled(self.controller.selection is not None and not self.controller.closing)
+        group_selected = self.duplicates.groups.currentRow() > 0
+        self.duplicates.compare.setEnabled((group_selected or self.controller.selection is not None)
+            and not self.controller.closing and not self.listing_pending and not self.search_timer.isActive())
         allowed = available and self.writable and self.status == 'complete'
         self.comparison.prepare.setEnabled(allowed and self.controller.selection is not None and bool(self.pending_pairs()))
         self.duplicates.bulk.setEnabled(allowed and bool(self.session))
@@ -548,6 +582,8 @@ class MainWindow(QMainWindow):
         for action in ('matches', 'groups'):
             self.controller.latest.pop(action, None)
         self.duplicates.groups.groups_model.review.clear()
+        self.listing_pending.clear()
+        self.duplicates.set_state(tr('query_loading'), False)
         self.search_timer.stop()
         self.scan_active = self.waiting_sources = True
         self.cancelled_before_session = False
@@ -611,11 +647,15 @@ class MainWindow(QMainWindow):
 
     def query_edited(self, *_: Any) -> None:
         self.open_group = False
-        self.invalidate_plan()
+        self.invalidate_selection()
+        self.listing_pending.clear()
         # An old query/prepare response cannot become actionable during debounce.
         for action in ('matches', 'groups', 'prepare', 'bulk'):
             self.controller.latest.pop(action, None)
         self.search_timer.start()
+        if self.session:
+            self.duplicates.set_state(tr('query_loading'), False)
+        self.busy_changed(self.controller.busy)
 
     def sort(self, column: int) -> None:
         self.open_group = False
@@ -648,6 +688,7 @@ class MainWindow(QMainWindow):
         target = self.group_offset + direction * min(24, self.query.limit)
         if 0 <= target < self.group_total:
             self.open_group = False
+            self.invalidate_plan()
             self.group_offset = target
             self.request_groups()
 
@@ -664,9 +705,25 @@ class MainWindow(QMainWindow):
         self.request_matches()
 
     def activate_group(self, index: QModelIndex) -> None:
-        if index.row() > 0:
+        if index.isValid() and 0 < index.row() <= len(self.group_rows) and not self.search_timer.isActive():
+            group = self.group_rows[index.row() - 1]
+            selected = self.controller.selection
+            if (selected is not None and self.query.keeper_id == group.keeper_id
+                    and self.query.kind == group.kind and selected.keeper_id == group.keeper_id
+                    and selected.match.kind.value == group.kind and not self.listing_pending):
+                # Reuse the explicitly selected pair; Review must not reset its
+                # identity/scroll to the first member of an already loaded group.
+                self.compare()
+                return
             self.group_changed(index.row())
             self.open_group = True
+
+    def review_group(self) -> None:
+        index = self.duplicates.groups.currentIndex()
+        if index.isValid() and index.row() > 0:
+            self.activate_group(index)
+        else:
+            self.compare()
 
     def selected(self, current: QModelIndex, previous: QModelIndex) -> None:
         if not current.isValid():
@@ -708,6 +765,10 @@ class MainWindow(QMainWindow):
         self.invalidate_plan()
         if not self.duplicates_flow.comparing:
             self.listing_context = (self.query, self.total, self.duplicates.model.rows, self.selected_id)
+            self.listing_scroll = tuple(bar.value() for bar in (
+                self.duplicates.groups.verticalScrollBar(), self.duplicates.table.verticalScrollBar(),
+                self.duplicates.table.horizontalScrollBar()))
+            self.listing_focus = QApplication.focusWidget()
         self.duplicates_flow.show_comparison(True)
         self.navigate(Route.DUPLICATES)
         self.comparison.back.setFocus(Qt.OtherFocusReason)
@@ -727,6 +788,7 @@ class MainWindow(QMainWindow):
             return
         self.invalidate_plan()
         self.duplicates_flow.show_comparison(False)
+        restored = self.listing_context is not None
         if self.listing_context:
             query, total, rows, selected_id = self.listing_context
             self.controller.latest.pop('matches', None)
@@ -735,18 +797,30 @@ class MainWindow(QMainWindow):
                 selection = self.duplicates.table.selectionModel()
                 selection.blockSignals(True)
                 self.duplicates.model.replace(rows)
-                index = next((i for i, row in enumerate(rows) if row.id == selected_id), None)
-                if index is not None:
-                    self.duplicates.table.selectRow(index)
                 selection.blockSignals(False)
-                if index is not None and (self.controller.selection is None or self.controller.selection.id != selected_id):
-                    self.selected(self.duplicates.model.index(index, 0), QModelIndex())
-                self.selected_id = selected_id
+            index = next((i for i, row in enumerate(rows) if row.id == selected_id), None)
+            selection = self.duplicates.table.selectionModel()
+            selection.blockSignals(True)
+            if index is not None:
+                self.duplicates.table.selectRow(index)
+            else:
+                selection.clear()
+            selection.blockSignals(False)
+            if index is not None and (self.controller.selection is None or self.controller.selection.id != selected_id):
+                self.selected(self.duplicates.model.index(index, 0), QModelIndex())
+            self.selected_id = selected_id
             set_text(self.duplicates.page, tr('page', query.offset + bool(rows), query.offset + len(rows), total))
             self.listing_context = None
+            self.listing_pending.discard('matches')
+            self.show_listing_state('matches')
         self.update_shell()
-        self.duplicates.table.setFocus(Qt.OtherFocusReason)
+        target = self.listing_focus if restored else None
+        (target if target and target.isVisible() else self.duplicates.table).setFocus(Qt.OtherFocusReason)
         self.duplicates_flow.restore_listing_scroll()
+        if restored and self.listing_scroll:
+            for bar, value in zip((self.duplicates.groups.verticalScrollBar(),
+                    self.duplicates.table.verticalScrollBar(), self.duplicates.table.horizontalScrollBar()), self.listing_scroll):
+                bar.setValue(value)
 
     def prepare_selected(self) -> None:
         row = self.controller.selection

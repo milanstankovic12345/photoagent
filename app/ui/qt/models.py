@@ -50,5 +50,6 @@ class MatchModel(QAbstractTableModel):
         if role in (Qt.DisplayRole, Qt.AccessibleTextRole):
             status = tr('photo_retained') if p.path in self.retained_paths else tr('photo_proposed') if p.path in self.moving_paths else ''
             name = Path(p.path).name + (' · ' + status if status else '')
-            return (name, tr('classification_' + pair.kind.value), p.image_format or p.ext,
+            kind = pair.kind.value
+            return (name, tr(('filter_' if kind in ('EXACT', 'VISUAL') else 'classification_') + kind), p.image_format or p.ext,
                     p.size, f'{p.width} × {p.height}', p.path)[index.column()]

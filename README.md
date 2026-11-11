@@ -18,9 +18,11 @@ Dashboard, Scan, Duplicates, Quarantine history and Settings. Navigate using the
 compact sidebar icons, or expand the navigation with the arrow below
 the application logo to show destination names. Hover an icon for its name;
 Tab and Space/Enter operate the toggle. The mode is retained for the current
-window session. Open a selected pair
-with Enter, double-click or Compare inside Duplicates. Back to group (Alt+Left)
-preserves filters, sorting, group, result page and selection without reloading.
+window session. In Duplicates, choose Review group on a card or press Enter on
+the selected group. Enter or double-click on a table row reviews that pair.
+Double-clicking a group's two-photo thumbnail does not select a file to open.
+Back to group (Alt+Left) preserves filters, sorting, group, result page, scroll
+and selection without reloading.
 Use `start_windows.bat --ui tk` (or `python -B photo_agent.py --ui tk`) for Tkinter.
 The theme defaults to Dark and respects any saved theme preference.
 Settings groups Appearance, Language, Scanning, Similarity Detection, Safety,
@@ -175,8 +177,11 @@ to the next scan; aspect stays 0.025. Preview zoom/pan/Fit uses a bitmap up to 2
 Enlarged previews use the same bounded bitmap, never original full resolution.
 Photo Details exposes full paths/SHA and available metadata. Gallery review status
 records only UI decisions during the current scan/application session; it is not
-persisted and is independent of the operation journal. Qt hides unsupported
-DERIVATIVE/SIMILAR_CAPTURE/RAW+JPEG classifications.
+persisted and is independent of the operation journal. Exact Copies means EXACT;
+Similar Photos means VISUAL direct links, without transitive identity claims.
+RAW + JPEG labels describe only the previewed formats, without proving a common
+original. Global RAW+JPEG/Needs Review and unsupported DERIVATIVE/SIMILAR_CAPTURE
+filters are not offered.
 
 ## Synthetic demo and tests
 
