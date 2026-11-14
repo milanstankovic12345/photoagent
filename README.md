@@ -20,7 +20,9 @@ the application logo to show destination names. Hover an icon for its name;
 Tab and Space/Enter operate the toggle. The mode is retained for the current
 window session. In Duplicates, choose Review group on a card or press Enter on
 the selected group. Enter or double-click on a table row reviews that pair.
-Double-clicking a group's two-photo thumbnail does not select a file to open.
+Double-click an individual photograph on a group card to open that file in the
+system's default viewer. The gap between samples and group labels represent the
+group; they do not choose a photograph to open.
 Back to group (Alt+Left) preserves filters, sorting, group, result page, scroll
 and selection without reloading.
 Review shows filename, format, resolution and size beside large previews. Full
@@ -33,6 +35,19 @@ The bottom action row stays visible while scrolling and names selected copies.
 Move to quarantine prepares the existing verified plan and opens confirmation;
 only explicit approval moves files. Cancel preserves the collection. After a
 single completed move, Restore photograph prepares its separate restore plan.
+Double-click also opens photographs on Dashboard, in Compare (including the
+explicit enlarged preview), and in a verified Quarantine thumbnail. Use the
+Open in Default Viewer button with Tab/Space as an alternative. Group cards offer
+named context-menu actions, Alt+O for the left sample and Alt+Shift+O for the right.
+Single clicks keep their selection behavior; opening never chooses a keeper or
+approves a move. Paths are checked in the background with full content/identity
+verification. Quarantine targets come from the operation manifest, not the old
+source path. Restored, legacy or unverifiable history entries report unavailable;
+scan again to open restored photographs from current results.
+RAW files are handed to the associated system application without conversion.
+PhotoAgent reports a rejected request, but OS acceptance cannot confirm that the
+image was displayed or that a viewer supports that format. There is no automatic
+internal-viewer fallback. See [opening behavior and platform checks](docs/PHOTO_OPENING.md).
 Use `start_windows.bat --ui tk` (or `python -B photo_agent.py --ui tk`) for Tkinter.
 The theme defaults to Dark and respects any saved theme preference.
 Settings groups Appearance, Language, Scanning, Safety and Storage. Similarity
@@ -68,7 +83,7 @@ Qt mode needs PySide6 >=6.8,<7; preflight checks only the selected toolkit.
 See [Qt distribution notes](docs/QT_DISTRIBUTION.md).
 
 v2.5 adds editable Qt Linguist `.ts` sources and embedded `.qm` catalogs for all
-467 messages in each language. Settings → Language changes open pages, dialogs,
+474 messages in each language. Settings → Language changes open pages, dialogs,
 accessibility labels and progress immediately; the selection survives restart.
 Display sizes, index totals and scan dates follow the selected locale. History
 dates remain explicitly UTC. File names, paths, hashes, formats and stored values

@@ -1,5 +1,13 @@
 # Qt accessibility and localization
 
+Task021 (2026-11-14) adds Open in Default Viewer buttons reachable with Tab/Space
+on photo cards, comparison/enlarged previews and Quarantine. The group gallery
+offers named context-menu actions and Alt+O / Alt+Shift+O for its left/right sample.
+Single clicks retain selection; Enter / Review group still reviews the group.
+Open controls, hints, errors and request status translate live in EN/SR. Opening
+never chooses a keeper or approves movement. Native viewer display and screen
+reader behavior remain unverified; see [opening behavior](../PHOTO_OPENING.md).
+
 Task016 (2026-11-10) adds session-local compact/expanded navigation. The default
 64 logical-pixel rail retains the application logo and five destinations; the
 208 logical-pixel expanded rail shows localized labels. Settings stays at the

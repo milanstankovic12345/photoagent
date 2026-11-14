@@ -13,6 +13,7 @@ from app.core.models import Kind, Match, Plan
 from app.core.queries import MatchQuery, MatchRow, ScanProgress
 from app.ui.qt.components import PageHeader, PlanDialog
 from app.ui.qt.controller import Controller
+from app.ui.qt.desktop_viewer import DesktopViewer
 from app.ui.qt.navigation import Route, Sidebar
 from app.ui.qt.screens import (CompareScreen, DashboardScreen, DuplicatesFlow, DuplicatesScreen,
                                HistoryScreen, ScanScreen, SettingsScreen, scroll_page)
@@ -29,6 +30,7 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(':/photoagent/photoagent.svg'))
         self.home = home or Path.home()
         self.controller = Controller(self.home, self)
+        self.desktop_viewer = DesktopViewer()
         self.theme = ThemeManager(QApplication.instance())
         self.theme.apply('dark')
         self.settings = {}
@@ -119,6 +121,9 @@ class MainWindow(QMainWindow):
         self.duplicates.groups.review_requested.connect(self.activate_group)
         self.history = HistoryScreen(self.restore, self.history_page, self.open_quarantine_folder)
         self.history.selection_changed.connect(self.history_selected)
+        for source in (self.dashboard, self.duplicates.groups, self.comparison.left,
+                       self.comparison.right, self.history):
+            source.open_requested.connect(self.open_photo)
         self.preferences = SettingsScreen(self.save_settings, self.theme_changed,
             lambda: self.navigate(Route.SCAN), self.language_changed)
         self.duplicates_flow = DuplicatesFlow(self.duplicates, self.comparison)
@@ -183,7 +188,7 @@ class MainWindow(QMainWindow):
         if comparing:
             body = []
             for photo in (self.comparison.left, self.comparison.right):
-                body.extend([photo.view, *photo.preview_buttons, photo.enlarge, photo.keep_photo,
+                body.extend([photo.view, *photo.preview_buttons, photo.enlarge, photo.open_default, photo.keep_photo,
                     photo.details.toggle, photo.full_metadata, photo.error_details.toggle, photo.error_details.text])
             body.extend([self.comparison.member_section.toggle, self.comparison.previous,
                 self.comparison.next, self.comparison.members, self.comparison.both,
@@ -380,6 +385,16 @@ class MainWindow(QMainWindow):
             self.history.show_page(value)
         elif action == 'history_preview':
             self.history.show_preview(*value)
+        elif action == 'open_photo':
+            try:
+                accepted = self.desktop_viewer.open_photo(value)
+            except (OSError, RuntimeError, ValueError) as exc:
+                self.error(action, 'photo_launch_failed: ' + str(exc))
+                return
+            if not accepted:
+                self.error(action, 'photo_launch_failed')
+                return
+            set_text(self.statusBar(), tr('photo_open_requested'), 'showMessage')
         elif action == 'quarantine_folder':
             entry = self.history.selected_entry
             if entry and entry.id == value[0]:
@@ -440,6 +455,9 @@ class MainWindow(QMainWindow):
         self.busy_changed(self.controller.busy)
 
     def error(self, action: str, detail: str) -> None:
+        if action == 'open_photo':
+            self.show_error(detail)
+            return
         if action == 'language':
             self.apply_language(self.settings['language'])
             self.preferences.show_save_error(detail)
@@ -1070,6 +1088,11 @@ class MainWindow(QMainWindow):
         entry = self.history.selected_entry
         if not self.controller.busy and entry:
             self.controller.request('quarantine_folder', entry.id)
+
+    def open_photo(self, target: object) -> None:
+        # No filesystem work on the GUI thread. The immutable clicked target is
+        # carried through validation; never re-read the global selection on reply.
+        self.controller.request('open_photo', target)
 
     def restore_context(self) -> None:
         if not self.controller.busy and self.restore_id and any(

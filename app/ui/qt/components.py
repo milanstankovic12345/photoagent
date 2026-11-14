@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from PySide6 import QtSvg  # Load SVG runtime before icon-engine DLLs on Windows.
-from PySide6.QtCore import QEvent, QRect, QSize, QTimer, Qt
+from PySide6.QtCore import QEvent, QObject, QRect, QSize, QTimer, Qt, Signal
 from PySide6.QtGui import QKeySequence, QPixmap, QShortcut
 from PySide6.QtWidgets import (QCheckBox, QComboBox, QDialog, QGraphicsScene,
     QGraphicsView, QHBoxLayout, QLabel, QLineEdit, QPlainTextEdit, QPushButton,
@@ -23,6 +23,41 @@ def text_label(text: str, role: str = 'body') -> QLabel:
     label.setWordWrap(True)
     label.setProperty('role', role)
     return label
+
+
+class PhotoDoubleClick(QObject):
+    """Consume photo double clicks once, without invoking a widget's activation."""
+    open_requested = Signal(object)
+
+    def __init__(self, widget: QWidget, target: Callable) -> None:
+        super().__init__(widget)
+        self.target = target
+        widget.installEventFilter(self)
+
+    def eventFilter(self, watched, event) -> bool:
+        if event.type() == QEvent.MouseButtonDblClick and event.button() == Qt.LeftButton:
+            target = self.target(event.position().toPoint())
+            if target is not None:
+                self.open_requested.emit(target)
+            event.accept()
+            return True
+        return super().eventFilter(watched, event)
+
+
+class PhotoLabel(QLabel):
+    open_requested = Signal(object)
+
+    def __init__(self, key: str) -> None:
+        super().__init__()
+        self.target: Photo | str | None = None
+        self.setTextFormat(Qt.PlainText)
+        self.setWordWrap(True)
+        set_text(self, tr(key))
+        set_text(self, tr('photo_open_hint'), 'setToolTip')
+        set_text(self, tr('photo_open_hint'), 'setAccessibleDescription')
+        self.gesture = PhotoDoubleClick(self, lambda _: self.target if self.pixmap()
+            and not self.pixmap().isNull() else None)
+        self.gesture.open_requested.connect(self.open_requested)
 
 
 def path_label(text: str = '', role: str = 'body') -> QLabel:
@@ -249,7 +284,8 @@ def button(key: str, callback: Callable, layout: QLayout, *, variant: str | None
         'review_duplicates': 'duplicates', 'review_results': 'duplicates', 'compare': 'duplicates',
         'settings': 'settings', 'selected_move': 'quarantine', 'bulk_move': 'quarantine',
         'move_copy': 'quarantine', 'restore': 'restore', 'restore_operation': 'restore',
-        'reports': 'open_external', 'open_quarantine_folder': 'open_external', 'sort_asc': 'sort',
+        'reports': 'open_external', 'open_quarantine_folder': 'open_external',
+        'open_default_viewer': 'open_external', 'sort_asc': 'sort',
     }.get(key)
     if glyph:
         set_icon(widget, glyph)
@@ -265,8 +301,11 @@ def button(key: str, callback: Callable, layout: QLayout, *, variant: str | None
 
 
 class PhotoView(Card):
+    open_requested = Signal(object)
+
     def __init__(self) -> None:
         super().__init__()
+        self.photo: Photo | None = None
         layout = self.content
         layout.setContentsMargins(*([SPACING[2]] * 4))
         self.metadata = path_label(tr('select_pair'), 'metadata')
@@ -285,6 +324,10 @@ class PhotoView(Card):
         set_text(self.view, tr('compare'), 'setAccessibleName')
         self.view.setMinimumSize(120, 240)
         self.view.viewport().installEventFilter(self)
+        self.open_gesture = PhotoDoubleClick(self.view.viewport(), lambda pos: self.photo
+            if self.state == 'preview_ready' and self.view.itemAt(pos) else None)
+        self.open_gesture.open_requested.connect(self.open_requested)
+        set_text(self.view, tr('photo_open_hint'), 'setToolTip')
         self.fitted = True
         self.enlarged = None
         self.preview = QStackedLayout()
@@ -312,6 +355,7 @@ class PhotoView(Card):
         controls.addWidget(self.zoom_label)
         self.enlarge = button('enlarge_preview', self.show_enlarged, controls)
         set_text(self.enlarge, tr('enlarge_preview'), 'setToolTip')
+        self.open_default = button('open_default_viewer', self.request_open, controls)
         self.keep_photo = button('keep_photo', lambda: None, layout)
         self.keep_photo.setCheckable(True)
         self.keep_photo.setProperty('choice', True)
@@ -348,6 +392,8 @@ class PhotoView(Card):
         self.enlarge.setEnabled(False)
 
     def reset(self) -> None:
+        self.photo = None
+        self.open_default.setEnabled(False)
         set_text(self.metadata, tr('select_pair'))
         self.keep_photo.setChecked(False)
         set_text(self.keep_photo, tr('keep_photo'))
@@ -364,6 +410,8 @@ class PhotoView(Card):
         self.error_details.set_detail('')
         self.show_state('preview_loading')
         self.photo = photo
+        # RAW may have no internal decoder but still have a system association.
+        self.open_default.setEnabled(True)
         set_text(self.quality_note, tr('heuristic'))
         self.update_summary()
         set_text(self.metadata, photo.path, 'setToolTip')
@@ -385,8 +433,12 @@ class PhotoView(Card):
 
     def resizeEvent(self, event) -> None:
         super().resizeEvent(event)
-        if hasattr(self, 'photo') and self.state != 'select_pair':
+        if self.photo is not None and self.state != 'select_pair':
             self.update_summary()
+
+    def request_open(self) -> None:
+        if self.photo is not None:
+            self.open_requested.emit(self.photo)
 
     def set_image(self, image: QImage | None, error: str) -> None:
         self.scene.clear()
@@ -449,6 +501,10 @@ class PhotoView(Card):
         button('zoom_in', lambda: view.scale(1.25, 1.25), actions)
         button('zoom_out', lambda: view.scale(.8, .8), actions)
         button('fit', lambda: view.fitInView(scene.itemsBoundingRect(), Qt.KeepAspectRatio), actions)
+        photo = self.photo  # Immutable target of this dialog, independent of selection.
+        gesture = PhotoDoubleClick(view.viewport(), lambda pos: photo if view.itemAt(pos) else None)
+        gesture.open_requested.connect(self.open_requested)
+        button('open_default_viewer', lambda: self.open_requested.emit(photo), actions)
         button('close_preview', dialog.reject, actions)
         def finished() -> None:
             self.enlarged = None

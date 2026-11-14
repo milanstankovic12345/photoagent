@@ -42,6 +42,20 @@ trenutne lokacije fotografije. Konflikti, nedostupan disk i potreba za oporavkom
 ostaju vidljivi. Neuspeh sličice ne blokira pripremu vraćanja. Vraćanje i dalje
 zahteva pregled plana i potvrdu i nikada ne prepisuje postojeći fajl.
 
+Dvoklik na pojedinačnu fotografiju u Kontrolnoj tabli, Duplikatima, Poređenju
+(i eksplicitno uvećanom pregledu) ili proverenu sličicu u Karantinu otvara taj fajl
+u podrazumevanoj sistemskoj aplikaciji. Dostupno je i dugme **Otvori u
+podrazumevanom pregledniku**, do kog možete doći tasterom Tab i aktivirati ga
+razmakom. Kartica grupe ima imenovane akcije u kontekstnom meniju, Alt+O za levi
+uzorak i Alt+Shift+O za desni. Enter na grupi i dalje otvara poređenje.
+Jedan klik bira; otvaranje ne bira zadržanu kopiju i ne odobrava premeštanje.
+Putanja, sadržaj i identitet proveravaju se u pozadini. Karantin koristi ID
+operacije i manifest; vraćeni, stari ili neproverljivi zapisi ne otvaraju
+nagađanu lokaciju. Vraćenu fotografiju otvorite iz novog skeniranja.
+RAW se predaje pridruženoj aplikaciji bez konverzije. Prihvaćen OS zahtev nije
+potvrda uspešnog prikaza; nema automatskog prelaska na interni preglednik.
+Detalji i ograničenja provere su u [PHOTO_OPENING.md](docs/PHOTO_OPENING.md).
+
 Kontrolna tabla odvojeno prikazuje fotografije celog indeksa, EXACT kopije,
 VISUAL parove i EXACT grupe poslednjeg skeniranja. Glavna akcija vodi na
 skeniranje ili pregled duplikata, prema dostupnim rezultatima.

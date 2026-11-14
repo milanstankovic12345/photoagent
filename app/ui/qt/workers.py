@@ -74,6 +74,8 @@ class ServiceWorker(QObject):
                 value = self.service.history(payload)
             elif action == 'history_preview':
                 value = (payload, self.service.history_preview(payload, cancel))
+            elif action == 'open_photo':
+                value = self.service.resolve_photo(payload, cancel)
             elif action == 'quarantine_folder':
                 value = (payload, self.service.quarantine_folder(payload))
             elif action == 'storage':
@@ -88,6 +90,8 @@ class ServiceWorker(QObject):
             # Keep OS diagnostics, but give recovery screens a stable, localized
             # explanation when a recorded file/root is no longer reachable.
             detail = str(exc)
+            if action == 'open_photo' and isinstance(exc, OSError):
+                detail = 'photo_open_unavailable: ' + detail
             if isinstance(exc, FileNotFoundError) and action in ('restore', 'history_preview', 'quarantine_folder'):
                 detail = 'history_file_unavailable: ' + detail
             self.error.emit(request, action, detail)

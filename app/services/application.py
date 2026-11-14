@@ -15,7 +15,7 @@ from typing import TYPE_CHECKING, Callable, Iterable
 if TYPE_CHECKING:
     from PySide6.QtGui import QImage
 
-from app.core.models import Approval, Cancelled, Match, Plan, SafetyError, ScanSummary
+from app.core.models import Approval, Cancelled, Match, Photo, Plan, SafetyError, ScanSummary
 from app.safety.journal import Journal
 from app.safety.operations import Operations, make_plan
 from app.safety.paths import check_path, snapshot
@@ -215,6 +215,10 @@ class Application:
         photo = quarantine_photo(self.journal, operation_id, cancel)
         # Small, uncached history thumbnails do not add another persistent cache.
         return PreviewService(limit=0).get(photo, cancel, size=320)
+
+    def resolve_photo(self, target: Photo | str, cancel: Event) -> str:
+        from app.services.open_photo import resolve_photo
+        return resolve_photo(self.journal, target, cancel)
 
     def quarantine_folder(self, operation_id: str) -> str:
         from app.services.quarantine import quarantine_folder

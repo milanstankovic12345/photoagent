@@ -6,8 +6,8 @@ from pathlib import Path
 from typing import Callable
 
 from PySide6.QtCore import QAbstractListModel, QModelIndex, QRect, QSize, QTimer, Qt, Signal
-from PySide6.QtGui import QImage, QPalette, QPen, QPixmap
-from PySide6.QtWidgets import QListView, QStyle, QStyledItemDelegate
+from PySide6.QtGui import QAction, QContextMenuEvent, QImage, QKeySequence, QPalette, QPen, QPixmap
+from PySide6.QtWidgets import QListView, QMenu, QStyle, QStyledItemDelegate
 
 from app.core.queries import GroupRow
 from app.ui.qt.dashboard_scan import size_text
@@ -75,6 +75,12 @@ class GroupDelegate(QStyledItemDelegate):
     def photo_rect(rect: QRect, grid: bool) -> QRect:
         return QRect(rect.x() + 14, rect.y() + 14, rect.width() - 28 if grid else 170, 104)
 
+    @classmethod
+    def sample_rect(cls, rect: QRect, grid: bool, slot: int) -> QRect:
+        area = cls.photo_rect(rect, grid)
+        return QRect(area.x() + slot * (area.width() // 2 + 2), area.y(),
+                     area.width() // 2 - 2, area.height())
+
     @staticmethod
     def review_rect(rect: QRect, grid: bool) -> QRect:
         return QRect(rect.x() + (14 if grid else 198), rect.bottom() - 38,
@@ -98,8 +104,7 @@ class GroupDelegate(QStyledItemDelegate):
         grid = self.parent().viewMode() == QListView.IconMode
         image_rect = self.photo_rect(option.rect, grid)
         for i, photo in enumerate(row.samples[:2]):
-            target = QRect(image_rect.x() + i * (image_rect.width() // 2 + 2), image_rect.y(),
-                           image_rect.width() // 2 - 2, image_rect.height())
+            target = self.sample_rect(option.rect, grid, i)
             cached = model.images.get(photo)
             if isinstance(cached, QPixmap):
                 size = cached.size().scaled(target.size(), Qt.KeepAspectRatio)
@@ -137,6 +142,7 @@ class GroupDelegate(QStyledItemDelegate):
 class GroupView(QListView):
     """One active batch of <=3, <=48 rendered thumbnails, <=24 group rows."""
     review_requested = Signal(QModelIndex)
+    open_requested = Signal(object)
 
     def __init__(self, thumbnails: Callable) -> None:
         super().__init__()
@@ -157,6 +163,47 @@ class GroupView(QListView):
         self.timer.timeout.connect(self.load_visible)
         self.verticalScrollBar().valueChanged.connect(lambda: self.timer.start())
         self.set_grid(True)
+        self.setContextMenuPolicy(Qt.DefaultContextMenu)
+        self.open_actions = []
+        for slot, shortcut in enumerate(('Alt+O', 'Alt+Shift+O')):
+            action = QAction(self)
+            action.setShortcut(QKeySequence(shortcut))
+            action.setShortcutContext(Qt.WidgetWithChildrenShortcut)
+            action.triggered.connect(lambda checked=False, slot=slot: self.open_sample(slot))
+            self.addAction(action)
+            self.open_actions.append(action)
+        self.selectionModel().currentChanged.connect(self.update_open_actions)
+        self.groups_model.modelReset.connect(self.update_open_actions)
+        self.update_open_actions()
+        set_text(self, tr('group_photo_open_hint'), 'setToolTip')
+
+    def update_open_actions(self, *args) -> None:
+        row = self.currentIndex().data(Qt.UserRole)
+        for slot, action in enumerate(self.open_actions):
+            photo = row.samples[slot] if row and slot < len(row.samples) else None
+            action.setEnabled(photo is not None)
+            set_text(action, tr('open_named_photo', photo.path) if photo else tr('open_default_viewer'))
+
+    def open_sample(self, slot: int) -> None:
+        row = self.currentIndex().data(Qt.UserRole)
+        if row and slot < len(row.samples):
+            self.open_requested.emit(row.samples[slot])
+
+    def contextMenuEvent(self, event) -> None:
+        index = self.indexAt(event.pos())
+        if event.reason() == QContextMenuEvent.Mouse and index.isValid():
+            self.setCurrentIndex(index)
+        self.update_open_actions()
+        row = self.currentIndex().data(Qt.UserRole)
+        if row:
+            menu = QMenu(self)
+            for photo in row.samples[:2]:
+                action = menu.addAction('')
+                set_text(action, tr('open_named_photo', photo.path))
+                action.triggered.connect(lambda checked=False, photo=photo: self.open_requested.emit(photo))
+            menu.exec(event.globalPos())
+            menu.deleteLater()
+        event.accept()
 
     def set_grid(self, grid: bool) -> None:
         self.setViewMode(QListView.IconMode if grid else QListView.ListMode)
@@ -188,11 +235,20 @@ class GroupView(QListView):
 
     def mouseDoubleClickEvent(self, event) -> None:
         index = self.indexAt(event.position().toPoint())
-        if index.isValid() and index.row() > 0:
-            # A group thumbnail contains two concrete files. It is not a target
-            # for opening an arbitrary file, nor a shortcut into group review.
-            photo = GroupDelegate.photo_rect(self.visualRect(index), self.viewMode() == QListView.IconMode)
-            if photo.contains(event.position().toPoint()):
+        if event.button() == Qt.LeftButton and index.isValid() and index.row() > 0:
+            row = index.data(Qt.UserRole)
+            grid = self.viewMode() == QListView.IconMode
+            pos = event.position().toPoint()
+            for slot, photo in enumerate(row.samples[:2]):
+                target = GroupDelegate.sample_rect(self.visualRect(index), grid, slot)
+                if target.contains(pos):
+                    # Placeholders are not photographs. The explicit named
+                    # action remains available even if internal decoding failed.
+                    if isinstance(self.groups_model.images.get(photo), QPixmap):
+                        self.open_requested.emit(photo)
+                    event.accept()
+                    return
+            if GroupDelegate.photo_rect(self.visualRect(index), grid).contains(pos):
                 event.accept()
                 return
         super().mouseDoubleClickEvent(event)
@@ -202,6 +258,7 @@ class GroupView(QListView):
 
     def setCurrentRow(self, row: int) -> None:
         self.setCurrentIndex(self.model().index(row))
+        self.update_open_actions()  # Also used while selection signals are blocked.
 
     def replace(self, rows: tuple[GroupRow, ...]) -> None:
         if self.inflight:

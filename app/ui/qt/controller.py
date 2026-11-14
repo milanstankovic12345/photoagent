@@ -32,6 +32,7 @@ class Controller(QObject):
         self.cancel_event = Event()
         self.preview_cancel = Event()
         self.history_preview_cancel = Event()
+        self.open_photo_cancel = Event()
         self.preview_id = 0
         self.thumbnail_id = 0
         self.thumbnail_cancel = Event()
@@ -68,6 +69,16 @@ class Controller(QObject):
             return
         self.sequence += 1
         self.latest[action] = self.sequence
+        if action == 'execute':
+            # A prepared path must never outlive a move/restore dispatch.
+            self.invalidate_open_photo()
+        if action == 'open_photo':
+            # Freeze the clicked Photo/operation ID in the queued payload. A
+            # later selection cannot redirect it. Only a newer open supersedes it.
+            self.invalidate_open_photo()
+            self.latest[action] = self.sequence
+            self.dispatch.emit(self.sequence, action, payload, self.open_photo_cancel)
+            return
         if action == 'history_preview':
             # Optional thumbnails must not disable Restore. Work still runs on
             # the service thread; each selection cancels the previous decode.
@@ -86,7 +97,13 @@ class Controller(QObject):
         self.cancel_event.set()
         self.preview_cancel.set()
         self.invalidate_history_preview()
+        self.invalidate_open_photo()
         self.thumbnails(())
+
+    def invalidate_open_photo(self) -> None:
+        self.open_photo_cancel.set()
+        self.open_photo_cancel = Event()
+        self.latest.pop('open_photo', None)
 
     def invalidate_history_preview(self) -> None:
         self.history_preview_cancel.set()

@@ -5,14 +5,14 @@ from pathlib import Path
 import time
 from typing import Callable
 
-from PySide6.QtCore import QEvent, QSize, QTimer, Qt
+from PySide6.QtCore import QEvent, QSize, QTimer, Qt, Signal
 from PySide6.QtGui import QImage, QPixmap
 from PySide6.QtWidgets import (QGridLayout, QHBoxLayout, QLabel, QListWidget,
     QListWidgetItem, QPlainTextEdit, QProgressBar, QScrollArea, QVBoxLayout, QWidget)
 
 from app.core.queries import DashboardSummary, MatchRow, ScanProgress
 from app.ui.qt.components import (Card, CollapsibleSection, ContextToolbar, ElidedPathLabel, EmptyState,
-                                  StatCard, StatusBadge, TechnicalDetails, ThemeSelector,
+                                  PhotoLabel, StatCard, StatusBadge, TechnicalDetails, ThemeSelector,
                                   button, path_label, text_label, style_button)
 from app.ui.qt.localization import set_text, text_of, language_manager
 from app.ui.qt.icons import IconLabel
@@ -21,6 +21,8 @@ from app.ui.qt.formatting import date_text, number_text, size_text
 
 
 class CandidateCard(Card):
+    open_requested = Signal(object)
+
     def __init__(self, row: MatchRow, review: Callable) -> None:
         super().__init__()
         self.row = row
@@ -28,7 +30,9 @@ class CandidateCard(Card):
         photo = row.match.dup
         content = QHBoxLayout()
         self.content.addLayout(content)
-        self.image = text_label(tr('preview_loading'), 'small')
+        self.image = PhotoLabel('preview_loading')
+        self.image.target = photo
+        self.image.open_requested.connect(self.open_requested)
         self.image.setFixedSize(128, 96)
         self.image.setAlignment(Qt.AlignCenter)
         content.addWidget(self.image)
@@ -41,6 +45,7 @@ class CandidateCard(Card):
             photo.width, photo.height), 'metadata'))
         metadata.addWidget(StatusBadge('classification_' + row.match.kind.value))
         button('review_candidate', lambda: review(row), metadata)
+        button('open_default_viewer', lambda: self.open_requested.emit(photo), metadata)
         self.error_details = TechnicalDetails()
         self.content.addWidget(self.error_details)
 
@@ -58,6 +63,8 @@ class CandidateCard(Card):
 
 
 class DashboardScreen(QWidget):
+    open_requested = Signal(object)
+
     def __init__(self, refresh: Callable, scan: Callable, review: Callable,
                  settings: Callable, theme_changed: Callable, thumbnails: Callable) -> None:
         super().__init__()
@@ -157,6 +164,7 @@ class DashboardScreen(QWidget):
         self.cards = [CandidateCard(row, self.review_callback) for row in value.candidates[:3]]
         for card in self.cards:
             self.candidate_layout.addWidget(card)
+            card.open_requested.connect(self.open_requested)
         self.loading_enabled = True
         self.visible_timer.start()
 

@@ -1,5 +1,63 @@
 # PhotoAgent test evidence
 
+## Task021 — System photograph opening (2026-11-14)
+
+Windows Python 3.12.10 / PySide6 6.12.0 / Qt Fusion offscreen. All photographs,
+application homes, journals and indexed state were synthetic and temporary. Every
+Task021 OS launch was mocked; these checks started no external viewer.
+
+Commands used `.venv/Scripts/python.exe -B -m pytest` with
+`QT_QPA_PLATFORM=offscreen`:
+
+- `tests/test_task021.py -q --durations=8`: **37 passed in 363.81s**, no skips.
+- `tests/test_task021.py -q -x -k 'context_menu or new_open or translate_live or group_slots'`:
+  **8 passed, 33 deselected in 108.84s**. This final-code supplement adds four
+  new cases and repeats all four Grid/List sample/keyboard cases after the context
+  menu refinement. Together the two runs cover **all 41 distinct Task021 cases**.
+- `tests/test_task021.py -q -x -k 'context_menu or dashboard_opens'`:
+  **3 passed, 36 deselected in 21.55s**, including the visible Dashboard image.
+- Existing UI/localization regression command below: **61 passed in 947.42s**,
+  no failures or skips. Covers groups, comparison, history, theme/language layouts,
+  frozen plans, Unicode scan/quarantine/restore, compiled/fallback/packaged
+  translations, Qt worker ownership/cancel/close and Dashboard lazy thumbnails.
+- `tests/test_operations.py tests/test_recovery.py tests/test_additional_safety.py tests/test_native_races.py -q`:
+  **40 passed, 1 skipped in 41.82s**. Skip: native Linux no-replace execution
+  unavailable on Windows (`tests/test_native_races.py:116`).
+- `tests/test_task013.py tests/test_localization.py::test_embedded_translations_load_from_isolated_packaged_tree -q`:
+  **16 passed in 1.98s**, no skips. The new guide ships in the source ZIP; embedded
+  EN/SR catalogs load from the isolated extracted synthetic package. No release
+  artifact was published or real runtime installed.
+- `python -B -m tools.build_translations` and `--check`: **474 finished entries
+  per language**, matching TS/JSON keys and placeholders. Embedded QM coverage is
+  also checked by the localization regression tests.
+- `git diff --check`: passed (Git printed only configured LF/CRLF notices).
+
+The 61-case regression command was:
+
+```text
+.venv/Scripts/python.exe -B -m pytest tests/test_task018.py tests/test_task019.py tests/test_task020.py tests/test_localization.py tests/test_qt.py::test_thread_ownership_heartbeat_cancel_and_close tests/test_qt.py::test_plan_rejection_close_and_explicit_execution tests/test_qt.py::test_dashboard_to_scan_to_review_with_actual_thumbnails tests/test_qt.py::test_dashboard_thumbnail_visibility_bound_and_stale_response -q
+```
+
+Coverage includes literal special/Unicode local paths, RAW handoff without decode,
+full identity/content/containment checks, missing/offline/replaced/changed files,
+redirected paths, authoritative quarantine after restart, refusal after restore,
+one launch per double-click and none per single click, left/right gallery samples,
+all photo contexts, keyboard/context actions, delayed selection changes, superseded
+requests, cancel/close/execute invalidation, rejected association/launch, and live
+EN/SR controls, status and error dialogs.
+
+Diagnostics are not counted as passing final checks: the first full run had
+**34 passed, 1 failed in 470.41s**; a single-case follow-up failed in 50.89s.
+Both waited for a Dashboard thumbnail below the visible viewport. The test now
+scrolls to the card before waiting, preserving lazy loading. A separate early
+enlarged/history check passed **2 cases in 118.08s**.
+
+Native Windows manual viewer display/association, Linux desktop behavior and valid
+RAW display remain **unverified**. Offscreen and mocked launches do not establish
+native display acceptance. Full-suite/release, real photo libraries, removable
+hardware and physical DPI checks were not run for this task. See
+[PHOTO_OPENING.md](PHOTO_OPENING.md) for behavior, platform limits and native steps.
+
 ## Task020 — Photo-first review (2026-11-11)
 
 Windows Python 3.12.10 / PySide6 6.12.0 / Qt Fusion offscreen. Generated photographs

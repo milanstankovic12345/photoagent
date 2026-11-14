@@ -1,5 +1,20 @@
 # Changelog
 
+## Task021 — Open photographs in the system viewer — 2026-11-14
+
+- Add individual-photo double-click opening on Dashboard, both Grid/List group
+  samples, both comparison previews, enlarged previews and Quarantine thumbnails.
+  Keep single-click selection, group review and keeper/confirmation actions separate.
+- Add accessible open buttons and named gallery context/keyboard actions, one shared
+  signal and a testable Qt local-file adapter. Validate paths on the service worker
+  with full hashes, identity and containment; resolve quarantine through operation IDs.
+  Restored/ambiguous history never opens a guessed location.
+- Freeze request targets across selection changes and invalidate queued launches on
+  cancellation, close and move/restore dispatch. Localize errors and request status
+  in EN/SR; OS acceptance is not proof of display. No decoding/conversion fallback.
+- Add synthetic service/Qt event tests and document native Windows/Linux display
+  verification as outstanding; automated tests mock system launches.
+
 ## Task020 — Photo-first comparison and explicit choices — 2026-11-11
 
 - Keep comparison inside Duplicates, with large aligned previews, basic photo

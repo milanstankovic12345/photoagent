@@ -2322,5 +2322,33 @@ Vrsta operacije: {2}</translation>
       <translation>pHash: {0}
 dHash: {1}</translation>
     </message>
+    <message>
+      <source>open_default_viewer</source>
+      <translation>Otvori u podrazumevanom pregledniku</translation>
+    </message>
+    <message>
+      <source>open_named_photo</source>
+      <translation>Otvori u podrazumevanom pregledniku: {0}</translation>
+    </message>
+    <message>
+      <source>photo_open_hint</source>
+      <translation>Dvoklik na fotografiju otvara je u sistemskom pregledniku. Možete i preći na dugme Otvori u podrazumevanom pregledniku i pritisnuti razmak.</translation>
+    </message>
+    <message>
+      <source>group_photo_open_hint</source>
+      <translation>Dvoklik na pojedinačnu fotografiju otvara taj fajl. Za izabranu grupu koristite kontekstni meni ili Alt+O za levi uzorak i Alt+Shift+O za desni. Enter otvara pregled grupe.</translation>
+    </message>
+    <message>
+      <source>photo_open_unavailable</source>
+      <translation>Fotografija nedostaje ili nije čitljiva. Proverite vezu sa diskom, pa ponovite skeniranje ili osvežite prikaz.</translation>
+    </message>
+    <message>
+      <source>photo_launch_failed</source>
+      <translation>Operativni sistem nije prihvatio zahtev za otvaranje fotografije. Proverite da li je podrazumevana aplikacija pridružena ovom tipu fajla.</translation>
+    </message>
+    <message>
+      <source>photo_open_requested</source>
+      <translation>Zahtev za otvaranje je poslat operativnom sistemu. PhotoAgent ne može da potvrdi da je fotografija prikazana.</translation>
+    </message>
   </context>
 </TS>

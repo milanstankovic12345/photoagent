@@ -25,7 +25,7 @@ def bundle_inputs(tmp_path):
     source.mkdir()
     names = ['app/__init__.py', 'app/i18n/en.json', 'app/i18n/sr_Latn.json',
              'photo_agent.py', 'README.md', 'README_SR.md', 'requirements.txt', 'tools/release_smoke.py',
-             'tools/build_translations.py', 'docs/LOCALIZATION.md',
+             'tools/build_translations.py', 'docs/LOCALIZATION.md', 'docs/PHOTO_OPENING.md',
              'docs/ARCHITECTURE.md', 'docs/SECURITY.md', 'docs/TESTING.md',
              'docs/QT_DISTRIBUTION.md', 'docs/RELEASE.md', 'docs/CHANGELOG.md',
              'packaging/install_offline.py', 'packaging/start_offline.bat', 'packaging/start_offline.sh']
@@ -57,6 +57,7 @@ def test_bundle_allowlist_hashes_notices_and_no_overwrite(bundle_inputs, tmp_pat
     with ZipFile(output) as archive:
         names = archive.namelist()
         assert 'app/i18n/en.json' in names and 'app/i18n/sr_Latn.json' in names
+        assert 'docs/PHOTO_OPENING.md' in names
         assert not any('private' in n or 'secret' in n or 'original.jpg' in n for n in names)
         assert 'notices/Example/example-1.0.dist-info/licenses/LICENSE' in names
         assert 'notices/Example/example-1.0.dist-info/licenses/THIRD_PARTY.txt' in names

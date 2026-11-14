@@ -1,5 +1,14 @@
 ﻿# PhotoAgent safety and recovery
 
+Task021 external photo opening is a separate read-only use case. It verifies a
+fresh full snapshot, root identity and path containment on the service worker;
+Quarantine uses the operation ID and the existing authoritative manifest checks.
+Restored/ambiguous records never redirect to a guessed source path. Opening is
+never keeper selection or move approval. Cancel, close and operation execution
+discard pending launches. Qt receives a literal local file URL, never a shell
+command. Validation cannot bind another application's later path-based read or
+prove successful display; see [PHOTO_OPENING.md](PHOTO_OPENING.md).
+
 Task013 distribution boundary: the source ZIP installer verifies file/wheel SHA-256,
 creates a new runtime and uses only local wheels. It refuses existing runtimes and
 provides no uninstall/history cleanup. Upgrade by extracting a compatible build

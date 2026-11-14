@@ -1,5 +1,13 @@
 # PhotoAgent v2.5 architecture
 
+Task021 adds `app/services/open_photo.py`, reached through `Application.resolve_photo`
+on the existing service worker, and the small `app/ui/qt/desktop_viewer.py` launch
+adapter. UI photo gestures/buttons emit a concrete immutable Photo or operation ID;
+service validation preserves full snapshot/manifest checks and never decodes or
+moves files. A GUI-thread reply uses Qt's literal local-file URL adapter. Selection
+cannot redirect a queued request; cancellation/close/execute discard stale replies.
+See [PHOTO_OPENING.md](PHOTO_OPENING.md) for targets, history rules and OS limits.
+
 `app/ui/qt/`, selected with `--ui qt`, contains bootstrap, controller, workers,
 screen components, named navigation, table model, themes and local SVG resources.
 Qt is now the default; `--ui tk` selects the retained Tkinter adapter. Both share the existing core.

@@ -13,7 +13,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QComboBox, QFormLayout, QHBoxL
 from app import __version__
 from app.core.queries import HistoryEntry, MatchingOptions, PageResult, StorageSummary
 from app.ui.qt.components import (Card, CollapsibleSection, ContextToolbar, EmptyState,
-                                  TechnicalDetails, ThemeSelector, button, path_label, text_label)
+                                  PhotoLabel, TechnicalDetails, ThemeSelector, button, path_label, text_label)
 from app.ui.qt.localization import set_text, text_of, add_item, language_manager
 from app.ui.qt.icons import set_combo_icon
 from app.ui.qt.strings import SR, error_text, tr, join_text
@@ -59,6 +59,7 @@ def move_date(value: str | None) -> str:
 
 class HistoryScreen(QWidget):
     selection_changed = Signal()
+    open_requested = Signal(object)
 
     def __init__(self, restore: Callable, page: Callable, open_folder: Callable) -> None:
         super().__init__()
@@ -69,6 +70,7 @@ class HistoryScreen(QWidget):
         self.toolbar = ContextToolbar()
         self.restore = button('restore', restore, self.toolbar.actions, variant='primary')
         self.open_folder = button('open_quarantine_folder', open_folder, self.toolbar.actions)
+        self.open_default = button('open_default_viewer', self.request_open, self.toolbar.actions)
         layout.addWidget(text_label(tr('quarantine_description'), 'metadata'))
         self.message = text_label('')
         layout.addWidget(self.message)
@@ -113,7 +115,8 @@ class HistoryScreen(QWidget):
         detail_layout.addWidget(self.selected_status)
         self.notice = text_label('')
         detail_layout.addWidget(self.notice)
-        self.thumbnail = text_label(tr('thumbnail_unavailable'), 'metadata')
+        self.thumbnail = PhotoLabel('thumbnail_unavailable')
+        self.thumbnail.open_requested.connect(self.open_requested)
         self.thumbnail.setAlignment(Qt.AlignCenter)
         self.thumbnail.setFixedHeight(120)
         detail_layout.addWidget(self.thumbnail)
@@ -184,6 +187,8 @@ class HistoryScreen(QWidget):
 
     def selection_details(self) -> None:
         entry = self.selected_entry
+        self.thumbnail.target = entry.id if entry else None
+        self.open_default.setEnabled(entry is not None)
         self.detail_card.setVisible(entry is not None)
         self.preview_error = ''
         self.thumbnail.clear()
@@ -202,6 +207,11 @@ class HistoryScreen(QWidget):
                 tr('history_metadata', move_date(entry.moved_at),
                    number_text(entry.size) if entry.size is not None else tr('not_available'),
                    tr('action_' + entry.action)), tr('history_location_note'))))
+
+    def request_open(self) -> None:
+        entry = self.selected_entry
+        if entry:
+            self.open_requested.emit(entry.id)
 
     def update_notice(self) -> None:
         entry = self.selected_entry

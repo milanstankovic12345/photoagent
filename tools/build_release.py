@@ -80,7 +80,7 @@ def build(wheelhouse: Path, lock: Path, output: Path, *, source: Path = ROOT) ->
             files[path.relative_to(source).as_posix()] = path.read_bytes()
     for relative in ('photo_agent.py', 'README.md', 'README_SR.md', 'requirements.txt',
                      'tools/release_smoke.py', 'tools/build_translations.py',
-                     'docs/LOCALIZATION.md', 'docs/ARCHITECTURE.md',
+                     'docs/LOCALIZATION.md', 'docs/PHOTO_OPENING.md', 'docs/ARCHITECTURE.md',
                      'docs/SECURITY.md', 'docs/TESTING.md', 'docs/QT_DISTRIBUTION.md',
                      'docs/RELEASE.md', 'docs/CHANGELOG.md'):
         path = source / relative

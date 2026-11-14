@@ -2322,5 +2322,33 @@ Operation type: {2}</translation>
       <translation>pHash: {0}
 dHash: {1}</translation>
     </message>
+    <message>
+      <source>open_default_viewer</source>
+      <translation>Open in Default Viewer</translation>
+    </message>
+    <message>
+      <source>open_named_photo</source>
+      <translation>Open in Default Viewer: {0}</translation>
+    </message>
+    <message>
+      <source>photo_open_hint</source>
+      <translation>Double-click the photograph to open it in your system viewer. You can also focus Open in Default Viewer and press Space.</translation>
+    </message>
+    <message>
+      <source>group_photo_open_hint</source>
+      <translation>Double-click an individual photograph to open that file. For the selected group, use the context menu or Alt+O for the left sample and Alt+Shift+O for the right sample. Enter reviews the group.</translation>
+    </message>
+    <message>
+      <source>photo_open_unavailable</source>
+      <translation>The photograph is missing or unreadable. Check that its drive is connected, then scan or refresh again.</translation>
+    </message>
+    <message>
+      <source>photo_launch_failed</source>
+      <translation>The operating system could not accept the request to open this photograph. Check that a default application is associated with this file type.</translation>
+    </message>
+    <message>
+      <source>photo_open_requested</source>
+      <translation>Open request sent to the operating system. PhotoAgent cannot confirm that the photograph was displayed.</translation>
+    </message>
   </context>
 </TS>
