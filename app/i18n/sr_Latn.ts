@@ -66,7 +66,7 @@
     <message>
       <source>quarantine_description</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Karantin je reverzibilno premeštanje fotografija. Izaberite stavku, pregledajte plan vraćanja i potvrdite vraćanje na prvobitno mesto. Postojeći fajlovi se ne prepisuju.</translation>
+      <translation>Fotografije iz karantina možete vratiti. Izaberite fotografiju, pregledajte plan i potvrdite vraćanje na prvobitno mesto. Postojeći fajlovi se nikada ne prepisuju.</translation>
     </message>
     <message>
       <source>quarantine_empty</source>
@@ -76,7 +76,7 @@
     <message>
       <source>quarantine_empty_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Ovde će se pojaviti istorija pomeranja. Fotografije premeštene u karantin mogu se vratiti kroz potvrđen plan.</translation>
+      <translation>Ovde se prikazuje istorija premeštanja. Fotografije iz karantina možete vratiti nakon pregleda i potvrde plana vraćanja.</translation>
     </message>
     <message>
       <source>open_quarantine_folder</source>
@@ -104,7 +104,7 @@
       <translation>Operacija: {0}
 Izvor: {1}
 Odredište: {2}
-Može u pripremu vraćanja: {3}. Servis ponovo proverava fajl i odredište.</translation>
+Plan vraćanja je dostupan: {3}. Fotografija i odredište ponovo se proveravaju pre premeštanja.</translation>
     </message>
     <message>
       <source>history_load_failed</source>
@@ -189,7 +189,7 @@ Može u pripremu vraćanja: {3}. Servis ponovo proverava fajl i odredište.</tra
     <message>
       <source>matching_explanation</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Izaberite širinu pretrage sličnih fotografija. Sličnost nije dokaz duplikata; svako vizuelno poklapanje zahteva pregled. Preseti nisu kalibrisana mera sigurnosti i nikada ne odobravaju karantin.</translation>
+      <translation>Izaberite širinu pretrage sličnih fotografija. Sličnost nije dokaz duplikata; pregledajte svaki sličan par. Ove opcije nisu ocene pouzdanosti i nikada ne odobravaju karantin.</translation>
     </message>
     <message>
       <source>matching_strict</source>
@@ -239,7 +239,7 @@ Može u pripremu vraćanja: {3}. Servis ponovo proverava fajl i odredište.</tra
     <message>
       <source>settings_safety_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Karantin je povratno pomeranje unutar izvornog korena. Svako pomeranje zahteva pripremu i potvrdu. Dnevnik podržava oporavak posle ponovnog pokretanja. Ne pomerajte ručno fajlove i ne brišite recovery podatke.</translation>
+      <translation>Karantin premešta fotografije unutar izvornog foldera. Kasnije ih možete vratiti. Svako premeštanje zahteva plan i potvrdu. Dnevnik omogućava oporavak posle ponovnog pokretanja. Ne premeštajte fajlove ručno i ne brišite podatke za oporavak.</translation>
     </message>
     <message>
       <source>settings_storage</source>
@@ -249,7 +249,7 @@ Može u pripremu vraćanja: {3}. Servis ponovo proverava fajl i odredište.</tra
     <message>
       <source>preview_cache_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Preview LRU keš drži do 64 MiB dekodiranih slika u memoriji tokom rada. To nije prostor na disku niti izmerena trenutna zauzetost. Pojedinačni pregled može kratkotrajno zauzeti dodatnu memoriju; sličice istorije se ne keširaju. Recovery podaci su odvojeni i trajni.</translation>
+      <translation>Pregledi fotografija koriste do 64 MiB memorije, uz kratkotrajnu dodatnu potrošnju pri učitavanju. Ovo je ograničenje, a ne trenutna potrošnja ili prostor na disku. Sličice istorije se ne čuvaju u kešu. Podaci za oporavak čuvaju se odvojeno.</translation>
     </message>
     <message>
       <source>storage_loading</source>
@@ -345,7 +345,7 @@ Indeksirane fotografije: {1} (fizički fajlovi, bez označenih nestalih i preme�
     <message>
       <source>review_progress</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Pregledanih veza: {0}</translation>
+      <translation>Pregledani parovi fotografija: {0}</translation>
     </message>
     <message>
       <source>reviewed</source>
@@ -355,7 +355,7 @@ Indeksirane fotografije: {1} (fizički fajlovi, bez označenih nestalih i preme�
     <message>
       <source>review_session_only</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Odluke pregleda važe samo do zatvaranja aplikacije ili novog skeniranja; nisu dnevnik operacija.</translation>
+      <translation>Izbor važi do zatvaranja aplikacije ili novog skeniranja. Istorija operacija čuva se odvojeno.</translation>
     </message>
     <message>
       <source>query_loading</source>
@@ -370,7 +370,7 @@ Indeksirane fotografije: {1} (fizički fajlovi, bez označenih nestalih i preme�
     <message>
       <source>choose_keeper</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Izaberite fotografiju koja ostaje. Pomeranje zahteva zasebnu potvrdu.</translation>
+      <translation>Izaberite fotografiju koju želite da zadržite. Premeštanje sledi tek nakon pregleda i potvrde plana.</translation>
     </message>
     <message>
       <source>review_advice</source>
@@ -385,27 +385,27 @@ Indeksirane fotografije: {1} (fizički fajlovi, bez označenih nestalih i preme�
     <message>
       <source>direct_members</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Direktni kandidati grupe · stranice</translation>
+      <translation>Povezane fotografije</translation>
     </message>
     <message>
       <source>member_count</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Fotografije u direktnoj grupi: {0} · pregled članova</translation>
+      <translation>Povezane fotografije: {0} · pregled članova</translation>
     </message>
     <message>
       <source>keep_photo</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Sačuvaj ovu fotografiju</translation>
+      <translation>Zadrži ovu fotografiju</translation>
     </message>
     <message>
       <source>keep_both</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Sačuvaj obe</translation>
+      <translation>Zadrži obe</translation>
     </message>
     <message>
       <source>keep_chosen</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Ostaje · izabrano</translation>
+      <translation>Zadrži ovu fotografiju · Izabrano</translation>
     </message>
     <message>
       <source>move_copy</source>
@@ -420,7 +420,7 @@ Indeksirane fotografije: {1} (fizički fajlovi, bez označenih nestalih i preme�
     <message>
       <source>selection_summary</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Predlog za karantin: {0} · izričito zadržano: {1}</translation>
+      <translation>Predlog za karantin: {0} · izabrano za zadržavanje: {1}. Premeštanje nije odobreno.</translation>
     </message>
     <message>
       <source>selection_limit</source>
@@ -430,7 +430,7 @@ Indeksirane fotografije: {1} (fizički fajlovi, bez označenih nestalih i preme�
     <message>
       <source>both_kept</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Obe fotografije ostaju. Predlog za karantin je poništen.</translation>
+      <translation>Izabrano je zadržavanje obe fotografije. Predlog za karantin je poništen; fajlovi nisu premešteni.</translation>
     </message>
     <message>
       <source>photo_summary</source>
@@ -451,12 +451,12 @@ Indeksirane fotografije: {1} (fizički fajlovi, bez označenih nestalih i preme�
     <message>
       <source>photo_retained</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Ostaje</translation>
+      <translation>Izabrana za zadržavanje</translation>
     </message>
     <message>
       <source>photo_proposed</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Predlog za karantin</translation>
+      <translation>Predlog za karantin · nije odobreno</translation>
     </message>
     <message>
       <source>technical_details</source>
@@ -466,19 +466,19 @@ Indeksirane fotografije: {1} (fizički fajlovi, bez označenih nestalih i preme�
     <message>
       <source>plan_summary</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Potvrda · broj fotografija za pomeranje: {0}</translation>
+      <translation>Pregled pre potvrde · fotografije za premeštanje u karantin: {0}</translation>
     </message>
     <message>
       <source>plan_reversible</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Karantin je povratno pomeranje. Vraćanje prolazi novu pripremu i potvrdu; postojeći fajl se nikada ne prepisuje.</translation>
+      <translation>Karantin premešta fotografije unutar izvornog foldera. Možete ih vratiti uz zaseban plan i potvrdu. Postojeći fajlovi se nikada ne prepisuju. Premeštanje u karantin ne oslobađa prostor na disku.</translation>
     </message>
     <message>
       <source>move_summary</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>IZVOR: {0}
-ODREDIŠTE: {1}
-OSTAJE: {2}</translation>
+      <translation>PREMESTI IZ: {0}
+PREMESTI U: {1}
+ZADRŽI: {2}</translation>
     </message>
     <message>
       <source>restore_original</source>
@@ -488,7 +488,7 @@ OSTAJE: {2}</translation>
     <message>
       <source>operation_count</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Uspešno pomereno fotografija: {0}. Rezultati i istorija se osvežavaju.</translation>
+      <translation>Fotografije premeštene u karantin: {0}. Osvežavanje rezultata i istorije.</translation>
     </message>
     <message>
       <source>dashboard_title</source>
@@ -513,22 +513,22 @@ OSTAJE: {2}</translation>
     <message>
       <source>exact_candidates</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>EXACT kopije</translation>
+      <translation>Identične kopije</translation>
     </message>
     <message>
       <source>last_session_candidates</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Poslednje skeniranje · direktni kandidati</translation>
+      <translation>Poslednje skeniranje · kopije sa identičnim sadržajem fajla</translation>
     </message>
     <message>
       <source>visual_links</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>VISUAL parovi</translation>
+      <translation>Slični parovi</translation>
     </message>
     <message>
       <source>last_session_links</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Poslednje skeniranje · slični parovi za pregled</translation>
+      <translation>Poslednje skeniranje · parovi sličnih fotografija za pregled</translation>
     </message>
     <message>
       <source>estimated_space</source>
@@ -559,7 +559,7 @@ OSTAJE: {2}</translation>
       <source>recent_scan_summary</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
       <translation>{0} · {1}
-Obrađene fotografije: {2} · EXACT kandidati: {3} · VISUAL veze: {4} · Neuspesi: {5}</translation>
+Obrađene fotografije: {2} · Identične kopije: {3} · Slični parovi: {4} · Greške: {5}</translation>
     </message>
     <message>
       <source>recent_candidates</source>
@@ -574,12 +574,12 @@ Obrađene fotografije: {2} · EXACT kandidati: {3} · VISUAL veze: {4} · Neuspe
     <message>
       <source>review_results</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Pregledaj rezultate</translation>
+      <translation>Pregledaj duplikate</translation>
     </message>
     <message>
       <source>review_candidate</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Pregledaj kandidata</translation>
+      <translation>Pregledaj fotografiju</translation>
     </message>
     <message>
       <source>candidate_metadata</source>
@@ -589,12 +589,12 @@ Obrađene fotografije: {2} · EXACT kandidati: {3} · VISUAL veze: {4} · Neuspe
     <message>
       <source>classification_EXACT</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>EXACT · identični bajtovi</translation>
+      <translation>EXACT · identičan sadržaj fajla</translation>
     </message>
     <message>
       <source>classification_VISUAL</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>VISUAL · sličnost zahteva pregled</translation>
+      <translation>VISUAL · slične fotografije, obavezan pregled</translation>
     </message>
     <message>
       <source>thumbnail_unavailable</source>
@@ -639,7 +639,7 @@ Obrađene fotografije: {2} · EXACT kandidati: {3} · VISUAL veze: {4} · Neuspe
     <message>
       <source>source_priority</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Redosled izvora utiče na izbor fotografije koja se čuva. Izaberite izvor i pomerite ga gore ili dole. Kopije na drugom disku mogu biti namerna rezerva.</translation>
+      <translation>Redosled izvora utiče na predlog fotografije za zadržavanje. Izaberite izvor i pomerite ga gore ili dole. Kopije na drugom disku mogu biti namerne rezervne kopije.</translation>
     </message>
     <message>
       <source>remove_source</source>
@@ -670,7 +670,7 @@ Obrađene fotografije: {2} · EXACT kandidati: {3} · VISUAL veze: {4} · Neuspe
       <source>scan_result_summary</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
       <translation>{0}
-Fotografije: {1} · EXACT grupe: {2} · Moguće VISUAL veze: {3} · Neuspesi: {4}</translation>
+Fotografije: {1} · Grupe identičnih kopija: {2} · Mogući slični parovi: {3} · Greške: {4}</translation>
     </message>
     <message>
       <source>no_scan_errors</source>
@@ -680,7 +680,7 @@ Fotografije: {1} · EXACT grupe: {2} · Moguće VISUAL veze: {3} · Neuspesi: {4
     <message>
       <source>scan_error_count</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Prijavljeni neuspesi: {0}. Detalji su dostupni ispod.</translation>
+      <translation>Prijavljene greške: {0}. Otvorite Prikaži greške skeniranja za detalje.</translation>
     </message>
     <message>
       <source>scan_failed</source>
@@ -690,7 +690,7 @@ Fotografije: {1} · EXACT grupe: {2} · Moguće VISUAL veze: {3} · Neuspesi: {4
     <message>
       <source>scan_failure_help</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Proverite dostupnost izvora i slobodan prostor za lokalni indeks, pa pokušajte ponovo. Detalji su dostupni ispod.</translation>
+      <translation>Proverite da li su izvorni diskovi povezani i ima li prostora za lokalni indeks, pa pokušajte ponovo. Otvorite Prikaži greške skeniranja za detalje.</translation>
     </message>
     <message>
       <source>preview_loading</source>
@@ -890,12 +890,12 @@ Fotografije: {1} · EXACT grupe: {2} · Moguće VISUAL veze: {3} · Neuspesi: {4
     <message>
       <source>selected_move</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Pripremi karantin izabranog para</translation>
+      <translation>Pripremi plan karantina</translation>
     </message>
     <message>
       <source>bulk_move</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Pripremi sve podobne EXACT kopije cele sesije</translation>
+      <translation>Pripremi plan karantina za sve podobne EXACT kopije ovog skeniranja. Pregled i potvrda su obavezni.</translation>
     </message>
     <message>
       <source>restore</source>
@@ -925,7 +925,7 @@ Fotografije: {1} · EXACT grupe: {2} · Moguće VISUAL veze: {3} · Neuspesi: {4
     <message>
       <source>groups</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Direktne grupe (keeper + kandidati)</translation>
+      <translation>Grupe fotografija za pregled</translation>
     </message>
     <message>
       <source>group</source>
@@ -1075,7 +1075,7 @@ Istorija obrade: nepoznata</translation>
     <message>
       <source>plan</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Pregled zamrznutog plana</translation>
+      <translation>Pregledaj plan</translation>
     </message>
     <message>
       <source>plan_count</source>
@@ -1190,7 +1190,7 @@ SHA-256: {1}</translation>
     <message>
       <source>errors</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Greške skeniranja</translation>
+      <translation>Prikaži greške skeniranja</translation>
     </message>
     <message>
       <source>dashboard_counts</source>
@@ -1401,7 +1401,7 @@ Greške: {3}</translation>
     <message>
       <source>keyboard_groups</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Strelicama izaberite grupu, a tasterom Enter otvorite poređenje.</translation>
+      <translation>Strelicama izaberite grupu, a tasterom Enter otvorite pregled.</translation>
     </message>
     <message>
       <source>keyboard_pairs</source>
@@ -1416,7 +1416,7 @@ Greške: {3}</translation>
     <message>
       <source>keyboard_history</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Strelicama izaberite fotografiju, pa izaberite Vrati fotografiju za pregled plana.</translation>
+      <translation>Strelicama izaberite fotografiju, pa izaberite Vrati fotografiju da pregledate plan.</translation>
     </message>
     <message>
       <source>selected_group</source>
@@ -1436,22 +1436,22 @@ Greške: {3}</translation>
     <message>
       <source>keep_named_photo</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Sačuvaj ovu fotografiju: {0}</translation>
+      <translation>Zadrži ovu fotografiju: {0}</translation>
     </message>
     <message>
       <source>keep_description</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Izbor samo priprema predlog. Fotografija se pomera tek posle pregleda i potvrde plana.</translation>
+      <translation>Bira fotografiju koja ostaje i predlaže drugu za karantin. Premeštanje sledi tek nakon pregleda i potvrde plana.</translation>
     </message>
     <message>
       <source>quarantine_description_action</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Otvara pregled plana. Pomeranje zahteva zasebnu izričitu potvrdu.</translation>
+      <translation>Priprema plan za pregled. Premeštanje sledi tek kada potvrdite prikazani plan.</translation>
     </message>
     <message>
       <source>restore_description_action</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Otvara plan vraćanja izabrane fotografije. Postojeći fajl se nikada ne prepisuje.</translation>
+      <translation>Priprema plan vraćanja za pregled. Premeštanje sledi tek nakon potvrde. Postojeći fajlovi se nikada ne prepisuju.</translation>
     </message>
     <message>
       <source>plan_paths</source>
@@ -1481,7 +1481,7 @@ Greške: {3}</translation>
     <message>
       <source>hide_details</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Sakrij tehničke detalje</translation>
+      <translation>Sakrij detalje</translation>
     </message>
     <message>
       <source>language_english</source>
@@ -2133,7 +2133,7 @@ Proverite naziv fajla.</translation>
     </message>
     <message>
       <source>exact_groups_stat</source>
-      <translation>EXACT grupe</translation>
+      <translation>Grupe identičnih kopija</translation>
     </message>
     <message>
       <source>last_scan_groups</source>
@@ -2201,11 +2201,11 @@ Proverite naziv fajla.</translation>
     </message>
     <message>
       <source>group_guidance</source>
-      <translation>Slične fotografije su direktna podudaranja sa imenovanom fotografijom, ne dokaz identičnih kopija. Pregledajte ih pre odluke.</translation>
+      <translation>Slične fotografije direktno se podudaraju sa navedenom fotografijom. Ostali članovi mogu se međusobno razlikovati. Sličnost nije dokaz duplikata; pregledajte svaki par.</translation>
     </message>
     <message>
       <source>direct_pairs</source>
-      <translation>Direktni parovi fotografija</translation>
+      <translation>Parovi fotografija za pregled</translation>
     </message>
     <message>
       <source>groups_count</source>
@@ -2275,7 +2275,7 @@ Vrsta operacije: {2}</translation>
     </message>
     <message>
       <source>exact_order_note</source>
-      <translation>Identičan sadržaj: predložena fotografija prati redosled izvora i putanja. To nije mera kvaliteta slike niti dozvola za premeštanje rezervnih kopija.</translation>
+      <translation>Sadržaj fajlova je identičan. Predlog prati redosled izvora, pa putanja; ne meri kvalitet slike i ne odobrava premeštanje rezervnih kopija.</translation>
     </message>
     <message>
       <source>next_pair</source>
@@ -2283,7 +2283,7 @@ Vrsta operacije: {2}</translation>
     </message>
     <message>
       <source>direct_pair_choice</source>
-      <translation>Izaberite direktno poređenje</translation>
+      <translation>Izaberi par fotografija</translation>
     </message>
     <message>
       <source>pair_position</source>
@@ -2291,7 +2291,7 @@ Vrsta operacije: {2}</translation>
     </message>
     <message>
       <source>direct_pair_help</source>
-      <translation>Svako poređenje je sačuvana direktna veza. Koristite Prethodni par / Sledeći par ili izaberite par iznad fotografija. Izbor važi samo za fotografije koje izričito pregledate; ne odobrava ostale članove.</translation>
+      <translation>Svaki par predstavlja direktno poklapanje. Koristite Prethodni par / Sledeći par ili izaberite par iznad fotografija. Vaš izbor važi samo za pregledane fotografije; ne odobrava premeštanje ostalih članova grupe.</translation>
     </message>
     <message>
       <source>photo_undecided</source>
@@ -2299,11 +2299,11 @@ Vrsta operacije: {2}</translation>
     </message>
     <message>
       <source>suggested_exact</source>
-      <translation>Predlog za čuvanje · redosled izvora, identičan sadržaj</translation>
+      <translation>Predlog za zadržavanje · identičan sadržaj, redosled izvora</translation>
     </message>
     <message>
       <source>suggested_heuristic</source>
-      <translation>Predlog za čuvanje · heuristika, pregledajte obe verzije</translation>
+      <translation>Predlog za zadržavanje · procena, pregledajte obe verzije</translation>
     </message>
     <message>
       <source>preserve_derivatives</source>
@@ -2311,11 +2311,11 @@ Vrsta operacije: {2}</translation>
     </message>
     <message>
       <source>proposed_named</source>
-      <translation>Izabrane kopije: {0}</translation>
+      <translation>Predlog za karantin: {0}</translation>
     </message>
     <message>
       <source>proposed_names</source>
-      <translation>Izabrane kopije: {0} · i još {1} (sve putanje u potvrdi)</translation>
+      <translation>Predlog za karantin: {0} · i još {1} (sve putanje su u potvrdi)</translation>
     </message>
     <message>
       <source>photo_fingerprints</source>
@@ -2332,7 +2332,7 @@ dHash: {1}</translation>
     </message>
     <message>
       <source>photo_open_hint</source>
-      <translation>Dvoklik na fotografiju otvara je u sistemskom pregledniku. Možete i preći na dugme Otvori u podrazumevanom pregledniku i pritisnuti razmak.</translation>
+      <translation>Dvaput kliknite na fotografiju da je otvorite u podrazumevanom pregledniku. Možete i da postavite fokus na Otvori u podrazumevanom pregledniku i pritisnete razmak.</translation>
     </message>
     <message>
       <source>group_photo_open_hint</source>
@@ -2344,11 +2344,42 @@ dHash: {1}</translation>
     </message>
     <message>
       <source>photo_launch_failed</source>
-      <translation>Operativni sistem nije prihvatio zahtev za otvaranje fotografije. Proverite da li je podrazumevana aplikacija pridružena ovom tipu fajla.</translation>
+      <translation>Operativni sistem nije prihvatio zahtev za otvaranje ove fotografije. Podesite podrazumevani preglednik za ovaj tip fajla, pa pokušajte ponovo.</translation>
     </message>
     <message>
       <source>photo_open_requested</source>
       <translation>Zahtev za otvaranje je poslat operativnom sistemu. PhotoAgent ne može da potvrdi da je fotografija prikazana.</translation>
+    </message>
+    <message>
+      <source>show_details</source>
+      <extracomment>Stable key. Keep placeholders and technical tokens unchanged.</extracomment>
+      <translation>Prikaži detalje</translation>
+    </message>
+    <message>
+      <source>keep_both_description</source>
+      <extracomment>Stable key. Keep placeholders and technical tokens unchanged.</extracomment>
+      <translation>Zadržava obe fotografije i poništava predlog karantina za ovaj par. Fajlovi se ne premeštaju.</translation>
+    </message>
+    <message>
+      <source>confirm_plan_help</source>
+      <extracomment>Stable key. Keep placeholders and technical tokens unchanged.</extracomment>
+      <translation>Odobrava samo premeštanja iz ovog plana. Fajlovi se ponovo proveravaju neposredno pre premeštanja.</translation>
+    </message>
+    <message>
+      <source>restore_plan_summary</source>
+      <extracomment>Stable key. Keep placeholders and technical tokens unchanged.</extracomment>
+      <translation>Pregled pre potvrde · fotografije za vraćanje: {0}</translation>
+    </message>
+    <message>
+      <source>restore_move_summary</source>
+      <extracomment>Stable key. Keep placeholders and technical tokens unchanged.</extracomment>
+      <translation>VRATI IZ: {0}
+VRATI U: {1}</translation>
+    </message>
+    <message>
+      <source>restore_count</source>
+      <extracomment>Stable key. Keep placeholders and technical tokens unchanged.</extracomment>
+      <translation>Vraćene fotografije: {0}. Osvežavanje rezultata i istorije.</translation>
     </message>
   </context>
 </TS>

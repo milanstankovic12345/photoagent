@@ -416,8 +416,10 @@ class MainWindow(QMainWindow):
             self.operation_epoch += 1
             self.controller.preview(None)
             self.invalidate_selection()
-            set_text(self.statusBar(), tr('operation_count', len(value)), 'showMessage')
             plan = self.executing_plan
+            restored = plan and plan.moves and all(move.action == 'restore' for move in plan.moves)
+            set_text(self.statusBar(), tr('restore_count' if restored else 'operation_count',
+                                         len(value)), 'showMessage')
             self.restore_id = (plan.moves[0].id if plan and len(plan.moves) == 1
                 and plan.moves[0].action == 'quarantine' and value else None)
             self.executing_plan = None

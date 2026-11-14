@@ -1,5 +1,68 @@
 # PhotoAgent test evidence
 
+## Task022 — Clear EN/SR workflow wording (2026-11-14)
+
+Windows Python 3.12.10 / PySide6 6.12.0 / Qt Fusion offscreen, DPR 1. Every
+application home, photo, index and journal was synthetic and temporary. No real
+collection or OS viewer was used. Full changed-file and screenshot evidence:
+[Task022 verification](design/verification/task022-20261114/README.md).
+
+Commands below used `.venv/Scripts/python.exe -B` and
+`QT_QPA_PLATFORM=offscreen`; each pytest command used a distinct `--basetemp`
+under `build/`.
+
+- `-m tools.build_translations`, followed by `-m tools.build_translations --check`:
+  **480/480** finished messages in each language; TS/JSON keys and placeholders
+  match. English inventory equality and embedded QM/JSON parity are also tested.
+- `-m pytest tests/test_task022.py -q`: **8 passed in 89.36s**, no skips.
+- `-m pytest tests/test_task022.py tests/test_operations.py tests/test_recovery.py tests/test_additional_safety.py tests/test_native_races.py tests/test_localization.py -q`:
+  **57 passed, 1 skipped, 1 setup error in 263.98s**. The error was the existing
+  desktop fixture's 30-second worker-initialization timeout before the new consent
+  test body ran, during concurrent offscreen runs. It is not counted as a pass.
+  The skipped case is native Linux no-replace execution on Windows
+  (`tests/test_native_races.py:116`). All safety tests and all localization tests
+  in this run passed, including every embedded translation, missing-resource/key
+  fallback, number/date display, Unicode confirmed move/restore and isolated
+  packaged catalog loading.
+- The timeout case was rerun with the group/navigation supplement below:
+  **10 passed in 126.77s**, no skips. Thus all eight distinct Task022 cases have
+  passed; the transient timeout remains recorded rather than hidden.
+- The broader intermediate Qt command below completed with **114 passed, 1 failed
+  in 1364.47s (22:44)**, no skips. It started before the final wording and restore
+  assertion update. The only failure was the already-collected old Unicode restore
+  assertion expecting `restore_original` inside the summary. Restore now shows
+  its actual FROM/TO direction using `restore_move_summary`; the updated test
+  passed in the final combined localization/safety run above. That final run also
+  validates the final regenerated catalogs. The other 114 cases include live
+  scanning, language persistence/fallback/plurals, EN/SR layouts, comparison plans,
+  history/settings and all 41 Task021 external-open tests. This intermediate run
+  is not represented as a clean single-invocation pass.
+
+```text
+python -B -m pytest tests/test_task012.py tests/test_localization.py tests/test_task017.py tests/test_task019.py tests/test_task020.py tests/test_task021.py -q
+```
+
+```text
+python -B -m pytest tests/test_task022.py::test_confirmation_language_changes_preserve_raw_legacy_consent_and_focus tests/test_task018.py::test_group_states_controls_and_keyboard tests/test_task018.py::test_review_labels_are_session_local_and_raw_jpeg_only_describes_samples tests/test_task016.py::test_routes_keyboard_accessibility_and_small_layouts -q
+```
+
+Initial diagnostics: the first Task022 run had **3 passed, 5 failed in 27.05s**
+because importing an existing Windows asyncio helper inside a test happened after
+the subprocess confinement fixture was installed. Moving that import to collection
+time fixed the harness; the subsequent focused run above passed all eight cases.
+
+`tools.capture_task022 --output docs/design/verification/task022-20261114/100-verified`
+completed with **52 real-widget captures**, EN/SR × Dark/Light, 1440×900 and
+853×480 comparison layouts, collapsed sidebar, active Scan, expanded details,
+tooltips, open consent and external-open error. Layout assertions and synthetic
+byte-equality checks passed. Early capture-driver corrections and exact manual
+review coverage are recorded in the linked report. `git diff --check` passed.
+
+No full-repository suite, physical DPI/screen-reader check, native Windows/Linux
+viewer handoff, valid RAW fixture or packaging build was run for this task. Tk
+remains Serbian only; external OS dialogs/viewers keep their own language. Some
+CJK fixture filename glyphs lack host font fallback; Unicode bytes remain intact.
+
 ## Task021 — System photograph opening (2026-11-14)
 
 Windows Python 3.12.10 / PySide6 6.12.0 / Qt Fusion offscreen. All photographs,

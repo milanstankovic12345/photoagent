@@ -45,7 +45,7 @@ standard dialogs; bound widgets and models update in place, preserving selection
 preview images, zoom and frozen operation plans. No translated label is used as a
 database identifier, sorting field, file identity or confirmation token.
 
-Both languages currently contain **474/474 finished messages (100%)**, with no
+Both languages currently contain **480/480 finished messages (100%)**, with no
 missing explicit SafetyError codes or untranslated application safety warnings.
 Translation coverage means catalog/key/placeholder and rendered workflow coverage;
 it is not certification of every OS/Qt-provided string or linguistic proofreading.
@@ -65,6 +65,45 @@ changed by switching. Settings chooses display locale `en_US` or `sr_Latn_RS`;
 binary size units and technical format names stay stable, decimals/grouping and
 dates change for display only. History dates remain UTC with the UTC suffix.
 Other technical metadata/CSV fields retain their stable formatting.
+
+## Task022 action vocabulary and workflow
+
+Task017–Task021 screens use the same action wording in visible labels, tooltips
+and accessible text. Existing stable keys are retained; duplicate intents such as
+`add`/`add_folder`, `review_duplicates`/`review_results` and
+`restore`/`restore_operation` have identical translations.
+
+| English | Serbian Latin | Key |
+|---|---|---|
+| Add Folder | Dodaj folder | `add_folder` |
+| Start Scan | Pokreni skeniranje | `start` |
+| Review Duplicates | Pregledaj duplikate | `review_duplicates` |
+| Keep This Photo | Zadrži ovu fotografiju | `keep_photo` |
+| Keep Both | Zadrži obe | `keep_both` |
+| Move to Quarantine | Premesti u karantin | `move_copy` |
+| Open in Default Viewer | Otvori u podrazumevanom pregledniku | `open_default_viewer` |
+| Show Details | Prikaži detalje | `show_details` |
+| Hide Details | Sakrij detalje | `hide_details` |
+| Restore Photo | Vrati fotografiju | `restore` |
+| View Scan Errors | Prikaži greške skeniranja | `errors` |
+
+Keep choices only propose a move; Keep Both clears that pair's proposal. Move to
+Quarantine and Restore Photo prepare a plan. Confirm Displayed Plan is the explicit
+approval step. Quarantine and restore confirmations/results describe their actual
+direction; restore summaries no longer label a restore destination as a keeper.
+The quarantine explanation includes reversibility, separate restore confirmation,
+no overwriting and no disk space freed. RAW, XMP, backup and visual-match warnings
+remain visible in their existing places. Technical paths/hashes, enum/database
+values, placeholders, plural rules and the required `RAW` token are unchanged.
+
+Photo details use a bound Show/Hide Details action; technical diagnostics retain
+their own Technical details disclosure. Changing language updates the current
+action without resetting expansion, focus, choice, zoom, frozen plan, typed RAW
+token or legacy checkbox. Focused synthetic tests exercise these states and
+external-open errors; existing tests cover active scanning, fallback, plural forms,
+number/date formatting and settings persistence. The inventory test compares every
+English intent with the authoritative source. See the actual commands and visual
+evidence in [Task022 verification](design/verification/task022-20261114/README.md).
 
 ## Packaging and extending
 

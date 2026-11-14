@@ -75,6 +75,10 @@ htmlcov/
 !/docs/design/verification/task018-20261111/
 !/docs/design/verification/task019-20261111/
 !/docs/design/verification/task020-20261111/
+!/docs/design/verification/task022-20261114/
+/docs/design/verification/task022-20261114/*
+!/docs/design/verification/task022-20261114/README.md
+!/docs/design/verification/task022-20261114/100-verified/
 /docs/design/verification/task012/*
 !/docs/design/verification/task012/current/
 /demo_photo_collection/

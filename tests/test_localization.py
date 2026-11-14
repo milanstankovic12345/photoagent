@@ -148,7 +148,9 @@ def test_unicode_scan_confirmation_quarantine_and_restore(desktop, collection):
     assert restore_dialog.plan.moves[0].keeper is None
     choose_language(window, 'sr_Latn')
     assert restore_dialog.approval is None
-    assert tr('restore_original') in restore_dialog.findChildren(QPlainTextEdit)[0].toPlainText()
+    restored_move = restore_dialog.plan.moves[0]
+    assert tr('restore_move_summary', restored_move.source, restored_move.destination) in (
+        restore_dialog.findChildren(QPlainTextEdit)[0].toPlainText())
     restore_dialog.approve()
     pump(lambda: not window.controller.busy)
     assert all(path.read_bytes() == data for path, data in before.items())

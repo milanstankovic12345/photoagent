@@ -1,5 +1,21 @@
 # Changelog
 
+## Task022 — Clear EN/SR workflow wording — 2026-11-14
+
+- Unify folder, scan, review, keep, quarantine, restore and external-open actions.
+  Use Serbian Latin "Zadrži" for retention choices and readable matching/status
+  explanations. Preserve RAW, backup, derivative and XMP warnings.
+- Distinguish a choice, a proposed move, plan preparation, explicit confirmation
+  and results. Explain reversible quarantine and unchanged disk usage; show restore
+  direction and restore results separately from quarantine.
+- Bind Show/Hide Details to photo disclosure state. Add accurate action tooltips
+  and accessible descriptions for preparation, Keep Both and final confirmation.
+  Preserve focus, selection, frozen plans and consent during language switching.
+- Update authoritative TS sources and text inventory; regenerate all JSON/QM and
+  embedded resources (480 finished messages per language). Add synthetic live Qt
+  regressions and an isolated EN/SR capture driver. Tk remains Serbian only;
+  external OS dialogs/viewers retain their own language.
+
 ## Task021 — Open photographs in the system viewer — 2026-11-14
 
 - Add individual-photo double-click opening on Dashboard, both Grid/List group

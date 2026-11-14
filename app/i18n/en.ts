@@ -6,7 +6,7 @@
     <message>
       <source>quarantine_description</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Quarantine moves photographs reversibly. Select an item, review the restore plan and confirm to return it to its original location. Existing files are never overwritten.</translation>
+      <translation>Photos moved to quarantine can be restored. Select a photo, review its restore plan and confirm to return it to its original location. Existing files are never overwritten.</translation>
     </message>
     <message>
       <source>quarantine_empty</source>
@@ -16,7 +16,7 @@
     <message>
       <source>quarantine_empty_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Move history appears here. Quarantined photographs can be restored through a confirmed plan.</translation>
+      <translation>Move history appears here. You can restore quarantined photos after reviewing and confirming a restore plan.</translation>
     </message>
     <message>
       <source>open_quarantine_folder</source>
@@ -44,7 +44,7 @@
       <translation>Operation: {0}
 Source: {1}
 Destination: {2}
-Eligible for restore preparation: {3}. The service rechecks the file and destination.</translation>
+Restore plan available: {3}. The photo and destination are checked again before moving.</translation>
     </message>
     <message>
       <source>history_load_failed</source>
@@ -129,7 +129,7 @@ Eligible for restore preparation: {3}. The service rechecks the file and destina
     <message>
       <source>matching_explanation</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Choose how widely to search for similar photos. Similarity is not proof of duplication; every visual match needs review. Presets are not calibrated confidence scores and never approve quarantine.</translation>
+      <translation>Choose how broadly to search for similar photos. Similarity is not proof of duplication; review every similar pair. These options are not confidence scores and never approve quarantine.</translation>
     </message>
     <message>
       <source>matching_strict</source>
@@ -179,7 +179,7 @@ Eligible for restore preparation: {3}. The service rechecks the file and destina
     <message>
       <source>settings_safety_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Quarantine is reversible movement within the source root. Every move requires preparation and confirmation. The journal supports recovery after restarting. Do not manually move files or delete recovery data.</translation>
+      <translation>Quarantine moves photos within the source folder. You can restore them later. Every move requires a plan and confirmation. The journal supports recovery after restarting. Do not move files manually or delete recovery data.</translation>
     </message>
     <message>
       <source>settings_storage</source>
@@ -189,7 +189,7 @@ Eligible for restore preparation: {3}. The service rechecks the file and destina
     <message>
       <source>preview_cache_detail</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>The preview LRU cache holds up to 64 MiB of decoded images in memory while running. This is neither disk space nor measured current usage. An individual preview may briefly use extra memory; history thumbnails are not cached. Recovery data is separate and persistent.</translation>
+      <translation>Photo previews use up to 64 MiB of memory, with brief extra use while loading. This is a limit, not current usage or disk space. History thumbnails are not cached. Recovery data is saved separately.</translation>
     </message>
     <message>
       <source>storage_loading</source>
@@ -285,7 +285,7 @@ Indexed photographs: {1} (physical files, excluding missing and moved files; dis
     <message>
       <source>review_progress</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Direct links reviewed: {0}</translation>
+      <translation>Photo pairs reviewed: {0}</translation>
     </message>
     <message>
       <source>reviewed</source>
@@ -295,7 +295,7 @@ Indexed photographs: {1} (physical files, excluding missing and moved files; dis
     <message>
       <source>review_session_only</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Review choices last until closing or rescanning and are not the operation journal.</translation>
+      <translation>Choices last until closing or rescanning. Operation history is saved separately.</translation>
     </message>
     <message>
       <source>query_loading</source>
@@ -310,7 +310,7 @@ Indexed photographs: {1} (physical files, excluding missing and moved files; dis
     <message>
       <source>choose_keeper</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Choose which photograph to retain. Moving needs separate confirmation.</translation>
+      <translation>Choose which photo to keep. Nothing moves until you review and confirm a plan.</translation>
     </message>
     <message>
       <source>review_advice</source>
@@ -325,42 +325,42 @@ Indexed photographs: {1} (physical files, excluding missing and moved files; dis
     <message>
       <source>direct_members</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Direct group candidates and member pages</translation>
+      <translation>Related photos</translation>
     </message>
     <message>
       <source>member_count</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Photographs in direct group: {0} · browse members</translation>
+      <translation>Related photos: {0} · browse members</translation>
     </message>
     <message>
       <source>keep_photo</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Keep this photograph</translation>
+      <translation>Keep This Photo</translation>
     </message>
     <message>
       <source>keep_both</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Keep both</translation>
+      <translation>Keep Both</translation>
     </message>
     <message>
       <source>keep_chosen</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Keep · selected</translation>
+      <translation>Keep This Photo · Selected</translation>
     </message>
     <message>
       <source>move_copy</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Move to quarantine</translation>
+      <translation>Move to Quarantine</translation>
     </message>
     <message>
       <source>restore_operation</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Restore photograph</translation>
+      <translation>Restore Photo</translation>
     </message>
     <message>
       <source>selection_summary</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Proposed for quarantine: {0} · explicitly retained: {1}</translation>
+      <translation>Proposed for quarantine: {0} · chosen to keep: {1}. No moves approved.</translation>
     </message>
     <message>
       <source>selection_limit</source>
@@ -370,7 +370,7 @@ Indexed photographs: {1} (physical files, excluding missing and moved files; dis
     <message>
       <source>both_kept</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Both photographs retained. Quarantine proposal cleared.</translation>
+      <translation>Both photos chosen to keep. Quarantine proposal cleared; no files moved.</translation>
     </message>
     <message>
       <source>photo_summary</source>
@@ -391,12 +391,12 @@ Indexed photographs: {1} (physical files, excluding missing and moved files; dis
     <message>
       <source>photo_retained</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Retained</translation>
+      <translation>Chosen to keep</translation>
     </message>
     <message>
       <source>photo_proposed</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Proposed for quarantine</translation>
+      <translation>Proposed for quarantine · not approved</translation>
     </message>
     <message>
       <source>technical_details</source>
@@ -406,19 +406,19 @@ Indexed photographs: {1} (physical files, excluding missing and moved files; dis
     <message>
       <source>plan_summary</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Confirmation · photographs to move: {0}</translation>
+      <translation>Review before confirming · photos to move to quarantine: {0}</translation>
     </message>
     <message>
       <source>plan_reversible</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Quarantine is reversible movement. Restoring requires a new preparation and confirmation; existing files are never overwritten.</translation>
+      <translation>Quarantine moves photos within the source folder and can be undone through a separate restore plan and confirmation. Existing files are never overwritten. Moving to quarantine does not free disk space.</translation>
     </message>
     <message>
       <source>move_summary</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>SOURCE: {0}
-DESTINATION: {1}
-RETAIN: {2}</translation>
+      <translation>MOVE FROM: {0}
+MOVE TO: {1}
+KEEP: {2}</translation>
     </message>
     <message>
       <source>restore_original</source>
@@ -428,7 +428,7 @@ RETAIN: {2}</translation>
     <message>
       <source>operation_count</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Photographs moved successfully: {0}. Refreshing results and history.</translation>
+      <translation>Photos moved to quarantine: {0}. Refreshing results and history.</translation>
     </message>
     <message>
       <source>dashboard_title</source>
@@ -453,22 +453,22 @@ RETAIN: {2}</translation>
     <message>
       <source>exact_candidates</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>EXACT copies</translation>
+      <translation>Exact copies</translation>
     </message>
     <message>
       <source>last_session_candidates</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Last scan · direct duplicate candidates</translation>
+      <translation>Last scan · copies with identical file contents</translation>
     </message>
     <message>
       <source>visual_links</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>VISUAL pairs</translation>
+      <translation>Similar pairs</translation>
     </message>
     <message>
       <source>last_session_links</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Last scan · similar pairs to review</translation>
+      <translation>Last scan · similar photo pairs to review</translation>
     </message>
     <message>
       <source>estimated_space</source>
@@ -499,7 +499,7 @@ RETAIN: {2}</translation>
       <source>recent_scan_summary</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
       <translation>{0} · {1}
-Photographs processed: {2} · EXACT candidates: {3} · VISUAL links: {4} · Failures: {5}</translation>
+Photos processed: {2} · Exact copies: {3} · Similar pairs: {4} · Errors: {5}</translation>
     </message>
     <message>
       <source>recent_candidates</source>
@@ -509,17 +509,17 @@ Photographs processed: {2} · EXACT candidates: {3} · VISUAL links: {4} · Fail
     <message>
       <source>review_duplicates</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Review duplicates</translation>
+      <translation>Review Duplicates</translation>
     </message>
     <message>
       <source>review_results</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Review results</translation>
+      <translation>Review Duplicates</translation>
     </message>
     <message>
       <source>review_candidate</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Review candidate</translation>
+      <translation>Review Photo</translation>
     </message>
     <message>
       <source>candidate_metadata</source>
@@ -529,12 +529,12 @@ Photographs processed: {2} · EXACT candidates: {3} · VISUAL links: {4} · Fail
     <message>
       <source>classification_EXACT</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>EXACT · identical bytes</translation>
+      <translation>EXACT · identical file contents</translation>
     </message>
     <message>
       <source>classification_VISUAL</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>VISUAL · similarity requires review</translation>
+      <translation>VISUAL · similar photos, review required</translation>
     </message>
     <message>
       <source>thumbnail_unavailable</source>
@@ -579,7 +579,7 @@ Photographs processed: {2} · EXACT candidates: {3} · VISUAL links: {4} · Fail
     <message>
       <source>source_priority</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Source order affects the choice of photograph to retain. Select a source and move it up or down. Copies on another drive may be deliberate backups.</translation>
+      <translation>Source order affects which photo is suggested to keep. Select a source and move it up or down. Copies on another drive may be deliberate backups.</translation>
     </message>
     <message>
       <source>remove_source</source>
@@ -610,7 +610,7 @@ Photographs processed: {2} · EXACT candidates: {3} · VISUAL links: {4} · Fail
       <source>scan_result_summary</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
       <translation>{0}
-Photographs: {1} · EXACT groups: {2} · Possible VISUAL links: {3} · Failures: {4}</translation>
+Photos: {1} · Exact groups: {2} · Possible similar pairs: {3} · Errors: {4}</translation>
     </message>
     <message>
       <source>no_scan_errors</source>
@@ -620,7 +620,7 @@ Photographs: {1} · EXACT groups: {2} · Possible VISUAL links: {3} · Failures:
     <message>
       <source>scan_error_count</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Reported failures: {0}. Details are available below.</translation>
+      <translation>Reported errors: {0}. Expand View Scan Errors for details.</translation>
     </message>
     <message>
       <source>scan_failed</source>
@@ -630,7 +630,7 @@ Photographs: {1} · EXACT groups: {2} · Possible VISUAL links: {3} · Failures:
     <message>
       <source>scan_failure_help</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Check source availability and free space for the local index, then retry. Details below.</translation>
+      <translation>Check that source drives are connected and that the local index has free disk space, then try again. Open View Scan Errors for details.</translation>
     </message>
     <message>
       <source>preview_loading</source>
@@ -745,7 +745,7 @@ Photographs: {1} · EXACT groups: {2} · Possible VISUAL links: {3} · Failures:
     <message>
       <source>add</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Add folder</translation>
+      <translation>Add Folder</translation>
     </message>
     <message>
       <source>remove</source>
@@ -765,7 +765,7 @@ Photographs: {1} · EXACT groups: {2} · Possible VISUAL links: {3} · Failures:
     <message>
       <source>start</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Start scan</translation>
+      <translation>Start Scan</translation>
     </message>
     <message>
       <source>cancel</source>
@@ -830,17 +830,17 @@ Photographs: {1} · EXACT groups: {2} · Possible VISUAL links: {3} · Failures:
     <message>
       <source>selected_move</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Prepare quarantine for the selected pair</translation>
+      <translation>Prepare Quarantine Plan</translation>
     </message>
     <message>
       <source>bulk_move</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Prepare all eligible EXACT copies across this session</translation>
+      <translation>Prepare a quarantine plan for all eligible EXACT copies in this scan. Review and confirmation are required.</translation>
     </message>
     <message>
       <source>restore</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Restore photograph</translation>
+      <translation>Restore Photo</translation>
     </message>
     <message>
       <source>refresh</source>
@@ -865,7 +865,7 @@ Photographs: {1} · EXACT groups: {2} · Possible VISUAL links: {3} · Failures:
     <message>
       <source>groups</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Direct groups: retained photograph and candidates</translation>
+      <translation>Groups of photos to review</translation>
     </message>
     <message>
       <source>group</source>
@@ -1015,7 +1015,7 @@ Editing history: unknown</translation>
     <message>
       <source>plan</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Review frozen plan</translation>
+      <translation>Review Plan</translation>
     </message>
     <message>
       <source>plan_count</source>
@@ -1040,7 +1040,7 @@ SHA-256: {1}</translation>
     <message>
       <source>approve</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Confirm displayed plan</translation>
+      <translation>Confirm Displayed Plan</translation>
     </message>
     <message>
       <source>raw_prompt</source>
@@ -1130,7 +1130,7 @@ SHA-256: {1}</translation>
     <message>
       <source>errors</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Scan errors</translation>
+      <translation>View Scan Errors</translation>
     </message>
     <message>
       <source>dashboard_counts</source>
@@ -1341,12 +1341,12 @@ Errors: {3}</translation>
     <message>
       <source>keyboard_groups</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Use arrows to select a group and Enter to open comparison.</translation>
+      <translation>Use arrows to select a group and Enter to review it.</translation>
     </message>
     <message>
       <source>keyboard_pairs</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Use arrows to select a pair and Enter to open comparison.</translation>
+      <translation>Use arrows to select a pair and Enter to compare photos.</translation>
     </message>
     <message>
       <source>keyboard_sources</source>
@@ -1356,7 +1356,7 @@ Errors: {3}</translation>
     <message>
       <source>keyboard_history</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Use arrows to select a photograph, then Restore photograph to review its plan.</translation>
+      <translation>Use arrows to select a photo, then Restore Photo to review its plan.</translation>
     </message>
     <message>
       <source>selected_group</source>
@@ -1376,22 +1376,22 @@ Errors: {3}</translation>
     <message>
       <source>keep_named_photo</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Keep this photograph: {0}</translation>
+      <translation>Keep This Photo: {0}</translation>
     </message>
     <message>
       <source>keep_description</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Selection only prepares a proposal. Moving requires plan review and confirmation.</translation>
+      <translation>Chooses the photo to keep and proposes the other for quarantine. Nothing moves until you review and confirm a plan.</translation>
     </message>
     <message>
       <source>quarantine_description_action</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Opens plan preview. Movement needs separate explicit confirmation.</translation>
+      <translation>Prepares a plan for review. Nothing moves until you confirm the displayed plan.</translation>
     </message>
     <message>
       <source>restore_description_action</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Opens the selected photograph's restore plan; existing files are never overwritten.</translation>
+      <translation>Prepares a restore plan for review. Nothing moves until you confirm it. Existing files are never overwritten.</translation>
     </message>
     <message>
       <source>plan_paths</source>
@@ -1421,7 +1421,7 @@ Errors: {3}</translation>
     <message>
       <source>hide_details</source>
       <extracomment>Stable key. Keep Python {0} and Qt %1 placeholders unchanged. Technical names, paths and hashes stay literal.</extracomment>
-      <translation>Hide technical details</translation>
+      <translation>Hide Details</translation>
     </message>
     <message>
       <source>previous_page</source>
@@ -2133,7 +2133,7 @@ Please check the file name.</translation>
     </message>
     <message>
       <source>exact_groups_stat</source>
-      <translation>EXACT groups</translation>
+      <translation>Exact groups</translation>
     </message>
     <message>
       <source>last_scan_groups</source>
@@ -2145,7 +2145,7 @@ Please check the file name.</translation>
     </message>
     <message>
       <source>add_folder</source>
-      <translation>Add folder</translation>
+      <translation>Add Folder</translation>
     </message>
     <message>
       <source>remove_source_help</source>
@@ -2189,11 +2189,11 @@ Please check the file name.</translation>
     </message>
     <message>
       <source>review_group</source>
-      <translation>Review group</translation>
+      <translation>Review Group</translation>
     </message>
     <message>
       <source>bulk_exact</source>
-      <translation>Prepare exact copies…</translation>
+      <translation>Prepare Exact Copies…</translation>
     </message>
     <message>
       <source>search_filter_sort</source>
@@ -2201,11 +2201,11 @@ Please check the file name.</translation>
     </message>
     <message>
       <source>group_guidance</source>
-      <translation>Similar Photos are direct matches to the named photograph, not proof of identical copies. Review before deciding.</translation>
+      <translation>Similar Photos match the named photo directly. Other members may differ from one another. Similarity is not proof of duplication; review each pair.</translation>
     </message>
     <message>
       <source>direct_pairs</source>
-      <translation>Direct photo pairs</translation>
+      <translation>Photo pairs to review</translation>
     </message>
     <message>
       <source>groups_count</source>
@@ -2271,19 +2271,19 @@ Operation type: {2}</translation>
     </message>
     <message>
       <source>previous_pair</source>
-      <translation>Previous pair</translation>
+      <translation>Previous Pair</translation>
     </message>
     <message>
       <source>exact_order_note</source>
-      <translation>Identical bytes: the suggested keeper follows source order and path ordering. This is not an image quality measurement or permission to move backup copies.</translation>
+      <translation>The file contents are identical. The suggestion follows source order, then path order; it does not measure image quality or approve moving backup copies.</translation>
     </message>
     <message>
       <source>next_pair</source>
-      <translation>Next pair</translation>
+      <translation>Next Pair</translation>
     </message>
     <message>
       <source>direct_pair_choice</source>
-      <translation>Choose a direct comparison</translation>
+      <translation>Choose a photo pair</translation>
     </message>
     <message>
       <source>pair_position</source>
@@ -2291,7 +2291,7 @@ Operation type: {2}</translation>
     </message>
     <message>
       <source>direct_pair_help</source>
-      <translation>Each comparison is a stored direct link. Browse with Previous pair / Next pair or choose a pair above the photos. Choosing a keeper applies only to photographs you explicitly review; it does not approve other members.</translation>
+      <translation>Each pair is a direct match. Use Previous Pair / Next Pair or choose a pair above the photos. Your choice applies only to the photos you review; it does not approve moves for other group members.</translation>
     </message>
     <message>
       <source>photo_undecided</source>
@@ -2299,11 +2299,11 @@ Operation type: {2}</translation>
     </message>
     <message>
       <source>suggested_exact</source>
-      <translation>Suggested to keep · source order, identical bytes</translation>
+      <translation>Suggested to keep · identical content, source order</translation>
     </message>
     <message>
       <source>suggested_heuristic</source>
-      <translation>Suggested to keep · heuristic, review both versions</translation>
+      <translation>Suggested to keep · estimate, review both versions</translation>
     </message>
     <message>
       <source>preserve_derivatives</source>
@@ -2311,11 +2311,11 @@ Operation type: {2}</translation>
     </message>
     <message>
       <source>proposed_named</source>
-      <translation>Copies selected: {0}</translation>
+      <translation>Proposed for quarantine: {0}</translation>
     </message>
     <message>
       <source>proposed_names</source>
-      <translation>Copies selected: {0} · and {1} more (all paths in confirmation)</translation>
+      <translation>Proposed for quarantine: {0} · and {1} more (all paths in confirmation)</translation>
     </message>
     <message>
       <source>photo_fingerprints</source>
@@ -2332,7 +2332,7 @@ dHash: {1}</translation>
     </message>
     <message>
       <source>photo_open_hint</source>
-      <translation>Double-click the photograph to open it in your system viewer. You can also focus Open in Default Viewer and press Space.</translation>
+      <translation>Double-click the photo to open it in your default viewer. You can also focus Open in Default Viewer and press Space.</translation>
     </message>
     <message>
       <source>group_photo_open_hint</source>
@@ -2344,11 +2344,42 @@ dHash: {1}</translation>
     </message>
     <message>
       <source>photo_launch_failed</source>
-      <translation>The operating system could not accept the request to open this photograph. Check that a default application is associated with this file type.</translation>
+      <translation>The operating system did not accept the request to open this photo. Set a default viewer for this file type, then try again.</translation>
     </message>
     <message>
       <source>photo_open_requested</source>
       <translation>Open request sent to the operating system. PhotoAgent cannot confirm that the photograph was displayed.</translation>
+    </message>
+    <message>
+      <source>show_details</source>
+      <extracomment>Stable key. Keep placeholders and technical tokens unchanged.</extracomment>
+      <translation>Show Details</translation>
+    </message>
+    <message>
+      <source>keep_both_description</source>
+      <extracomment>Stable key. Keep placeholders and technical tokens unchanged.</extracomment>
+      <translation>Keeps both photos and clears this pair's quarantine proposal. No files are moved.</translation>
+    </message>
+    <message>
+      <source>confirm_plan_help</source>
+      <extracomment>Stable key. Keep placeholders and technical tokens unchanged.</extracomment>
+      <translation>Approves only the moves in this plan. Files are checked again immediately before moving.</translation>
+    </message>
+    <message>
+      <source>restore_plan_summary</source>
+      <extracomment>Stable key. Keep placeholders and technical tokens unchanged.</extracomment>
+      <translation>Review before confirming · photos to restore: {0}</translation>
+    </message>
+    <message>
+      <source>restore_move_summary</source>
+      <extracomment>Stable key. Keep placeholders and technical tokens unchanged.</extracomment>
+      <translation>RESTORE FROM: {0}
+RESTORE TO: {1}</translation>
+    </message>
+    <message>
+      <source>restore_count</source>
+      <extracomment>Stable key. Keep placeholders and technical tokens unchanged.</extracomment>
+      <translation>Photos restored: {0}. Refreshing results and history.</translation>
     </message>
   </context>
 </TS>

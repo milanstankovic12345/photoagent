@@ -231,8 +231,11 @@ class StatusBadge(QLabel):
 
 
 class CollapsibleSection(Card):
-    def __init__(self, title_key: str, expanded: bool = False) -> None:
+    def __init__(self, title_key: str, expanded: bool = False, *,
+                 expanded_title_key: str | None = None) -> None:
         super().__init__()
+        self.title_key = title_key
+        self.expanded_title_key = expanded_title_key
         self.setProperty('role', 'section')
         self.content.setContentsMargins(0, 0, 0, 0)
         self.toggle = with_text(QPushButton(), tr(title_key))
@@ -252,6 +255,10 @@ class CollapsibleSection(Card):
     def set_expanded(self, expanded: bool) -> None:
         self.toggle.setChecked(expanded)
         self.body.setVisible(expanded)
+        if self.expanded_title_key:
+            key = self.expanded_title_key if expanded else self.title_key
+            set_text(self.toggle, tr(key))
+            set_text(self.toggle, tr(key), 'setAccessibleName')
         set_icon(self.toggle, 'collapse' if expanded else 'expand')
         set_text(self.toggle, tr('section_expanded' if expanded else 'section_collapsed'), 'setAccessibleDescription')
 
@@ -291,10 +298,14 @@ def button(key: str, callback: Callable, layout: QLayout, *, variant: str | None
         set_icon(widget, glyph)
     if key in ('selected_move', 'bulk_move', 'restore'):
         widget.setProperty('operation', True)
-    if key in ('selected_move', 'bulk_move', 'move_copy', 'approve'):
+    if key in ('selected_move', 'bulk_move', 'bulk_exact', 'move_copy'):
         set_text(widget, tr('quarantine_description_action'), 'setAccessibleDescription')
+        set_text(widget, tr('quarantine_description_action'), 'setToolTip')
+    elif key == 'approve':
+        set_text(widget, tr('confirm_plan_help'), 'setAccessibleDescription')
     elif key in ('restore', 'restore_operation'):
         set_text(widget, tr('restore_description_action'), 'setAccessibleDescription')
+        set_text(widget, tr('restore_description_action'), 'setToolTip')
     widget.clicked.connect(callback)
     layout.addWidget(widget)
     return widget
@@ -362,7 +373,8 @@ class PhotoView(Card):
         set_text(self.keep_photo, tr('keep_description'), 'setAccessibleDescription')
         self.choice_status = text_label(tr('photo_undecided'), 'small')
         layout.addWidget(self.choice_status)
-        self.details = CollapsibleSection('photo_details')
+        self.details = CollapsibleSection('show_details', expanded_title_key='hide_details')
+        set_text(self.details.toggle, tr('photo_details'), 'setToolTip')
         self.details.content.setContentsMargins(0, SPACING[1], 0, 0)
         self.full_metadata = path_label('', 'small')
         self.full_metadata.setFocusPolicy(Qt.StrongFocus)
@@ -533,7 +545,9 @@ class PlanDialog(QDialog):
         screen = self.screen().availableGeometry()
         self.resize(min(900, int(screen.width() * .94)), min(620, int(screen.height() * .94)))
         layout = QVBoxLayout(self)
-        layout.addWidget(text_label(tr('plan_summary', len(plan.moves)), 'section'))
+        restore = bool(plan.moves) and all(move.action == 'restore' for move in plan.moves)
+        layout.addWidget(text_label(tr('restore_plan_summary' if restore else 'plan_summary',
+                                       len(plan.moves)), 'section'))
         layout.addWidget(text_label(tr('plan_reversible'), 'metadata'))
         summary = QPlainTextEdit()
         summary.setReadOnly(True)
@@ -541,8 +555,9 @@ class PlanDialog(QDialog):
         set_text(summary, tr('plan_paths'), 'setAccessibleName')
         descriptions = []
         for move in plan.moves:
-            descriptions.append(tr('move_summary', move.source, move.destination,
-                move.keeper.path if move.keeper else tr('restore_original')))
+            descriptions.append(tr('restore_move_summary', move.source, move.destination)
+                if move.action == 'restore' else tr('move_summary', move.source, move.destination,
+                    move.keeper.path if move.keeper else tr('restore_original')))
         set_text(summary, join_text(descriptions, '\n\n'), 'setPlainText')
         layout.addWidget(summary, 1)
         warnings = []
@@ -590,6 +605,8 @@ class PlanDialog(QDialog):
         self.confirm = with_text(QPushButton(), tr('approve'))
         buttons.addWidget(self.confirm)
         style_button(self.confirm, 'danger')
+        set_text(self.confirm, tr('confirm_plan_help'), 'setAccessibleDescription')
+        set_text(self.confirm, tr('confirm_plan_help'), 'setToolTip')
         self.confirm.setAutoDefault(False)
         self.cancel = cancel = with_text(QPushButton(), tr('cancel'))
         buttons.addWidget(cancel)
