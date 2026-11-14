@@ -6,6 +6,9 @@ Qt supports English and Serbian Latin; the retained Tk interface uses Serbian La
 Python 3.12+; Windows 10/11 and Linux
 source adapters. Native Linux execution and valid RAW decoding are not yet verified.
 
+Final UI refinement checks, screenshots and outstanding native/manual acceptance:
+[Task023 verification](docs/design/UI_REFINEMENT_VERIFICATION.md).
+
 ## Install and run
 
 Windows: run `start_windows.bat`. It creates a project `.venv` with Python 3.12 if

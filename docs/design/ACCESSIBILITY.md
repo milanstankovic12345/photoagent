@@ -103,4 +103,7 @@ For executed commands, actual results and reviewed renders see
 [TESTING.md](../TESTING.md). Offscreen rendering and `QAccessible` queries do not
 prove assistive-technology usability. Manual NVDA/Narrator, native Windows/Linux
 high-DPI and physical-display keyboard testing remain unverified. Full redesign
-acceptance belongs to Task011. Task012 covers the Qt interface; Tk remains Serbian.
+acceptance belongs to Task011 and the final Task023 native/manual gate. Task012
+covers the Qt interface; Tk remains Serbian. The combined refinement evidence and
+repeatable native keyboard/assistive-technology checklist live in
+[UI_REFINEMENT_VERIFICATION.md](UI_REFINEMENT_VERIFICATION.md).

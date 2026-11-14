@@ -1,5 +1,12 @@
 ﻿# PhotoAgent v2 implementation roadmap
 
+Task023 (2026-11-14) consolidates final UI refinement verification, new synthetic
+restart/conflict coverage and reproducible capture/native-viewer probes. See
+[the A–J verification report](design/UI_REFINEMENT_VERIFICATION.md) for current-run
+results and remaining manual/native gates. UI refinement acceptance stays open
+where those gates are unverified; Task013 packaging, distribution and benchmark
+gates are not expanded or closed by this work.
+
 v2.5 localization (2026-11-09) extends the existing Qt L1 implementation with
 editable Linguist TS sources, embedded QM catalogs, JSON fallback, locale-aware
 display values, English/Serbian installation guidance and isolated packaged-resource

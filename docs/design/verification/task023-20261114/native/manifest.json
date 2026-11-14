@@ -1,0 +1,86 @@
+{
+  "platform": "Windows-11-10.0.26100-SP0",
+  "qt_platform": "windows",
+  "synthetic": true,
+  "finished": true,
+  "method": "Native Qt, real worker/service/adapter and OS association; QTest events, not manual mouse input",
+  "session_pixels": [
+    1920,
+    1080
+  ],
+  "system_dpi": 120,
+  "launches": [
+    {
+      "file": "Task023-ac7b554c05-0-čćžšđ.png",
+      "accepted": true
+    },
+    {
+      "file": "Task023-ac7b554c05-0-čćžšđ.png",
+      "accepted": true
+    }
+  ],
+  "screenshots": [
+    {
+      "state": "double-click-viewer",
+      "file": "double-click-viewer.rejected.png",
+      "captured": true,
+      "pixels": [
+        1440,
+        740
+      ],
+      "sha256": "7ef13c46b5449475ceacbb61f63b64c696c07b2b48c1801618ce30e2b98f22fa",
+      "visually_reviewed": true,
+      "accepted": false,
+      "rejection_reason": "Desktop rectangle captured an occluding window. Rejected; not native viewer display evidence; image excluded from version control."
+    },
+    {
+      "state": "explicit-action-viewer",
+      "file": "explicit-action-viewer.rejected.png",
+      "captured": true,
+      "pixels": [
+        1440,
+        740
+      ],
+      "sha256": "7ef13c46b5449475ceacbb61f63b64c696c07b2b48c1801618ce30e2b98f22fa",
+      "visually_reviewed": true,
+      "accepted": false,
+      "rejection_reason": "Desktop rectangle captured an occluding window. Rejected; not native viewer display evidence; image excluded from version control."
+    }
+  ],
+  "limits": [
+    "Viewer title detection may fail even if an app opened",
+    "Screenshot requires visual inspection before display acceptance",
+    "No Linux, valid RAW, physical DPI or assistive technology verification"
+  ],
+  "single_click_no_launch": true,
+  "original_bytes_preserved": true,
+  "manual_png_observation": {
+    "source": "Owner reply to the Task023 native verification question in this session",
+    "recorded_utc": "2026-11-14T20:26:22.256841+00:00",
+    "filename": "Task023-ac7b554c05-0-čćžšđ.png",
+    "expected_content": "Red rectangle, green ellipse and blue diagonal lines",
+    "reply_sr": "Da, vidim tu sliku i naziv",
+    "confirmed": [
+      "Expected synthetic PNG content is visible",
+      "Expected filename is visible"
+    ],
+    "limits": [
+      "Does not independently observe each launch",
+      "No JPEG/RAW/Linux display confirmation",
+      "No native quarantine/missing-file or all-context manual journey"
+    ]
+  },
+  "direct_hwnd_diagnostic": {
+    "capture_method": "Pillow ImageGrab(window=HWND) on the title-matched existing viewer",
+    "result": "Blank surface; rejected as display evidence",
+    "artifact": "build/task023/native-window.png (ignored diagnostic)"
+  },
+  "viewer_identity_probe": {
+    "png_user_choice_progid": "AppX43hnxtbyyps62jhe9sqpdzxn1790zetc",
+    "synthetic_filename_window_processes": [
+      "Photos.exe",
+      "Photos.exe"
+    ],
+    "note": "Read-only current association and executable basename for title-matched synthetic windows only; no configuration changes"
+  }
+}

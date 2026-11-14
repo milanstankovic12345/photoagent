@@ -1,5 +1,21 @@
 # Changelog
 
+## Task023 — Final UI refinement verification — 2026-11-14
+
+- Add a synthetic three-member Qt journey through folder selection, Keep Both,
+  Cancel, explicit quarantine, stopped-worker restart, restore conflict and
+  restoration of every original byte, preserving the conflicting file too.
+- Add capture/integrity-review tools for all six experiences, both languages,
+  Dark/Light, both sidebar modes and two window sizes at 100%/150%. Track actual
+  geometry/DPR, synthetic operation checks and simulated System signals separately
+  from native acceptance. Preserve earlier evidence directories.
+- Add a Windows native probe using the actual Qt adapter and unique synthetic
+  filenames; title-matched OS screenshots require visual inspection. Record OS
+  acceptance separately from displayed content and retain Linux/manual gates.
+- Publish the A–J verification report, repeatable manual checklist and current-run
+  test evidence; correct the design-system description of selected navigation.
+  No production matching, service, schema or safety behavior changes.
+
 ## Task022 — Clear EN/SR workflow wording — 2026-11-14
 
 - Unify folder, scan, review, keep, quarantine, restore and external-open actions.

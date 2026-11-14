@@ -42,8 +42,9 @@ tokens. Radii are 8 controls/badges and 12 cards, including painted group cards.
 Buttons and inputs reserve a fixed 1 px outline and remain at least 36 px high.
 Hover, focus, disabled and checked states change colors without changing padding
 or border width. Checkboxes and item focus retain their fixed 2 px outlines.
-Selected navigation has a visible contour; its keyboard focus can override that
-contour. Qt checked state remains available to accessibility APIs.
+Selected navigation has a persistent foreground marker and a subtle selected
+surface (Task016); keyboard focus has its own outline. Qt checked state remains
+available to accessibility APIs.
 
 `CollapsibleSection` is a frameless section with a named disclosure button,
 spacing and typography. Photo details no longer add another card frame; embedded

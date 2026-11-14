@@ -352,7 +352,9 @@ def test_history_double_click_keeps_operation_id_during_selection_change(desktop
     window.prepare_bulk()
     pump(lambda: window.plan_dialog is not None)
     window.plan_dialog.approve()
-    pump(lambda: not window.controller.busy and len(window.history_rows) == 2)
+    # Two fully verified moves and the queued history refresh can exceed 30 s on
+    # Windows. Keep the complete-state assertion; allow the same I/O budget as scan.
+    pump(lambda: not window.controller.busy and len(window.history_rows) == 2, timeout=90)
     window.navigate(Route.QUARANTINE)
     window.history.table.selectRow(0)
     pump(lambda: not window.history.thumbnail.pixmap().isNull())

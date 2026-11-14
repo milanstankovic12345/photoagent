@@ -4,6 +4,9 @@ Lokalna aplikacija za pronalaženje i pregled identičnih i vizuelno sličnih
 fotografija. Obrada radi bez interneta, naloga, telemetrije i spoljnih AI servisa.
 [English installation and usage](README.md).
 
+Završne provere interfejsa, snimci ekrana i otvorene native/manuelne provere:
+[Task023 izveštaj](docs/design/UI_REFINEMENT_VERIFICATION.md).
+
 ## Instalacija i pokretanje
 
 Potreban je Python 3.12+ na Windows 10/11 ili Linux sistemu. Na Windowsu pokrenite

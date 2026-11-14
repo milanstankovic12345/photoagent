@@ -61,6 +61,7 @@ htmlcov/
 !/docs/design/TASK011_VERIFICATION.md
 !/docs/design/TASK012_VERIFICATION.md
 !/docs/design/UI_REFINEMENT_PLAN.md
+!/docs/design/UI_REFINEMENT_VERIFICATION.md
 !/docs/design/verification/
 /docs/design/verification/*
 !/docs/design/verification/task004/
@@ -76,6 +77,17 @@ htmlcov/
 !/docs/design/verification/task019-20261111/
 !/docs/design/verification/task020-20261111/
 !/docs/design/verification/task022-20261114/
+!/docs/design/verification/task023-20261114/
+/docs/design/verification/task023-20261114/*
+!/docs/design/verification/task023-20261114/README.md
+!/docs/design/verification/task023-20261114/100-verified/
+!/docs/design/verification/task023-20261114/150-verified/
+!/docs/design/verification/task023-20261114/history-100/
+!/docs/design/verification/task023-20261114/history-150/
+!/docs/design/verification/task023-20261114/review/
+!/docs/design/verification/task023-20261114/native/
+/docs/design/verification/task023-20261114/native/*
+!/docs/design/verification/task023-20261114/native/manifest.json
 /docs/design/verification/task022-20261114/*
 !/docs/design/verification/task022-20261114/README.md
 !/docs/design/verification/task022-20261114/100-verified/

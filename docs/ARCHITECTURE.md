@@ -1,5 +1,11 @@
 # PhotoAgent v2.5 architecture
 
+Task023 adds verification-only capture/review/native-probe tools and a synthetic
+Qt journey through explicit consent, restart, restore conflict and byte-preserving
+restoration. Production component, service, schema and recovery boundaries are
+unchanged. Evidence and remaining native/manual gates are tracked in
+[UI_REFINEMENT_VERIFICATION.md](design/UI_REFINEMENT_VERIFICATION.md).
+
 Task021 adds `app/services/open_photo.py`, reached through `Application.resolve_photo`
 on the existing service worker, and the small `app/ui/qt/desktop_viewer.py` launch
 adapter. UI photo gestures/buttons emit a concrete immutable Photo or operation ID;

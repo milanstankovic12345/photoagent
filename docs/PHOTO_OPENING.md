@@ -50,7 +50,18 @@ not prove a viewer launched successfully, decoded the file or displayed an image
 The status message says only that the request was sent. Windows and Linux share
 the Qt adapter; native associations and desktop environments remain OS-owned.
 
-## Verification record — 2026-11-14
+## Task023 native supplement — 2026-11-14
+
+The real Windows Qt probe submitted zero requests for one click, one for a photo
+double-click and one for the explicit Compare button; both PNG requests were
+accepted. The owner confirmed the expected generated image and exact filename.
+This is a separate human PNG display observation, not proof of JPEG/RAW support,
+every launch/context or Linux behavior. Automated rectangle captures showed the
+wrong window and were rejected; direct HWND capture was blank and was rejected
+too. The tool now captures the target HWND without substituting desktop pixels.
+See [Task023 evidence and remaining gates](design/UI_REFINEMENT_VERIFICATION.md).
+
+## Task021 verification record — 2026-11-14
 
 Automated checks use synthetic temporary collections and mock every OS launch.
 See [TESTING.md](TESTING.md) for executed checks and results. No real photo library

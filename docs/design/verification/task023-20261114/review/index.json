@@ -1,0 +1,619 @@
+{
+  "validated": 282,
+  "sheets": [
+    {
+      "file": "100-01.jpg",
+      "captures": [
+        "100-verified/empty-dashboard-en-dark-compact-1280.png",
+        "100-verified/empty-dashboard-en-light-compact-1280.png",
+        "100-verified/empty-dashboard-sr_Latn-dark-compact-1280.png",
+        "100-verified/empty-dashboard-sr_Latn-light-compact-1280.png",
+        "100-verified/empty-scan-en-dark-compact-1280.png",
+        "100-verified/empty-scan-en-light-compact-1280.png",
+        "100-verified/empty-scan-sr_Latn-dark-compact-1280.png",
+        "100-verified/empty-scan-sr_Latn-light-compact-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-02.jpg",
+      "captures": [
+        "100-verified/empty-duplicates-en-dark-compact-1280.png",
+        "100-verified/empty-duplicates-en-light-compact-1280.png",
+        "100-verified/empty-duplicates-sr_Latn-dark-compact-1280.png",
+        "100-verified/empty-duplicates-sr_Latn-light-compact-1280.png",
+        "100-verified/empty-history-en-dark-compact-1280.png",
+        "100-verified/empty-history-en-light-compact-1280.png",
+        "100-verified/empty-history-sr_Latn-dark-compact-1280.png",
+        "100-verified/empty-history-sr_Latn-light-compact-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-03.jpg",
+      "captures": [
+        "100-verified/empty-settings-en-dark-compact-1280.png",
+        "100-verified/empty-settings-en-light-compact-1280.png",
+        "100-verified/empty-settings-sr_Latn-dark-compact-1280.png",
+        "100-verified/empty-settings-sr_Latn-light-compact-1280.png",
+        "100-verified/folder-chooser.png",
+        "100-verified/running-scan-en-dark.png",
+        "100-verified/running-settings-sr_Latn-light.png",
+        "100-verified/running-dashboard-sr_Latn-dark.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-04.jpg",
+      "captures": [
+        "100-verified/running-scan-en-light.png",
+        "100-verified/populated-dashboard-en-dark-compact-1280.png",
+        "100-verified/populated-dashboard-en-dark-compact-853.png",
+        "100-verified/populated-dashboard-en-dark-expanded-1280.png",
+        "100-verified/populated-dashboard-en-dark-expanded-853.png",
+        "100-verified/populated-dashboard-en-light-compact-1280.png",
+        "100-verified/populated-dashboard-en-light-compact-853.png",
+        "100-verified/populated-dashboard-en-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-05.jpg",
+      "captures": [
+        "100-verified/populated-dashboard-en-light-expanded-853.png",
+        "100-verified/populated-dashboard-sr_Latn-dark-compact-1280.png",
+        "100-verified/populated-dashboard-sr_Latn-dark-compact-853.png",
+        "100-verified/populated-dashboard-sr_Latn-dark-expanded-1280.png",
+        "100-verified/populated-dashboard-sr_Latn-dark-expanded-853.png",
+        "100-verified/populated-dashboard-sr_Latn-light-compact-1280.png",
+        "100-verified/populated-dashboard-sr_Latn-light-compact-853.png",
+        "100-verified/populated-dashboard-sr_Latn-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-06.jpg",
+      "captures": [
+        "100-verified/populated-dashboard-sr_Latn-light-expanded-853.png",
+        "100-verified/populated-scan-en-dark-compact-1280.png",
+        "100-verified/populated-scan-en-dark-compact-853.png",
+        "100-verified/populated-scan-en-dark-expanded-1280.png",
+        "100-verified/populated-scan-en-dark-expanded-853.png",
+        "100-verified/populated-scan-en-light-compact-1280.png",
+        "100-verified/populated-scan-en-light-compact-853.png",
+        "100-verified/populated-scan-en-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-07.jpg",
+      "captures": [
+        "100-verified/populated-scan-en-light-expanded-853.png",
+        "100-verified/populated-scan-sr_Latn-dark-compact-1280.png",
+        "100-verified/populated-scan-sr_Latn-dark-compact-853.png",
+        "100-verified/populated-scan-sr_Latn-dark-expanded-1280.png",
+        "100-verified/populated-scan-sr_Latn-dark-expanded-853.png",
+        "100-verified/populated-scan-sr_Latn-light-compact-1280.png",
+        "100-verified/populated-scan-sr_Latn-light-compact-853.png",
+        "100-verified/populated-scan-sr_Latn-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-08.jpg",
+      "captures": [
+        "100-verified/populated-scan-sr_Latn-light-expanded-853.png",
+        "100-verified/populated-duplicates-en-dark-compact-1280.png",
+        "100-verified/populated-duplicates-en-dark-compact-853.png",
+        "100-verified/populated-duplicates-en-dark-expanded-1280.png",
+        "100-verified/populated-duplicates-en-dark-expanded-853.png",
+        "100-verified/populated-duplicates-en-light-compact-1280.png",
+        "100-verified/populated-duplicates-en-light-compact-853.png",
+        "100-verified/populated-duplicates-en-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-09.jpg",
+      "captures": [
+        "100-verified/populated-duplicates-en-light-expanded-853.png",
+        "100-verified/populated-duplicates-sr_Latn-dark-compact-1280.png",
+        "100-verified/populated-duplicates-sr_Latn-dark-compact-853.png",
+        "100-verified/populated-duplicates-sr_Latn-dark-expanded-1280.png",
+        "100-verified/populated-duplicates-sr_Latn-dark-expanded-853.png",
+        "100-verified/populated-duplicates-sr_Latn-light-compact-1280.png",
+        "100-verified/populated-duplicates-sr_Latn-light-compact-853.png",
+        "100-verified/populated-duplicates-sr_Latn-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-10.jpg",
+      "captures": [
+        "100-verified/populated-duplicates-sr_Latn-light-expanded-853.png",
+        "100-verified/populated-settings-en-dark-compact-1280.png",
+        "100-verified/populated-settings-en-dark-compact-853.png",
+        "100-verified/populated-settings-en-dark-expanded-1280.png",
+        "100-verified/populated-settings-en-dark-expanded-853.png",
+        "100-verified/populated-settings-en-light-compact-1280.png",
+        "100-verified/populated-settings-en-light-compact-853.png",
+        "100-verified/populated-settings-en-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-11.jpg",
+      "captures": [
+        "100-verified/populated-settings-en-light-expanded-853.png",
+        "100-verified/populated-settings-sr_Latn-dark-compact-1280.png",
+        "100-verified/populated-settings-sr_Latn-dark-compact-853.png",
+        "100-verified/populated-settings-sr_Latn-dark-expanded-1280.png",
+        "100-verified/populated-settings-sr_Latn-dark-expanded-853.png",
+        "100-verified/populated-settings-sr_Latn-light-compact-1280.png",
+        "100-verified/populated-settings-sr_Latn-light-compact-853.png",
+        "100-verified/populated-settings-sr_Latn-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-12.jpg",
+      "captures": [
+        "100-verified/populated-settings-sr_Latn-light-expanded-853.png",
+        "100-verified/compare-exact-en-dark-compact-1280.png",
+        "100-verified/compare-exact-en-dark-compact-853.png",
+        "100-verified/compare-exact-en-dark-expanded-1280.png",
+        "100-verified/compare-exact-en-dark-expanded-853.png",
+        "100-verified/compare-exact-en-light-compact-1280.png",
+        "100-verified/compare-exact-en-light-compact-853.png",
+        "100-verified/compare-exact-en-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-13.jpg",
+      "captures": [
+        "100-verified/compare-exact-en-light-expanded-853.png",
+        "100-verified/compare-exact-sr_Latn-dark-compact-1280.png",
+        "100-verified/compare-exact-sr_Latn-dark-compact-853.png",
+        "100-verified/compare-exact-sr_Latn-dark-expanded-1280.png",
+        "100-verified/compare-exact-sr_Latn-dark-expanded-853.png",
+        "100-verified/compare-exact-sr_Latn-light-compact-1280.png",
+        "100-verified/compare-exact-sr_Latn-light-compact-853.png",
+        "100-verified/compare-exact-sr_Latn-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-14.jpg",
+      "captures": [
+        "100-verified/compare-exact-sr_Latn-light-expanded-853.png",
+        "100-verified/compare-keep-both.png",
+        "100-verified/quarantine-confirm-cancel.png",
+        "100-verified/quarantine-active-en-dark-compact-1280.png",
+        "100-verified/quarantine-active-en-dark-compact-853.png",
+        "100-verified/quarantine-active-en-dark-expanded-1280.png",
+        "100-verified/quarantine-active-en-dark-expanded-853.png",
+        "100-verified/quarantine-active-en-light-compact-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-15.jpg",
+      "captures": [
+        "100-verified/quarantine-active-en-light-compact-853.png",
+        "100-verified/quarantine-active-en-light-expanded-1280.png",
+        "100-verified/quarantine-active-en-light-expanded-853.png",
+        "100-verified/quarantine-active-sr_Latn-dark-compact-1280.png",
+        "100-verified/quarantine-active-sr_Latn-dark-compact-853.png",
+        "100-verified/quarantine-active-sr_Latn-dark-expanded-1280.png",
+        "100-verified/quarantine-active-sr_Latn-dark-expanded-853.png",
+        "100-verified/quarantine-active-sr_Latn-light-compact-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-16.jpg",
+      "captures": [
+        "100-verified/quarantine-active-sr_Latn-light-compact-853.png",
+        "100-verified/quarantine-active-sr_Latn-light-expanded-1280.png",
+        "100-verified/quarantine-active-sr_Latn-light-expanded-853.png",
+        "100-verified/quarantine-after-restart.png",
+        "100-verified/restore-conflict-en-dark-compact-1280.png",
+        "100-verified/restore-conflict-en-light-compact-1280.png",
+        "100-verified/restore-conflict-sr_Latn-dark-compact-1280.png",
+        "100-verified/restore-conflict-sr_Latn-light-compact-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-17.jpg",
+      "captures": [
+        "100-verified/restore-conflict-dialog.png",
+        "100-verified/restore-confirm.png",
+        "100-verified/restore-complete.png",
+        "100-verified/compare-visual-en-dark-compact-1280.png",
+        "100-verified/compare-visual-en-light-compact-1280.png",
+        "100-verified/compare-visual-sr_Latn-dark-compact-1280.png",
+        "100-verified/compare-visual-sr_Latn-light-compact-1280.png",
+        "100-verified/raw-backup-warning-en.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "100-18.jpg",
+      "captures": [
+        "100-verified/raw-backup-warning-sr_Latn.png",
+        "100-verified/external-open-error.png",
+        "100-verified/missing-photo-error-en.png",
+        "100-verified/missing-photo-error-sr_Latn.png",
+        "100-verified/system-light-signal.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-01.jpg",
+      "captures": [
+        "150-verified/empty-dashboard-en-dark-compact-1280.png",
+        "150-verified/empty-dashboard-en-light-compact-1280.png",
+        "150-verified/empty-dashboard-sr_Latn-dark-compact-1280.png",
+        "150-verified/empty-dashboard-sr_Latn-light-compact-1280.png",
+        "150-verified/empty-scan-en-dark-compact-1280.png",
+        "150-verified/empty-scan-en-light-compact-1280.png",
+        "150-verified/empty-scan-sr_Latn-dark-compact-1280.png",
+        "150-verified/empty-scan-sr_Latn-light-compact-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-02.jpg",
+      "captures": [
+        "150-verified/empty-duplicates-en-dark-compact-1280.png",
+        "150-verified/empty-duplicates-en-light-compact-1280.png",
+        "150-verified/empty-duplicates-sr_Latn-dark-compact-1280.png",
+        "150-verified/empty-duplicates-sr_Latn-light-compact-1280.png",
+        "150-verified/empty-history-en-dark-compact-1280.png",
+        "150-verified/empty-history-en-light-compact-1280.png",
+        "150-verified/empty-history-sr_Latn-dark-compact-1280.png",
+        "150-verified/empty-history-sr_Latn-light-compact-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-03.jpg",
+      "captures": [
+        "150-verified/empty-settings-en-dark-compact-1280.png",
+        "150-verified/empty-settings-en-light-compact-1280.png",
+        "150-verified/empty-settings-sr_Latn-dark-compact-1280.png",
+        "150-verified/empty-settings-sr_Latn-light-compact-1280.png",
+        "150-verified/folder-chooser.png",
+        "150-verified/running-scan-en-dark.png",
+        "150-verified/running-settings-sr_Latn-light.png",
+        "150-verified/running-dashboard-sr_Latn-dark.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-04.jpg",
+      "captures": [
+        "150-verified/running-scan-en-light.png",
+        "150-verified/populated-dashboard-en-dark-compact-1280.png",
+        "150-verified/populated-dashboard-en-dark-compact-853.png",
+        "150-verified/populated-dashboard-en-dark-expanded-1280.png",
+        "150-verified/populated-dashboard-en-dark-expanded-853.png",
+        "150-verified/populated-dashboard-en-light-compact-1280.png",
+        "150-verified/populated-dashboard-en-light-compact-853.png",
+        "150-verified/populated-dashboard-en-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-05.jpg",
+      "captures": [
+        "150-verified/populated-dashboard-en-light-expanded-853.png",
+        "150-verified/populated-dashboard-sr_Latn-dark-compact-1280.png",
+        "150-verified/populated-dashboard-sr_Latn-dark-compact-853.png",
+        "150-verified/populated-dashboard-sr_Latn-dark-expanded-1280.png",
+        "150-verified/populated-dashboard-sr_Latn-dark-expanded-853.png",
+        "150-verified/populated-dashboard-sr_Latn-light-compact-1280.png",
+        "150-verified/populated-dashboard-sr_Latn-light-compact-853.png",
+        "150-verified/populated-dashboard-sr_Latn-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-06.jpg",
+      "captures": [
+        "150-verified/populated-dashboard-sr_Latn-light-expanded-853.png",
+        "150-verified/populated-scan-en-dark-compact-1280.png",
+        "150-verified/populated-scan-en-dark-compact-853.png",
+        "150-verified/populated-scan-en-dark-expanded-1280.png",
+        "150-verified/populated-scan-en-dark-expanded-853.png",
+        "150-verified/populated-scan-en-light-compact-1280.png",
+        "150-verified/populated-scan-en-light-compact-853.png",
+        "150-verified/populated-scan-en-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-07.jpg",
+      "captures": [
+        "150-verified/populated-scan-en-light-expanded-853.png",
+        "150-verified/populated-scan-sr_Latn-dark-compact-1280.png",
+        "150-verified/populated-scan-sr_Latn-dark-compact-853.png",
+        "150-verified/populated-scan-sr_Latn-dark-expanded-1280.png",
+        "150-verified/populated-scan-sr_Latn-dark-expanded-853.png",
+        "150-verified/populated-scan-sr_Latn-light-compact-1280.png",
+        "150-verified/populated-scan-sr_Latn-light-compact-853.png",
+        "150-verified/populated-scan-sr_Latn-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-08.jpg",
+      "captures": [
+        "150-verified/populated-scan-sr_Latn-light-expanded-853.png",
+        "150-verified/populated-duplicates-en-dark-compact-1280.png",
+        "150-verified/populated-duplicates-en-dark-compact-853.png",
+        "150-verified/populated-duplicates-en-dark-expanded-1280.png",
+        "150-verified/populated-duplicates-en-dark-expanded-853.png",
+        "150-verified/populated-duplicates-en-light-compact-1280.png",
+        "150-verified/populated-duplicates-en-light-compact-853.png",
+        "150-verified/populated-duplicates-en-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-09.jpg",
+      "captures": [
+        "150-verified/populated-duplicates-en-light-expanded-853.png",
+        "150-verified/populated-duplicates-sr_Latn-dark-compact-1280.png",
+        "150-verified/populated-duplicates-sr_Latn-dark-compact-853.png",
+        "150-verified/populated-duplicates-sr_Latn-dark-expanded-1280.png",
+        "150-verified/populated-duplicates-sr_Latn-dark-expanded-853.png",
+        "150-verified/populated-duplicates-sr_Latn-light-compact-1280.png",
+        "150-verified/populated-duplicates-sr_Latn-light-compact-853.png",
+        "150-verified/populated-duplicates-sr_Latn-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-10.jpg",
+      "captures": [
+        "150-verified/populated-duplicates-sr_Latn-light-expanded-853.png",
+        "150-verified/populated-settings-en-dark-compact-1280.png",
+        "150-verified/populated-settings-en-dark-compact-853.png",
+        "150-verified/populated-settings-en-dark-expanded-1280.png",
+        "150-verified/populated-settings-en-dark-expanded-853.png",
+        "150-verified/populated-settings-en-light-compact-1280.png",
+        "150-verified/populated-settings-en-light-compact-853.png",
+        "150-verified/populated-settings-en-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-11.jpg",
+      "captures": [
+        "150-verified/populated-settings-en-light-expanded-853.png",
+        "150-verified/populated-settings-sr_Latn-dark-compact-1280.png",
+        "150-verified/populated-settings-sr_Latn-dark-compact-853.png",
+        "150-verified/populated-settings-sr_Latn-dark-expanded-1280.png",
+        "150-verified/populated-settings-sr_Latn-dark-expanded-853.png",
+        "150-verified/populated-settings-sr_Latn-light-compact-1280.png",
+        "150-verified/populated-settings-sr_Latn-light-compact-853.png",
+        "150-verified/populated-settings-sr_Latn-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-12.jpg",
+      "captures": [
+        "150-verified/populated-settings-sr_Latn-light-expanded-853.png",
+        "150-verified/compare-exact-en-dark-compact-1280.png",
+        "150-verified/compare-exact-en-dark-compact-853.png",
+        "150-verified/compare-exact-en-dark-expanded-1280.png",
+        "150-verified/compare-exact-en-dark-expanded-853.png",
+        "150-verified/compare-exact-en-light-compact-1280.png",
+        "150-verified/compare-exact-en-light-compact-853.png",
+        "150-verified/compare-exact-en-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-13.jpg",
+      "captures": [
+        "150-verified/compare-exact-en-light-expanded-853.png",
+        "150-verified/compare-exact-sr_Latn-dark-compact-1280.png",
+        "150-verified/compare-exact-sr_Latn-dark-compact-853.png",
+        "150-verified/compare-exact-sr_Latn-dark-expanded-1280.png",
+        "150-verified/compare-exact-sr_Latn-dark-expanded-853.png",
+        "150-verified/compare-exact-sr_Latn-light-compact-1280.png",
+        "150-verified/compare-exact-sr_Latn-light-compact-853.png",
+        "150-verified/compare-exact-sr_Latn-light-expanded-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-14.jpg",
+      "captures": [
+        "150-verified/compare-exact-sr_Latn-light-expanded-853.png",
+        "150-verified/compare-keep-both.png",
+        "150-verified/quarantine-confirm-cancel.png",
+        "150-verified/quarantine-active-en-dark-compact-1280.png",
+        "150-verified/quarantine-active-en-dark-compact-853.png",
+        "150-verified/quarantine-active-en-dark-expanded-1280.png",
+        "150-verified/quarantine-active-en-dark-expanded-853.png",
+        "150-verified/quarantine-active-en-light-compact-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-15.jpg",
+      "captures": [
+        "150-verified/quarantine-active-en-light-compact-853.png",
+        "150-verified/quarantine-active-en-light-expanded-1280.png",
+        "150-verified/quarantine-active-en-light-expanded-853.png",
+        "150-verified/quarantine-active-sr_Latn-dark-compact-1280.png",
+        "150-verified/quarantine-active-sr_Latn-dark-compact-853.png",
+        "150-verified/quarantine-active-sr_Latn-dark-expanded-1280.png",
+        "150-verified/quarantine-active-sr_Latn-dark-expanded-853.png",
+        "150-verified/quarantine-active-sr_Latn-light-compact-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-16.jpg",
+      "captures": [
+        "150-verified/quarantine-active-sr_Latn-light-compact-853.png",
+        "150-verified/quarantine-active-sr_Latn-light-expanded-1280.png",
+        "150-verified/quarantine-active-sr_Latn-light-expanded-853.png",
+        "150-verified/quarantine-after-restart.png",
+        "150-verified/restore-conflict-en-dark-compact-1280.png",
+        "150-verified/restore-conflict-en-light-compact-1280.png",
+        "150-verified/restore-conflict-sr_Latn-dark-compact-1280.png",
+        "150-verified/restore-conflict-sr_Latn-light-compact-1280.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-17.jpg",
+      "captures": [
+        "150-verified/restore-conflict-dialog.png",
+        "150-verified/restore-confirm.png",
+        "150-verified/restore-complete.png",
+        "150-verified/compare-visual-en-dark-compact-1280.png",
+        "150-verified/compare-visual-en-light-compact-1280.png",
+        "150-verified/compare-visual-sr_Latn-dark-compact-1280.png",
+        "150-verified/compare-visual-sr_Latn-light-compact-1280.png",
+        "150-verified/raw-backup-warning-en.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    },
+    {
+      "file": "150-18.jpg",
+      "captures": [
+        "150-verified/raw-backup-warning-sr_Latn.png",
+        "150-verified/external-open-error.png",
+        "150-verified/missing-photo-error-en.png",
+        "150-verified/missing-photo-error-sr_Latn.png",
+        "150-verified/system-light-signal.png"
+      ],
+      "visually_reviewed": true,
+      "review_method": "Opened whole-frame contact sheet; fine text checked on representative original PNGs"
+    }
+  ],
+  "visual_review": "All 36 contact sheets and six comparisons opened; loading frames rejected pending loaded replacements",
+  "note": "Contact sheets are scaled review aids; original PNG dimensions remain authoritative.",
+  "comparisons": [
+    {
+      "file": "before-after-dashboard.jpg",
+      "before": "task014-20261110\\baseline\\matrix-1280-dark-dashboard.png",
+      "after": "100-verified\\populated-dashboard-en-dark-expanded-1280.png",
+      "visually_reviewed": true,
+      "note": "Same viewport/theme; synthetic sessions and some state/data differ. Not a pixel-diff test."
+    },
+    {
+      "file": "before-after-scan.jpg",
+      "before": "task014-20261110\\baseline\\matrix-1280-dark-scan.png",
+      "after": "100-verified\\populated-scan-en-dark-expanded-1280.png",
+      "visually_reviewed": true,
+      "note": "Same viewport/theme; synthetic sessions and some state/data differ. Not a pixel-diff test."
+    },
+    {
+      "file": "before-after-duplicates.jpg",
+      "before": "task014-20261110\\baseline\\matrix-1280-dark-duplicates.png",
+      "after": "100-verified\\populated-duplicates-en-dark-expanded-1280.png",
+      "visually_reviewed": true,
+      "note": "Same viewport/theme; synthetic sessions and some state/data differ. Not a pixel-diff test."
+    },
+    {
+      "file": "before-after-compare.jpg",
+      "before": "task014-20261110\\baseline\\matrix-1280-dark-compare.png",
+      "after": "100-verified\\compare-exact-en-dark-expanded-1280.png",
+      "visually_reviewed": true,
+      "note": "Same viewport/theme; synthetic sessions and some state/data differ. Not a pixel-diff test."
+    },
+    {
+      "file": "before-after-history.jpg",
+      "before": "task014-20261110\\baseline\\matrix-1280-dark-history.png",
+      "after": "100-verified\\quarantine-active-en-dark-expanded-1280.png",
+      "visually_reviewed": true,
+      "note": "Same viewport/theme; synthetic sessions and some state/data differ. Not a pixel-diff test."
+    },
+    {
+      "file": "before-after-settings.jpg",
+      "before": "task014-20261110\\baseline\\matrix-1280-dark-settings.png",
+      "after": "100-verified\\populated-settings-en-dark-expanded-1280.png",
+      "visually_reviewed": true,
+      "note": "Same viewport/theme; synthetic sessions and some state/data differ. Not a pixel-diff test."
+    }
+  ],
+  "rejected_loading_frames": [
+    "100-verified/quarantine-active-en-dark-compact-1280.png",
+    "100-verified/quarantine-after-restart.png",
+    "100-verified/restore-conflict-en-dark-compact-1280.png",
+    "150-verified/quarantine-active-en-dark-compact-1280.png",
+    "150-verified/quarantine-after-restart.png",
+    "150-verified/restore-conflict-en-dark-compact-1280.png"
+  ],
+  "full_size_originals_opened": [
+    "100-verified/populated-dashboard-en-dark-expanded-1280.png",
+    "100-verified/populated-duplicates-sr_Latn-light-expanded-853.png",
+    "100-verified/populated-settings-sr_Latn-light-expanded-853.png",
+    "100-verified/populated-scan-sr_Latn-light-expanded-853.png",
+    "100-verified/compare-exact-sr_Latn-light-expanded-853.png",
+    "100-verified/quarantine-active-sr_Latn-light-expanded-853.png",
+    "100-verified/populated-scan-en-dark-expanded-1280.png",
+    "150-verified/raw-backup-warning-sr_Latn.png",
+    "150-verified/quarantine-confirm-cancel.png",
+    "150-verified/restore-conflict-dialog.png"
+  ],
+  "historical_references_opened": [
+    "docs/design/target_reference.png",
+    "docs/design/reference_sidebar_icons.png",
+    "docs/design/verification/task014-20261110/baseline/dark-history-populated.png"
+  ],
+  "observations": [
+    "Completed Dashboard/Scan prioritizes Review; details and report paths disclosed on demand",
+    "Controls wrap in narrow SR layouts, with main shell/footer actions inside the window",
+    "Compare shows retained/proposed text and visible separate plan approval; warnings outside Details",
+    "History has three columns; narrow secondary content needs vertical scrolling",
+    "Settings language/theme selection matches the captured presentation",
+    "D03 partial: candidate thumbnails remain 128x96 with two separate review/open actions",
+    "Native rectangle and HWND captures rejected; owner separately confirmed expected PNG content/name"
+  ]
+}
