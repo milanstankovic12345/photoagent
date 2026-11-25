@@ -11,10 +11,10 @@ offline, without accounts, telemetry, cloud uploads or external AI services.
 The default interface supports **English and Serbian Latin**, with **Dark, Light
 and System** themes. Serbian documentation: [README_SR.md](README_SR.md).
 
-**Current status:** v2.5 development candidate. Windows source execution has test
-evidence; clean-computer installation, native Linux execution and successful valid
-RAW decoding still need acceptance testing. There is no public release or standalone
-`.exe` installer. See [test evidence](docs/TESTING.md) and
+**Current status:** v2.5 development candidate. The standalone installer passed
+offline installation and recovery checks in a clean Windows 11 x64 Sandbox.
+Windows 10, native Linux and successful valid RAW decoding still need acceptance
+testing. See [test evidence](docs/TESTING.md) and
 [release status](docs/RELEASE.md) for the remaining checks.
 
 ## What you can do
@@ -38,6 +38,7 @@ Choose the instructions that match the files you received:
 
 | Files you have | Installation method |
 | --- | --- |
+| `PhotoAgent-Setup.exe` | On Windows 10/11 x64, double-click the installer, then open PhotoAgent from Start. Includes Python and all dependencies. Works offline. |
 | Source folder containing `photo_agent.py`, `app/` and `start_windows.bat` / `start_linux.sh` | [Windows](#windows-1011-source-installation) or [Linux](#linux-source-installation); first setup normally needs internet |
 | Prepared bundle containing `install_offline.py`, `release-manifest.json` and `wheelhouse/` | [Offline Windows installation](#offline-windows-installation) |
 
@@ -47,7 +48,7 @@ machine. Git and VS Code are not required to use the application.
 
 ### Windows 10/11: source installation
 
-1. Install **64-bit Python 3.12**, including the Python launcher (`py`) and `pip`.
+1. Install **64-bit Python 3.12, 3.13 or 3.14**, including the Python launcher (`py`) and `pip`.
    Python is a separate prerequisite; PhotoAgent does not install it.
 2. Copy the complete application source folder, or extract its source ZIP, into a
    writable location such as `C:\Users\YourName\Apps\PhotoAgent`. Keep `app/`,
@@ -56,7 +57,7 @@ machine. Git and VS Code are not required to use the application.
 3. Open PowerShell in that folder. Confirm that Python is available:
 
    ```powershell
-   py -3.12 --version
+   py --list
    ```
 
 4. Start PhotoAgent:

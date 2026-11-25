@@ -273,7 +273,8 @@ def test_history_settings_errors_toolbar_and_unavailable_features(desktop, theme
     assert_toolbar_available(window, window.preferences.toolbar)
     assert window.preferences.language.currentData() == 'en'
     assert window.preferences.language.count() == 2
-    assert '64 MiB' in tr('preview_cache_detail') and 'not calibrated' in tr('matching_explanation')
+    assert '64 MiB' in tr('preview_cache_detail')
+    assert 'not confidence scores' in tr('matching_explanation')
     window.navigate(Route.QUARANTINE)
     assert_toolbar_available(window, window.history.toolbar)
     _real_error(window, 'restore', 'destination_occupied')

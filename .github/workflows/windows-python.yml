@@ -1,0 +1,21 @@
+name: Windows source compatibility
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  windows:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.12', '3.13', '3.14', '3.x']
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          architecture: x64
+      - run: python -m pip install --only-binary=:all: -r requirements-dev.txt
+      - run: python -B -m app.services.preflight
+      - run: python -B -c "from PySide6.QtWidgets import QApplication,QWidget; app=QApplication([]); w=QWidget(); w.show(); app.processEvents(); assert w.isVisible()"
+      - run: python -B -m pytest -q
+        env:
+          QT_QPA_PLATFORM: offscreen

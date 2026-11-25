@@ -1,5 +1,11 @@
 # Changelog
 
+## Windows standalone installer candidate
+
+- Added a per-user offline installer build with private CPython 3.12.10, Qt,
+  Tcl/Tk, image codecs, verified side-by-side installation and a Start shortcut.
+- Added a Windows source compatibility matrix and a verified interpreter list for the source launcher.
+
 ## Task023 — Final UI refinement verification — 2026-11-14
 
 - Add a synthetic three-member Qt journey through folder selection, Keep Both,

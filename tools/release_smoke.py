@@ -193,7 +193,9 @@ def run(output: Path) -> None:
     before = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in photos.iterdir()}
     results = {'python': platform.python_version(), 'platform': platform.platform(),
                'runtime': str(sys.prefix), 'phases': {}, 'status': 'running',
-               'network': 'Python socket audit denial; no OS-level disconnection claim'}
+               'network': ('Private runtime ignores PYTHONPATH audit hook; use an offline VM'
+                           if sys.flags.isolated else
+                           'Python socket audit denial; no OS-level disconnection claim')}
     report = output / 'results.json'
     report.write_text(json.dumps(results, indent=2), encoding='utf-8')
     for name in ('scan', 'interrupt', 'restore', 'qt'):

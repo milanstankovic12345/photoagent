@@ -1416,3 +1416,52 @@ No packaging, real archive benchmark, valid RAW, physical media, Linux native ru
 full visual/keyboard/scaling review or physical power-loss validation was performed.
 Full localization/themes/SQLite are outside Task001 and are not tested as features.
 See SECURITY.md for remaining Linux concurrent namespace and filesystem limits.
+
+## Standalone Windows acceptance
+
+Local 2.5.0 candidate, SHA-256
+`d1ea6a8ca962276177416369f9dc542e98b3d27773a48b92f59e41adcad8e309`.
+Windows 11 Sandbox 24H2 (build 26100), networking disabled, no prior
+`python` or `py` command. Setup completed, and its private CPython 3.12.10
+passed the native Qt, synthetic scan, interrupted move, conflict refusal and
+byte-identical recovery rehearsal. Upgrade, uninstall and reinstall preserved
+the synthetic journal and quarantined file. Interrupting a later installer
+worker during extraction preserved the previous Start shortcut and its visible
+PhotoAgent window. Retrying setup with Python 3.14.5 first on PATH activated a
+new payload, with the external command still reporting 3.14.5.
+
+On the Windows development host, the packaged runtime also returned both image
+previews, exported the expected CSV rows and cancelled a synthetic scan. Python
+3.13.17 and 3.14.5 each opened a native Qt window and passed 56 focused decoder,
+scan, operation, packaging and localization checks (one valid RAW asset skip
+each). The source batch launcher selected 3.14.5 for a fresh environment and
+reused it on the second invocation.
+
+Full 3.12 regression initially yielded 363 passes, two skips, three failures and
+one fixture error. The 3.14 suite (split into the focused and remaining files)
+initially yielded 364 passes, two skips, two failures and one fixture error.
+The settings test expected obsolete translation wording; other affected cases hit
+Qt worker deadlines. After aligning the assertion with the current catalog,
+all four affected 3.12 cases and all three affected 3.14 cases passed on targeted
+reruns. Each version has 367 distinct passing tests across runs. The two skips
+are native Linux and the valid RAW asset. The full 3.13 suite was not run locally.
+
+The guest rehearsal is in `tools/windows_sandbox_smoke.ps1`. Windows 10,
+a separately restricted standard account, and a licensed valid RAW fixture
+remain open. No real photo library was used.
+
+On fresh Windows 10 and 11 x64 VMs, test with the network disabled and a standard
+user, first without Python and again with Python 3.14 or newer. Record OS, setup
+SHA-256, installed Python paths and the system Python version before and after.
+Open PhotoAgent from Start and run the installed synthetic rehearsal:
+
+```powershell
+& "$release\.runtime\python.exe" -X utf8 -B "$release\tools\release_smoke.py" --output "$env:TEMP\PhotoAgent-smoke-čćž"
+```
+
+Set `$release` to the newly installed version directory. Use a fresh smoke output.
+In a synthetic library confirm preview, cancellation, CSV export and approved
+quarantine. Upgrade, then verify restore conflict refusal and byte-identical
+restoration. Repeat across uninstall/reinstall. Interrupt setup before shortcut
+activation and verify the prior shortcut and journal. Record skipped OS/format
+tests explicitly. A developer-host run covers only that host.

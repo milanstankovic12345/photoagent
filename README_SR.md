@@ -9,7 +9,15 @@ Završne provere interfejsa, snimci ekrana i otvorene native/manuelne provere:
 
 ## Instalacija i pokretanje
 
-Potreban je Python 3.12+ na Windows 10/11 ili Linux sistemu. Na Windowsu pokrenite
+**Windows 10/11 x64:** Ako ste dobili `PhotoAgent-Setup.exe`, pokrenite ga dvostrukim klikom.
+Zatim otvorite PhotoAgent iz Start menija. Instalater sadrži svoj Python i biblioteke.
+Radi bez interneta i kada je na računaru instaliran Python 3.14. Za nadogradnju zatvorite
+PhotoAgent i pokrenite novi instalater. Deinstalacija čuva fotografije i istoriju karantina.
+
+### Pokretanje iz izvornog koda
+
+Proverene Windows verzije Pythona za ovaj način pokretanja navedene su u
+`packaging/windows-source-versions.txt`. Na Windowsu pokrenite
 `start_windows.bat`; na Linuxu `bash start_linux.sh`. Pokretači proveravaju
 zavisnosti i otvaraju PySide6 interfejs. Preuzimanje nedostajućih zavisnosti zahteva
 internet ili lokalne pakete. Linux Python i venv se instaliraju zasebno.

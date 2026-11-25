@@ -1,4 +1,28 @@
-# Task013: local release candidate
+# Windows standalone installer candidate
+
+Build on Windows x64 with full CPython 3.12.10 including Tcl/Tk, the official
+`python-3.12.10-embed-amd64.zip`, Inno Setup ISCC and the version-locked wheelhouse
+described below. Use a new output directory for each build.
+
+```powershell
+.\.venv\Scripts\python.exe -B -m tools.build_windows_setup --embed build/python-3.12.10-embed-amd64.zip --wheelhouse build/task013-wheelhouse --iscc build/inno-portable/ISCC.exe --output build/windows-candidate --version 2.5.0
+Get-FileHash build/windows-candidate/PhotoAgent-Setup.exe
+```
+
+Distribute the resulting EXE with its external checksum. The per-user setup
+installs versioned payloads and activates the shortcut after manifest, native Qt
+and Tk validation. Close installed instances first. Each installation keeps the
+previous payload and therefore requires space for another complete copy.
+Startup errors from the launcher are logged in `%LocalAppData%\PhotoAgent\startup.log`.
+Authenticode signing and redistribution/license review remain public-release gates.
+
+The private interpreter is pinned independently of source compatibility. The
+Windows CI matrix exercises 3.12, 3.13, 3.14 and latest stable. After successful
+native and regression checks, add newly confirmed versions, highest first, to
+`packaging/windows-source-versions.txt`. Updating the private interpreter requires
+a matching embed archive digest, Tcl/Tk build, dependency lock and installer rehearsal.
+
+## Historical Task013 source ZIP
 
 v2.5 localization update: subsequent source builds include editable TS, compiled
 QM, embedded Qt catalog resources, JSON fallbacks, `tools/build_translations.py`,
